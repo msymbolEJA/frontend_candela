@@ -1,12 +1,14 @@
-import logo from "./logo.svg";
-import "./App.css";
+import WhatshotIcon from "@material-ui/icons/Whatshot";
+import NavBar from "./components/navbar/Navbar";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>CANDELA</h1>
-      </header>
+      <NavBar />
+      <h1>
+        CANDELA
+        <WhatshotIcon />
+      </h1>
     </div>
   );
 }
