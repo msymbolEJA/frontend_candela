@@ -1,14 +1,11 @@
-import WhatshotIcon from "@material-ui/icons/Whatshot";
-import NavBar from "./components/navbar/Navbar";
+import MainLayout from "./components/navbar/MainLayout";
+import AppRouter from "./router/AppRouter";
 
 function App() {
   return (
     <div className="App">
-      <NavBar />
-      <h1>
-        CANDELA
-        <WhatshotIcon />
-      </h1>
+      <MainLayout />
+      <AppRouter />
     </div>
   );
 }
