@@ -1,8 +1,8 @@
 import React from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Dashboard from "../components/dashboard/Dashboard";
-import BBOrderTable from "../components/ordertable/BBOrderTable";
-import NEOrderTable from "../components/ordertable/NEOrdersTable";
+import BBOrderTable from "../components/ordertable/BestBuy/BBOrderTable";
+import NEOrderTable from "../components/ordertable/NewEgg/NEOrdersTable";
 
 const AppRouter = () => {
   return (

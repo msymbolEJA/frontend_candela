@@ -15,7 +15,7 @@ import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
 import TableHead from "@material-ui/core/TableHead";
-import { getData } from "../../helpers/DataTransitions";
+import { getData } from "../../../helpers/DataTransitions";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -109,7 +109,7 @@ export default function CustomPaginationActionsTable() {
   const [tableData, setTableData] = useState({ rows: [], count: 0 });
 
   useEffect(() => {
-    getData(`${BASE_URL}ne/?limit=100&offset=0`).then((response) => {
+    getData(`${BASE_URL}bb/?limit=100&offset=0`).then((response) => {
       //   console.log(response);
       setTableData({
         ...tableData,
@@ -135,7 +135,7 @@ export default function CustomPaginationActionsTable() {
 
   return (
     <div>
-      <h2>New Egg</h2>
+      <h2>Best Buy</h2>
       <TableContainer
         style={{ marginLeft: "75px", width: "auto", marginRight: "5px" }}
         component={Paper}
@@ -143,17 +143,17 @@ export default function CustomPaginationActionsTable() {
         <Table className={classes.table} aria-label="custom pagination table">
           <TableHead>
             <TableRow style={{ backgroundColor: "black", color: "white" }}>
-              <TableCell align="left" style={{ color: "white" }}>
-                Customer Name
+              <TableCell align="center" style={{ color: "white" }}>
+                Manufacturer
               </TableCell>
-              <TableCell style={{ color: "white" }} align="right">
-                Customer Email Address
+              <TableCell style={{ color: "white" }} align="center">
+                ModelNumber
               </TableCell>
-              <TableCell style={{ color: "white" }} align="right">
-                OrderNumber
+              <TableCell style={{ color: "white" }} align="center">
+                Sale Price
               </TableCell>
-              <TableCell style={{ color: "white" }} align="right">
-                OrderStatusDescription
+              <TableCell style={{ color: "white" }} align="center">
+                shippingCost
               </TableCell>
             </TableRow>
           </TableHead>
@@ -166,14 +166,12 @@ export default function CustomPaginationActionsTable() {
               : tableData?.rows
             ).map((row, index) => (
               <TableRow key={index}>
-                <TableCell component="th" scope="row">
-                  {row.CustomerName}
+                <TableCell align="center" component="th" scope="row">
+                  {row.manufacturer}
                 </TableCell>
-                <TableCell align="right">{row.CustomerEmailAddress}</TableCell>
-                <TableCell align="right">{row.OrderNumber}</TableCell>
-                <TableCell align="right">
-                  {row.OrderStatusDescription}
-                </TableCell>
+                <TableCell align="center">{row.modelNumber}</TableCell>
+                <TableCell align="center">{row.salePrice}</TableCell>
+                <TableCell align="center">{row.shippingCost}</TableCell>
               </TableRow>
             ))}
 
