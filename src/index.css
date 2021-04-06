@@ -1,7 +1,7 @@
 @import-normalize; /* bring in normalize.css styles */
 
 * {
-  font-family: "Courier New", Courier, monospace !important;
+  /* font-family: "Courier New", Courier, monospace !important; */
   padding: 0;
   margin: 0;
   box-sizing: border-box;
