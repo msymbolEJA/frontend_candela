@@ -41,9 +41,6 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: 36,
   },
-  rightTitle: {
-    marginLeft: "1rem",
-  },
   title: {
     flexGrow: 1,
   },
@@ -120,7 +117,7 @@ export default function NavBar({ open, handleDrawerOpen, handleDrawerClose }) {
           {STORE_NAME}
         </Typography>
 
-        <div style={{ marginRight: "2rem" }}>
+        <div>
           <FormControl className={classes.formControl}>
             <NativeSelect
               //   value={lang}
