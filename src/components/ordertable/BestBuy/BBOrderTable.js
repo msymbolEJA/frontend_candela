@@ -16,6 +16,7 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
 import TableHead from "@material-ui/core/TableHead";
 import { getData } from "../../../helpers/DataTransitions";
+import spinner from "../../../assets/spinner.gif";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -100,6 +101,12 @@ const useStyles2 = makeStyles({
   table: {
     minWidth: 500,
   },
+  headerStyle: {
+    color: "#1f441e",
+    fontSize: "2rem",
+    marginBottom: "1rem",
+    fontFamily: "Courier New",
+  },
 });
 
 export default function CustomPaginationActionsTable() {
@@ -135,7 +142,7 @@ export default function CustomPaginationActionsTable() {
 
   return (
     <div>
-      <h2>Best Buy</h2>
+      <h2 className={classes.headerStyle}>Best Buy</h2>
       <TableContainer
         style={{ marginLeft: "75px", width: "auto", marginRight: "5px" }}
         component={Paper}
@@ -158,22 +165,37 @@ export default function CustomPaginationActionsTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {(rowsPerPage > 0
-              ? tableData?.rows?.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
-              : tableData?.rows
-            ).map((row, index) => (
-              <TableRow key={index}>
-                <TableCell align="center" component="th" scope="row">
-                  {row.manufacturer}
+            {tableData?.rows.length > 0 ? (
+              (rowsPerPage > 0
+                ? tableData?.rows?.slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  )
+                : tableData?.rows
+              ).map((row, index) => (
+                <TableRow key={index}>
+                  <TableCell align="center" component="th" scope="row">
+                    {row.manufacturer}
+                  </TableCell>
+                  <TableCell align="center">{row.modelNumber}</TableCell>
+                  <TableCell align="center">{row.salePrice}</TableCell>
+                  <TableCell align="center">{row.shippingCost}</TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={2}>
+                  <img
+                    src={spinner}
+                    style={{
+                      width: 50,
+                      float: "right",
+                    }}
+                    alt="spinner"
+                  />
                 </TableCell>
-                <TableCell align="center">{row.modelNumber}</TableCell>
-                <TableCell align="center">{row.salePrice}</TableCell>
-                <TableCell align="center">{row.shippingCost}</TableCell>
               </TableRow>
-            ))}
+            )}
 
             {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>

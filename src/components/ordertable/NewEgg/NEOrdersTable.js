@@ -9,6 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { getData } from "../../../helpers/DataTransitions";
 import Row from "./DetailsTable";
+import spinner from "../../../assets/spinner.gif";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -77,11 +78,28 @@ export default function NEOrdersTable() {
             </TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {tableData?.rows?.map((row, index) => (
-            <Row key={index} row={row} />
-          ))}
-        </TableBody>
+        {tableData ? (
+          <TableBody>
+            {tableData?.rows?.map((row, index) => (
+              <Row key={index} row={row} />
+            ))}
+          </TableBody>
+        ) : (
+          <TableBody>
+            <TableRow>
+              <TableCell colSpan={4}>
+                <img
+                  src={spinner}
+                  style={{
+                    width: 50,
+                    float: "right",
+                  }}
+                  alt="spinner"
+                />
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        )}
       </Table>
     </TableContainer>
   );
