@@ -32,7 +32,7 @@ const Items = ({ dRow }) => {
       </TableCell>
       <TableCell align="center">{dRow.OrderedQty}</TableCell>
       <TableCell align="center">{dRow.UnitPrice}</TableCell>
-      <TableCell align="center" style={{ maxWidth: 200 }}>
+      <TableCell align="center" style={{ maxWidth: 500 }}>
         {dRow.Description}
       </TableCell>
       <TableCell align="center">{upcInfos?.salePrice}</TableCell>

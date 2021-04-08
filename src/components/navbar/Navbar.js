@@ -75,7 +75,7 @@ export default function NavBar({ open, handleDrawerOpen, handleDrawerClose }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const open2 = Boolean(anchorEl);
-  const history = useHistory();
+  let history = useHistory();
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -86,6 +86,10 @@ export default function NavBar({ open, handleDrawerOpen, handleDrawerClose }) {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const dashboarDirectFunc = () => {
+    history.push("/");
   };
 
   return (
@@ -107,7 +111,12 @@ export default function NavBar({ open, handleDrawerOpen, handleDrawerClose }) {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap style={{ flexGrow: 1 }}>
+        <Typography
+          variant="h6"
+          noWrap
+          style={{ flexGrow: 1, cursor: "pointer" }}
+          onClick={dashboarDirectFunc}
+        >
           {STORE_NAME}
         </Typography>
 

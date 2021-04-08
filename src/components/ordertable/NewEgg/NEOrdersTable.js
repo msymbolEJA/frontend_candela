@@ -28,6 +28,12 @@ const useRowStyles = makeStyles({
   tCell: {
     color: "white",
   },
+  headerStyle: {
+    color: "#1f441e",
+    fontSize: "2rem",
+    marginBottom: "1rem",
+    fontFamily: "Courier New",
+  },
 });
 
 export default function NEOrdersTable() {
@@ -48,26 +54,26 @@ export default function NEOrdersTable() {
 
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
-      <h2>New Egg</h2>
+      <h2 className={classes.headerStyle}>New Egg</h2>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow className={classes.tRow}>
             <TableCell />
-            <TableCell className={classes.tCell}>OrderNumber</TableCell>
+            <TableCell className={classes.tCell}>Order Number</TableCell>
             <TableCell align="center" className={classes.tCell}>
-              OrderDate
+              Order Date
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
-              OrderStatusDescription
+              Order Status Description
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
-              OrderItemAmount
+              Order Item Amount
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
-              OrderQty
+              Order Qty
             </TableCell>
             <TableCell align="right" className={classes.tCell}>
-              OrderTotalAmount
+              Order Total Amount
             </TableCell>
           </TableRow>
         </TableHead>
