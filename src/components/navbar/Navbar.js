@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.2rem",
   },
   whiteColor: {
-    color: "white",
+    color: "black",
   },
   hide: {
     display: "none",
