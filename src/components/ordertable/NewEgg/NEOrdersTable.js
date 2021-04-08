@@ -20,8 +20,8 @@ const useRowStyles = makeStyles({
     },
   },
   tContainer: {
-    marginLeft: "75px",
-    width: `calc(100% - ${75}px)`,
+    marginLeft: "60px",
+    width: `calc(100% - ${60}px)`,
   },
   tRow: {
     backgroundColor: "#52734d",

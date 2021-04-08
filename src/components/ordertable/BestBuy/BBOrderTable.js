@@ -148,7 +148,7 @@ export default function CustomPaginationActionsTable() {
     <div>
       <h2 className={classes.headerStyle}>Best Buy</h2>
       <TableContainer
-        style={{ marginLeft: "75px", width: "auto", marginRight: "5px" }}
+        style={{ marginLeft: "60px", width: "auto", marginRight: 1 }}
         component={Paper}
       >
         <Table className={classes.table} aria-label="custom pagination table">
