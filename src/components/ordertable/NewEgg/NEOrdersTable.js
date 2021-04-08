@@ -36,7 +36,7 @@ export default function NEOrdersTable() {
 
   useEffect(() => {
     getData(`${BASE_URL}ne/?limit=100&offset=0`).then((response) => {
-      //console.log(response.data);
+      console.log(response.data);
       setTableData({
         ...tableData,
         rows: response.data.results,

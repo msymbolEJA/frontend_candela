@@ -7,8 +7,11 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
+import Items from "./Items";
 
 const ItemsTable = ({ open, detailsRow }) => {
+  // console.log(detailsRow.length);
+
   return (
     <TableRow>
       <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
@@ -25,23 +28,17 @@ const ItemsTable = ({ open, detailsRow }) => {
                   <TableCell align="center">UPCCode</TableCell>
                   <TableCell align="center">OrderedQty</TableCell>
                   <TableCell align="center">UnitPrice</TableCell>
-                  <TableCell align="right">Description</TableCell>
+                  <TableCell align="center">Description</TableCell>
+                  <TableCell align="center">BestBuy Price</TableCell>
+                  <TableCell align="center">BestBuy Shipping Cost</TableCell>
+                  <TableCell align="right">
+                    BestBuy Online Availibility
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {detailsRow?.map((dRow, index) => (
-                  <TableRow key={index}>
-                    <TableCell component="th" scope="row">
-                      {dRow.id}
-                    </TableCell>
-                    <TableCell>{dRow.SellerPartNumber}</TableCell>
-                    <TableCell align="center">
-                      {dRow.UPCCode ? dRow.UPCCode : "-"}
-                    </TableCell>
-                    <TableCell align="center">{dRow.OrderedQty}</TableCell>
-                    <TableCell align="center">{dRow.UnitPrice}</TableCell>
-                    <TableCell align="right">{dRow.Description}</TableCell>
-                  </TableRow>
+                  <Items key={index} dRow={dRow} />
                 ))}
               </TableBody>
             </Table>

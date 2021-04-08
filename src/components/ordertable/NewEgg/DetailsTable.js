@@ -11,6 +11,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import moment from "moment";
 import ItemsTable from "./ItemsTable";
 
 const useRowStyles = makeStyles({
@@ -37,7 +38,7 @@ function Row(props) {
   const classes = useRowStyles();
 
   const detailsRow = row.items;
-  console.log({ row });
+  //   console.log(detailsRow);
 
   return (
     <React.Fragment>
@@ -54,7 +55,9 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.OrderNumber}
         </TableCell>
-        <TableCell align="center">{row.OrderDate}</TableCell>
+        <TableCell align="center">
+          {moment.utc(row.OrderDate).local().format("MM-DD-YY HH:mm")}
+        </TableCell>
         <TableCell align="center">{row.OrderStatusDescription}</TableCell>
         <TableCell align="center">{row.OrderItemAmount}</TableCell>
         <TableCell align="center">{row.OrderQty}</TableCell>
