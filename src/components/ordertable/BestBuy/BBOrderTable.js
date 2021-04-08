@@ -107,6 +107,10 @@ const useStyles2 = makeStyles({
     marginBottom: "1rem",
     fontFamily: "Courier New",
   },
+  tRow: {
+    backgroundColor: "#52734d",
+    color: "white",
+  },
 });
 
 export default function CustomPaginationActionsTable() {
@@ -149,7 +153,7 @@ export default function CustomPaginationActionsTable() {
       >
         <Table className={classes.table} aria-label="custom pagination table">
           <TableHead>
-            <TableRow style={{ backgroundColor: "black", color: "white" }}>
+            <TableRow className={classes.tRow}>
               <TableCell align="center" style={{ color: "white" }}>
                 Manufacturer
               </TableCell>
