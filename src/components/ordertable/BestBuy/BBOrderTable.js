@@ -205,7 +205,12 @@ export default function CustomPaginationActionsTable() {
                 : tableData?.rows
               ).map((row, index) => (
                 <TableRow key={index} className={classes.rowStyle}>
-                  <TableCell align="center" component="th" scope="row">
+                  <TableCell
+                    align="center"
+                    component="th"
+                    scope="row"
+                    style={{ maxWidth: 600 }}
+                  >
                     {row.name}
                   </TableCell>
                   <TableCell align="center" component="th" scope="row">
