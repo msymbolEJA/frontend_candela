@@ -108,13 +108,10 @@ export default function NavBar({ open, handleDrawerOpen, handleDrawerClose }) {
         >
           <MenuIcon />
         </IconButton>
-        <Typography
-          variant="h6"
-          noWrap
-          style={{ flexGrow: 1, cursor: "pointer" }}
-          onClick={dashboarDirectFunc}
-        >
-          {STORE_NAME}
+        <Typography variant="h6" noWrap style={{ flexGrow: 1 }}>
+          <span onClick={dashboarDirectFunc} style={{ cursor: "pointer" }}>
+            {STORE_NAME}
+          </span>
         </Typography>
 
         <div>
