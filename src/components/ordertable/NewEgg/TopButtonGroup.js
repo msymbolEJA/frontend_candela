@@ -23,7 +23,6 @@ const TopButtonGroup = ({ buttonTag, setButtonTag }) => {
   const classes = useStyles();
 
   const handleTagBtnClick = (event) => {
-    console.log("handleTagBtnClick", event.currentTarget.id);
     setButtonTag(event.currentTarget.id);
   };
 

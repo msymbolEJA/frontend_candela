@@ -44,16 +44,16 @@ export default function NEOrdersTable() {
 
   useEffect(() => {
     setTableData();
-    getData(
-      `${BASE_URL}ne/?OrderStatus=${buttonTag}&limit=100&offset=100`
-    ).then((response) => {
-      console.log(response);
-      setTableData({
-        ...tableData,
-        rows: response.data.results,
-        count: response.data.count,
-      });
-    });
+    getData(`${BASE_URL}ne/?OrderStatus=${buttonTag}&limit=100&offset=0`).then(
+      (response) => {
+        console.log(response);
+        setTableData({
+          ...tableData,
+          rows: response.data.results,
+          count: response.data.count,
+        });
+      }
+    );
     // return () => setTableData(false);
     // eslint-disable-next-line
   }, [buttonTag]);
