@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import { getData } from "../../../helpers/DataTransitions";
 import Row from "./DetailsTable";
 import spinner from "../../../assets/spinner.gif";
+import TopButtonGroup from "./TopButtonGroup";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -32,7 +33,6 @@ const useRowStyles = makeStyles({
   headerStyle: {
     color: "#1f441e",
     fontSize: "2rem",
-    marginBottom: "1rem",
     fontFamily: "Courier New",
   },
 });
@@ -56,6 +56,7 @@ export default function NEOrdersTable() {
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
       <h2 className={classes.headerStyle}>New Egg</h2>
+      <TopButtonGroup />
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow className={classes.tRow}>
