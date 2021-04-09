@@ -12,9 +12,7 @@ import Items from "./Items";
 
 const useRowStyles = makeStyles({
   innerTable: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: "#feffde",
-    },
+    backgroundColor: "#bdd2b6",
   },
 });
 
@@ -27,7 +25,7 @@ const ItemsTable = ({ open, detailsRow }) => {
       <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <Box margin={1}>
-            <Typography variant="h6" gutterBottom component="div">
+            <Typography variant="h4" gutterBottom component="div">
               Items
             </Typography>
             <Table size="small" aria-label="purchases">
@@ -38,12 +36,12 @@ const ItemsTable = ({ open, detailsRow }) => {
                   <TableCell align="center">UPC Code</TableCell>
                   <TableCell align="center">Ordered Qty</TableCell>
                   <TableCell align="center">Unit Price</TableCell>
-                  <TableCell align="center">Description</TableCell>
                   <TableCell align="center">BestBuy Price</TableCell>
                   <TableCell align="center">BestBuy Shipping Cost</TableCell>
                   <TableCell align="right">
                     BestBuy Online Availibility
                   </TableCell>
+                  <TableCell align="center">Description</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

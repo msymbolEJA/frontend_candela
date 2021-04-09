@@ -50,6 +50,7 @@ export default function NEOrdersTable() {
         count: response.data.count,
       });
     });
+    // return () => setTableData(false);
     // eslint-disable-next-line
   }, []);
 
