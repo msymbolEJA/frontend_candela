@@ -26,37 +26,37 @@ import {
 const menuLinks = [
   {
     id: 0,
-    title: "home",
+    title: "menu1",
     icon: Dashboard,
     link: "/home",
   },
   {
     id: 1,
-    title: "moderators",
+    title: "menu2",
     icon: AssignmentTurnedIn,
     link: "/moderators",
   },
   {
     id: 2,
-    title: "editors",
+    title: "menu3",
     icon: Assignment,
     link: "/editors",
   },
   {
     id: 3,
-    title: "teachers",
+    title: "menu4",
     icon: LocalLibrary,
     link: "/teachers",
   },
   {
     id: 4,
-    title: "schoolAdmin",
+    title: "menu4",
     icon: SupervisorAccount,
     link: "/school-admin",
   },
   {
     id: 11,
-    title: "exams",
+    title: "menu5",
     icon: Assignment,
     link: "/student",
 
