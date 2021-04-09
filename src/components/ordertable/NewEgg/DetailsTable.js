@@ -34,9 +34,7 @@ const useRowStyles = makeStyles({
     color: "white",
   },
   innerTable: {
-    "&:nth-of-type(even)": {
-      backgroundColor: "#feffde",
-    },
+    backgroundColor: "#bdd2b6",
   },
 });
 
@@ -75,7 +73,7 @@ function Row(props) {
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
-              <Typography variant="h6" gutterBottom component="div">
+              <Typography variant="h4" gutterBottom component="div">
                 Details
               </Typography>
               <Table size="small" aria-label="purchases">
@@ -84,22 +82,15 @@ function Row(props) {
                     <TableCell>Customer Name</TableCell>
                     <TableCell align="center">Customer Phone Number</TableCell>
                     <TableCell align="center">Discount Amount</TableCell>
-                    <TableCell align="center">Duty Total</TableCell>
-                    <TableCell align="center">Fulfillment Option</TableCell>
                     <TableCell align="center">Invoice Number</TableCell>
-                    <TableCell align="center">Is Auto Void</TableCell>
                     <TableCell align="center">Order Status</TableCell>
                     <TableCell align="center">Refund Amount</TableCell>
-                    <TableCell align="center">Sales Channel</TableCell>
                     <TableCell align="center">Sales Tax</TableCell>
                     <TableCell align="center">Ship Service</TableCell>
+                    <TableCell align="center">Ship To Company</TableCell>
                     <TableCell align="center">ShipToAddress1</TableCell>
                     <TableCell align="center">ShipToAddress2</TableCell>
-                    <TableCell align="center">Ship To City Name</TableCell>
-                    <TableCell align="center">Ship To Company</TableCell>
-                    <TableCell align="center">Ship To Country Code</TableCell>
-                    <TableCell align="center">Ship To State Code</TableCell>
-                    <TableCell align="center">Ship To Zip Code</TableCell>
+                    <TableCell align="center">ShipToAddress3</TableCell>
                     <TableCell align="center">Shipping Amount</TableCell>
                     <TableCell align="right">VAT Total</TableCell>
                   </TableRow>
@@ -111,32 +102,30 @@ function Row(props) {
                     </TableCell>
                     <TableCell>{row.CustomerPhoneNumber}</TableCell>
                     <TableCell align="center">{row.DiscountAmount}</TableCell>
-                    <TableCell align="center">
-                      {row.DutyTotal ? row.DutyTotal : "-"}
-                    </TableCell>
-                    <TableCell align="center">
-                      {row.FulfillmentOption}
-                    </TableCell>
+
                     <TableCell align="center">{row.InvoiceNumber}</TableCell>
-                    <TableCell align="center">
-                      {row.IsAutoVoid ? 1 : 0}
-                    </TableCell>
+
                     <TableCell align="center">{row.OrderStatus}</TableCell>
                     <TableCell align="center">{row.RefundAmount}</TableCell>
-                    <TableCell align="center">{row.SalesChannel}</TableCell>
                     <TableCell align="center">{row.SalesTax}</TableCell>
                     <TableCell align="center">{row.ShipService}</TableCell>
-                    <TableCell align="center">{row.ShipToAddress1}</TableCell>
-                    <TableCell align="center">{row.ShipToAddress2}</TableCell>
-                    <TableCell align="center">{row.ShipToCityName}</TableCell>
                     <TableCell align="center">
                       {row.ShipToCompany ? row.ShipToCompany : "-"}
                     </TableCell>
+                    <TableCell align="center">{row.ShipToAddress1}</TableCell>
+                    <TableCell align="center">{row.ShipToAddress2}</TableCell>
                     <TableCell align="center">
-                      {row.ShipToCountryCode}
+                      <>
+                        {row.ShipToCityName}
+                        <br />
+                        {row.ShipToStateCode}
+                        <br />
+                        {row.ShipToCountryCode}
+                        <br />
+                        {row.ShipToZipCode}
+                      </>
                     </TableCell>
-                    <TableCell align="center">{row.ShipToStateCode}</TableCell>
-                    <TableCell align="center">{row.ShipToZipCode}</TableCell>
+
                     <TableCell align="center">{row.ShippingAmount}</TableCell>
                     <TableCell align="right">
                       {row.VATTotal ? row.VATTotal : "-"}
