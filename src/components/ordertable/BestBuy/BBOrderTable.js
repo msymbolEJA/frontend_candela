@@ -17,6 +17,7 @@ import LastPageIcon from "@material-ui/icons/LastPage";
 import TableHead from "@material-ui/core/TableHead";
 import { getData } from "../../../helpers/DataTransitions";
 import spinner from "../../../assets/spinner.gif";
+import moment from "moment";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -126,7 +127,7 @@ export default function CustomPaginationActionsTable() {
 
   useEffect(() => {
     getData(`${BASE_URL}bb/?limit=100&offset=0`).then((response) => {
-      //   console.log(response);
+      console.log(response);
       setTableData({
         ...tableData,
         rows: response.data.results,
@@ -160,16 +161,37 @@ export default function CustomPaginationActionsTable() {
           <TableHead>
             <TableRow className={classes.headingRow}>
               <TableCell align="center" style={{ color: "white" }}>
+                Name
+              </TableCell>
+              <TableCell align="center" style={{ color: "white" }}>
                 Manufacturer
               </TableCell>
               <TableCell style={{ color: "white" }} align="center">
                 ModelNumber
               </TableCell>
               <TableCell style={{ color: "white" }} align="center">
+                Online Availability
+              </TableCell>
+              <TableCell style={{ color: "white" }} align="center">
+                Release Date
+              </TableCell>
+              <TableCell style={{ color: "white" }} align="center">
                 Sale Price
               </TableCell>
               <TableCell style={{ color: "white" }} align="center">
-                shippingCost
+                Shipping Cost
+              </TableCell>
+              <TableCell style={{ color: "white" }} align="center">
+                Shipping Weight
+              </TableCell>
+              <TableCell style={{ color: "white" }} align="center">
+                SKU
+              </TableCell>
+              <TableCell style={{ color: "white" }} align="center">
+                UPC
+              </TableCell>
+              <TableCell style={{ color: "white" }} align="center">
+                Created Date
               </TableCell>
             </TableRow>
           </TableHead>
@@ -184,26 +206,56 @@ export default function CustomPaginationActionsTable() {
               ).map((row, index) => (
                 <TableRow key={index} className={classes.rowStyle}>
                   <TableCell align="center" component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell align="center" component="th" scope="row">
                     {row.manufacturer}
                   </TableCell>
                   <TableCell align="center">{row.modelNumber}</TableCell>
+                  <TableCell align="center">
+                    {row.onlineAvailability ? "Yes" : "No"}
+                  </TableCell>
+                  <TableCell align="center">
+                    {row.releaseDate ? row.releaseDate : "-"}
+                  </TableCell>
                   <TableCell align="center">{row.salePrice}</TableCell>
                   <TableCell align="center">{row.shippingCost}</TableCell>
+                  <TableCell align="center">{row.shippingWeight}</TableCell>
+                  <TableCell align="center">{row.sku}</TableCell>
+                  <TableCell align="center">
+                    <>
+                      <p className={classes.priceStyle}>{row?.upc}</p>
+                      <a href={row?.url} target="_blank" rel="noreferrer">
+                        Visit
+                      </a>
+                    </>
+                  </TableCell>
+                  <TableCell align="center">
+                    {moment
+                      .utc(row.createdate)
+                      .local()
+                      .format("MM-DD-YY HH:mm")}
+                  </TableCell>
                 </TableRow>
               ))
             ) : (
-              <TableRow>
-                <TableCell colSpan={2}>
+              <tr>
+                <td
+                  colSpan="18"
+                  style={{
+                    display: "table-cell",
+                    height: "5rem",
+                  }}
+                >
                   <img
                     src={spinner}
                     style={{
                       width: 50,
-                      float: "right",
                     }}
                     alt="spinner"
                   />
-                </TableCell>
-              </TableRow>
+                </td>
+              </tr>
             )}
 
             {emptyRows > 0 && (
