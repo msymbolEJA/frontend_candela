@@ -16,6 +16,9 @@ import ItemsTable from "./ItemsTable";
 
 const useRowStyles = makeStyles({
   root: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: "#feffde",
+    },
     "& > *": {
       borderBottom: "unset",
     },
@@ -29,6 +32,11 @@ const useRowStyles = makeStyles({
   },
   tCell: {
     color: "white",
+  },
+  innerTable: {
+    "&:nth-of-type(even)": {
+      backgroundColor: "#feffde",
+    },
   },
 });
 
@@ -63,7 +71,7 @@ function Row(props) {
         <TableCell align="center">{row.OrderQty}</TableCell>
         <TableCell align="right">{row.OrderTotalAmount}</TableCell>
       </TableRow>
-      <TableRow>
+      <TableRow className={classes.innerTable}>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
@@ -72,7 +80,7 @@ function Row(props) {
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
-                  <TableRow style={{ backgroundColor: "lightgrey" }}>
+                  <TableRow style={{ backgroundColor: "#96bb7c" }}>
                     <TableCell>Customer Name</TableCell>
                     <TableCell align="center">Customer Phone Number</TableCell>
                     <TableCell align="center">Discount Amount</TableCell>

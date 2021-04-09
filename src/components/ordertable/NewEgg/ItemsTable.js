@@ -6,14 +6,24 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Items from "./Items";
 
+const useRowStyles = makeStyles({
+  innerTable: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: "#feffde",
+    },
+  },
+});
+
 const ItemsTable = ({ open, detailsRow }) => {
+  const classes = useRowStyles();
   // console.log(detailsRow.length);
 
   return (
-    <TableRow>
+    <TableRow className={classes.innerTable}>
       <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <Box margin={1}>
@@ -22,7 +32,7 @@ const ItemsTable = ({ open, detailsRow }) => {
             </Typography>
             <Table size="small" aria-label="purchases">
               <TableHead>
-                <TableRow style={{ backgroundColor: "#e8eae6" }}>
+                <TableRow style={{ backgroundColor: "#d6efc7" }}>
                   <TableCell>Id</TableCell>
                   <TableCell>Seller Part Number</TableCell>
                   <TableCell align="center">UPC Code</TableCell>

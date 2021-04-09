@@ -107,9 +107,14 @@ const useStyles2 = makeStyles({
     marginBottom: "1rem",
     fontFamily: "Courier New",
   },
-  tRow: {
+  headingRow: {
     backgroundColor: "#52734d",
     color: "white",
+  },
+  rowStyle: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: "#feffde",
+    },
   },
 });
 
@@ -153,7 +158,7 @@ export default function CustomPaginationActionsTable() {
       >
         <Table className={classes.table} aria-label="custom pagination table">
           <TableHead>
-            <TableRow className={classes.tRow}>
+            <TableRow className={classes.headingRow}>
               <TableCell align="center" style={{ color: "white" }}>
                 Manufacturer
               </TableCell>
@@ -177,7 +182,7 @@ export default function CustomPaginationActionsTable() {
                   )
                 : tableData?.rows
               ).map((row, index) => (
-                <TableRow key={index}>
+                <TableRow key={index} className={classes.rowStyle}>
                   <TableCell align="center" component="th" scope="row">
                     {row.manufacturer}
                   </TableCell>
