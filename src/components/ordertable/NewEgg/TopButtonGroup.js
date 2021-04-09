@@ -15,12 +15,17 @@ const useStyles = makeStyles((theme) => ({
   btnStyle: {
     color: "#52734d",
     borderColor: "#52734d",
-    minWidth: 150,
+    minWidth: 160,
   },
 }));
 
-const TopButtonGroup = () => {
+const TopButtonGroup = ({ buttonTag, setButtonTag }) => {
   const classes = useStyles();
+
+  const handleTagBtnClick = (event) => {
+    console.log("handleTagBtnClick", event.currentTarget.id);
+    setButtonTag(event.currentTarget.id);
+  };
 
   return (
     <div className={classes.root}>
@@ -29,11 +34,24 @@ const TopButtonGroup = () => {
         aria-label="outlined primary button group"
         size="small"
       >
-        <Button className={classes.btnStyle}>Unshipped</Button>
-        <Button className={classes.btnStyle}>Partially Shipped</Button>
-        <Button className={classes.btnStyle}>Shipped</Button>
-        <Button className={classes.btnStyle}>Invoiced</Button>
-        <Button className={classes.btnStyle}>Voided</Button>
+        <Button className={classes.btnStyle} onClick={handleTagBtnClick} id="">
+          All
+        </Button>
+        <Button className={classes.btnStyle} onClick={handleTagBtnClick} id="0">
+          Unshipped
+        </Button>
+        <Button className={classes.btnStyle} onClick={handleTagBtnClick} id="1">
+          Partially Shipped
+        </Button>
+        <Button className={classes.btnStyle} onClick={handleTagBtnClick} id="2">
+          Shipped
+        </Button>
+        <Button className={classes.btnStyle} onClick={handleTagBtnClick} id="3">
+          Invoiced
+        </Button>
+        <Button className={classes.btnStyle} onClick={handleTagBtnClick} id="4">
+          Voided
+        </Button>
       </ButtonGroup>
     </div>
   );
