@@ -28,6 +28,9 @@ const Dashboard = () => {
       <button id="orders/ne" onClick={handleClick} className={classes.btn}>
         New Egg
       </button>
+      <button id="orders/wal" onClick={handleClick} className={classes.btn}>
+        Wallmart
+      </button>
     </div>
   );
 };
