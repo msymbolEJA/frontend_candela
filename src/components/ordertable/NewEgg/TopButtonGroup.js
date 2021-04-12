@@ -16,6 +16,11 @@ const useStyles = makeStyles((theme) => ({
     color: "#52734d",
     borderColor: "#52734d",
     minWidth: 160,
+    backgroundColor: "#fad586",
+    "&:hover": {
+      color: "white",
+      backgroundColor: "#52734d",
+    },
   },
 }));
 
@@ -31,24 +36,78 @@ const TopButtonGroup = ({ buttonTag, setButtonTag }) => {
       <ButtonGroup
         color="primary"
         aria-label="outlined primary button group"
-        size="small"
+        size="medium"
       >
-        <Button className={classes.btnStyle} onClick={handleTagBtnClick} id="">
+        <Button
+          className={classes.btnStyle}
+          variant="contained"
+          onClick={handleTagBtnClick}
+          id=""
+          style={{
+            backgroundColor: buttonTag === "" ? "#52734d" : null,
+            color: buttonTag === "" ? "#fad586" : null,
+          }}
+        >
           All
         </Button>
-        <Button className={classes.btnStyle} onClick={handleTagBtnClick} id="0">
+        <Button
+          className={classes.btnStyle}
+          variant="contained"
+          onClick={handleTagBtnClick}
+          id="0"
+          style={{
+            backgroundColor: buttonTag === "0" ? "#52734d" : null,
+            color: buttonTag === "0" ? "#fad586" : null,
+          }}
+        >
           Unshipped
         </Button>
-        <Button className={classes.btnStyle} onClick={handleTagBtnClick} id="1">
+        <Button
+          className={classes.btnStyle}
+          variant="contained"
+          onClick={handleTagBtnClick}
+          id="1"
+          style={{
+            backgroundColor: buttonTag === "1" ? "#52734d" : null,
+            color: buttonTag === "1" ? "#fad586" : null,
+          }}
+        >
           Partially Shipped
         </Button>
-        <Button className={classes.btnStyle} onClick={handleTagBtnClick} id="2">
+        <Button
+          className={classes.btnStyle}
+          variant="contained"
+          onClick={handleTagBtnClick}
+          id="2"
+          style={{
+            backgroundColor: buttonTag === "2" ? "#52734d" : null,
+            color: buttonTag === "2" ? "#fad586" : null,
+          }}
+        >
           Shipped
         </Button>
-        <Button className={classes.btnStyle} onClick={handleTagBtnClick} id="3">
+        <Button
+          className={classes.btnStyle}
+          variant="contained"
+          onClick={handleTagBtnClick}
+          id="3"
+          style={{
+            backgroundColor: buttonTag === "3" ? "#52734d" : null,
+            color: buttonTag === "3" ? "#fad586" : null,
+          }}
+        >
           Invoiced
         </Button>
-        <Button className={classes.btnStyle} onClick={handleTagBtnClick} id="4">
+        <Button
+          className={classes.btnStyle}
+          variant="contained"
+          onClick={handleTagBtnClick}
+          id="4"
+          style={{
+            backgroundColor: buttonTag === "4" ? "#52734d" : null,
+            color: buttonTag === "4" ? "#fad586" : null,
+          }}
+        >
           Voided
         </Button>
       </ButtonGroup>
