@@ -42,7 +42,7 @@ const useRowStyles = makeStyles({
 });
 
 export default function NEOrdersTable() {
-  const [tableData, setTableData] = useState();
+  const [tableData, setTableData] = useState({ rows: [], count: 0 });
   const classes = useRowStyles();
   const [buttonTag, setButtonTag] = useState("");
   const [page, setPage] = useState(0);

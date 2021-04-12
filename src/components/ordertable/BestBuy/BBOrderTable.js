@@ -44,6 +44,7 @@ export default function CustomPaginationActionsTable() {
   const [tableData, setTableData] = useState({ rows: [], count: 0 });
 
   useEffect(() => {
+    setTableData();
     getData(
       `${BASE_URL}bb/?limit=${rowsPerPage}&offset=${page * rowsPerPage}`
     ).then((response) => {
