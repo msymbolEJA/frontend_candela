@@ -10,7 +10,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableHead from "@material-ui/core/TableHead";
 import { getData } from "../../../helpers/DataTransitions";
-import TablePaginationActions from "./TablePagination";
+import TablePaginationActions from "./TablePaginationActions";
 import spinner from "../../../assets/spinner.gif";
 import moment from "moment";
 
@@ -47,7 +47,7 @@ export default function CustomPaginationActionsTable() {
     getData(
       `${BASE_URL}bb/?limit=${rowsPerPage}&offset=${page * rowsPerPage}`
     ).then((response) => {
-      console.log(response.data.results);
+      console.log(response.data);
       setTableData({
         ...tableData,
         rows: response.data.results,
@@ -56,10 +56,6 @@ export default function CustomPaginationActionsTable() {
     });
     // eslint-disable-next-line
   }, [rowsPerPage, page]);
-
-  const emptyRows =
-    rowsPerPage -
-    Math.min(rowsPerPage, tableData?.rows?.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -189,6 +185,8 @@ export default function CustomPaginationActionsTable() {
           </TableBody>
           <TableFooter>
             <TableRow>
+              <td>Total Record :</td>
+              <td style={{ textAlign: "left" }}>{tableData?.count || 0}</td>
               <TablePagination
                 rowsPerPageOptions={[25, 50, 100, 250, 500, 2500]}
                 colSpan={22}

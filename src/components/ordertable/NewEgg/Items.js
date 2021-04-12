@@ -20,7 +20,7 @@ const Items = ({ dRow }) => {
 
   useEffect(() => {
     getData(`${BASE_URL}bb/${upcQuery}`).then((response) => {
-      console.log("items", response.data);
+      // console.log("items", response.data);
       setUpcInfos(response.data);
     });
   }, [upcQuery]);
