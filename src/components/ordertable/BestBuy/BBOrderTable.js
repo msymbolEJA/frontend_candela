@@ -177,33 +177,29 @@ export default function CustomPaginationActionsTable() {
                 </td>
               </tr>
             )}
-
-            {/* {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
-              </TableRow>
-            )} */}
           </TableBody>
-          <TableFooter>
-            <TableRow>
-              <td>Total Record :</td>
-              <td style={{ textAlign: "left" }}>{tableData?.count || 0}</td>
-              <TablePagination
-                rowsPerPageOptions={[25, 50, 100, 250, 500, 2500]}
-                colSpan={22}
-                count={tableData?.count}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                SelectProps={{
-                  inputProps: { "aria-label": "rows per page" },
-                  native: true,
-                }}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
-              />
-            </TableRow>
-          </TableFooter>
+          {tableData?.rows.length > 0 ? (
+            <TableFooter>
+              <TableRow>
+                <td>Total Record :</td>
+                <td style={{ textAlign: "left" }}>{tableData?.count || 0}</td>
+                <TablePagination
+                  rowsPerPageOptions={[25, 50, 100, 250, 500, 2500]}
+                  colSpan={22}
+                  count={tableData?.count}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  SelectProps={{
+                    inputProps: { "aria-label": "rows per page" },
+                    native: true,
+                  }}
+                  onChangePage={handleChangePage}
+                  onChangeRowsPerPage={handleChangeRowsPerPage}
+                  ActionsComponent={TablePaginationActions}
+                />
+              </TableRow>
+            </TableFooter>
+          ) : null}
         </Table>
       </TableContainer>
     </div>
