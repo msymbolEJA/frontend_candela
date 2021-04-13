@@ -1,14 +1,18 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import bestbuy from "../../assets/bestbuy.png";
+import walmart from "../../assets/walmart.png";
+import newegg from "../../assets/newegg.png";
 
 const useStyles = makeStyles((theme) => ({
   btn: {
     padding: 10,
-    width: 100,
+    width: 300,
     fontSize: "1rem",
     margin: 10,
     cursor: "pointer",
+    borderBottom: "3px solid green",
   },
 }));
 
@@ -22,15 +26,28 @@ const Dashboard = () => {
   return (
     <div>
       <h1>DashBoard</h1>
-      <button id="orders/bb" onClick={handleClick} className={classes.btn}>
-        Best Buy
-      </button>
-      <button id="orders/ne" onClick={handleClick} className={classes.btn}>
-        New Egg
-      </button>
-      <button id="orders/wal" onClick={handleClick} className={classes.btn}>
-        Wallmart
-      </button>
+
+      <img
+        id="orders/bb"
+        onClick={handleClick}
+        className={classes.btn}
+        src={bestbuy}
+        alt="besybuy"
+      />
+      <img
+        id="orders/ne"
+        onClick={handleClick}
+        className={classes.btn}
+        src={newegg}
+        alt="newegg"
+      />
+      <img
+        id="orders/wal"
+        onClick={handleClick}
+        className={classes.btn}
+        src={walmart}
+        alt="walmart"
+      />
     </div>
   );
 };
