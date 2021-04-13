@@ -26,21 +26,21 @@ import {
 const menuLinks = [
   {
     id: 0,
-    title: "menu1",
+    title: "Best Buy",
     icon: Dashboard,
-    link: "/home",
+    link: "/orders/bb",
   },
   {
     id: 1,
-    title: "menu2",
+    title: "New Egg",
     icon: AssignmentTurnedIn,
-    link: "/moderators",
+    link: "/orders/ne",
   },
   {
     id: 2,
-    title: "menu3",
+    title: "Wallmart",
     icon: Assignment,
-    link: "/editors",
+    link: "/orders/wal",
   },
   {
     id: 3,
