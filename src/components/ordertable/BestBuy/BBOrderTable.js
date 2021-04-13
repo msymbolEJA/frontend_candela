@@ -69,7 +69,7 @@ export default function CustomPaginationActionsTable() {
 
   return (
     <div>
-      <h2 className={classes.headerStyle}>Best Buy</h2>
+      <h2 className={classes.headerStyle}>Best Buy Items</h2>
       <TableContainer
         style={{ marginLeft: "60px", width: "auto", marginRight: 1 }}
         component={Paper}

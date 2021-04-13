@@ -77,7 +77,7 @@ export default function NEOrdersTable() {
 
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
-      <h2 className={classes.headerStyle}>New Egg</h2>
+      <h2 className={classes.headerStyle}>New Egg Orders</h2>
       <TopButtonGroup buttonTag={buttonTag} setButtonTag={setButtonTag} />
       <Table aria-label="collapsible table">
         <TableHead>
