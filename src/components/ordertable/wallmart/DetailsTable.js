@@ -38,7 +38,7 @@ function Row(props) {
   const classes = useRowStyles();
 
   const detailsRow = row.items;
-  console.log(detailsRow);
+  // console.log(detailsRow);
 
   return (
     <React.Fragment>
