@@ -52,19 +52,6 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
-          {row.customerOrderId}
-        </TableCell>
-        <TableCell align="center" component="th" scope="row">
-          {row.cutomerName}
-        </TableCell>
-        <TableCell align="center" component="th" scope="row">
-          {row.customerEmailId ? (
-            row.customerEmailId
-          ) : (
-            <p style={{ color: "red" }}>No Info</p>
-          )}
-        </TableCell>
         <TableCell align="center" component="th" scope="row">
           {row.customerOrderId ? (
             <>
@@ -77,19 +64,17 @@ function Row(props) {
             <p style={{ color: "red" }}>No Info</p>
           )}
         </TableCell>
+        <TableCell align="center" component="th" scope="row">
+          {row.cutomerName}
+        </TableCell>
         <TableCell align="center">
           {moment.utc(row.OrderDate).local().format("MM-DD-YY HH:mm")}
         </TableCell>
         <TableCell align="center">{row.orderStatus}</TableCell>
         <TableCell align="center">{row.address1}</TableCell>
         <TableCell align="center">
-          {row.address2 ? (
-            row.address2
-          ) : (
-            <p style={{ color: "red" }}>No Info</p>
-          )}
+          {row.address2 ? row.address2 : <p>No Info</p>}
         </TableCell>
-        <TableCell align="right">{row.addressType}</TableCell>
         <TableCell align="right">{row.city}</TableCell>
         <TableCell align="right">{row.country}</TableCell>
         <TableCell align="right">{row.postalCode}</TableCell>

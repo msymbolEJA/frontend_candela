@@ -88,12 +88,6 @@ export default function NEOrdersTable() {
               Cutomer Name
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
-              Customer Email Id
-            </TableCell>
-            <TableCell align="center" className={classes.tCell}>
-              Customer Order Id
-            </TableCell>
-            <TableCell align="center" className={classes.tCell}>
               Order Date
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
@@ -104,9 +98,6 @@ export default function NEOrdersTable() {
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
               Address 2
-            </TableCell>
-            <TableCell align="right" className={classes.tCell}>
-              Address Type
             </TableCell>
             <TableCell align="right" className={classes.tCell}>
               City
