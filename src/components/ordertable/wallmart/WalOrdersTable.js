@@ -134,8 +134,13 @@ export default function NEOrdersTable() {
             </TableBody>
             <TableFooter>
               <TableRow>
-                <td>Total Record :</td>
-                <td style={{ textAlign: "left" }}>{tableData?.count || 0}</td>
+                <td colSpan={2} style={{ textAlign: "right" }}>
+                  Total Record :
+                </td>
+                <td style={{ textAlign: "left", paddingLeft: "5px" }}>
+                  {" "}
+                  {tableData?.count || 0}
+                </td>
                 <TablePagination
                   rowsPerPageOptions={[25, 50, 100, 250, 500, 2500]}
                   colSpan={22}
