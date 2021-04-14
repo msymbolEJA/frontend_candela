@@ -3,6 +3,8 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import { getData } from "../../../helpers/DataTransitions";
 import { makeStyles } from "@material-ui/core/styles";
+import checkSvg from "../../../assets/check.svg";
+import deleteSvg from "../../../assets/delete.svg";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -16,16 +18,12 @@ const Items = ({ dRow }) => {
   const [upcInfos, setUpcInfos] = useState();
   const classes = useStyles();
 
-  console.log({ dRow });
-
   let upcQuery;
   if (dRow?.sku.includes("NC_UPC_")) {
     upcQuery = dRow.sku.replace("NC_UPC_", "");
   } else if (dRow?.sku.includes("MC_UPC_")) {
     upcQuery = dRow.sku.replace("MC_UPC_", "");
   }
-
-  console.log(upcQuery);
 
   useEffect(() => {
     getData(`${BASE_URL}bb/${upcQuery}`)
@@ -38,6 +36,12 @@ const Items = ({ dRow }) => {
       });
   }, [upcQuery]);
 
+  let isBuyable =
+    Number(dRow?.itemPrice) / 1.3 >
+      Number(upcInfos?.salePrice) + Number(upcInfos?.shippingCost) &&
+    upcInfos?.onlineAvailability;
+  console.log({ isBuyable });
+
   return (
     <TableRow>
       <TableCell component="th" scope="row">
@@ -45,16 +49,20 @@ const Items = ({ dRow }) => {
       </TableCell>
       <TableCell align="center">{upcQuery}</TableCell>
       <TableCell align="center">
-        <p>
+        <>
           <p className={classes.priceStyle}>{dRow.itemPrice}</p>
-        </p>
+        </>
       </TableCell>
       <TableCell align="center">
         <>
-          <p className={classes.priceStyle}>{upcInfos?.salePrice}</p>
-          <a href={upcInfos?.url} target="_blank" rel="noreferrer">
-            Visit
-          </a>
+          <p className={classes.priceStyle}>
+            {upcInfos?.salePrice ? upcInfos?.salePrice : "-"}
+          </p>
+          {upcInfos?.url ? (
+            <a href={upcInfos?.url} target="_blank" rel="noreferrer">
+              Visit
+            </a>
+          ) : null}
         </>
       </TableCell>
       <TableCell align="center">{upcInfos?.shippingCost}</TableCell>
@@ -65,6 +73,13 @@ const Items = ({ dRow }) => {
       </TableCell>
       <TableCell align="right">
         {upcInfos?.onlineAvailability ? "Yes" : "No"}
+      </TableCell>
+      <TableCell align="center">
+        <img
+          src={isBuyable ? checkSvg : deleteSvg}
+          style={{ width: 25 }}
+          alt=""
+        />
       </TableCell>
     </TableRow>
   );

@@ -42,6 +42,7 @@ const ItemsTable = ({ open, detailsRow }) => {
                   <TableCell align="right">
                     BestBuy Online Availibility
                   </TableCell>
+                  <TableCell align="right">Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
