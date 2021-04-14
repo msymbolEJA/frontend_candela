@@ -73,7 +73,7 @@ function Row(props) {
         <TableCell align="center">{row.orderStatus}</TableCell>
         <TableCell align="center">{row.address1}</TableCell>
         <TableCell align="center">
-          {row.address2 ? row.address2 : <p>No Info</p>}
+          {row.address2 ? row.address2 : <>No Info</>}
         </TableCell>
         <TableCell align="right">{row.city}</TableCell>
         <TableCell align="right">{row.country}</TableCell>

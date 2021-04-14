@@ -31,10 +31,12 @@ const ItemsTable = ({ open, detailsRow }) => {
             <Table size="small" aria-label="purchases">
               <TableHead>
                 <TableRow style={{ backgroundColor: "#d6efc7" }}>
-                  <TableCell>Product Name</TableCell>
-                  <TableCell>Item Price</TableCell>
+                  <TableCell align="center">Product Name</TableCell>
+                  <TableCell align="center">UPC</TableCell>
+                  <TableCell align="center">Item Price</TableCell>
+                  <TableCell align="center">BestBuy Price</TableCell>
+                  <TableCell>BestBuy Shipping Cost</TableCell>
                   <TableCell align="center">Order Status</TableCell>
-                  <TableCell align="center">SKU</TableCell>
                   <TableCell align="center">Tax Amount</TableCell>
                   <TableCell align="center">Tax Name</TableCell>
                   <TableCell align="right">
