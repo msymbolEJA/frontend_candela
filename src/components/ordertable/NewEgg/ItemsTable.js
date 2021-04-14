@@ -32,16 +32,17 @@ const ItemsTable = ({ open, detailsRow }) => {
               <TableHead>
                 <TableRow style={{ backgroundColor: "#d6efc7" }}>
                   <TableCell>Id</TableCell>
-                  <TableCell>Seller Part Number</TableCell>
+                  <TableCell align="center">Seller Part Number</TableCell>
                   <TableCell align="center">UPC Code</TableCell>
                   <TableCell align="center">Ordered Qty</TableCell>
                   <TableCell align="center">Unit Price</TableCell>
                   <TableCell align="center">BestBuy Price</TableCell>
                   <TableCell align="center">BestBuy Shipping Cost</TableCell>
-                  <TableCell align="right">
+                  <TableCell align="center">Description</TableCell>
+                  <TableCell align="center">
                     BestBuy Online Availibility
                   </TableCell>
-                  <TableCell align="center">Description</TableCell>
+                  <TableCell align="right">Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

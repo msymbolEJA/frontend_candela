@@ -3,6 +3,8 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import { getData } from "../../../helpers/DataTransitions";
 import { makeStyles } from "@material-ui/core/styles";
+import checkSvg from "../../../assets/check.svg";
+import deleteSvg from "../../../assets/delete.svg";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -25,12 +27,18 @@ const Items = ({ dRow }) => {
     });
   }, [upcQuery]);
 
+  let isBuyable =
+    Number(dRow?.UnitPrice) / 1.3 >
+      Number(upcInfos?.salePrice) + Number(upcInfos?.shippingCost) &&
+    upcInfos?.onlineAvailability;
+  console.log({ isBuyable });
+
   return (
     <TableRow>
       <TableCell component="th" scope="row">
         {dRow.id}
       </TableCell>
-      <TableCell>{dRow.SellerPartNumber}</TableCell>
+      <TableCell align="center">{dRow.SellerPartNumber}</TableCell>
       <TableCell align="center">
         {dRow.UPCCode
           ? dRow.UPCCode
@@ -49,18 +57,29 @@ const Items = ({ dRow }) => {
       </TableCell>
       <TableCell align="center">
         <>
-          <p className={classes.priceStyle}>{upcInfos?.salePrice}</p>
-          <a href={upcInfos?.url} target="_blank" rel="noreferrer">
-            Visit
-          </a>
+          <p className={classes.priceStyle}>
+            {upcInfos?.salePrice ? upcInfos?.salePrice : "-"}
+          </p>
+          {upcInfos?.url ? (
+            <a href={upcInfos?.url} target="_blank" rel="noreferrer">
+              Visit
+            </a>
+          ) : null}
         </>
       </TableCell>
       <TableCell align="center">{upcInfos?.shippingCost}</TableCell>
-      <TableCell align="right">
-        {upcInfos?.onlineAvailability ? "Yes" : "No"}
-      </TableCell>
       <TableCell align="center" style={{ maxWidth: 500 }}>
         {dRow.Description}
+      </TableCell>
+      <TableCell align="center">
+        {upcInfos?.onlineAvailability ? "Yes" : "No"}
+      </TableCell>
+      <TableCell align="center">
+        <img
+          src={isBuyable ? checkSvg : deleteSvg}
+          style={{ width: 25 }}
+          alt=""
+        />
       </TableCell>
     </TableRow>
   );
