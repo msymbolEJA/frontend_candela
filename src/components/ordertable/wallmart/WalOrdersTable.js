@@ -83,7 +83,9 @@ export default function NEOrdersTable() {
         <TableHead>
           <TableRow className={classes.tRow}>
             <TableCell />
-            <TableCell className={classes.tCell}>Customer Order Id</TableCell>
+            <TableCell align="center" className={classes.tCell}>
+              Customer Order Id
+            </TableCell>
             <TableCell align="center" className={classes.tCell}>
               Cutomer Name
             </TableCell>
@@ -99,19 +101,19 @@ export default function NEOrdersTable() {
             <TableCell align="center" className={classes.tCell}>
               Address 2
             </TableCell>
-            <TableCell align="right" className={classes.tCell}>
+            <TableCell align="center" className={classes.tCell}>
               City
             </TableCell>
-            <TableCell align="right" className={classes.tCell}>
+            <TableCell align="center" className={classes.tCell}>
               Country
             </TableCell>
-            <TableCell align="right" className={classes.tCell}>
+            <TableCell align="center" className={classes.tCell}>
               Postal Code
             </TableCell>
-            <TableCell align="right" className={classes.tCell}>
+            <TableCell align="center" className={classes.tCell}>
               Ship Method
             </TableCell>
-            <TableCell align="right" className={classes.tCell}>
+            <TableCell align="center" className={classes.tCell}>
               State
             </TableCell>
           </TableRow>

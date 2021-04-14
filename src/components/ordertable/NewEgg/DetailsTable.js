@@ -58,7 +58,7 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
+        <TableCell align="center" component="th" scope="row">
           {row.OrderNumber}
         </TableCell>
         <TableCell align="center">
@@ -67,7 +67,7 @@ function Row(props) {
         <TableCell align="center">{row.OrderStatusDescription}</TableCell>
         <TableCell align="center">{row.OrderItemAmount}</TableCell>
         <TableCell align="center">{row.OrderQty}</TableCell>
-        <TableCell align="right">{row.OrderTotalAmount}</TableCell>
+        <TableCell align="center">{row.OrderTotalAmount}</TableCell>
       </TableRow>
       <TableRow className={classes.innerTable}>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
@@ -79,7 +79,7 @@ function Row(props) {
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow style={{ backgroundColor: "#96bb7c" }}>
-                    <TableCell>Customer Name</TableCell>
+                    <TableCell align="center">Customer Name</TableCell>
                     <TableCell align="center">Customer Phone Number</TableCell>
                     <TableCell align="center">Discount Amount</TableCell>
                     <TableCell align="center">Invoice Number</TableCell>
@@ -92,15 +92,17 @@ function Row(props) {
                     <TableCell align="center">ShipToAddress2</TableCell>
                     <TableCell align="center">ShipToAddress3</TableCell>
                     <TableCell align="center">Shipping Amount</TableCell>
-                    <TableCell align="right">VAT Total</TableCell>
+                    <TableCell align="center">VAT Total</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   <TableRow>
-                    <TableCell component="th" scope="row">
+                    <TableCell align="center" component="th" scope="row">
                       {row.CustomerName}
                     </TableCell>
-                    <TableCell>{row.CustomerPhoneNumber}</TableCell>
+                    <TableCell align="center">
+                      {row.CustomerPhoneNumber}
+                    </TableCell>
                     <TableCell align="center">{row.DiscountAmount}</TableCell>
 
                     <TableCell align="center">{row.InvoiceNumber}</TableCell>
@@ -127,7 +129,7 @@ function Row(props) {
                     </TableCell>
 
                     <TableCell align="center">{row.ShippingAmount}</TableCell>
-                    <TableCell align="right">
+                    <TableCell align="center">
                       {row.VATTotal ? row.VATTotal : "-"}
                     </TableCell>
                   </TableRow>

@@ -35,7 +35,7 @@ const Items = ({ dRow }) => {
 
   return (
     <TableRow>
-      <TableCell component="th" scope="row">
+      <TableCell align="center" component="th" scope="row">
         {dRow.id}
       </TableCell>
       <TableCell align="center">{dRow.SellerPartNumber}</TableCell>

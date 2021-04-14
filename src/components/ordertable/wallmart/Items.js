@@ -44,7 +44,7 @@ const Items = ({ dRow }) => {
 
   return (
     <TableRow>
-      <TableCell component="th" scope="row">
+      <TableCell align="center" component="th" scope="row">
         {dRow.productName}
       </TableCell>
       <TableCell align="center">{upcQuery}</TableCell>
@@ -67,11 +67,11 @@ const Items = ({ dRow }) => {
       </TableCell>
       <TableCell align="center">{upcInfos?.shippingCost}</TableCell>
       <TableCell align="center">{dRow.orderStatus}</TableCell>
-      <TableCell align="right">{dRow?.taxAmount}</TableCell>
+      <TableCell align="center">{dRow?.taxAmount}</TableCell>
       <TableCell align="center" style={{ maxWidth: 500 }}>
         {dRow.taxName}
       </TableCell>
-      <TableCell align="right">
+      <TableCell align="center">
         {upcInfos?.onlineAvailability ? "Yes" : "No"}
       </TableCell>
       <TableCell align="center">

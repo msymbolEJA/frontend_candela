@@ -39,10 +39,10 @@ const ItemsTable = ({ open, detailsRow }) => {
                   <TableCell align="center">Order Status</TableCell>
                   <TableCell align="center">Tax Amount</TableCell>
                   <TableCell align="center">Tax Name</TableCell>
-                  <TableCell align="right">
+                  <TableCell align="center">
                     BestBuy Online Availibility
                   </TableCell>
-                  <TableCell align="right">Action</TableCell>
+                  <TableCell align="center">Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

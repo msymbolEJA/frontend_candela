@@ -31,7 +31,7 @@ const ItemsTable = ({ open, detailsRow }) => {
             <Table size="small" aria-label="purchases">
               <TableHead>
                 <TableRow style={{ backgroundColor: "#d6efc7" }}>
-                  <TableCell>Id</TableCell>
+                  <TableCell align="center">Id</TableCell>
                   <TableCell align="center">Seller Part Number</TableCell>
                   <TableCell align="center">UPC Code</TableCell>
                   <TableCell align="center">Ordered Qty</TableCell>
@@ -42,7 +42,7 @@ const ItemsTable = ({ open, detailsRow }) => {
                   <TableCell align="center">
                     BestBuy Online Availibility
                   </TableCell>
-                  <TableCell align="right">Action</TableCell>
+                  <TableCell align="center">Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

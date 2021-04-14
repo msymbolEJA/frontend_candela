@@ -75,11 +75,11 @@ function Row(props) {
         <TableCell align="center">
           {row.address2 ? row.address2 : "No Info"}
         </TableCell>
-        <TableCell align="right">{row.city}</TableCell>
-        <TableCell align="right">{row.country}</TableCell>
-        <TableCell align="right">{row.postalCode}</TableCell>
-        <TableCell align="right">{row.shipMethod}</TableCell>
-        <TableCell align="right">{row.state}</TableCell>
+        <TableCell align="center">{row.city}</TableCell>
+        <TableCell align="center">{row.country}</TableCell>
+        <TableCell align="center">{row.postalCode}</TableCell>
+        <TableCell align="center">{row.shipMethod}</TableCell>
+        <TableCell align="center">{row.state}</TableCell>
       </TableRow>
       <ItemsTable open={open} detailsRow={detailsRow} />
     </React.Fragment>

@@ -83,7 +83,9 @@ export default function NEOrdersTable() {
         <TableHead>
           <TableRow className={classes.tRow}>
             <TableCell />
-            <TableCell className={classes.tCell}>Order Number</TableCell>
+            <TableCell align="center" className={classes.tCell}>
+              Order Number
+            </TableCell>
             <TableCell align="center" className={classes.tCell}>
               Order Date
             </TableCell>
@@ -96,7 +98,7 @@ export default function NEOrdersTable() {
             <TableCell align="center" className={classes.tCell}>
               Order Qty
             </TableCell>
-            <TableCell align="right" className={classes.tCell}>
+            <TableCell align="center" className={classes.tCell}>
               Order Total Amount
             </TableCell>
           </TableRow>
