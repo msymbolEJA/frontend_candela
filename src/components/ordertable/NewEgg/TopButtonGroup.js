@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { makeStyles } from "@material-ui/core/styles";
+import { NEOrderStatus } from "../../../helpers/Constants";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,78 +39,22 @@ const TopButtonGroup = ({ buttonTag, setButtonTag }) => {
         aria-label="outlined primary button group"
         size="medium"
       >
-        <Button
-          className={classes.btnStyle}
-          variant="contained"
-          onClick={handleTagBtnClick}
-          id=""
-          style={{
-            backgroundColor: buttonTag === "" ? "#52734d" : null,
-            color: buttonTag === "" ? "#fad586" : null,
-          }}
-        >
-          All
-        </Button>
-        <Button
-          className={classes.btnStyle}
-          variant="contained"
-          onClick={handleTagBtnClick}
-          id="0"
-          style={{
-            backgroundColor: buttonTag === "0" ? "#52734d" : null,
-            color: buttonTag === "0" ? "#fad586" : null,
-          }}
-        >
-          Unshipped
-        </Button>
-        <Button
-          className={classes.btnStyle}
-          variant="contained"
-          onClick={handleTagBtnClick}
-          id="1"
-          style={{
-            backgroundColor: buttonTag === "1" ? "#52734d" : null,
-            color: buttonTag === "1" ? "#fad586" : null,
-          }}
-        >
-          Partially Shipped
-        </Button>
-        <Button
-          className={classes.btnStyle}
-          variant="contained"
-          onClick={handleTagBtnClick}
-          id="2"
-          style={{
-            backgroundColor: buttonTag === "2" ? "#52734d" : null,
-            color: buttonTag === "2" ? "#fad586" : null,
-          }}
-        >
-          Shipped
-        </Button>
-        <Button
-          className={classes.btnStyle}
-          variant="contained"
-          onClick={handleTagBtnClick}
-          id="3"
-          style={{
-            backgroundColor: buttonTag === "3" ? "#52734d" : null,
-            color: buttonTag === "3" ? "#fad586" : null,
-          }}
-        >
-          Invoiced
-        </Button>
-        <Button
-          className={classes.btnStyle}
-          variant="contained"
-          onClick={handleTagBtnClick}
-          id="4"
-          style={{
-            backgroundColor: buttonTag === "4" ? "#52734d" : null,
-            color: buttonTag === "4" ? "#fad586" : null,
-          }}
-        >
-          Voided
-        </Button>
+        {NEOrderStatus?.map((item, index) => (
+          <Button
+            className={classes.btnStyle}
+            variant="contained"
+            onClick={handleTagBtnClick}
+            key={index}
+            id={item.id}
+            style={{
+              backgroundColor:
+                buttonTag === item?.id?.toString() ? "#52734d" : null,
+              color: buttonTag === item?.id?.toString() ? "#fad586" : null,
+            }}
+          >
+            {item.status}
+          </Button>
+        ))}
       </ButtonGroup>
     </div>
   );
