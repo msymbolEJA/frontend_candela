@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import bestbuy from "../../assets/bestbuy.png";
 import walmart from "../../assets/walmart.png";
 import newegg from "../../assets/newegg.png";
+import neweggBusiness from "../../assets/nebusiness.png";
 
 const useStyles = makeStyles((theme) => ({
   btn: {
@@ -47,6 +48,13 @@ const Dashboard = () => {
         className={classes.btn}
         src={walmart}
         alt="walmart"
+      />
+      <img
+        id="orders/neb"
+        onClick={handleClick}
+        className={classes.btn}
+        src={neweggBusiness}
+        alt="neweggbusiness"
       />
     </div>
   );
