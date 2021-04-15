@@ -44,9 +44,9 @@ const menuLinks = [
   },
   {
     id: 3,
-    title: "menu4",
+    title: "NewEgg Business",
     icon: LocalLibrary,
-    link: "/teachers",
+    link: "/orders/neb",
   },
   {
     id: 4,
