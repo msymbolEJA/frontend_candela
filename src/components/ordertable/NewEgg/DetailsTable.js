@@ -22,6 +22,7 @@ const useRowStyles = makeStyles({
     "& > *": {
       borderBottom: "unset",
     },
+    cursor: "pointer",
   },
   tContainer: {
     marginLeft: "75px",
@@ -48,7 +49,7 @@ function Row(props) {
 
   return (
     <React.Fragment>
-      <TableRow className={classes.root}>
+      <TableRow className={classes.root} onClick={() => setOpen(!open)}>
         <TableCell>
           <IconButton
             aria-label="expand row"
