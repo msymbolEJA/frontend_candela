@@ -3,9 +3,10 @@ import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Dashboard from "../components/dashboard/Dashboard";
 import BBOrderTable from "../components/ordertable/BestBuy/BBOrderTable";
 import NEOrderTable from "../components/ordertable/NewEgg/NEOrdersTable";
-import NEBusinessTable from "../components/ordertable/neweggbusiness/NEOrdersTable";
+import NEBusinessTable from "../components/ordertable/neweggbusiness/NEBOrdersTable";
 import WalOrdersTable from "../components/ordertable/wallmart/WalOrdersTable";
 import MainLayout from "../components/navbar/MainLayout";
+import Login from "../components/login/Login";
 
 const AppRouter = () => {
   return (
@@ -17,6 +18,7 @@ const AppRouter = () => {
         <Route path="/orders/ne/" component={NEOrderTable} />
         <Route path="/orders/neb/" component={NEBusinessTable} />
         <Route path="/orders/wal/" component={WalOrdersTable} />
+        <Route path="/login/" component={Login} />
       </Switch>
     </BrowserRouter>
   );
