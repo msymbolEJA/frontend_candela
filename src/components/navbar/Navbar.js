@@ -89,6 +89,10 @@ export default function NavBar({ open, handleDrawerOpen, handleDrawerClose }) {
     history.push("/");
   };
 
+  const handleLogout = () => {
+    history.push("/login");
+  };
+
   return (
     <AppBar
       position="fixed"
@@ -161,11 +165,7 @@ export default function NavBar({ open, handleDrawerOpen, handleDrawerClose }) {
             onClose={handleClose}
           >
             <MenuItem onClick={handleAccountPage}>Account</MenuItem>
-            <MenuItem
-            // onClick={handleLogout}
-            >
-              Logout
-            </MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
         </div>
       </Toolbar>

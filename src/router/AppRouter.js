@@ -11,17 +11,25 @@ import Login from "../components/login/Login";
 const AppRouter = () => {
   return (
     <BrowserRouter>
-      <MainLayout />
       <Switch>
-        <Route exact path="/" component={Dashboard} />
-        <Route path="/orders/bb/" component={BBOrderTable} />
-        <Route path="/orders/ne/" component={NEOrderTable} />
-        <Route path="/orders/neb/" component={NEBusinessTable} />
-        <Route path="/orders/wal/" component={WalOrdersTable} />
         <Route path="/login/" component={Login} />
+        <Route component={DefaultContainer} />
       </Switch>
     </BrowserRouter>
   );
 };
+
+const DefaultContainer = () => (
+  <div>
+    <MainLayout />
+    <Switch>
+      <Route exact path="/" component={Dashboard} />
+      <Route path="/orders/bb/" component={BBOrderTable} />
+      <Route path="/orders/ne/" component={NEOrderTable} />
+      <Route path="/orders/neb/" component={NEBusinessTable} />
+      <Route path="/orders/wal/" component={WalOrdersTable} />
+    </Switch>
+  </div>
+);
 
 export default AppRouter;

@@ -8,11 +8,11 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import candleSvg from "../../assets/candle.svg";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "93.8vh",
-    marginTop: -20,
+    height: "100vh",
     "& .MuiPaper-root": {
       borderRadius: "10px",
       boxShadow: "10px 10px 5px 0px rgba(0,0,0,0.75);",
@@ -54,8 +54,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignIn({ loggedIn, logout, login }) {
+function SignIn({ loggedIn, logout }) {
   const classes = useStyles();
+  const history = useHistory();
+
+  const login = () => {
+    history.push("/");
+  };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -73,10 +78,10 @@ function SignIn({ loggedIn, logout, login }) {
         >
           <Grid className={classes.paper}>
             <Avatar className={classes.avatar}>
-              <img src={candleSvg} style={{ width: 50 }} />
+              <img src={candleSvg} style={{ width: 50 }} alt="candela" />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Login
             </Typography>
             <form className={classes.form} noValidate>
               <TextField
@@ -108,7 +113,7 @@ function SignIn({ loggedIn, logout, login }) {
                 className={classes.submit}
                 onClick={login}
               >
-                Sign In
+                Login
               </Button>
             </form>
           </Grid>
