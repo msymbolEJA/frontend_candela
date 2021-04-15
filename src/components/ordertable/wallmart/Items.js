@@ -4,7 +4,7 @@ import TableRow from "@material-ui/core/TableRow";
 import { getData } from "../../../helpers/DataTransitions";
 import { makeStyles } from "@material-ui/core/styles";
 import checkSvg from "../../../assets/check.svg";
-import deleteSvg from "../../../assets/delete.svg";
+import warnSvg from "../../../assets/warn.svg";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -76,7 +76,7 @@ const Items = ({ dRow }) => {
       </TableCell>
       <TableCell align="center">
         <img
-          src={isBuyable ? checkSvg : deleteSvg}
+          src={isBuyable ? checkSvg : warnSvg}
           style={{ width: 25 }}
           alt=""
         />
