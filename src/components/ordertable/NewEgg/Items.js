@@ -18,7 +18,7 @@ const Items = ({ dRow }) => {
   const [upcInfos, setUpcInfos] = useState();
   const classes = useStyles();
 
-  const upcQuery = dRow.UPCCode || dRow.SellerPartNumber.replace("NC_UPC_", "");
+  const upcQuery = dRow.SellerPartNumber.replace("NC_UPC_", "");
 
   useEffect(() => {
     getData(`${BASE_URL}bb/${upcQuery}`).then((response) => {
