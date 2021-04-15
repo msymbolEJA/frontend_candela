@@ -38,7 +38,7 @@ function Row(props) {
   const classes = useRowStyles();
 
   const detailsRow = row.items;
-  // console.log(detailsRow);
+  console.log({ row });
 
   return (
     <React.Fragment>
@@ -68,7 +68,7 @@ function Row(props) {
           {row.cutomerName}
         </TableCell>
         <TableCell align="center">
-          {moment.utc(row.OrderDate).local().format("MM-DD-YY HH:mm")}
+          {moment.utc(row.orderDate).local().format("MM-DD-YY HH:mm")}
         </TableCell>
         <TableCell align="center">{row.orderStatus}</TableCell>
         <TableCell align="center">{row.address1}</TableCell>
