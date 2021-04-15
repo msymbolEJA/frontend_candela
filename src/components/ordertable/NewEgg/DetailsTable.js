@@ -59,7 +59,14 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell align="center" component="th" scope="row">
-          {row.OrderNumber}
+          <>
+            <p>{row.OrderNumber ? row.OrderNumber : "-"}</p>
+            {row?.ordoroUrl ? (
+              <a href={row?.ordoroUrl} target="_blank" rel="noreferrer">
+                Visit
+              </a>
+            ) : null}
+          </>
         </TableCell>
         <TableCell align="center">
           {moment.utc(row.OrderDate).local().format("MM-DD-YY HH:mm")}
