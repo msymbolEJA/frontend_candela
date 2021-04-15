@@ -51,7 +51,7 @@ export default function NEOrdersTable() {
   useEffect(() => {
     setTableData();
     getData(
-      `${BASE_URL}ne/?OrderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
+      `${BASE_URL}ne/b2b/?OrderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
         page * rowsPerPage
       }`
     ).then((response) => {
@@ -77,7 +77,7 @@ export default function NEOrdersTable() {
 
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
-      <h2 className={classes.headerStyle}>New Egg Orders</h2>
+      <h2 className={classes.headerStyle}>New Egg Business Orders</h2>
       <TopButtonGroup buttonTag={buttonTag} setButtonTag={setButtonTag} />
       <Table aria-label="collapsible table">
         <TableHead>
