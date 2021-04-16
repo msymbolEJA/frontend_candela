@@ -77,6 +77,9 @@ const useStyles = makeStyles((theme) => ({
       color: "#52734D",
     },
   },
+  header: {
+    color: "#52734D",
+  },
 }));
 
 function SignIn({ loggedIn, logout }) {
@@ -105,7 +108,7 @@ function SignIn({ loggedIn, logout }) {
             <Avatar className={classes.avatar}>
               <img src={candleSvg} style={{ width: 50 }} alt="candela" />
             </Avatar>
-            <Typography component="h1" variant="h5">
+            <Typography className={classes.header} component="h1" variant="h5">
               Login
             </Typography>
             <form className={classes.form} noValidate>
