@@ -118,7 +118,7 @@ export default function NEOrdersTable() {
             </TableCell>
           </TableRow>
         </TableHead>
-        {tableData?.rows.length > 0 ? (
+        {tableData?.rows?.length > 0 ? (
           <>
             <TableBody>
               {tableData?.rows?.map((row, index) => (

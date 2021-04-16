@@ -20,6 +20,26 @@ const useStyles = makeStyles((theme) => ({
       marginTop: 40,
       maxWidth: "500px",
     },
+    "& .MuiInputBase-root": {
+      color: "#52734D",
+    },
+    "& label.Mui-focused": {
+      color: "#52734D",
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "#52734D",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "#52734D",
+      },
+      "&:hover fieldset": {
+        borderColor: "#52734D",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#52734D",
+      },
+    },
   },
   image: {
     backgroundImage: "url(https://picsum.photos/1600/900)",
@@ -51,6 +71,11 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: "#52734D",
+    "&:hover": {
+      backgroundColor: "#fad586",
+      color: "#52734D",
+    },
   },
 }));
 
