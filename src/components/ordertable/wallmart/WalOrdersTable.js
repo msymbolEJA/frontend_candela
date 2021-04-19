@@ -10,7 +10,6 @@ import Paper from "@material-ui/core/Paper";
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 import TablePaginationActions from "./TablePaginationActions";
-
 import { getData } from "../../../helpers/DataTransitions";
 import Row from "./DetailsTable";
 import spinner from "../../../assets/spinner.gif";
@@ -82,7 +81,6 @@ export default function NEOrdersTable() {
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow className={classes.tRow}>
-            <TableCell />
             <TableCell align="center" className={classes.tCell}>
               Customer Order Id
             </TableCell>

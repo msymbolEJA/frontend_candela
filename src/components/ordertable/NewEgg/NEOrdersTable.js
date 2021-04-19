@@ -82,7 +82,6 @@ export default function NEOrdersTable() {
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow className={classes.tRow}>
-            <TableCell />
             <TableCell align="center" className={classes.tCell}>
               Order Number
             </TableCell>

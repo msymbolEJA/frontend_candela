@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import moment from "moment";
 import ItemsTable from "./ItemsTable";
 
@@ -16,6 +13,7 @@ const useRowStyles = makeStyles({
     "& > *": {
       borderBottom: "unset",
     },
+    cursor: "pointer",
   },
   tContainer: {
     marginLeft: "75px",
@@ -42,16 +40,7 @@ function Row(props) {
 
   return (
     <React.Fragment>
-      <TableRow className={classes.root}>
-        <TableCell>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
+      <TableRow className={classes.root} onClick={() => setOpen(!open)}>
         <TableCell align="center" component="th" scope="row">
           {row.customerOrderId ? (
             <>
