@@ -8,7 +8,7 @@ export const getData = async (url) => {
   return response;
 };
 
-export const postAuthData = async (path, data) => {
+export const postAuthData = async (path, data = {}) => {
   const response = await axios.post(`${path}`, data, {
     headers: {
       Accept: "application/json",
