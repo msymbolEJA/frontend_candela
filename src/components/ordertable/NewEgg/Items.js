@@ -40,10 +40,10 @@ const Items = ({ dRow }) => {
       </TableCell>
       <TableCell align="center">{dRow.SellerPartNumber}</TableCell>
       <TableCell align="center">
-        {dRow.UPCCode
-          ? dRow.UPCCode
-          : dRow.SellerPartNumber
+        {dRow.SellerPartNumber
           ? dRow.SellerPartNumber.replace("NC_UPC_", "")
+          : dRow.UPCCode
+          ? dRow.UPCCode
           : "-"}
       </TableCell>
       <TableCell align="center">{dRow.OrderedQty}</TableCell>
