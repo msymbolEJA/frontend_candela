@@ -112,12 +112,10 @@ function Login() {
     onSubmit: (values) => {
       postAuthData(`${BASE_URL}auth/login/`, values)
         .then((response) => {
-          console.log(response);
           toastSuccessNotify("Logged in successfully!");
           history.push("/");
         })
         .catch(({ response }) => {
-          console.log(response.data.non_field_errors[0]);
           toastErrorNotify(response?.data?.non_field_errors[0]);
         });
     },

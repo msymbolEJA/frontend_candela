@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavBar({ open, handleDrawerOpen, handleDrawerClose }) {
+export default function NavBar({ open, handleDrawerOpen }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const open2 = Boolean(anchorEl);
