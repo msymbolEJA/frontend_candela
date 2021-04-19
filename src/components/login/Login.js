@@ -1,14 +1,31 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import candleSvg from "../../assets/candle.svg";
 import { useHistory } from "react-router-dom";
+import {
+  toastSuccessNotify,
+  toastErrorNotify,
+} from "../../helpers/ToastNotify";
+import { postAuthData } from "../../helpers/DataTransitions";
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
+const validationSchema = yup.object({
+  username: yup
+    .string("Enter your username")
+    .min(2, "Username should be of minimum 2 characters length.")
+    .required("Username is required"),
+  password: yup.string("Enter your password").required("Password is required"),
+});
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,28 +99,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignIn({ loggedIn, logout }) {
+function Login() {
   const classes = useStyles();
   const history = useHistory();
 
-  const login = () => {
-    history.push("/");
-  };
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      postAuthData(`${BASE_URL}auth/login/`, values)
+        .then((response) => {
+          console.log(response);
+          toastSuccessNotify("Logged in successfully!");
+          history.push("/");
+        })
+        .catch(({ response }) => {
+          console.log(response.data.non_field_errors[0]);
+          toastErrorNotify(response?.data?.non_field_errors[0]);
+        });
+    },
+  });
 
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid container justify="center" className={classes.image}>
-        <Grid
-          item
-          xs={12}
-          sm={8}
-          md={5}
-          component={Paper}
-          direction="row"
-          elevation={6}
-          square
-        >
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Grid className={classes.paper}>
             <Avatar className={classes.avatar}>
               <img src={candleSvg} style={{ width: 50 }} alt="candela" />
@@ -111,35 +135,47 @@ function SignIn({ loggedIn, logout }) {
             <Typography className={classes.header} component="h1" variant="h5">
               Login
             </Typography>
-            <form className={classes.form} noValidate>
+            <form className={classes.form} onSubmit={formik.handleSubmit}>
               <TextField
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 autoFocus
+                value={formik.values.username}
+                error={
+                  formik.touched.username && Boolean(formik.errors.username)
+                }
+                helperText={formik.touched.username && formik.errors.username}
               />
               <TextField
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
                 name="password"
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                autoComplete="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
+                helperText={formik.touched.password && formik.errors.password}
               />
               <Button
+                type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                onClick={login}
               >
                 Login
               </Button>
@@ -151,4 +187,4 @@ function SignIn({ loggedIn, logout }) {
   );
 }
 
-export default SignIn;
+export default Login;
