@@ -112,7 +112,7 @@ function Login() {
     onSubmit: (values) => {
       postAuthData(`${BASE_URL}auth/login/`, values)
         .then((response) => {
-          console.log(response.data.key);
+          // console.log(response.data.key);
           localStorage.setItem("x-auth-token", response.data.key);
           toastSuccessNotify("Logged in successfully!");
           history.push("/");
