@@ -7,6 +7,7 @@ import NEBusinessTable from "../components/ordertable/neweggbusiness/NEBOrdersTa
 import WalOrdersTable from "../components/ordertable/wallmart/WalOrdersTable";
 import MainLayout from "../components/navbar/MainLayout";
 import Login from "../components/login/Login";
+import PrivateRouter from "./PrivateRouter";
 
 const AppRouter = () => {
   return (
@@ -23,11 +24,11 @@ const DefaultContainer = () => (
   <div>
     <MainLayout />
     <Switch>
-      <Route exact path="/" component={Dashboard} />
-      <Route path="/orders/bb/" component={BBOrderTable} />
-      <Route path="/orders/ne/" component={NEOrderTable} />
-      <Route path="/orders/neb/" component={NEBusinessTable} />
-      <Route path="/orders/wal/" component={WalOrdersTable} />
+      <PrivateRouter exact path="/" component={Dashboard} />
+      <PrivateRouter path="/orders/bb/" component={BBOrderTable} />
+      <PrivateRouter path="/orders/ne/" component={NEOrderTable} />
+      <PrivateRouter path="/orders/neb/" component={NEBusinessTable} />
+      <PrivateRouter path="/orders/wal/" component={WalOrdersTable} />
     </Switch>
   </div>
 );

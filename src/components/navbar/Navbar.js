@@ -101,6 +101,7 @@ export default function NavBar({ open, handleDrawerOpen }) {
     postAuthData(`${BASE_URL}auth/logout/`)
       .then((response) => {
         toastSuccessNotify(response.data.detail);
+        localStorage.removeItem("x-auth-token");
       })
       .catch((error) => {
         console.log(error);
