@@ -20,6 +20,9 @@ const useRowStyles = makeStyles({
       borderBottom: "unset",
     },
     cursor: "pointer",
+    "&:hover": {
+      backgroundColor: "#DDFFBC",
+    },
   },
   tContainer: {
     marginLeft: "75px",

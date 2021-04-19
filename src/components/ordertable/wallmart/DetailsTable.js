@@ -14,6 +14,9 @@ const useRowStyles = makeStyles({
       borderBottom: "unset",
     },
     cursor: "pointer",
+    "&:hover": {
+      backgroundColor: "#DDFFBC",
+    },
   },
   tContainer: {
     marginLeft: "75px",
@@ -50,7 +53,7 @@ function Row(props) {
               </a>
             </>
           ) : (
-            <p style={{ color: "red" }}>No Info</p>
+            <p>No Info</p>
           )}
         </TableCell>
         <TableCell align="center" component="th" scope="row">
