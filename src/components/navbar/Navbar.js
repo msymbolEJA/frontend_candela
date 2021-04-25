@@ -63,16 +63,17 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   userInfo: {
-    border: "2px solid #868686",
+    border: "2px solid #52734D",
     padding: 5,
     borderRadius: 3,
   },
   userRole: {
     fontSize: "0.8rem",
-    color: "#868686",
+    color: "#52734D",
   },
   userName: {
     fontSize: "1.2rem",
+    color: "#2D402A",
   },
   whiteColor: {
     color: "black",
