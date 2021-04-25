@@ -59,10 +59,17 @@ const useStyles = makeStyles((theme) => ({
   rightTop: {
     display: "flex",
     flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  userInfo: {
+    border: "2px solid #868686",
+    padding: 5,
+    borderRadius: 3,
   },
   userRole: {
     fontSize: "0.8rem",
-    color: "#d3d3d3",
+    color: "#868686",
   },
   userName: {
     fontSize: "1.2rem",
@@ -72,6 +79,9 @@ const useStyles = makeStyles((theme) => ({
   },
   hide: {
     display: "none",
+  },
+  langControl: {
+    margin: 10,
   },
 }));
 
@@ -102,12 +112,16 @@ export default function NavBar({ open, handleDrawerOpen }) {
       .then((response) => {
         toastSuccessNotify(response.data.detail);
         localStorage.removeItem("x-auth-token");
+        localStorage.removeItem("user");
       })
       .catch((error) => {
         console.log(error);
         toastErrorNotify(error);
       });
   };
+
+  const localUser = JSON.parse(localStorage.getItem("user"));
+  // console.log({ localUser });
 
   return (
     <AppBar
@@ -135,7 +149,7 @@ export default function NavBar({ open, handleDrawerOpen }) {
         </Typography>
 
         <div>
-          <FormControl className={classes.formControl}>
+          <FormControl className={classes.langControl}>
             <NativeSelect
               //   value={lang}
               //   onChange={handleLangChange}
@@ -155,6 +169,12 @@ export default function NavBar({ open, handleDrawerOpen }) {
           </FormControl>
         </div>
         <div className={classes.rightTop}>
+          <div className={classes.userInfo}>
+            <div className={classes.userRole}>
+              {localUser?.userRole?.toUpperCase()}
+            </div>
+            <div className={classes.userName}>{localUser?.username}</div>
+          </div>
           <IconButton
             aria-label="account of current user"
             aria-controls="menu-appbar"
