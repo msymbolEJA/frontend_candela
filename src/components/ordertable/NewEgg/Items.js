@@ -5,12 +5,17 @@ import { getData } from "../../../helpers/DataTransitions";
 import { makeStyles } from "@material-ui/core/styles";
 import checkSvg from "../../../assets/check.svg";
 import warnSvg from "../../../assets/warn.svg";
+import moment from "moment";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const useStyles = makeStyles({
   priceStyle: {
     fontSize: "1.25rem",
+  },
+  oldPrice: {
+    textDecoration: "line-through",
+    opacity: 0.5,
   },
 });
 
@@ -24,6 +29,7 @@ const Items = ({ dRow }) => {
     getData(`${BASE_URL}bb/${upcQuery}`).then((response) => {
       // console.log("items", response.data);
       setUpcInfos(response.data);
+      // console.log(response.data);
     });
   }, [upcQuery]);
 
@@ -57,6 +63,9 @@ const Items = ({ dRow }) => {
       </TableCell>
       <TableCell align="center">
         <>
+          <p className={classes.oldPrice}>
+            {upcInfos?.pre_salePrice ? upcInfos?.pre_salePrice : null}
+          </p>
           <p className={classes.priceStyle}>
             {upcInfos?.salePrice ? upcInfos?.salePrice : "-"}
           </p>
@@ -67,12 +76,21 @@ const Items = ({ dRow }) => {
           ) : null}
         </>
       </TableCell>
+      <TableCell align="center">
+        {moment.utc(upcInfos?.priceUpdateDate).local().format("MM-DD-YY HH:mm")}
+      </TableCell>
       <TableCell align="center">{upcInfos?.shippingCost}</TableCell>
       <TableCell align="center" style={{ maxWidth: 500 }}>
         {dRow.Description}
       </TableCell>
       <TableCell align="center">
         {upcInfos?.onlineAvailability ? "Yes" : "No"}
+      </TableCell>
+      <TableCell align="center">
+        {moment
+          .utc(upcInfos?.onlineAvailabilityUpdateDate)
+          .local()
+          .format("MM-DD-YY HH:mm")}
       </TableCell>
       <TableCell align="center">
         <img

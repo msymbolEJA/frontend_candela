@@ -37,10 +37,14 @@ const ItemsTable = ({ open, detailsRow }) => {
                   <TableCell align="center">Ordered Qty</TableCell>
                   <TableCell align="center">Unit Price</TableCell>
                   <TableCell align="center">BestBuy Price</TableCell>
+                  <TableCell align="center">Price Update Date</TableCell>
                   <TableCell align="center">BestBuy Shipping Cost</TableCell>
                   <TableCell align="center">Description</TableCell>
                   <TableCell align="center">
                     BestBuy Online Availibility
+                  </TableCell>
+                  <TableCell align="center">
+                    Online Availability Update Date
                   </TableCell>
                   <TableCell align="center">Action</TableCell>
                 </TableRow>
