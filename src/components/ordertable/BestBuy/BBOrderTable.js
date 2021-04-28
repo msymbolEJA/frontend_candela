@@ -13,6 +13,7 @@ import { getData } from "../../../helpers/DataTransitions";
 import TablePaginationActions from "./TablePaginationActions";
 import spinner from "../../../assets/spinner.gif";
 import moment from "moment";
+import SearchField from "./SearchField";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -42,21 +43,31 @@ export default function CustomPaginationActionsTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [tableData, setTableData] = useState({ rows: [], count: 0 });
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    setTableData();
+  const getProducts = () => {
     getData(
-      `${BASE_URL}bb/?limit=${rowsPerPage}&offset=${page * rowsPerPage}`
+      `${BASE_URL}bb/?limit=${rowsPerPage}&offset=${
+        page * rowsPerPage
+      }&search=${searchKeyword}`
     ).then((response) => {
       console.log(response.data);
+      setIsLoading(false);
       setTableData({
         ...tableData,
         rows: response.data.results,
         count: response.data.count,
       });
     });
+  };
+
+  useEffect(() => {
+    setTableData();
+    setIsLoading(true);
+    getProducts();
     // eslint-disable-next-line
-  }, [rowsPerPage, page]);
+  }, [rowsPerPage, page, searchKeyword]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -67,9 +78,20 @@ export default function CustomPaginationActionsTable() {
     setPage(0);
   };
 
+  const globalSearch = (event, searchKey) => {
+    event.preventDefault();
+    setSearchKeyword(searchKey);
+    setPage(0);
+  };
+
   return (
     <div>
       <h2 className={classes.headerStyle}>Best Buy Items</h2>
+      <div
+        style={{ display: "flex", justifyContent: "center", margin: "0.3rem" }}
+      >
+        <SearchField globalSearch={globalSearch} />
+      </div>
       <TableContainer
         style={{ marginLeft: "60px", width: "auto", marginRight: 1 }}
         component={Paper}
@@ -113,7 +135,25 @@ export default function CustomPaginationActionsTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {tableData?.rows.length > 0 ? (
+            {isLoading ? (
+              <tr>
+                <td
+                  colSpan="18"
+                  style={{
+                    display: "table-cell",
+                    height: "5rem",
+                  }}
+                >
+                  <img
+                    src={spinner}
+                    style={{
+                      width: 50,
+                    }}
+                    alt="spinner"
+                  />
+                </td>
+              </tr>
+            ) : tableData?.rows.length > 0 ? (
               tableData?.rows.map((row, index) => (
                 <TableRow key={index} className={classes.rowStyle}>
                   <TableCell
@@ -161,19 +201,14 @@ export default function CustomPaginationActionsTable() {
             ) : (
               <tr>
                 <td
-                  colSpan="18"
+                  colSpan="16"
                   style={{
                     display: "table-cell",
                     height: "5rem",
+                    color: "#CC2828",
                   }}
                 >
-                  <img
-                    src={spinner}
-                    style={{
-                      width: 50,
-                    }}
-                    alt="spinner"
-                  />
+                  <h2>There is nothing in this search.</h2>
                 </td>
               </tr>
             )}
