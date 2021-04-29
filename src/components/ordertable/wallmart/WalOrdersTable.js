@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -7,16 +7,13 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import TableFooter from "@material-ui/core/TableFooter";
-import TablePagination from "@material-ui/core/TablePagination";
-import TablePaginationActions from "./TablePaginationActions";
-import { getData } from "../../../helpers/DataTransitions";
 import Row from "./DetailsTable";
 import TopButtonGroup from "./TopButtonGroup";
 import useFetch from "../../../hooks/useFetch";
 import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 import { TableNoOrders } from "../../../helpers/NoOrders";
 import { TableError } from "../../../helpers/Errors";
+import CustomTableFooter from "../otheritems/CustomTableFooter";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -44,7 +41,6 @@ const useRowStyles = makeStyles({
 });
 
 export default function NEOrdersTable() {
-  const [tableData, setTableData] = useState({ rows: [], count: 0 });
   const classes = useRowStyles();
   const [buttonTag, setButtonTag] = useState("");
   const [page, setPage] = useState(0);
@@ -61,24 +57,6 @@ export default function NEOrdersTable() {
     { results: [], count: 0 }
   );
 
-  useEffect(() => {
-    setTableData();
-    getData(
-      `${BASE_URL}wal/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
-        page * rowsPerPage
-      }`
-    ).then((response) => {
-      console.log(response.data);
-      setTableData({
-        ...tableData,
-        rows: response.data.results,
-        count: response.data.count,
-      });
-    });
-    // return () => setTableData(false);
-    // eslint-disable-next-line
-  }, [buttonTag, rowsPerPage, page]);
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
     setLoading(true);
@@ -86,7 +64,6 @@ export default function NEOrdersTable() {
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
     setLoading(true);
   };
 
@@ -151,31 +128,13 @@ export default function NEOrdersTable() {
                 <Row key={index} row={row} />
               ))}
             </TableBody>
-            <TableFooter>
-              <TableRow>
-                <td colSpan={2} style={{ textAlign: "right" }}>
-                  Total Record :
-                </td>
-                <td style={{ textAlign: "left", paddingLeft: "5px" }}>
-                  {" "}
-                  {response?.count || 0}
-                </td>
-                <TablePagination
-                  rowsPerPageOptions={[25, 50, 100, 250, 500, 2500]}
-                  colSpan={22}
-                  count={response?.count}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  SelectProps={{
-                    inputProps: { "aria-label": "rows per page" },
-                    native: true,
-                  }}
-                  onChangePage={handleChangePage}
-                  onChangeRowsPerPage={handleChangeRowsPerPage}
-                  ActionsComponent={TablePaginationActions}
-                />
-              </TableRow>
-            </TableFooter>
+            <CustomTableFooter
+              response={response}
+              handleChangePage={handleChangePage}
+              handleChangeRowsPerPage={handleChangeRowsPerPage}
+              page={page}
+              rowsPerPage={rowsPerPage}
+            />
           </>
         ) : response?.results?.length === 0 ? (
           <tbody>
