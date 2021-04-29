@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-import { getData } from "../../../helpers/DataTransitions";
 import { makeStyles } from "@material-ui/core/styles";
 import checkSvg from "../../../assets/check.svg";
 import warnSvg from "../../../assets/warn.svg";
+import useFetch from "../../../hooks/useFetch";
 import moment from "moment";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -20,23 +20,15 @@ const useStyles = makeStyles({
 });
 
 const Items = ({ dRow }) => {
-  const [upcInfos, setUpcInfos] = useState();
   const classes = useStyles();
-
-  const upcQuery = dRow.SellerPartNumber.replace("NC_UPC_", "");
-
-  useEffect(() => {
-    getData(`${BASE_URL}bb/${upcQuery}`).then((response) => {
-      // console.log("items", response.data);
-      setUpcInfos(response.data);
-      // console.log(response.data);
-    });
-  }, [upcQuery]);
+  const { response } = useFetch(
+    `${BASE_URL}bb/${dRow.SellerPartNumber.replace("NC_UPC_", "")}`
+  );
 
   let isBuyable =
     Number(dRow?.UnitPrice) / 1.3 >
-      Number(upcInfos?.salePrice) + Number(upcInfos?.shippingCost) &&
-    upcInfos?.onlineAvailability;
+      Number(response?.salePrice) + Number(response?.shippingCost) &&
+    response?.onlineAvailability;
   // console.log({ isBuyable });
 
   return (
@@ -64,31 +56,31 @@ const Items = ({ dRow }) => {
       <TableCell align="center">
         <>
           <p className={classes.oldPrice}>
-            {upcInfos?.pre_salePrice ? upcInfos?.pre_salePrice : null}
+            {response?.pre_salePrice ? response?.pre_salePrice : null}
           </p>
           <p className={classes.priceStyle}>
-            {upcInfos?.salePrice ? upcInfos?.salePrice : "-"}
+            {response?.salePrice ? response?.salePrice : "-"}
           </p>
-          {upcInfos?.url ? (
-            <a href={upcInfos?.url} target="_blank" rel="noreferrer">
+          {response?.url ? (
+            <a href={response?.url} target="_blank" rel="noreferrer">
               Visit
             </a>
           ) : null}
         </>
       </TableCell>
       <TableCell align="center">
-        {moment.utc(upcInfos?.priceUpdateDate).local().format("MM-DD-YY HH:mm")}
+        {moment.utc(response?.priceUpdateDate).local().format("MM-DD-YY HH:mm")}
       </TableCell>
-      <TableCell align="center">{upcInfos?.shippingCost}</TableCell>
+      <TableCell align="center">{response?.shippingCost}</TableCell>
       <TableCell align="center" style={{ maxWidth: 500 }}>
         {dRow.Description}
       </TableCell>
       <TableCell align="center">
-        {upcInfos?.onlineAvailability ? "Yes" : "No"}
+        {response?.onlineAvailability ? "Yes" : "No"}
       </TableCell>
       <TableCell align="center">
         {moment
-          .utc(upcInfos?.onlineAvailabilityUpdateDate)
+          .utc(response?.onlineAvailabilityUpdateDate)
           .local()
           .format("MM-DD-YY HH:mm")}
       </TableCell>
