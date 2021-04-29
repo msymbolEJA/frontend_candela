@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -10,10 +10,11 @@ import Paper from "@material-ui/core/Paper";
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 import TablePaginationActions from "./TablePaginationActions";
-import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
-import { getData } from "../../../helpers/DataTransitions";
 import Row from "./DetailsTable";
 import TopButtonGroup from "./TopButtonGroup";
+import useFetch from "../../../hooks/useFetch";
+import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
+import { TableError } from "../../../helpers/Errors";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -41,43 +42,41 @@ const useRowStyles = makeStyles({
 });
 
 export default function NEOrdersTable() {
-  const [tableData, setTableData] = useState({ rows: [], count: 0 });
   const classes = useRowStyles();
   const [buttonTag, setButtonTag] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
-
-  useEffect(() => {
-    setTableData();
-    getData(
-      `${BASE_URL}ne/b2b/?OrderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
-        page * rowsPerPage
-      }`
-    ).then((response) => {
-      console.log(response.data);
-      setTableData({
-        ...tableData,
-        rows: response.data.results,
-        count: response.data.count,
-      });
-    });
-    // return () => setTableData(false);
-    // eslint-disable-next-line
-  }, [buttonTag, rowsPerPage, page]);
+  const {
+    response,
+    error,
+    loading,
+    setLoading,
+  } = useFetch(
+    `${BASE_URL}ne/b2b/?OrderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
+      page * rowsPerPage
+    }`,
+    { results: [], count: 0 }
+  );
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+    setLoading(true);
   };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+    setLoading(true);
   };
 
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
       <h2 className={classes.headerStyle}>New Egg Business Orders</h2>
-      <TopButtonGroup buttonTag={buttonTag} setButtonTag={setButtonTag} />
+      <TopButtonGroup
+        buttonTag={buttonTag}
+        setButtonTag={setButtonTag}
+        setLoading={setLoading}
+      />
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow className={classes.tRow}>
@@ -101,10 +100,18 @@ export default function NEOrdersTable() {
             </TableCell>
           </TableRow>
         </TableHead>
-        {tableData?.rows.length > 0 ? (
+        {loading ? (
+          <tbody>
+            <TableLoadingSpinner />
+          </tbody>
+        ) : error ? (
+          <tbody>
+            <TableError />
+          </tbody>
+        ) : response?.results?.length > 0 ? (
           <>
             <TableBody>
-              {tableData?.rows?.map((row, index) => (
+              {response?.results?.map((row, index) => (
                 <Row key={index} row={row} />
               ))}
             </TableBody>
@@ -114,12 +121,12 @@ export default function NEOrdersTable() {
                   Total Record :
                 </td>
                 <td style={{ textAlign: "left", paddingLeft: "5px" }}>
-                  {tableData?.count || 0}
+                  {response?.count || 0}
                 </td>
                 <TablePagination
                   rowsPerPageOptions={[25, 50, 100, 250, 500, 2500]}
                   colSpan={22}
-                  count={tableData?.count}
+                  count={response?.count}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   SelectProps={{
@@ -133,7 +140,7 @@ export default function NEOrdersTable() {
               </TableRow>
             </TableFooter>
           </>
-        ) : tableData?.rows?.length === 0 ? (
+        ) : response?.results?.length === 0 ? (
           <tbody>
             <tr>
               <td
@@ -147,11 +154,7 @@ export default function NEOrdersTable() {
               </td>
             </tr>
           </tbody>
-        ) : (
-          <tbody>
-            <TableLoadingSpinner />
-          </tbody>
-        )}
+        ) : null}
       </Table>
     </TableContainer>
   );
