@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,11 +9,11 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableHead from "@material-ui/core/TableHead";
-import { getData } from "../../../helpers/DataTransitions";
 import TablePaginationActions from "./TablePaginationActions";
 import spinner from "../../../assets/spinner.gif";
 import moment from "moment";
 import SearchField from "./SearchField";
+import useFetch from "../../../hooks/useFetch";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -38,36 +38,21 @@ const useStyles2 = makeStyles({
   },
 });
 
-export default function CustomPaginationActionsTable() {
+export default function BBOrdersTable() {
   const classes = useStyles2();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
-  const [tableData, setTableData] = useState({ rows: [], count: 0 });
   const [searchKeyword, setSearchKeyword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  const getProducts = () => {
-    getData(
-      `${BASE_URL}bb/?limit=${rowsPerPage}&offset=${
-        page * rowsPerPage
-      }&search=${searchKeyword}`
-    ).then((response) => {
-      console.log(response.data);
-      setIsLoading(false);
-      setTableData({
-        ...tableData,
-        rows: response.data.results,
-        count: response.data.count,
-      });
-    });
-  };
-
-  useEffect(() => {
-    setTableData();
-    setIsLoading(true);
-    getProducts();
-    // eslint-disable-next-line
-  }, [rowsPerPage, page, searchKeyword]);
+  const {
+    response,
+    error,
+    loading,
+  } = useFetch(
+    `${BASE_URL}bb/?limit=${rowsPerPage}&offset=${
+      page * rowsPerPage
+    }&search=${searchKeyword}`,
+    { results: [], count: 0 }
+  );
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -135,7 +120,7 @@ export default function CustomPaginationActionsTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {isLoading ? (
+            {loading ? (
               <tr>
                 <td
                   colSpan="18"
@@ -153,8 +138,8 @@ export default function CustomPaginationActionsTable() {
                   />
                 </td>
               </tr>
-            ) : tableData?.rows.length > 0 ? (
-              tableData?.rows.map((row, index) => (
+            ) : response?.results?.length > 0 ? (
+              response?.results?.map((row, index) => (
                 <TableRow key={index} className={classes.rowStyle}>
                   <TableCell
                     align="center"
@@ -198,6 +183,19 @@ export default function CustomPaginationActionsTable() {
                   </TableCell>
                 </TableRow>
               ))
+            ) : error ? (
+              <tr>
+                <td
+                  colSpan="16"
+                  style={{
+                    display: "table-cell",
+                    height: "5rem",
+                    color: "#CC2828",
+                  }}
+                >
+                  <h2>Something went wrong. Please try again.</h2>
+                </td>
+              </tr>
             ) : (
               <tr>
                 <td
@@ -213,17 +211,17 @@ export default function CustomPaginationActionsTable() {
               </tr>
             )}
           </TableBody>
-          {tableData?.rows.length > 0 ? (
+          {response?.results.length > 0 ? (
             <TableFooter>
               <TableRow>
                 <td style={{ textAlign: "right" }}>Total Record :</td>
                 <td style={{ textAlign: "left", paddingLeft: 5 }}>
-                  {tableData?.count || 0}
+                  {response?.count || 0}
                 </td>
                 <TablePagination
                   rowsPerPageOptions={[25, 50, 100, 250, 500, 2500]}
                   colSpan={22}
-                  count={tableData?.count}
+                  count={response?.count | 0}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   SelectProps={{
