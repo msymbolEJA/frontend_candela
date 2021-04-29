@@ -14,6 +14,7 @@ import Row from "./DetailsTable";
 import TopButtonGroup from "./TopButtonGroup";
 import useFetch from "../../../hooks/useFetch";
 import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
+import { TableNoOrders } from "../../../helpers/NoOrders";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -151,17 +152,7 @@ export default function NEOrdersTable() {
           </tbody>
         ) : (
           <tbody>
-            <tr>
-              <td
-                colSpan="18"
-                style={{
-                  display: "table-cell",
-                  height: "5rem",
-                }}
-              >
-                <h2>There are no orders.</h2>
-              </td>
-            </tr>
+            <TableNoOrders />
           </tbody>
         )}
       </Table>
