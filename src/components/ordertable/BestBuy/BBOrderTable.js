@@ -14,6 +14,7 @@ import moment from "moment";
 import SearchField from "./SearchField";
 import useFetch from "../../../hooks/useFetch";
 import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
+import { TableError } from "../../../helpers/Errors";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -126,6 +127,8 @@ export default function BBOrdersTable() {
           <TableBody>
             {loading ? (
               <TableLoadingSpinner />
+            ) : error ? (
+              <TableError />
             ) : response?.results?.length > 0 ? (
               response?.results?.map((row, index) => (
                 <TableRow key={index} className={classes.rowStyle}>
@@ -171,19 +174,6 @@ export default function BBOrdersTable() {
                   </TableCell>
                 </TableRow>
               ))
-            ) : error ? (
-              <tr>
-                <td
-                  colSpan="16"
-                  style={{
-                    display: "table-cell",
-                    height: "5rem",
-                    color: "#CC2828",
-                  }}
-                >
-                  <h2>Something went wrong. Please try again.</h2>
-                </td>
-              </tr>
             ) : (
               <tr>
                 <td

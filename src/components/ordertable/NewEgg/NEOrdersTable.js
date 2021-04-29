@@ -15,6 +15,7 @@ import TopButtonGroup from "./TopButtonGroup";
 import useFetch from "../../../hooks/useFetch";
 import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 import { TableNoOrders } from "../../../helpers/NoOrders";
+import { TableError } from "../../../helpers/Errors";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -104,6 +105,10 @@ export default function NEOrdersTable() {
           <tbody>
             <TableLoadingSpinner />
           </tbody>
+        ) : error ? (
+          <tbody>
+            <TableError />
+          </tbody>
         ) : response?.results?.length > 0 ? (
           <>
             <TableBody>
@@ -136,20 +141,6 @@ export default function NEOrdersTable() {
               </TableRow>
             </TableFooter>
           </>
-        ) : error ? (
-          <tbody>
-            <tr>
-              <td
-                colSpan="18"
-                style={{
-                  display: "table-cell",
-                  height: "5rem",
-                }}
-              >
-                <h2>Something went wrong. Try again!</h2>
-              </td>
-            </tr>
-          </tbody>
         ) : (
           <tbody>
             <TableNoOrders />
