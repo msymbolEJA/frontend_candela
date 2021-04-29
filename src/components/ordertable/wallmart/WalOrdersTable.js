@@ -67,13 +67,18 @@ export default function NEOrdersTable() {
     setLoading(true);
   };
 
+  const handleTagBtnClick = (event) => {
+    setButtonTag(event.currentTarget.id);
+    setPage(0);
+    setLoading(true);
+  };
+
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
       <h2 className={classes.headerStyle}>Wallmart Orders</h2>
       <TopButtonGroup
         buttonTag={buttonTag}
-        setButtonTag={setButtonTag}
-        setLoading={setLoading}
+        handleTagBtnClick={handleTagBtnClick}
       />
       <Table aria-label="collapsible table">
         <TableHead>
