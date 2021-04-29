@@ -4,17 +4,15 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
-import TableFooter from "@material-ui/core/TableFooter";
-import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableHead from "@material-ui/core/TableHead";
-import TablePaginationActions from "./TablePaginationActions";
 import moment from "moment";
 import SearchField from "./SearchField";
 import useFetch from "../../../hooks/useFetch";
 import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 import { TableError } from "../../../helpers/Errors";
+import CustomTableFooter from "../otheritems/CustomTableFooter";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -190,28 +188,13 @@ export default function BBOrdersTable() {
             )}
           </TableBody>
           {response?.results.length > 0 ? (
-            <TableFooter>
-              <TableRow>
-                <td style={{ textAlign: "right" }}>Total Record :</td>
-                <td style={{ textAlign: "left", paddingLeft: 5 }}>
-                  {response?.count || 0}
-                </td>
-                <TablePagination
-                  rowsPerPageOptions={[25, 50, 100, 250, 500, 2500]}
-                  colSpan={22}
-                  count={response?.count | 0}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  SelectProps={{
-                    inputProps: { "aria-label": "rows per page" },
-                    native: true,
-                  }}
-                  onChangePage={handleChangePage}
-                  onChangeRowsPerPage={handleChangeRowsPerPage}
-                  ActionsComponent={TablePaginationActions}
-                />
-              </TableRow>
-            </TableFooter>
+            <CustomTableFooter
+              response={response}
+              handleChangePage={handleChangePage}
+              handleChangeRowsPerPage={handleChangeRowsPerPage}
+              page={page}
+              rowsPerPage={rowsPerPage}
+            />
           ) : null}
         </Table>
       </TableContainer>

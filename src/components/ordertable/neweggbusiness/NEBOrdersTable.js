@@ -7,15 +7,13 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import TableFooter from "@material-ui/core/TableFooter";
-import TablePagination from "@material-ui/core/TablePagination";
-import TablePaginationActions from "./TablePaginationActions";
 import Row from "./DetailsTable";
 import TopButtonGroup from "./TopButtonGroup";
 import useFetch from "../../../hooks/useFetch";
 import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 import { TableError } from "../../../helpers/Errors";
 import { TableNoOrders } from "../../../helpers/NoOrders";
+import CustomTableFooter from "../otheritems/CustomTableFooter";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -116,30 +114,13 @@ export default function NEOrdersTable() {
                 <Row key={index} row={row} />
               ))}
             </TableBody>
-            <TableFooter>
-              <TableRow>
-                <td colSpan={2} style={{ textAlign: "right" }}>
-                  Total Record :
-                </td>
-                <td style={{ textAlign: "left", paddingLeft: "5px" }}>
-                  {response?.count || 0}
-                </td>
-                <TablePagination
-                  rowsPerPageOptions={[25, 50, 100, 250, 500, 2500]}
-                  colSpan={22}
-                  count={response?.count}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  SelectProps={{
-                    inputProps: { "aria-label": "rows per page" },
-                    native: true,
-                  }}
-                  onChangePage={handleChangePage}
-                  onChangeRowsPerPage={handleChangeRowsPerPage}
-                  ActionsComponent={TablePaginationActions}
-                />
-              </TableRow>
-            </TableFooter>
+            <CustomTableFooter
+              response={response}
+              handleChangePage={handleChangePage}
+              handleChangeRowsPerPage={handleChangeRowsPerPage}
+              page={page}
+              rowsPerPage={rowsPerPage}
+            />
           </>
         ) : response?.results?.length === 0 ? (
           <tbody>
