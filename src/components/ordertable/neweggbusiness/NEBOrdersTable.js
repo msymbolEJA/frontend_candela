@@ -10,7 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 import TablePaginationActions from "./TablePaginationActions";
-
+import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 import { getData } from "../../../helpers/DataTransitions";
 import Row from "./DetailsTable";
 import spinner from "../../../assets/spinner.gif";
@@ -150,23 +150,7 @@ export default function NEOrdersTable() {
           </tbody>
         ) : (
           <tbody>
-            <tr>
-              <td
-                colSpan="18"
-                style={{
-                  display: "table-cell",
-                  height: "5rem",
-                }}
-              >
-                <img
-                  src={spinner}
-                  style={{
-                    width: 50,
-                  }}
-                  alt="spinner"
-                />
-              </td>
-            </tr>
+            <TableLoadingSpinner />
           </tbody>
         )}
       </Table>

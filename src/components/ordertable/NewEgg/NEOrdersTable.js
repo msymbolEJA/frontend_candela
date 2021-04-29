@@ -11,9 +11,9 @@ import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 import TablePaginationActions from "./TablePaginationActions";
 import Row from "./DetailsTable";
-import spinner from "../../../assets/spinner.gif";
 import TopButtonGroup from "./TopButtonGroup";
 import useFetch from "../../../hooks/useFetch";
+import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -101,23 +101,7 @@ export default function NEOrdersTable() {
         </TableHead>
         {loading ? (
           <tbody>
-            <tr>
-              <td
-                colSpan="18"
-                style={{
-                  display: "table-cell",
-                  height: "5rem",
-                }}
-              >
-                <img
-                  src={spinner}
-                  style={{
-                    width: 50,
-                  }}
-                  alt="spinner"
-                />
-              </td>
-            </tr>
+            <TableLoadingSpinner />
           </tbody>
         ) : response?.results?.length > 0 ? (
           <>

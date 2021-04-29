@@ -10,10 +10,10 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableHead from "@material-ui/core/TableHead";
 import TablePaginationActions from "./TablePaginationActions";
-import spinner from "../../../assets/spinner.gif";
 import moment from "moment";
 import SearchField from "./SearchField";
 import useFetch from "../../../hooks/useFetch";
+import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -125,23 +125,7 @@ export default function BBOrdersTable() {
           </TableHead>
           <TableBody>
             {loading ? (
-              <tr>
-                <td
-                  colSpan="18"
-                  style={{
-                    display: "table-cell",
-                    height: "5rem",
-                  }}
-                >
-                  <img
-                    src={spinner}
-                    style={{
-                      width: 50,
-                    }}
-                    alt="spinner"
-                  />
-                </td>
-              </tr>
+              <TableLoadingSpinner />
             ) : response?.results?.length > 0 ? (
               response?.results?.map((row, index) => (
                 <TableRow key={index} className={classes.rowStyle}>
