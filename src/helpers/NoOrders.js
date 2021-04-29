@@ -1,5 +1,5 @@
 import React from "react";
-import infoSvg from "../assets/info.svg";
+import emptyCartSvg from "../assets/emptycart.svg";
 
 export const TableNoOrders = () => {
   return (
@@ -11,7 +11,7 @@ export const TableNoOrders = () => {
           height: "5rem",
         }}
       >
-        <img src={infoSvg} alt="information" style={{ width: 25 }} />
+        <img src={emptyCartSvg} alt="empty-cart" style={{ width: 35 }} />
         <h2>There are no orders.</h2>
       </td>
     </tr>
