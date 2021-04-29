@@ -13,7 +13,10 @@ import TablePaginationActions from "./TablePaginationActions";
 import { getData } from "../../../helpers/DataTransitions";
 import Row from "./DetailsTable";
 import TopButtonGroup from "./TopButtonGroup";
+import useFetch from "../../../hooks/useFetch";
 import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
+import { TableNoOrders } from "../../../helpers/NoOrders";
+import { TableError } from "../../../helpers/Errors";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -46,6 +49,17 @@ export default function NEOrdersTable() {
   const [buttonTag, setButtonTag] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
+  const {
+    response,
+    error,
+    loading,
+    setLoading,
+  } = useFetch(
+    `${BASE_URL}wal/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
+      page * rowsPerPage
+    }`,
+    { results: [], count: 0 }
+  );
 
   useEffect(() => {
     setTableData();
@@ -67,17 +81,23 @@ export default function NEOrdersTable() {
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+    setLoading(true);
   };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+    setLoading(true);
   };
 
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
       <h2 className={classes.headerStyle}>Wallmart Orders</h2>
-      <TopButtonGroup buttonTag={buttonTag} setButtonTag={setButtonTag} />
+      <TopButtonGroup
+        buttonTag={buttonTag}
+        setButtonTag={setButtonTag}
+        setLoading={setLoading}
+      />
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow className={classes.tRow}>
@@ -116,10 +136,18 @@ export default function NEOrdersTable() {
             </TableCell>
           </TableRow>
         </TableHead>
-        {tableData?.rows?.length > 0 ? (
+        {loading ? (
+          <tbody>
+            <TableLoadingSpinner />
+          </tbody>
+        ) : error ? (
+          <tbody>
+            <TableError />
+          </tbody>
+        ) : response?.results?.length > 0 ? (
           <>
             <TableBody>
-              {tableData?.rows?.map((row, index) => (
+              {response?.results?.map((row, index) => (
                 <Row key={index} row={row} />
               ))}
             </TableBody>
@@ -130,12 +158,12 @@ export default function NEOrdersTable() {
                 </td>
                 <td style={{ textAlign: "left", paddingLeft: "5px" }}>
                   {" "}
-                  {tableData?.count || 0}
+                  {response?.count || 0}
                 </td>
                 <TablePagination
                   rowsPerPageOptions={[25, 50, 100, 250, 500, 2500]}
                   colSpan={22}
-                  count={tableData?.count}
+                  count={response?.count}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   SelectProps={{
@@ -149,25 +177,11 @@ export default function NEOrdersTable() {
               </TableRow>
             </TableFooter>
           </>
-        ) : tableData?.rows?.length === 0 ? (
+        ) : response?.results?.length === 0 ? (
           <tbody>
-            <tr>
-              <td
-                colSpan="18"
-                style={{
-                  display: "table-cell",
-                  height: "5rem",
-                }}
-              >
-                <h2>There are no orders.</h2>
-              </td>
-            </tr>
+            <TableNoOrders />
           </tbody>
-        ) : (
-          <tbody>
-            <TableLoadingSpinner />
-          </tbody>
-        )}
+        ) : null}
       </Table>
     </TableContainer>
   );

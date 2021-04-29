@@ -25,11 +25,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TopButtonGroup = ({ buttonTag, setButtonTag }) => {
+const TopButtonGroup = ({ buttonTag, setButtonTag, setLoading }) => {
   const classes = useStyles();
 
   const handleTagBtnClick = (event) => {
     setButtonTag(event.currentTarget.id);
+    setLoading(true);
   };
 
   return (
