@@ -6,10 +6,12 @@ const useFetch = (url, initVal) => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  //   console.log("useFetchLoading", loading);
+
   useEffect(() => {
     getData(url)
       .then((data) => {
-        console.log("useFetch", data);
+        // console.log("useFetch", data);
         setResponse(data.data);
         setLoading(false);
       })
@@ -19,7 +21,7 @@ const useFetch = (url, initVal) => {
       });
   }, [url]);
 
-  return { response, error, loading };
+  return { response, error, loading, setLoading };
 };
 
 export default useFetch;

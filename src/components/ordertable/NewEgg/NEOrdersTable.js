@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -10,11 +10,10 @@ import Paper from "@material-ui/core/Paper";
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 import TablePaginationActions from "./TablePaginationActions";
-
-import { getData } from "../../../helpers/DataTransitions";
 import Row from "./DetailsTable";
 import spinner from "../../../assets/spinner.gif";
 import TopButtonGroup from "./TopButtonGroup";
+import useFetch from "../../../hooks/useFetch";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -42,43 +41,41 @@ const useRowStyles = makeStyles({
 });
 
 export default function NEOrdersTable() {
-  const [tableData, setTableData] = useState({ rows: [], count: 0 });
   const classes = useRowStyles();
   const [buttonTag, setButtonTag] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
-
-  useEffect(() => {
-    setTableData();
-    getData(
-      `${BASE_URL}ne/?OrderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
-        page * rowsPerPage
-      }`
-    ).then((response) => {
-      console.log(response.data);
-      setTableData({
-        ...tableData,
-        rows: response.data.results,
-        count: response.data.count,
-      });
-    });
-    // return () => setTableData(false);
-    // eslint-disable-next-line
-  }, [buttonTag, rowsPerPage, page]);
+  const {
+    response,
+    error,
+    loading,
+    setLoading,
+  } = useFetch(
+    `${BASE_URL}ne/?OrderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
+      page * rowsPerPage
+    }`,
+    { results: [], count: 0 }
+  );
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+    setLoading(true);
   };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+    setLoading(true);
   };
 
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
       <h2 className={classes.headerStyle}>New Egg Orders</h2>
-      <TopButtonGroup buttonTag={buttonTag} setButtonTag={setButtonTag} />
+      <TopButtonGroup
+        buttonTag={buttonTag}
+        setButtonTag={setButtonTag}
+        setLoading={setLoading}
+      />
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow className={classes.tRow}>
@@ -102,53 +99,7 @@ export default function NEOrdersTable() {
             </TableCell>
           </TableRow>
         </TableHead>
-        {tableData?.rows.length > 0 ? (
-          <>
-            <TableBody>
-              {tableData?.rows?.map((row, index) => (
-                <Row key={index} row={row} />
-              ))}
-            </TableBody>
-            <TableFooter>
-              <TableRow>
-                <td colSpan={2} style={{ textAlign: "right" }}>
-                  Total Record :
-                </td>
-                <td style={{ textAlign: "left", paddingLeft: "5px" }}>
-                  {tableData?.count || 0}
-                </td>
-                <TablePagination
-                  rowsPerPageOptions={[25, 50, 100, 250, 500, 2500]}
-                  colSpan={22}
-                  count={tableData?.count}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  SelectProps={{
-                    inputProps: { "aria-label": "rows per page" },
-                    native: true,
-                  }}
-                  onChangePage={handleChangePage}
-                  onChangeRowsPerPage={handleChangeRowsPerPage}
-                  ActionsComponent={TablePaginationActions}
-                />
-              </TableRow>
-            </TableFooter>
-          </>
-        ) : tableData?.rows?.length === 0 ? (
-          <tbody>
-            <tr>
-              <td
-                colSpan="18"
-                style={{
-                  display: "table-cell",
-                  height: "5rem",
-                }}
-              >
-                <h2>There are no orders.</h2>
-              </td>
-            </tr>
-          </tbody>
-        ) : (
+        {loading ? (
           <tbody>
             <tr>
               <td
@@ -165,6 +116,66 @@ export default function NEOrdersTable() {
                   }}
                   alt="spinner"
                 />
+              </td>
+            </tr>
+          </tbody>
+        ) : response?.results?.length > 0 ? (
+          <>
+            <TableBody>
+              {response?.results?.map((row, index) => (
+                <Row key={index} row={row} />
+              ))}
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <td colSpan={2} style={{ textAlign: "right" }}>
+                  Total Record :
+                </td>
+                <td style={{ textAlign: "left", paddingLeft: "5px" }}>
+                  {response?.count || 0}
+                </td>
+                <TablePagination
+                  rowsPerPageOptions={[25, 50, 100, 250, 500, 2500]}
+                  colSpan={22}
+                  count={response?.count | 0}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  SelectProps={{
+                    inputProps: { "aria-label": "rows per page" },
+                    native: true,
+                  }}
+                  onChangePage={handleChangePage}
+                  onChangeRowsPerPage={handleChangeRowsPerPage}
+                  ActionsComponent={TablePaginationActions}
+                />
+              </TableRow>
+            </TableFooter>
+          </>
+        ) : error ? (
+          <tbody>
+            <tr>
+              <td
+                colSpan="18"
+                style={{
+                  display: "table-cell",
+                  height: "5rem",
+                }}
+              >
+                <h2>Something went wrong. Try again!</h2>
+              </td>
+            </tr>
+          </tbody>
+        ) : (
+          <tbody>
+            <tr>
+              <td
+                colSpan="18"
+                style={{
+                  display: "table-cell",
+                  height: "5rem",
+                }}
+              >
+                <h2>There are no orders.</h2>
               </td>
             </tr>
           </tbody>

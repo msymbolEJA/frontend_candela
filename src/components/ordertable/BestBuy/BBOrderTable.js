@@ -47,6 +47,7 @@ export default function BBOrdersTable() {
     response,
     error,
     loading,
+    setLoading,
   } = useFetch(
     `${BASE_URL}bb/?limit=${rowsPerPage}&offset=${
       page * rowsPerPage
@@ -56,17 +57,20 @@ export default function BBOrdersTable() {
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+    setLoading(true);
   };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+    setLoading(true);
   };
 
   const globalSearch = (event, searchKey) => {
     event.preventDefault();
     setSearchKeyword(searchKey);
     setPage(0);
+    setLoading(true);
   };
 
   return (
