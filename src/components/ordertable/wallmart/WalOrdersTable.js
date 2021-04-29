@@ -12,7 +12,6 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TablePaginationActions from "./TablePaginationActions";
 import { getData } from "../../../helpers/DataTransitions";
 import Row from "./DetailsTable";
-import spinner from "../../../assets/spinner.gif";
 import TopButtonGroup from "./TopButtonGroup";
 import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 

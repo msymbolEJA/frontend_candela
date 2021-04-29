@@ -13,7 +13,6 @@ import TablePaginationActions from "./TablePaginationActions";
 import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 import { getData } from "../../../helpers/DataTransitions";
 import Row from "./DetailsTable";
-import spinner from "../../../assets/spinner.gif";
 import TopButtonGroup from "./TopButtonGroup";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
