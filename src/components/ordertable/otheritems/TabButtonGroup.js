@@ -2,7 +2,6 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { makeStyles } from "@material-ui/core/styles";
-import { NEOrderStatus } from "../../../helpers/Constants";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TopButtonGroup = ({ buttonTag, handleTagBtnClick }) => {
+const TopButtonGroup = ({ buttonTag, handleTagBtnClick, orderStatusTags }) => {
   const classes = useStyles();
 
   return (
@@ -35,7 +34,7 @@ const TopButtonGroup = ({ buttonTag, handleTagBtnClick }) => {
         aria-label="outlined primary button group"
         size="medium"
       >
-        {NEOrderStatus?.map((item, index) => (
+        {orderStatusTags?.map((item, index) => (
           <Button
             className={classes.btnStyle}
             variant="contained"

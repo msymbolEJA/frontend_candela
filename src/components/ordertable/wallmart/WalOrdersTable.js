@@ -8,12 +8,13 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Row from "./DetailsTable";
-import TopButtonGroup from "./TopButtonGroup";
+import TopButtonGroup from "../otheritems/TabButtonGroup";
 import useFetch from "../../../hooks/useFetch";
 import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 import { TableNoOrders } from "../../../helpers/NoOrders";
 import { TableError } from "../../../helpers/Errors";
 import CustomTableFooter from "../otheritems/CustomTableFooter";
+import { WALOrderStatus } from "../../../helpers/Constants";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -79,6 +80,7 @@ export default function NEOrdersTable() {
       <TopButtonGroup
         buttonTag={buttonTag}
         handleTagBtnClick={handleTagBtnClick}
+        orderStatusTags={WALOrderStatus}
       />
       <Table aria-label="collapsible table">
         <TableHead>
