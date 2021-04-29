@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-import { getData } from "../../../helpers/DataTransitions";
 import { makeStyles } from "@material-ui/core/styles";
 import checkSvg from "../../../assets/check.svg";
 import warnSvg from "../../../assets/warn.svg";
+import useFetch from "../../../hooks/useFetch";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -15,22 +15,15 @@ const useStyles = makeStyles({
 });
 
 const Items = ({ dRow }) => {
-  const [upcInfos, setUpcInfos] = useState();
   const classes = useStyles();
-
-  const upcQuery = dRow.SellerPartNumber.replace("NC_UPC_", "");
-
-  useEffect(() => {
-    getData(`${BASE_URL}bb/${upcQuery}`).then((response) => {
-      // console.log("items", response.data);
-      setUpcInfos(response.data);
-    });
-  }, [upcQuery]);
+  const { response } = useFetch(
+    `${BASE_URL}bb/${dRow.SellerPartNumber.replace("NC_UPC_", "")}`
+  );
 
   let isBuyable =
     Number(dRow?.UnitPrice) / 1.3 >
-      Number(upcInfos?.salePrice) + Number(upcInfos?.shippingCost) &&
-    upcInfos?.onlineAvailability;
+      Number(response?.salePrice) + Number(response?.shippingCost) &&
+    response?.onlineAvailability;
   // console.log({ isBuyable });
 
   return (
@@ -58,21 +51,21 @@ const Items = ({ dRow }) => {
       <TableCell align="center">
         <>
           <p className={classes.priceStyle}>
-            {upcInfos?.salePrice ? upcInfos?.salePrice : "-"}
+            {response?.salePrice ? response?.salePrice : "-"}
           </p>
-          {upcInfos?.url ? (
-            <a href={upcInfos?.url} target="_blank" rel="noreferrer">
+          {response?.url ? (
+            <a href={response?.url} target="_blank" rel="noreferrer">
               Visit
             </a>
           ) : null}
         </>
       </TableCell>
-      <TableCell align="center">{upcInfos?.shippingCost}</TableCell>
+      <TableCell align="center">{response?.shippingCost}</TableCell>
       <TableCell align="center" style={{ maxWidth: 500 }}>
         {dRow.Description}
       </TableCell>
       <TableCell align="center">
-        {upcInfos?.onlineAvailability ? "Yes" : "No"}
+        {response?.onlineAvailability ? "Yes" : "No"}
       </TableCell>
       <TableCell align="center">
         <img
