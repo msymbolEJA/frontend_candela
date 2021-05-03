@@ -4,12 +4,17 @@ import { makeStyles } from "@material-ui/core/styles";
 import checkSvg from "../../../assets/check.svg";
 import warnSvg from "../../../assets/warn.svg";
 import useFetch from "../../../hooks/useFetch";
+import moment from "moment";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const useStyles = makeStyles({
   priceStyle: {
     fontSize: "1.25rem",
+  },
+  oldPrice: {
+    textDecoration: "line-through",
+    opacity: 0.5,
   },
 });
 
@@ -52,6 +57,9 @@ const Items = ({ dRow }) => {
       </TableCell>
       <TableCell align="center">
         <>
+          <p className={classes.oldPrice}>
+            {response?.pre_salePrice ? response?.pre_salePrice : null}
+          </p>
           <p className={classes.priceStyle}>
             {response?.salePrice ? response?.salePrice : "-"}
           </p>
@@ -62,6 +70,9 @@ const Items = ({ dRow }) => {
           ) : null}
         </>
       </TableCell>
+      <TableCell align="center">
+        {moment.utc(response?.priceUpdateDate).local().format("MM-DD-YY HH:mm")}
+      </TableCell>
       <TableCell align="center">{response?.shippingCost}</TableCell>
       <TableCell align="center">{dRow.orderStatus}</TableCell>
       <TableCell align="center">{dRow?.taxAmount}</TableCell>
@@ -70,6 +81,12 @@ const Items = ({ dRow }) => {
       </TableCell>
       <TableCell align="center">
         {response?.onlineAvailability ? "Yes" : "No"}
+      </TableCell>
+      <TableCell align="center">
+        {moment
+          .utc(response?.onlineAvailabilityUpdateDate)
+          .local()
+          .format("MM-DD-YY HH:mm")}
       </TableCell>
       <TableCell align="center">
         <img

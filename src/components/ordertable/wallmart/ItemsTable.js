@@ -35,12 +35,16 @@ const ItemsTable = ({ open, detailsRow }) => {
                   <TableCell align="center">UPC</TableCell>
                   <TableCell align="center">Item Price</TableCell>
                   <TableCell align="center">BestBuy Price</TableCell>
-                  <TableCell>BestBuy Shipping Cost</TableCell>
+                  <TableCell align="center">Price Update Date</TableCell>
+                  <TableCell align="center">BestBuy Shipping Cost</TableCell>
                   <TableCell align="center">Order Status</TableCell>
                   <TableCell align="center">Tax Amount</TableCell>
                   <TableCell align="center">Tax Name</TableCell>
                   <TableCell align="center">
                     BestBuy Online Availibility
+                  </TableCell>
+                  <TableCell align="center">
+                    Online Availability Update Date
                   </TableCell>
                   <TableCell align="center">Action</TableCell>
                 </TableRow>
