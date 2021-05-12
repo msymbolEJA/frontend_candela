@@ -24,6 +24,14 @@ const useStyles = makeStyles((theme) => ({
   },
   btnSave: {
     margin: theme.spacing(1.3),
+    color: "#52734d",
+    borderColor: "#52734d",
+    minWidth: 160,
+    backgroundColor: "#fad586",
+    "&:hover": {
+      color: "#fad586",
+      backgroundColor: "#52734d",
+    },
   },
 }));
 
