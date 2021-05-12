@@ -46,12 +46,7 @@ export default function NEOrdersTable() {
   const [buttonTag, setButtonTag] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
-  const {
-    response,
-    error,
-    loading,
-    setLoading,
-  } = useFetch(
+  const { response, error, loading, setLoading } = useFetch(
     `${BASE_URL}ne/?OrderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
     }`,

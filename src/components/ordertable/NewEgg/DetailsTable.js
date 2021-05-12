@@ -10,6 +10,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
 import moment from "moment";
 import ItemsTable from "./ItemsTable";
+import OrderForm from "./OrderForm";
 
 const useRowStyles = makeStyles({
   root: {
@@ -144,6 +145,7 @@ function Row(props) {
         </TableCell>
       </TableRow>
       <ItemsTable open={open} detailsRow={detailsRow} />
+      <OrderForm open={open} />
     </React.Fragment>
   );
 }
