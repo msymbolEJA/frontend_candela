@@ -10,6 +10,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import { OrderFormSelect } from "../../../helpers/Constants";
+import CustomAutoComplete from "../otheritems/CustomAutoComplete";
 
 const useStyles = makeStyles((theme) => ({
   innerTable: {
@@ -46,10 +47,6 @@ const OrderForm = ({ open }) => {
     vendor: "",
   });
 
-  const handleChange = (event) => {
-    setFormInfo({ ...formInfo, [event.target.name]: event.target.value });
-  };
-
   const handleFormSend = () => {
     console.log({ formInfo });
   };
@@ -62,7 +59,7 @@ const OrderForm = ({ open }) => {
             <Typography variant="h4" gutterBottom component="div">
               Order Tracking
             </Typography>
-            {OrderFormSelect?.map((item, index) => (
+            {/* {OrderFormSelect?.map((item, index) => (
               <FormControl
                 variant="outlined"
                 key={index}
@@ -90,6 +87,18 @@ const OrderForm = ({ open }) => {
                   ))}
                 </Select>
               </FormControl>
+            ))} */}
+            {OrderFormSelect?.map((order, index) => (
+              <div
+                key={index}
+                style={{ display: "flex", flexDirection: "row" }}
+              >
+                <CustomAutoComplete
+                  order={order}
+                  setFormInfo={setFormInfo}
+                  formInfo={formInfo}
+                />
+              </div>
             ))}
             <Button
               variant="contained"
