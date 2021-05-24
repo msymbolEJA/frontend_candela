@@ -5,9 +5,6 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import { OrderFormSelect } from "../../../helpers/Constants";
 import CustomAutoComplete from "../otheritems/CustomAutoComplete";
@@ -59,35 +56,6 @@ const OrderForm = ({ open }) => {
             <Typography variant="h4" gutterBottom component="div">
               Order Tracking
             </Typography>
-            {/* {OrderFormSelect?.map((item, index) => (
-              <FormControl
-                variant="outlined"
-                key={index}
-                className={classes.formControl}
-              >
-                <InputLabel htmlFor="outlined-age-native-simple">
-                  {item.label}
-                </InputLabel>
-                <Select
-                  native
-                  value={formInfo[item.name]}
-                  // defaultValue="await"
-                  onChange={handleChange}
-                  label={item.label}
-                  margin="dense"
-                  inputProps={{
-                    name: item.name,
-                    id: "outlined-age-native-simple",
-                  }}
-                >
-                  {item?.selectArray?.map((item, index) => (
-                    <option value={item.status} key={index}>
-                      {item.status}
-                    </option>
-                  ))}
-                </Select>
-              </FormControl>
-            ))} */}
             {OrderFormSelect?.map((order, index) => (
               <div
                 key={index}
