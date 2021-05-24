@@ -1,9 +1,13 @@
 import axios from "axios";
 
 export const getData = async (url) => {
+  const token = localStorage.getItem("x-auth-token");
+
   const response = await axios.get(url, {
-    Accept: "application/json",
-    "Content-Type": "application/json",
+    headers: {
+      Authorization: `Token ${token}`,
+      "Content-Type": "application/json",
+    },
   });
   return response;
 };
