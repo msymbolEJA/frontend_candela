@@ -9,8 +9,7 @@ import Button from "@material-ui/core/Button";
 import CustomAutoComplete from "../otheritems/CustomAutoComplete";
 import { OrderFormSelect } from "../../../helpers/Constants";
 import { putData } from "../../../helpers/DataTransitions";
-// import useFetch from "../../../hooks/useFetch";
-import { getData } from "../../../helpers/DataTransitions";
+import useFetch from "../../../hooks/useFetch";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -42,17 +41,17 @@ const useStyles = makeStyles((theme) => ({
 
 const OrderForm = ({ open, detRow }) => {
   const classes = useStyles();
-  // const { response, error, loading, setLoading } = useFetch(
-  //   `${BASE_URL}ne/ordertrack/4724`,
-  //   { results: [] }
-  // );
+  const { response, error, loading } = useFetch(
+    `${BASE_URL}ne/ordertrack/${detRow.id}`,
+    {}
+  );
   const [formInfo, setFormInfo] = useState({
     id: 1,
-    status: "status test",
-    so_user: "t",
-    so_info: "e",
-    po_vendor: "s",
-    po_num: "s",
+    status: "",
+    so_user: "",
+    so_info: "",
+    po_vendor: "",
+    po_num: "",
     po_cost: 0,
     pay_method: "",
     qty: 1,
@@ -69,18 +68,10 @@ const OrderForm = ({ open, detRow }) => {
     putData(`${BASE_URL}ne/ordertrack/${detRow.id}`, formInfo);
   };
 
-  const getValues = () => {
-    // getData(`http://104.156.237.87:8080/ne/ordertrack/${detRow.id}`).then(
-    getData(`http://104.156.237.87:8080/ne/ordertrack/4724`).then((data) => {
-      setFormInfo(data.data);
-      // console.log(data.data);
-    });
-  };
-
   useEffect(() => {
-    getValues();
+    setFormInfo(response);
     return;
-  }, []);
+  }, [response]);
 
   return (
     <TableRow className={classes.innerTable}>
@@ -90,18 +81,24 @@ const OrderForm = ({ open, detRow }) => {
             <Typography variant="h4" gutterBottom component="div">
               Order Tracking
             </Typography>
-            {OrderFormSelect?.map((order, index) => (
-              <div
-                key={index}
-                style={{ display: "flex", flexDirection: "row" }}
-              >
-                <CustomAutoComplete
-                  order={order}
-                  setFormInfo={setFormInfo}
-                  formInfo={formInfo}
-                />
-              </div>
-            ))}
+            {loading ? (
+              <p>Loading</p>
+            ) : error ? (
+              <p>Something went wrong</p>
+            ) : (
+              OrderFormSelect?.map((order, index) => (
+                <div
+                  key={index}
+                  style={{ display: "flex", flexDirection: "row" }}
+                >
+                  <CustomAutoComplete
+                    order={order}
+                    setFormInfo={setFormInfo}
+                    formInfo={formInfo}
+                  />
+                </div>
+              ))
+            )}
             <Button
               variant="contained"
               color="primary"
