@@ -145,7 +145,9 @@ function Row(props) {
         </TableCell>
       </TableRow>
       <ItemsTable open={open} detailsRow={detailsRow} />
-      <OrderForm open={open} />
+      {detailsRow?.map((detRow, index) => (
+        <OrderForm open={open} detRow={detRow} key={index} />
+      ))}
     </React.Fragment>
   );
 }

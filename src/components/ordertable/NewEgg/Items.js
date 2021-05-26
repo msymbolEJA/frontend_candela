@@ -29,7 +29,6 @@ const Items = ({ dRow }) => {
     Number(dRow?.UnitPrice) / 1.3 >
       Number(response?.salePrice) + Number(response?.shippingCost) &&
     response?.onlineAvailability;
-  // console.log({ isBuyable });
 
   return (
     <TableRow>
