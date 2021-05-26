@@ -9,6 +9,7 @@ export default function FreeSolo({ order, setFormInfo, formInfo }) {
       style={{ minWidth: 150 }}
       id={order?.label}
       size="small"
+      disableClearable
       value={formInfo[order?.name] ? String(formInfo[order?.name]) : ""}
       freeSolo
       options={order?.selectArray?.map((option) => option.status)}

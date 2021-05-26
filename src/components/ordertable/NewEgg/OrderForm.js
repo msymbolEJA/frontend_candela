@@ -35,9 +35,17 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#52734d",
     },
   },
+  orderHeader: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  inputGroup: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
 }));
-
-// http://104.156.237.87:8080/
 
 const OrderForm = ({ open, detRow }) => {
   const classes = useStyles();
@@ -78,35 +86,36 @@ const OrderForm = ({ open, detRow }) => {
       <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <Box margin={1}>
-            <Typography variant="h4" gutterBottom component="div">
-              Order Tracking
-            </Typography>
-            {loading ? (
-              <p>Loading</p>
-            ) : error ? (
-              <p>Something went wrong</p>
-            ) : (
-              OrderFormSelect?.map((order, index) => (
-                <div
-                  key={index}
-                  style={{ display: "flex", flexDirection: "row" }}
-                >
-                  <CustomAutoComplete
-                    order={order}
-                    setFormInfo={setFormInfo}
-                    formInfo={formInfo}
-                  />
-                </div>
-              ))
-            )}
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.btnSave}
-              onClick={handleFormSend}
-            >
-              Save
-            </Button>
+            <div className={classes.orderHeader}>
+              <Typography variant="h4" gutterBottom component="div">
+                Order Tracking
+              </Typography>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.btnSave}
+                onClick={handleFormSend}
+              >
+                Save
+              </Button>
+            </div>
+            <div className={classes.inputGroup} style={{}}>
+              {loading ? (
+                <p>Loading</p>
+              ) : error ? (
+                <p>Something went wrong</p>
+              ) : (
+                OrderFormSelect?.map((order, index) => (
+                  <div key={index}>
+                    <CustomAutoComplete
+                      order={order}
+                      setFormInfo={setFormInfo}
+                      formInfo={formInfo}
+                    />
+                  </div>
+                ))
+              )}
+            </div>
           </Box>
         </Collapse>
       </TableCell>
