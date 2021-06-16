@@ -10,7 +10,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
 import moment from "moment";
 import ItemsTable from "./ItemsTable";
-import OrderForm from "./OrderForm";
+import OrderTracking from "../otheritems/OrderTracking";
 
 const useRowStyles = makeStyles({
   root: {
@@ -146,7 +146,7 @@ function Row(props) {
       </TableRow>
       <ItemsTable open={open} detailsRow={detailsRow} />
       {detailsRow?.map((detRow, index) => (
-        <OrderForm open={open} detRow={detRow} key={index} />
+        <OrderTracking open={open} detRow={detRow} key={index} store={"ne"} />
       ))}
     </React.Fragment>
   );

@@ -4,6 +4,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import moment from "moment";
 import ItemsTable from "./ItemsTable";
+import OrderTracking from "../otheritems/OrderTracking";
 
 const useRowStyles = makeStyles({
   root: {
@@ -74,6 +75,9 @@ function Row(props) {
         <TableCell align="center">{row.state}</TableCell>
       </TableRow>
       <ItemsTable open={open} detailsRow={detailsRow} />
+      {detailsRow?.map((detRow, index) => (
+        <OrderTracking open={open} detRow={detRow} key={index} store={"wal"} />
+      ))}
     </React.Fragment>
   );
 }

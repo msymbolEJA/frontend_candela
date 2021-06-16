@@ -47,10 +47,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const OrderForm = ({ open, detRow }) => {
+const OrderTracking = ({ open, detRow, store }) => {
   const classes = useStyles();
   const { response, error, loading } = useFetch(
-    `${BASE_URL}ne/ordertrack/${detRow.id}`,
+    `${BASE_URL}${store}/ordertrack/${detRow.id}`,
     {}
   );
   const [formInfo, setFormInfo] = useState({
@@ -73,7 +73,7 @@ const OrderForm = ({ open, detRow }) => {
 
   const handleFormSend = () => {
     console.log({ formInfo });
-    putData(`${BASE_URL}ne/ordertrack/${detRow.id}`, formInfo);
+    putData(`${BASE_URL}${store}/ordertrack/${detRow.id}`, formInfo);
   };
 
   useEffect(() => {
@@ -83,7 +83,7 @@ const OrderForm = ({ open, detRow }) => {
 
   return (
     <TableRow className={classes.innerTable}>
-      <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
+      <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={11}>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <Box margin={1}>
             <div className={classes.orderHeader}>
@@ -123,4 +123,4 @@ const OrderForm = ({ open, detRow }) => {
   );
 };
 
-export default OrderForm;
+export default OrderTracking;
