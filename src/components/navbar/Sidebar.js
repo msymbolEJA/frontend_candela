@@ -86,7 +86,7 @@ const menuLinks = [
   },
 ];
 
-const drawerWidth = 240;
+const drawerWidth = 225;
 
 const useStyles = makeStyles((theme) => ({
   hide: {
@@ -121,7 +121,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingLeft: 16,
+    paddingLeft: 70,
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
@@ -179,7 +179,6 @@ export default function SideBar({ user, open, handleDrawerClose, setOpen }) {
           className={clsx({
             [classes.hide]: !open,
           })}
-          style={{ marginLeft: "55px" }}
         >
           <ChevronLeftIcon />
         </IconButton>
