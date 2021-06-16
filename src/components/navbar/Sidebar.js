@@ -170,8 +170,8 @@ export default function SideBar({ user, open, handleDrawerClose, setOpen }) {
           [classes.drawerClose]: !open,
         }),
       }}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      // onMouseEnter={() => setOpen(true)}
+      // onMouseLeave={() => setOpen(false)}
     >
       <div className={classes.toolbar}>
         <IconButton
@@ -179,6 +179,7 @@ export default function SideBar({ user, open, handleDrawerClose, setOpen }) {
           className={clsx({
             [classes.hide]: !open,
           })}
+          style={{ marginLeft: "55px" }}
         >
           <ChevronLeftIcon />
         </IconButton>
