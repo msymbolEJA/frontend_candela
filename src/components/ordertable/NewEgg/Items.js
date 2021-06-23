@@ -38,7 +38,7 @@ const Items = ({ dRow }) => {
       <TableCell align="center">{dRow.SellerPartNumber}</TableCell>
       <TableCell align="center">
         {dRow.SellerPartNumber
-          ? dRow.SellerPartNumber.replace("NC_UPC_", "")
+          ? dRow.SellerPartNumber.replace("NC_UPC_", "").replace("MC_UPC_", "")
           : dRow.UPCCode
           ? dRow.UPCCode
           : "-"}

@@ -8,7 +8,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableHead from "@material-ui/core/TableHead";
-import moment from "moment";
 import { TableLoadingSpinner } from "../../helpers/LoadingSpinners";
 import { TableError } from "../../helpers/Errors";
 
