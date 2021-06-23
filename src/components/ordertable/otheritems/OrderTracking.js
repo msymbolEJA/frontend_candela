@@ -10,6 +10,7 @@ import CustomAutoComplete from "../otheritems/CustomAutoComplete";
 import { OrderFormSelect } from "../../../helpers/Constants";
 import { putData } from "../../../helpers/DataTransitions";
 import useFetch from "../../../hooks/useFetch";
+import { useHistory } from "react-router-dom";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -35,6 +36,17 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#52734d",
     },
   },
+  btnLog: {
+    margin: theme.spacing(1.3),
+    color: "#fad586",
+    borderColor: "#52734d",
+    minWidth: 160,
+    backgroundColor: "#52734d",
+    "&:hover": {
+      color: "#52734d",
+      backgroundColor: "#fad586",
+    },
+  },
   orderHeader: {
     display: "flex",
     flexDirection: "row",
@@ -49,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
 
 const OrderTracking = ({ open, detRow, store }) => {
   const classes = useStyles();
+  let history = useHistory();
   const { response, error, loading } = useFetch(
     `${BASE_URL}${store}/ordertrack/${detRow.id}`,
     {}
@@ -81,6 +94,10 @@ const OrderTracking = ({ open, detRow, store }) => {
     return;
   }, [response]);
 
+  const handleGotoLog = () => {
+    history.push(`/log-table/${detRow.OrderNumber}`);
+  };
+
   return (
     <TableRow className={classes.innerTable}>
       <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={11}>
@@ -90,14 +107,24 @@ const OrderTracking = ({ open, detRow, store }) => {
               <Typography variant="h4" gutterBottom component="div">
                 Order Tracking
               </Typography>
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.btnSave}
-                onClick={handleFormSend}
-              >
-                Save
-              </Button>
+              <div>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.btnLog}
+                  onClick={handleGotoLog}
+                >
+                  Go to Log
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.btnSave}
+                  onClick={handleFormSend}
+                >
+                  Save
+                </Button>
+              </div>
             </div>
             <div className={classes.inputGroup} style={{}}>
               {loading ? (
