@@ -5,6 +5,7 @@ import bestbuy from "../../assets/bestbuy.png";
 import walmart from "../../assets/walmart.png";
 import newegg from "../../assets/newegg.png";
 import neweggBusiness from "../../assets/nebusiness.png";
+import microCenter from "../../assets/micro-center.png";
 
 const useStyles = makeStyles((theme) => ({
   btn: {
@@ -55,6 +56,13 @@ const Dashboard = () => {
         className={classes.btn}
         src={neweggBusiness}
         alt="neweggbusiness"
+      />
+      <img
+        id="orders/mc"
+        onClick={handleClick}
+        className={classes.btn}
+        src={microCenter}
+        alt="micro-center"
       />
     </div>
   );

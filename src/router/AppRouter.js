@@ -9,6 +9,7 @@ import ReturnOrders from "../components/ordertable/returnorders/ReturnOrders";
 import MainLayout from "../components/navbar/MainLayout";
 import Login from "../components/login/Login";
 import PrivateRouter from "./PrivateRouter";
+import MicroCenter from "../components/ordertable/micro-center/MicroCenter";
 
 const AppRouter = () => {
   return (
@@ -31,6 +32,7 @@ const DefaultContainer = () => (
       <PrivateRouter path="/orders/neb/" component={NEBusinessTable} />
       <PrivateRouter path="/orders/wal/" component={WalOrdersTable} />
       <PrivateRouter path="/orders/return-orders/" component={ReturnOrders} />
+      <PrivateRouter path="/orders/mc/" component={MicroCenter} />
     </Switch>
   </div>
 );
