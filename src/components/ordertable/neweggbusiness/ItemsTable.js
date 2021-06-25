@@ -18,7 +18,6 @@ const useRowStyles = makeStyles({
 
 const ItemsTable = ({ open, detailsRow }) => {
   const classes = useRowStyles();
-  // console.log(detailsRow.length);
 
   return (
     <TableRow className={classes.innerTable}>
@@ -36,7 +35,11 @@ const ItemsTable = ({ open, detailsRow }) => {
                   <TableCell align="center">UPC Code</TableCell>
                   <TableCell align="center">Ordered Qty</TableCell>
                   <TableCell align="center">Unit Price</TableCell>
-                  <TableCell align="center">BestBuy Price</TableCell>
+                  <TableCell align="center">
+                    {detailsRow[0]?.SellerPartNumber.includes("MC")
+                      ? "MicroCenter Price"
+                      : "BestBuy Price"}
+                  </TableCell>
                   <TableCell align="center">Price Update Date</TableCell>
                   <TableCell align="center">BestBuy Shipping Cost</TableCell>
                   <TableCell align="center">Description</TableCell>
