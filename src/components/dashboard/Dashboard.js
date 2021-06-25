@@ -37,6 +37,14 @@ const Dashboard = () => {
         alt="besybuy"
       />
       <img
+        id="orders/mc"
+        onClick={handleClick}
+        className={classes.btn}
+        src={microCenter}
+        alt="micro-center"
+      />
+      <hr />
+      <img
         id="orders/ne"
         onClick={handleClick}
         className={classes.btn}
@@ -56,13 +64,6 @@ const Dashboard = () => {
         className={classes.btn}
         src={neweggBusiness}
         alt="neweggbusiness"
-      />
-      <img
-        id="orders/mc"
-        onClick={handleClick}
-        className={classes.btn}
-        src={microCenter}
-        alt="micro-center"
       />
     </div>
   );
