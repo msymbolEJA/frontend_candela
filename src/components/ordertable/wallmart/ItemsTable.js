@@ -34,7 +34,11 @@ const ItemsTable = ({ open, detailsRow }) => {
                   <TableCell align="center">Product Name</TableCell>
                   <TableCell align="center">UPC</TableCell>
                   <TableCell align="center">Item Price</TableCell>
-                  <TableCell align="center">BestBuy Price</TableCell>
+                  <TableCell align="center">
+                    {detailsRow[0]?.sku.includes("MC")
+                      ? "MicroCenter Price"
+                      : "BestBuy Price"}
+                  </TableCell>
                   <TableCell align="center">Price Update Date</TableCell>
                   <TableCell align="center">BestBuy Shipping Cost</TableCell>
                   <TableCell align="center">Order Status</TableCell>

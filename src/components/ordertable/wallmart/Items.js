@@ -21,13 +21,9 @@ const useStyles = makeStyles({
 const Items = ({ dRow }) => {
   const classes = useStyles();
   const { response } = useFetch(
-    `${BASE_URL}bb/${
-      dRow?.sku.includes("NC_UPC_")
-        ? dRow.sku.replace("NC_UPC_", "")
-        : dRow?.sku.includes("MC_UPC_")
-        ? dRow.sku.replace("MC_UPC_", "")
-        : ""
-    }`
+    `${BASE_URL}${dRow?.sku.includes("MC") ? "mc" : "bb"}/${dRow.sku
+      .replace("NC_UPC_", "")
+      .replace("MC_UPC_", "")}`
   );
 
   const getUpc = () => {
