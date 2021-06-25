@@ -35,12 +35,22 @@ const useRowStyles = makeStyles({
 });
 
 function Row(props) {
-  const { row } = props;
+  const { row, index, upcArray } = props;
   const [open, setOpen] = useState(false);
   const classes = useRowStyles();
 
   const detailsRow = row.items;
-  // console.log({ row });
+
+  const upcEditFunc = (singleUpc) => {
+    return Array.isArray(singleUpc)
+      ? singleUpc?.map((item) => (
+          <>
+            {item?.replace("MC_UPC_", "")}
+            <br />
+          </>
+        ))
+      : singleUpc?.replace("MC_UPC_", "");
+  };
 
   return (
     <React.Fragment>
@@ -56,6 +66,9 @@ function Row(props) {
           ) : (
             <p>No Info</p>
           )}
+        </TableCell>
+        <TableCell align="center" component="th" scope="row">
+          {upcEditFunc(upcArray[index])}
         </TableCell>
         <TableCell align="center" component="th" scope="row">
           {row.cutomerName}

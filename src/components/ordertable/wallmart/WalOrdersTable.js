@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -46,12 +46,7 @@ export default function NEOrdersTable() {
   const [buttonTag, setButtonTag] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
-  const {
-    response,
-    error,
-    loading,
-    setLoading,
-  } = useFetch(
+  const { response, error, loading, setLoading } = useFetch(
     `${BASE_URL}wal/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
     }`,
@@ -74,6 +69,25 @@ export default function NEOrdersTable() {
     setLoading(true);
   };
 
+  let upcArray = [];
+  useEffect(() => {
+    response?.results?.map((item) => {
+      // console.log(item?.items.length);
+      // console.log(item?.items[0]?.sku);
+      if (item?.items.length > 1) {
+        let biggerUpcArray = [];
+        item?.items?.map((i, ind) => {
+          // console.log(ind, i?.sku);
+          biggerUpcArray.push(i?.sku);
+        });
+        upcArray.push(biggerUpcArray);
+      } else {
+        upcArray.push(item?.items[0]?.sku);
+      }
+    });
+    // console.log(upcArray);
+  });
+
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
       <h2 className={classes.headerStyle}>Wallmart Orders</h2>
@@ -87,6 +101,9 @@ export default function NEOrdersTable() {
           <TableRow className={classes.tRow}>
             <TableCell align="center" className={classes.tCell}>
               Customer Order Id
+            </TableCell>
+            <TableCell align="center" className={classes.tCell}>
+              UPC
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
               Cutomer Name
@@ -132,7 +149,7 @@ export default function NEOrdersTable() {
           <>
             <TableBody>
               {response?.results?.map((row, index) => (
-                <Row key={index} row={row} />
+                <Row key={index} row={row} index={index} upcArray={upcArray} />
               ))}
             </TableBody>
             <CustomTableFooter

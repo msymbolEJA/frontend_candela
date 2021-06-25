@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -46,12 +46,7 @@ export default function NEOrdersTable() {
   const [buttonTag, setButtonTag] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
-  const {
-    response,
-    error,
-    loading,
-    setLoading,
-  } = useFetch(
+  const { response, error, loading, setLoading } = useFetch(
     `${BASE_URL}ne/b2b/?OrderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
     }`,

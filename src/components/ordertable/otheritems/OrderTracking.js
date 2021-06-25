@@ -100,7 +100,7 @@ const OrderTracking = ({ open, detRow, store }) => {
 
   return (
     <TableRow className={classes.innerTable}>
-      <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={11}>
+      <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={20}>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <Box margin={1}>
             <div className={classes.orderHeader}>
