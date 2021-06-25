@@ -70,6 +70,21 @@ export default function NEOrdersTable() {
     setLoading(true);
   };
 
+  let upcArray = [];
+  response?.results?.forEach((item) => {
+    if (item?.items.length > 1) {
+      let biggerUpcArray = [];
+      item?.items?.forEach((i, ind) => {
+        biggerUpcArray.push(i?.UPCCode || i?.SellerPartNumber);
+      });
+      upcArray.push(biggerUpcArray);
+    } else {
+      upcArray.push(
+        item?.items[0]?.UPCCode || item?.items[0]?.SellerPartNumber
+      );
+    }
+  });
+
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
       <h2 className={classes.headerStyle}>New Egg Business Orders</h2>
@@ -83,6 +98,9 @@ export default function NEOrdersTable() {
           <TableRow className={classes.tRow}>
             <TableCell align="center" className={classes.tCell}>
               Order Number
+            </TableCell>
+            <TableCell align="center" className={classes.tCell}>
+              UPC
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
               Order Date
@@ -113,7 +131,7 @@ export default function NEOrdersTable() {
           <>
             <TableBody>
               {response?.results?.map((row, index) => (
-                <Row key={index} row={row} />
+                <Row key={index} row={row} upcArray={upcArray} index={index} />
               ))}
             </TableBody>
             <CustomTableFooter
