@@ -95,7 +95,7 @@ const OrderTracking = ({ open, detRow, store }) => {
   }, [response]);
 
   const handleGotoLog = () => {
-    history.push(`/log-table/${detRow.OrderNumber}`);
+    history.push(`/log-table/${detRow.OrderNumber || detRow.customerOrderId}`);
   };
 
   return (
