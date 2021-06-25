@@ -88,6 +88,7 @@ const Items = ({ dRow }) => {
           .local()
           .format("MM-DD-YY HH:mm")}
       </TableCell>
+      <TableCell align="center">{dRow?.ShippingAmount}</TableCell>
       <TableCell align="center">
         <img
           src={isBuyable ? checkSvg : warnSvg}

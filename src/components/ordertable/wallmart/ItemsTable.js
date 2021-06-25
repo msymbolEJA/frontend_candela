@@ -46,6 +46,7 @@ const ItemsTable = ({ open, detailsRow }) => {
                   <TableCell align="center">
                     Online Availability Update Date
                   </TableCell>
+                  <TableCell align="center">Shipping Amount</TableCell>
                   <TableCell align="center">Action</TableCell>
                 </TableRow>
               </TableHead>
