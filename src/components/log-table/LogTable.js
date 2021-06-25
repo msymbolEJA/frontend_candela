@@ -36,7 +36,7 @@ const useStyles = makeStyles({
 
 const LogTable = (props) => {
   const { response, error, loading } = useFetch(
-    `${BASE_URL}/logs/?order_num${props.match.params.id}`,
+    `${BASE_URL}/logs/?order_num=${props.match.params.id}`,
     {}
   );
   const classes = useStyles();
