@@ -149,7 +149,7 @@ export default function NavBar({ open, handleDrawerOpen }) {
           </span>
         </Typography>
 
-        <div>
+        {/* <div>
           <FormControl className={classes.langControl}>
             <NativeSelect
               //   value={lang}
@@ -168,7 +168,7 @@ export default function NavBar({ open, handleDrawerOpen }) {
               </option>
             </NativeSelect>
           </FormControl>
-        </div>
+        </div> */}
         <div className={classes.rightTop}>
           <div className={classes.userInfo}>
             <div className={classes.userRole}>
