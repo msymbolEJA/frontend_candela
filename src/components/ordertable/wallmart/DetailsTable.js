@@ -32,6 +32,9 @@ const useRowStyles = makeStyles({
   innerTable: {
     backgroundColor: "#bdd2b6",
   },
+  upcStyle: {
+    fontWeight: "normal",
+  },
 });
 
 function Row(props) {
@@ -41,13 +44,16 @@ function Row(props) {
 
   const detailsRow = row.items;
 
+  // console.log(upcArray[index]);
+  // console.log(upcArray);
+  // console.log(index);
+
   const upcEditFunc = (singleUpc) => {
     return Array.isArray(singleUpc)
-      ? singleUpc?.map((item) => (
-          <>
+      ? singleUpc?.map((item, index) => (
+          <p key={index} className={classes.upcStyle}>
             {item?.replace("MC_UPC_", "")}
-            <br />
-          </>
+          </p>
         ))
       : singleUpc?.replace("MC_UPC_", "");
   };

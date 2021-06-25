@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -70,23 +70,21 @@ export default function NEOrdersTable() {
   };
 
   let upcArray = [];
-  useEffect(() => {
-    response?.results?.map((item) => {
-      // console.log(item?.items.length);
-      // console.log(item?.items[0]?.sku);
-      if (item?.items.length > 1) {
-        let biggerUpcArray = [];
-        item?.items?.map((i, ind) => {
-          // console.log(ind, i?.sku);
-          biggerUpcArray.push(i?.sku);
-        });
-        upcArray.push(biggerUpcArray);
-      } else {
-        upcArray.push(item?.items[0]?.sku);
-      }
-    });
-    // console.log(upcArray);
+  response?.results?.forEach((item) => {
+    // console.log(item?.items.length);
+    // console.log(item?.items[0]?.sku);
+    if (item?.items.length > 1) {
+      let biggerUpcArray = [];
+      item?.items?.forEach((i, ind) => {
+        // console.log(ind, i?.sku);
+        biggerUpcArray.push(i?.sku);
+      });
+      upcArray.push(biggerUpcArray);
+    } else {
+      upcArray.push(item?.items[0]?.sku);
+    }
   });
+  // console.log(upcArray);
 
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
