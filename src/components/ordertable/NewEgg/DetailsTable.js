@@ -38,15 +38,27 @@ const useRowStyles = makeStyles({
   innerTable: {
     backgroundColor: "#bdd2b6",
   },
+  upcStyle: {
+    fontWeight: "normal",
+  },
 });
 
 function Row(props) {
-  const { row } = props;
+  const { row, index, upcArray } = props;
   const [open, setOpen] = useState(false);
   const classes = useRowStyles();
 
   const detailsRow = row.items;
-  //   console.log(detailsRow);
+
+  const upcEditFunc = (singleUpc) => {
+    return Array.isArray(singleUpc)
+      ? singleUpc?.map((item, index) => (
+          <p key={index} className={classes.upcStyle}>
+            {item?.replace("MC_UPC_", "").replace("NC_UPC_", "")}
+          </p>
+        ))
+      : singleUpc?.replace("MC_UPC_", "").replace("NC_UPC_", "");
+  };
 
   return (
     <React.Fragment>
@@ -65,6 +77,9 @@ function Row(props) {
               </a>
             ) : null}
           </>
+        </TableCell>
+        <TableCell align="center" component="th" scope="row">
+          {upcEditFunc(upcArray[index])}
         </TableCell>
         <TableCell align="center">
           {moment.utc(row.OrderDate).local().format("MM-DD-YY HH:mm")}

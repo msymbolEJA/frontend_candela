@@ -52,10 +52,10 @@ function Row(props) {
     return Array.isArray(singleUpc)
       ? singleUpc?.map((item, index) => (
           <p key={index} className={classes.upcStyle}>
-            {item?.replace("MC_UPC_", "")}
+            {item?.replace("MC_UPC_", "").replace("NC_UPC_", "")}
           </p>
         ))
-      : singleUpc?.replace("MC_UPC_", "");
+      : singleUpc?.replace("MC_UPC_", "").replace("NC_UPC_", "");
   };
 
   return (
