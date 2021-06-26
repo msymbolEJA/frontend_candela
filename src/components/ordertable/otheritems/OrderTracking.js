@@ -99,8 +99,40 @@ const OrderTracking = ({ open, detRow, store }) => {
   };
 
   return (
-    <TableRow className={classes.innerTable}>
-      <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={20}>
+    <TableRow
+      className={classes.innerTable}
+      style={{
+        backgroundColor:
+          formInfo?.status === "Awaiting-fulfillment"
+            ? "#FFF5DA"
+            : formInfo?.status === "Cancelled"
+            ? "#FF7171"
+            : formInfo?.status === "Error"
+            ? "#8F4068"
+            : formInfo?.status === "Late-shipment"
+            ? "#B590CA"
+            : formInfo?.status === "Ordered"
+            ? "#F3D1F4"
+            : formInfo?.status === "Refund/return"
+            ? "#C06C84"
+            : formInfo?.status === "Shipped"
+            ? "#F1C6D3"
+            : formInfo?.status === "Stock"
+            ? "#BE8ABF"
+            : formInfo?.status === "ZZZ"
+            ? "#8AC6D1"
+            : formInfo?.status === "Ready"
+            ? "#32AFA9"
+            : formInfo?.status === "Partial-refund"
+            ? "#445C3C"
+            : formInfo?.status === "Reserved"
+            ? "#F7DAD9"
+            : formInfo?.status === "Other"
+            ? "#DBE9B7"
+            : "bdd2b6",
+      }}
+    >
+      <TableCell style={{ paddingBottom: 3, paddingTop: 3 }} colSpan={20}>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <Box margin={1}>
             <div className={classes.orderHeader}>

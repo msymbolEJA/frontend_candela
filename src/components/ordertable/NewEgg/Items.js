@@ -27,8 +27,8 @@ const Items = ({ dRow }) => {
     }/${dRow.SellerPartNumber.replace("NC_UPC_", "").replace("MC_UPC_", "")}`
   );
 
-  console.log(dRow?.SellerPartNumber.includes("MC"));
-  console.log(response);
+  // console.log(dRow?.SellerPartNumber.includes("MC"));
+  // console.log(response);
 
   let isBuyable =
     Number(dRow?.UnitPrice) / 1.3 >
