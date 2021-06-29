@@ -9,7 +9,9 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableHead from "@material-ui/core/TableHead";
 import { TableLoadingSpinner } from "../../helpers/LoadingSpinners";
+import { logTableColumns } from "../../helpers/Constants";
 import { TableError } from "../../helpers/Errors";
+import moment from "moment";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -56,21 +58,11 @@ const LogTable = (props) => {
         <Table className={classes.table} aria-label="custom pagination table">
           <TableHead>
             <TableRow className={classes.headingRow}>
-              <TableCell align="center" style={{ color: "white" }}>
-                Id
-              </TableCell>
-              <TableCell align="center" style={{ color: "white" }}>
-                Order Number
-              </TableCell>
-              <TableCell style={{ color: "white" }} align="center">
-                User
-              </TableCell>
-              <TableCell style={{ color: "white" }} align="center">
-                Field
-              </TableCell>
-              <TableCell style={{ color: "white" }} align="center">
-                Updated Data
-              </TableCell>
+              {logTableColumns?.map((item) => (
+                <TableCell align="center" style={{ color: "white" }}>
+                  {item?.label}
+                </TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -81,20 +73,16 @@ const LogTable = (props) => {
             ) : response?.results?.length > 0 ? (
               response?.results?.map((row, index) => (
                 <TableRow key={index} className={classes.rowStyle}>
-                  <TableCell
-                    align="center"
-                    component="th"
-                    scope="row"
-                    style={{ maxWidth: 600 }}
-                  >
-                    {row.id}
-                  </TableCell>
-                  <TableCell align="center" component="th" scope="row">
-                    {row.order_num}
-                  </TableCell>
-                  <TableCell align="center">{row.user}</TableCell>
-                  <TableCell align="center">{row.field}</TableCell>
-                  <TableCell align="center">{row.updated_data}</TableCell>
+                  {logTableColumns?.map((item) => (
+                    <TableCell align="center">
+                      {item?.id === "change_date"
+                        ? moment
+                            .utc(row[item?.id])
+                            .local()
+                            .format("MM-DD-YY HH:mm")
+                        : row[item?.id]}
+                    </TableCell>
+                  ))}
                 </TableRow>
               ))
             ) : (
@@ -119,15 +107,3 @@ const LogTable = (props) => {
 };
 
 export default LogTable;
-
-/*
-{response?.count}
-      {response?.results?.map((item) => (
-        <div key={item.id}>
-          <p>{item.id}</p>
-          <p>{item.change_date}</p>
-          <p>{item.field}</p>
-          <p>{item.order_num}</p>
-        </div>
-      ))}
-*/

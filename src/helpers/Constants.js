@@ -143,3 +143,12 @@ export const OrderFormSelect = [
     ],
   },
 ];
+
+export const logTableColumns = [
+  { id: "id", label: "Id" },
+  { id: "order_num", label: "Order Number" },
+  { id: "user", label: "User" },
+  { id: "field", label: "Field" },
+  { id: "updated_data", label: "Updated Data" },
+  { id: "change_date", label: "Change Date" },
+];
