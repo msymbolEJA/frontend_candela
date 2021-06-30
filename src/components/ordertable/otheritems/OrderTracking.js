@@ -116,7 +116,7 @@ const OrderTracking = ({ open, detRow, store }) => {
             : formInfo?.status === "Refund/return"
             ? "#C06C84"
             : formInfo?.status === "Shipped"
-            ? "#F1C6D3"
+            ? "#C68B59"
             : formInfo?.status === "Stock"
             ? "#BE8ABF"
             : formInfo?.status === "ZZZ"
