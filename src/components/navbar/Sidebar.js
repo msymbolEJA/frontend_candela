@@ -55,6 +55,12 @@ const menuLinks = [
     link: "/orders/return-orders",
   },
   {
+    id: 5,
+    title: "Report",
+    icon: Assignment,
+    link: "/report",
+  },
+  {
     id: 11,
     title: "menu5",
     icon: Assignment,

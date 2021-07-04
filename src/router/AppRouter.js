@@ -11,6 +11,7 @@ import Login from "../components/login/Login";
 import PrivateRouter from "./PrivateRouter";
 import MicroCenter from "../components/ordertable/micro-center/MicroCenter";
 import LogTable from "../components/log-table/LogTable";
+import Report from "../components/report/Report";
 
 const AppRouter = () => {
   return (
@@ -35,6 +36,7 @@ const DefaultContainer = () => (
       <PrivateRouter path="/orders/return-orders/" component={ReturnOrders} />
       <PrivateRouter path="/orders/mc/" component={MicroCenter} />
       <PrivateRouter path="/log-table/:id" component={LogTable} />
+      <PrivateRouter path="/report" component={Report} />
     </Switch>
   </div>
 );
