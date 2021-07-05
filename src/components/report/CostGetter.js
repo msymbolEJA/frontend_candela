@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 // import { getData } from "../../helper/PostData";
@@ -6,7 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import moment from "moment";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+// const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -28,46 +28,38 @@ const useStyles = makeStyles((theme) => ({
   date: {
     margin: 5,
   },
+  btnDiv: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
+  btn: {
+    margin: 5,
+  },
 }));
 
-const CostGetter = () => {
+const CostGetter = ({ dates, setDates }) => {
   const classes = useStyles();
   const beginnerDateRef = useRef(null);
   const endDateRef = useRef(null);
-  // const [quantity, setQuantity] = useState(0);
-  const [calcCost, setCalcCost] = useState({
-    totalCost: null,
-    isLoading: false,
-  });
 
   const getDate = () => {
     // console.log("B", beginnerDateRef.current.value);
     // console.log("E", endDateRef.current.value);
-    getCost();
+    setDates({
+      ...dates,
+      end_date: endDateRef.current.value,
+      start_date: beginnerDateRef.current.value,
+    });
   };
 
-  const getCost = () => {
-    setCalcCost({ ...calcCost, isLoading: true });
-    console.log(beginnerDateRef.current.value, endDateRef.current.value);
-    console.log(
-      `${BASE_URL}report/ne?end_date=${endDateRef.current.value}&start_date=${beginnerDateRef.current.value}`
-    );
-    // getData(
-    //   `${BASE_URL}etsy/cost/?order_date__iexact=&order_date__lte=${endDateRef.current.value}+00%3A00&order_date__gte=${beginnerDateRef.current.value}+00%3A00&limit=100000000000&offset=0`
-    // ).then((response) => {
-    //   // console.log(response.data.count);
-    //   setQuantity(response.data.count);
-
-    //   let res = response.data.results.reduce(function (a, b) {
-    //     return { cost: Number(a.cost) + Number(b.cost) }; // returns object with property x
-    //   });
-
-    //   setCalcCost({ ...calcCost, totalCost: res.cost, isLoading: false });
-    // });
+  const resetDate = () => {
+    setDates({
+      ...dates,
+      end_date: "",
+      start_date: "",
+    });
   };
-
-  // http://104.156.237.87:8080/report/ne?end_date=2021-06-29&start_date=2021-04-12
-  // `${BASE_URL}report/ne?end_date=${endDateRef.current.value}&start_date=${beginnerDateRef.current.value}`
 
   useEffect(() => {
     endDateRef.current.value = moment().format("YYYY-MM-DD");
@@ -90,21 +82,26 @@ const CostGetter = () => {
         </label>
         <input ref={endDateRef} type="date" className={classes.date} />
       </div>
-      <Button variant="contained" color="primary" onClick={getDate}>
-        Calculate
-      </Button>
-      {/* <div style={{ height: "5rem" }}>
-        {calcCost.isLoading ? (
-          <h3>Calculating...</h3>
-        ) : (
-          <>
-            <h3>
-              {calcCost.totalCost && "Total Cost : $" + calcCost.totalCost}
-            </h3>
-            <h3>{calcCost.totalCost && "Quantity : " + quantity}</h3>
-          </>
-        )}
-      </div> */}
+      <div className={classes.btnDiv}>
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          onClick={getDate}
+          className={classes.btn}
+        >
+          Calculate
+        </Button>
+        <Button
+          size="small"
+          variant="contained"
+          color="primary"
+          onClick={resetDate}
+          className={classes.btn}
+        >
+          Reset
+        </Button>
+      </div>
     </Paper>
   );
 };

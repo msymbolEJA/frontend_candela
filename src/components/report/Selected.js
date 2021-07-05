@@ -40,7 +40,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CustomizedTables() {
+export default function CustomizedTables({ dates }) {
   const classes = useStyles();
   const [stats, setStats] = useState({
     ne: [],
@@ -49,15 +49,15 @@ export default function CustomizedTables() {
   });
   const [statRows, setStatRows] = useState([]);
   const neReport = useFetch(
-    `http://104.156.237.87:8080/report/summ/ne/?end_date=2021-07-02&start_date=2021-06-10`,
+    `http://104.156.237.87:8080/report/summ/ne/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 }
   );
   const nbReport = useFetch(
-    `http://104.156.237.87:8080/report/summ/nb/?end_date=2021-07-02&start_date=2021-06-10`,
+    `http://104.156.237.87:8080/report/summ/nb/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 }
   );
   const waReport = useFetch(
-    `http://104.156.237.87:8080/report/summ/wa/?end_date=2021-07-02&start_date=2021-06-10`,
+    `http://104.156.237.87:8080/report/summ/wa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 }
   );
 
@@ -119,6 +119,9 @@ export default function CustomizedTables() {
     // console.log(statRows);
   }, [stats]);
 
+  useEffect(() => {
+    // console.log(statRows);
+  }, [dates]);
   return (
     <TableContainer className={classes.tContainer} component={Paper}>
       <h2>Selected</h2>
@@ -140,16 +143,16 @@ export default function CustomizedTables() {
                 {row.id}
               </StyledTableCell>
               <StyledTableCell align="right">
-                {row.ne?.toFixed(2)}
+                {row.ne?.toFixed(2) || 0}
               </StyledTableCell>
               <StyledTableCell align="right">
-                {row.nb?.toFixed(2)}
+                {row.nb?.toFixed(2) || 0}
               </StyledTableCell>
               <StyledTableCell align="right">
-                {row.wa?.toFixed(2)}
+                {row.wa?.toFixed(2) || 0}
               </StyledTableCell>
               <StyledTableCell align="right">
-                {row.gt?.toFixed(2)}
+                {row.gt?.toFixed(2) || 0}
               </StyledTableCell>
             </StyledTableRow>
           ))}

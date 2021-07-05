@@ -112,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EnhancedTable() {
+export default function EnhancedTable({ dates }) {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
@@ -120,7 +120,7 @@ export default function EnhancedTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(20);
   const [rows, setRows] = useState([]);
   const { response, error, loading, setLoading } = useFetch(
-    `${BASE_URL}report/ne?end_date=2021-06-29&start_date=2021-04-12`,
+    `${BASE_URL}report/ne?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 }
   );
   useEffect(() => {
