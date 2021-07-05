@@ -137,8 +137,31 @@ export default function SideBar({ user, open, handleDrawerClose, setOpen }) {
   const classes = useStyles();
   const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
-  const menuLinkComp = (item) => {
-    return (
+
+  const userRole = JSON.parse(localStorage.getItem("user")).userRole;
+  // console.log(userRole);
+
+  const menuLinkComp = (item) =>
+    userRole !== "admin" ? (
+      item?.title !== "Report" ? (
+        <Fragment key={item.id}>
+          <ListItem
+            button
+            onClick={
+              item?.subMenuLinks?.length
+                ? handleShowSubMenu()
+                : handleNavigate(item.link)
+            }
+          >
+            <ListItemIcon>{item.icon && <item.icon />}</ListItemIcon>
+            <ListItemText primary={item.title} />
+          </ListItem>
+          {item?.subMenuLinks?.length &&
+            isOpen &&
+            item.subMenuLinks.map((el) => menuLinkComp(el))}
+        </Fragment>
+      ) : null
+    ) : (
       <Fragment key={item.id}>
         <ListItem
           button
@@ -156,7 +179,6 @@ export default function SideBar({ user, open, handleDrawerClose, setOpen }) {
           item.subMenuLinks.map((el) => menuLinkComp(el))}
       </Fragment>
     );
-  };
   const handleNavigate = (link) => () => {
     history.push(link);
   };
