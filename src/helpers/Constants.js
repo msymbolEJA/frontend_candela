@@ -152,3 +152,20 @@ export const logTableColumns = [
   { id: "updated_data", label: "Updated Data" },
   { id: "change_date", label: "Change Date" },
 ];
+
+export const bestSellerTableHeaders = [
+  {
+    id: "SellerPartNumber",
+    label: "Seller Part Number",
+  },
+  {
+    id: "Description",
+    label: "Description",
+  },
+  { id: "shop", label: "Shop" },
+  {
+    id: "sum_total_price",
+    label: "Sum Total Price",
+  },
+  { id: "sum_item", label: "Sum Item" },
+];

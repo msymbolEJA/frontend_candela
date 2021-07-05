@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 // import { getData } from "../../helper/PostData";
-import BorderColorIcon from "@material-ui/icons/BorderColor";
+// import BorderColorIcon from "@material-ui/icons/BorderColor";
 import Button from "@material-ui/core/Button";
 import moment from "moment";
 
@@ -34,7 +34,7 @@ const CostGetter = () => {
   const classes = useStyles();
   const beginnerDateRef = useRef(null);
   const endDateRef = useRef(null);
-  const [quantity, setQuantity] = useState(0);
+  // const [quantity, setQuantity] = useState(0);
   const [calcCost, setCalcCost] = useState({
     totalCost: null,
     isLoading: false,
@@ -49,6 +49,9 @@ const CostGetter = () => {
   const getCost = () => {
     setCalcCost({ ...calcCost, isLoading: true });
     console.log(beginnerDateRef.current.value, endDateRef.current.value);
+    console.log(
+      `${BASE_URL}report/ne?end_date=${endDateRef.current.value}&start_date=${beginnerDateRef.current.value}`
+    );
     // getData(
     //   `${BASE_URL}etsy/cost/?order_date__iexact=&order_date__lte=${endDateRef.current.value}+00%3A00&order_date__gte=${beginnerDateRef.current.value}+00%3A00&limit=100000000000&offset=0`
     // ).then((response) => {
@@ -62,6 +65,9 @@ const CostGetter = () => {
     //   setCalcCost({ ...calcCost, totalCost: res.cost, isLoading: false });
     // });
   };
+
+  // http://104.156.237.87:8080/report/ne?end_date=2021-06-29&start_date=2021-04-12
+  // `${BASE_URL}report/ne?end_date=${endDateRef.current.value}&start_date=${beginnerDateRef.current.value}`
 
   useEffect(() => {
     endDateRef.current.value = moment().format("YYYY-MM-DD");

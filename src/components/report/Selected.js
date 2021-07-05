@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,7 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import useFetch from "../../hooks/useFetch";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+// const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -60,7 +60,10 @@ export default function CustomizedTables() {
 
   useEffect(() => {
     // console.log(response);
-  }, [response]);
+    // console.log(error);
+    // console.log(loading);
+    // console.log(setLoading);
+  }, [response, error, loading, setLoading]);
 
   return (
     <TableContainer className={classes.tContainer} component={Paper}>
