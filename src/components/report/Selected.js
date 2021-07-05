@@ -60,6 +60,14 @@ export default function CustomizedTables({ dates }) {
     `http://104.156.237.87:8080/report/summ/wa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 }
   );
+  const otherReport = useFetch(`http://104.156.237.87:8080/report/const/`, {
+    results: [],
+    count: 0,
+  });
+
+  useEffect(() => {
+    console.log(otherReport.response.results);
+  }, [otherReport.response.results]);
 
   useEffect(() => {
     setStats((stats) => ({
@@ -115,9 +123,38 @@ export default function CustomizedTables({ dates }) {
           stats.nb.shipping_cost +
           stats.wa.shipping_cost,
       },
+      {
+        id: "OTHER",
+        ne: otherReport?.response?.results[2]?.other_exp,
+        nb: otherReport?.response?.results[1]?.other_exp,
+        wa: otherReport?.response?.results[0]?.other_exp,
+        gt:
+          otherReport?.response?.results[2]?.other_exp +
+          otherReport?.response?.results[1]?.other_exp +
+          otherReport?.response?.results[0]?.other_exp,
+      },
+      {
+        id: "NET PROFIT",
+        ne:
+          stats.ne.gross_profit -
+          stats.ne.commision_cost -
+          otherReport?.response?.results[2]?.other_exp,
+        nb:
+          stats.nb.gross_profit -
+          stats.nb.commision_cost -
+          otherReport?.response?.results[1]?.other_exp,
+        wa:
+          stats.wa.gross_profit -
+          stats.wa.commision_cost -
+          otherReport?.response?.results[0]?.other_exp,
+        gt:
+          otherReport?.response?.results[2]?.other_exp +
+          otherReport?.response?.results[1]?.other_exp +
+          otherReport?.response?.results[0]?.other_exp,
+      },
     ]);
     // console.log(statRows);
-  }, [stats]);
+  }, [stats, otherReport?.response?.results]);
 
   useEffect(() => {
     // console.log(statRows);
