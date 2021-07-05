@@ -124,12 +124,11 @@ export default function EnhancedTable() {
     { results: [], count: 0 }
   );
   useEffect(() => {
-    console.log(response);
+    // console.log(response);
   }, [response, error, loading, setLoading]);
 
   useEffect(() => {
     setRows(response.results);
-    console.log(response.results);
   }, [response]);
 
   const handleRequestSort = (event, property) => {

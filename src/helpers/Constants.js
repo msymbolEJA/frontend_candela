@@ -169,3 +169,19 @@ export const bestSellerTableHeaders = [
   },
   { id: "sum_item", label: "Sum Item" },
 ];
+
+export const selectedHeaders = [
+  {
+    id: "ne",
+    label: "NEWEGG",
+  },
+  {
+    id: "nb",
+    label: "NEWEGG BUSINESS",
+  },
+  { id: "wa", label: "WALMART" },
+  {
+    id: "grandTotal",
+    label: "Grand Total",
+  },
+];

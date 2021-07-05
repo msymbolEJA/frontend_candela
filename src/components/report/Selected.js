@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -8,6 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import useFetch from "../../hooks/useFetch";
+import { selectedHeaders } from "../../helpers/Constants";
 
 // const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -29,18 +30,6 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
 const useStyles = makeStyles({
   table: {
     minWidth: 250,
@@ -53,17 +42,82 @@ const useStyles = makeStyles({
 
 export default function CustomizedTables() {
   const classes = useStyles();
-  const { response, error, loading, setLoading } = useFetch(
-    `http://104.156.237.87:8080/report/ne?end_date=2021-06-29&start_date=2021-04-12`,
+  const [stats, setStats] = useState({
+    ne: [],
+    nb: [],
+    wa: [],
+  });
+  const [statRows, setStatRows] = useState([]);
+  const neReport = useFetch(
+    `http://104.156.237.87:8080/report/summ/ne/?end_date=2021-07-02&start_date=2021-06-10`,
+    { results: [], count: 0 }
+  );
+  const nbReport = useFetch(
+    `http://104.156.237.87:8080/report/summ/nb/?end_date=2021-07-02&start_date=2021-06-10`,
+    { results: [], count: 0 }
+  );
+  const waReport = useFetch(
+    `http://104.156.237.87:8080/report/summ/wa/?end_date=2021-07-02&start_date=2021-06-10`,
     { results: [], count: 0 }
   );
 
   useEffect(() => {
-    // console.log(response);
-    // console.log(error);
-    // console.log(loading);
-    // console.log(setLoading);
-  }, [response, error, loading, setLoading]);
+    setStats((stats) => ({
+      ...stats,
+      ne: neReport.response,
+      nb: nbReport.response,
+      wa: waReport.response,
+    }));
+  }, [neReport.response, nbReport.response, waReport.response]);
+
+  useEffect(() => {
+    // console.log(stats);
+    setStatRows([
+      {
+        id: "SALES",
+        ne: stats.ne.sales,
+        nb: stats.nb.sales,
+        wa: stats.wa.sales,
+        gt: stats.ne.sales + stats.nb.sales + stats.wa.sales,
+      },
+      {
+        id: "COST",
+        ne: stats.ne.cost,
+        wa: stats.wa.cost,
+        nb: stats.nb.cost,
+        gt: stats.ne.cost + stats.nb.cost + stats.wa.cost,
+      },
+      {
+        id: "GROSS PROFIT",
+        ne: stats.ne.gross_profit,
+        nb: stats.nb.gross_profit,
+        wa: stats.wa.gross_profit,
+        gt:
+          stats.ne.gross_profit + stats.nb.gross_profit + stats.wa.gross_profit,
+      },
+      {
+        id: "COMMISSION",
+        ne: stats.ne.commision_cost,
+        nb: stats.nb.commision_cost,
+        wa: stats.wa.commision_cost,
+        gt:
+          stats.ne.commision_cost +
+          stats.nb.commision_cost +
+          stats.wa.commision_cost,
+      },
+      {
+        id: "SHIPPING/HANDLING",
+        ne: stats.ne.shipping_cost,
+        nb: stats.nb.shipping_cost,
+        wa: stats.wa.shipping_cost,
+        gt:
+          stats.ne.shipping_cost +
+          stats.nb.shipping_cost +
+          stats.wa.shipping_cost,
+      },
+    ]);
+    // console.log(statRows);
+  }, [stats]);
 
   return (
     <TableContainer className={classes.tContainer} component={Paper}>
@@ -72,20 +126,31 @@ export default function CustomizedTables() {
         <TableHead>
           <TableRow>
             <StyledTableCell></StyledTableCell>
-            <StyledTableCell align="right">NEWEGG</StyledTableCell>
-            <StyledTableCell align="right">WALMART</StyledTableCell>
-            <StyledTableCell align="right">Grand Total</StyledTableCell>
+            {selectedHeaders?.map((item) => (
+              <StyledTableCell align="right" key={item?.id}>
+                {item?.label}
+              </StyledTableCell>
+            ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {statRows?.map((row) => (
+            <StyledTableRow key={row.id}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {row.id}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
+              <StyledTableCell align="right">
+                {row.ne?.toFixed(2)}
+              </StyledTableCell>
+              <StyledTableCell align="right">
+                {row.nb?.toFixed(2)}
+              </StyledTableCell>
+              <StyledTableCell align="right">
+                {row.wa?.toFixed(2)}
+              </StyledTableCell>
+              <StyledTableCell align="right">
+                {row.gt?.toFixed(2)}
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
