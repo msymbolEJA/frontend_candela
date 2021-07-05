@@ -138,7 +138,7 @@ export default function SideBar({ user, open, handleDrawerClose, setOpen }) {
   const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
 
-  const userRole = JSON.parse(localStorage.getItem("user")).userRole;
+  const userRole = JSON.parse(localStorage.getItem("user"))?.userRole;
   // console.log(userRole);
 
   const menuLinkComp = (item) =>
