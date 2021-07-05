@@ -202,7 +202,7 @@ export default function EnhancedTable({ dates }) {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[20, 50, 100]}
+          rowsPerPageOptions={[20, 50, 100, 1000]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
