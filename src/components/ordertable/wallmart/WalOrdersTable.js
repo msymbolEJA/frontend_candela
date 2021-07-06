@@ -110,7 +110,7 @@ export default function NEOrdersTable() {
               Order Date
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
-              Order Status
+              Api Status
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
               Address 1

@@ -106,7 +106,7 @@ export default function NEOrdersTable() {
               Order Date
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
-              Order Status Description
+              Api Status Description
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
               Order Item Amount
