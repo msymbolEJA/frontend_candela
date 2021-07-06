@@ -22,7 +22,7 @@ const Report = () => {
           flexWrap: "wrap",
         }}
       >
-        {username === "admin50" && <ConstantCost />}
+        {username === "Admin50" && <ConstantCost />}
         <CostGetter dates={dates} setDates={setDates} />
         <Selected dates={dates} />
         <BestSeller dates={dates} />
