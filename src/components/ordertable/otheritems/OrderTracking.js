@@ -127,6 +127,8 @@ const OrderTracking = ({ open, detRow, store }) => {
             ? "#445C3C"
             : formInfo?.status === "Reserved"
             ? "#F7DAD9"
+            : formInfo?.status === "Label Purchased"
+            ? "#FFC947"
             : formInfo?.status === "Other"
             ? "#DBE9B7"
             : "bdd2b6",

@@ -34,7 +34,8 @@ export const OrderFormSelect = [
       { id: 10, status: "Ready" },
       { id: 11, status: "Partial-refund" },
       { id: 12, status: "Reserved" },
-      { id: 13, status: "Other" },
+      { id: 13, status: "Label Purchased" },
+      { id: 14, status: "Other" },
     ],
   },
   {
