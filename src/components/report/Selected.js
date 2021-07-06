@@ -148,8 +148,14 @@ export default function CustomizedTables({ dates }) {
           stats.wa.commision_cost -
           otherReport?.response?.results[0]?.other_exp,
         gt:
+          stats.ne.gross_profit -
+          stats.ne.commision_cost -
           otherReport?.response?.results[2]?.other_exp +
+          stats.nb.gross_profit -
+          stats.nb.commision_cost -
           otherReport?.response?.results[1]?.other_exp +
+          stats.wa.gross_profit -
+          stats.wa.commision_cost -
           otherReport?.response?.results[0]?.other_exp,
       },
     ]);
