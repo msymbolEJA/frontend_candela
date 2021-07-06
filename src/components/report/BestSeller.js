@@ -119,17 +119,19 @@ export default function EnhancedTable({ dates }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(20);
   const [rows, setRows] = useState([]);
-  const { response, error, loading, setLoading } = useFetch(
+  const neOrders = useFetch(
     `${BASE_URL}report/ne?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 }
   );
-  useEffect(() => {
-    // console.log(response);
-  }, [response, error, loading, setLoading]);
+  const waOrders = useFetch(
+    `${BASE_URL}report/wa?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+    { results: [], count: 0 }
+  );
 
   useEffect(() => {
-    setRows(response.results);
-  }, [response]);
+    const newArr = neOrders.response.results.concat(waOrders.response.results);
+    setRows(newArr);
+  }, [neOrders?.response?.results, waOrders?.response?.results]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
