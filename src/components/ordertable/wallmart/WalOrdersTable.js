@@ -15,6 +15,7 @@ import { TableNoOrders } from "../../../helpers/NoOrders";
 import { TableError } from "../../../helpers/Errors";
 import CustomTableFooter from "../otheritems/CustomTableFooter";
 import { WALOrderStatus } from "../../../helpers/Constants";
+import SearchField from "../otheritems/SearchField";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -39,6 +40,10 @@ const useRowStyles = makeStyles({
     fontSize: "2rem",
     fontFamily: "Courier New",
   },
+  topDiv: {
+    display: "flex",
+    justifyContent: "center",
+  },
 });
 
 export default function NEOrdersTable() {
@@ -46,10 +51,11 @@ export default function NEOrdersTable() {
   const [buttonTag, setButtonTag] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
+  const [searchKeyword, setSearchKeyword] = useState("");
   const { response, error, loading, setLoading } = useFetch(
     `${BASE_URL}wal/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
-    }`,
+    }&search=${searchKeyword}`,
     { results: [], count: 0 }
   );
 
@@ -65,6 +71,13 @@ export default function NEOrdersTable() {
 
   const handleTagBtnClick = (event) => {
     setButtonTag(event.currentTarget.id);
+    setPage(0);
+    setLoading(true);
+  };
+
+  const globalSearch = (event, searchKey) => {
+    event.preventDefault();
+    setSearchKeyword(searchKey);
     setPage(0);
     setLoading(true);
   };
@@ -88,7 +101,10 @@ export default function NEOrdersTable() {
 
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
-      <h2 className={classes.headerStyle}>Wallmart Orders</h2>
+      <div className={classes.topDiv}>
+        <h2 className={classes.headerStyle}>Wallmart Orders</h2>
+        <SearchField globalSearch={globalSearch} />
+      </div>
       <TopButtonGroup
         buttonTag={buttonTag}
         handleTagBtnClick={handleTagBtnClick}
@@ -104,7 +120,7 @@ export default function NEOrdersTable() {
               UPC
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
-              Cutomer Name
+              Customer Name
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
               Order Date

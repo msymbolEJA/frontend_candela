@@ -8,7 +8,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableHead from "@material-ui/core/TableHead";
 import moment from "moment";
-import SearchField from "./SearchField";
+import SearchField from "../otheritems/SearchField";
 import useFetch from "../../../hooks/useFetch";
 import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 import { TableError } from "../../../helpers/Errors";
@@ -42,12 +42,7 @@ export default function BBOrdersTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [searchKeyword, setSearchKeyword] = useState("");
-  const {
-    response,
-    error,
-    loading,
-    setLoading,
-  } = useFetch(
+  const { response, error, loading, setLoading } = useFetch(
     `${BASE_URL}bb/?limit=${rowsPerPage}&offset=${
       page * rowsPerPage
     }&search=${searchKeyword}`,

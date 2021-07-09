@@ -15,6 +15,7 @@ import { TableNoOrders } from "../../../helpers/NoOrders";
 import { TableError } from "../../../helpers/Errors";
 import CustomTableFooter from "../otheritems/CustomTableFooter";
 import { NEOrderStatus } from "../../../helpers/Constants";
+import SearchField from "../otheritems/SearchField";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -39,17 +40,22 @@ const useRowStyles = makeStyles({
     fontSize: "2rem",
     fontFamily: "Courier New",
   },
+  topDiv: {
+    display: "flex",
+    justifyContent: "center",
+  },
 });
 
 export default function NEOrdersTable() {
   const classes = useRowStyles();
   const [buttonTag, setButtonTag] = useState("");
   const [page, setPage] = useState(0);
+  const [searchKeyword, setSearchKeyword] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const { response, error, loading, setLoading } = useFetch(
     `${BASE_URL}ne/?OrderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
-    }`,
+    }&search=${searchKeyword}`,
     { results: [], count: 0 }
   );
 
@@ -83,9 +89,19 @@ export default function NEOrdersTable() {
     }
   });
 
+  const globalSearch = (event, searchKey) => {
+    event.preventDefault();
+    setSearchKeyword(searchKey);
+    setPage(0);
+    setLoading(true);
+  };
+
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
-      <h2 className={classes.headerStyle}>New Egg Orders</h2>
+      <div className={classes.topDiv}>
+        <h2 className={classes.headerStyle}>New Egg Orders</h2>
+        <SearchField globalSearch={globalSearch} />
+      </div>
       <TopButtonGroup
         buttonTag={buttonTag}
         handleTagBtnClick={handleTagBtnClick}
