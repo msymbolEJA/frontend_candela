@@ -9,6 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import useFetch from "../../hooks/useFetch";
 import { selectedHeaders } from "../../helpers/Constants";
+import moment from "moment";
 
 // const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -65,9 +66,12 @@ export default function CustomizedTables({ dates }) {
     count: 0,
   });
 
-  useEffect(() => {
-    console.log(otherReport.response.results);
-  }, [otherReport.response.results]);
+  let start = moment(dates.start_date, "YYYY-MM-DD");
+  let end = moment(dates.end_date, "YYYY-MM-DD");
+
+  // useEffect(() => {
+  //   console.log(otherReport.response.results);
+  // }, [otherReport.response.results]);
 
   useEffect(() => {
     setStats((stats) => ({
@@ -125,14 +129,24 @@ export default function CustomizedTables({ dates }) {
       },
       {
         id: "OTHER",
-        ne: otherReport?.response?.results[2]?.other_exp,
-        nb: otherReport?.response?.results[1]?.other_exp,
-        wa: otherReport?.response?.results[0]?.other_exp,
+        ne: moment.duration(start.diff(end)).asDays() * -1 * 30,
+        nb: moment.duration(start.diff(end)).asDays() * -1 * 30,
+        wa: moment.duration(start.diff(end)).asDays() * -1 * 90,
         gt:
-          otherReport?.response?.results[2]?.other_exp +
-          otherReport?.response?.results[1]?.other_exp +
-          otherReport?.response?.results[0]?.other_exp,
+          moment.duration(start.diff(end)).asDays() * -1 * 30 +
+          moment.duration(start.diff(end)).asDays() * -1 * 30 +
+          moment.duration(start.diff(end)).asDays() * -1 * 90,
       },
+      // {
+      //   id: "OTHER",
+      //   ne: otherReport?.response?.results[2]?.other_exp,
+      //   nb: otherReport?.response?.results[1]?.other_exp,
+      //   wa: otherReport?.response?.results[0]?.other_exp,
+      //   gt:
+      //     otherReport?.response?.results[2]?.other_exp +
+      //     otherReport?.response?.results[1]?.other_exp +
+      //     otherReport?.response?.results[0]?.other_exp,
+      // },
       {
         id: "NET PROFIT",
         ne:
@@ -160,6 +174,7 @@ export default function CustomizedTables({ dates }) {
       },
     ]);
     // console.log(statRows);
+    // eslint-disable-next-line
   }, [stats, otherReport?.response?.results]);
 
   useEffect(() => {

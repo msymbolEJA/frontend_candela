@@ -43,21 +43,17 @@ export const ConstantCost = () => {
   const [constantCosts, setConstantCosts] = useState([]);
 
   useEffect(() => {
-    console.log(response?.results);
+    // console.log(response?.results);
     setConstantCosts(response?.results);
   }, [response]);
 
   const handleSave = (e) => {
     // console.log(e);
     constantCosts?.forEach((item) => {
-      console.log(item);
+      // console.log(item);
       putData(`${BASE_URL}report/const/${item?.shop}/`, item);
     });
   };
-
-  useEffect(() => {
-    console.log("---", constantCosts);
-  }, [constantCosts]);
 
   const handleChange = (e, label, index) => {
     if (index === 0) {

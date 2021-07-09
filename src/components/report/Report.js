@@ -3,12 +3,15 @@ import BestSeller from "./BestSeller";
 import Selected from "./Selected";
 import CostGetter from "./CostGetter";
 import { ConstantCost } from "./ConstantCost";
+import moment from "moment";
 
 const Report = () => {
-  const [dates, setDates] = useState({ end_date: "", start_date: "" });
+  const [dates, setDates] = useState({
+    end_date: moment().format("YYYY-MM-DD"),
+    start_date: moment().subtract(1, "months").format("YYYY-MM-DD"),
+  });
 
   const username = JSON.parse(localStorage.getItem("user"))?.username;
-  console.log(username);
 
   return (
     <div>
