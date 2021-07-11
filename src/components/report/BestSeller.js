@@ -179,24 +179,33 @@ export default function EnhancedTable({ dates }) {
                       tabIndex={-1}
                       key={row.SellerPartNumber}
                     >
-                      {bestSellerTableHeaders?.map((item) => (
-                        <TableCell
-                          component="th"
-                          id={labelId}
-                          key={item.id}
-                          scope="row"
-                          style={{ maxWidth: "250px" }}
-                          align="center"
-                        >
-                          {row[item?.id]}
-                        </TableCell>
-                      ))}
-                      {/* <TableCell align="right" style={{ maxWidth: "250px" }}>
-                        {row.Description}
-                      </TableCell>
-                      <TableCell align="right">{row.shop}</TableCell>
-                      <TableCell align="right">{row.sum_total_price}</TableCell>
-                      <TableCell align="right">{row.sum_item}</TableCell> */}
+                      {bestSellerTableHeaders?.map((item) =>
+                        item?.label === "Seller Store" ? (
+                          <TableCell
+                            component="th"
+                            id={labelId}
+                            key={item.id}
+                            scope="row"
+                            style={{ maxWidth: "250px" }}
+                            align="center"
+                          >
+                            {row[item?.id].includes("MC")
+                              ? "Micro Center"
+                              : "Best Buy"}
+                          </TableCell>
+                        ) : (
+                          <TableCell
+                            component="th"
+                            id={labelId}
+                            key={item.id}
+                            scope="row"
+                            style={{ maxWidth: "250px" }}
+                            align="center"
+                          >
+                            {row[item?.id]}
+                          </TableCell>
+                        )
+                      )}
                     </TableRow>
                   );
                 })}

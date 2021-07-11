@@ -129,13 +129,13 @@ export default function CustomizedTables({ dates }) {
       },
       {
         id: "OTHER",
-        ne: moment.duration(start.diff(end)).asDays() * -1 * 30,
-        nb: moment.duration(start.diff(end)).asDays() * -1 * 30,
-        wa: moment.duration(start.diff(end)).asDays() * -1 * 90,
+        ne: moment.duration(start.diff(end)).asDays() * -1 * 50,
+        nb: moment.duration(start.diff(end)).asDays() * -1 * 20,
+        wa: moment.duration(start.diff(end)).asDays() * -1 * 80,
         gt:
-          moment.duration(start.diff(end)).asDays() * -1 * 30 +
-          moment.duration(start.diff(end)).asDays() * -1 * 30 +
-          moment.duration(start.diff(end)).asDays() * -1 * 90,
+          moment.duration(start.diff(end)).asDays() * -1 * 50 +
+          moment.duration(start.diff(end)).asDays() * -1 * 20 +
+          moment.duration(start.diff(end)).asDays() * -1 * 80,
       },
       // {
       //   id: "OTHER",

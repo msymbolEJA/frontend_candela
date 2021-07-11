@@ -164,6 +164,7 @@ export const bestSellerTableHeaders = [
     label: "Description",
   },
   { id: "shop", label: "Shop" },
+  { id: "SellerPartNumber", label: "Seller Store" },
   {
     id: "sum_total_price",
     label: "Sum Total Price",
