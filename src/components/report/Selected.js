@@ -152,25 +152,31 @@ export default function CustomizedTables({ dates }) {
         ne:
           stats.ne.gross_profit -
           stats.ne.commision_cost -
-          otherReport?.response?.results[2]?.other_exp,
+          stats.ne.shipping_cost -
+          moment.duration(start.diff(end)).asDays() * -1 * 50,
         nb:
           stats.nb.gross_profit -
           stats.nb.commision_cost -
-          otherReport?.response?.results[1]?.other_exp,
+          stats.nb.shipping_cost -
+          moment.duration(start.diff(end)).asDays() * -1 * 20,
         wa:
           stats.wa.gross_profit -
           stats.wa.commision_cost -
-          otherReport?.response?.results[0]?.other_exp,
+          stats.wa.shipping_cost -
+          moment.duration(start.diff(end)).asDays() * -1 * 80,
         gt:
           stats.ne.gross_profit -
           stats.ne.commision_cost -
-          otherReport?.response?.results[2]?.other_exp +
+          stats.ne.shipping_cost -
+          moment.duration(start.diff(end)).asDays() * -1 * 50 +
           stats.nb.gross_profit -
           stats.nb.commision_cost -
-          otherReport?.response?.results[1]?.other_exp +
+          stats.nb.shipping_cost -
+          moment.duration(start.diff(end)).asDays() * -1 * 20 +
           stats.wa.gross_profit -
           stats.wa.commision_cost -
-          otherReport?.response?.results[0]?.other_exp,
+          stats.wa.shipping_cost -
+          moment.duration(start.diff(end)).asDays() * -1 * 80,
       },
     ]);
     // console.log(statRows);
