@@ -189,9 +189,11 @@ export default function EnhancedTable({ dates }) {
                             style={{ maxWidth: "250px" }}
                             align="center"
                           >
-                            {row[item?.id].includes("MC")
+                            {row[item?.id].startsWith("MC")
                               ? "Micro Center"
-                              : "Best Buy"}
+                              : row[item?.id].startsWith("NC")
+                              ? "Best Buy"
+                              : "Other"}
                           </TableCell>
                         ) : (
                           <TableCell
