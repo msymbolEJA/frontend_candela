@@ -14,9 +14,9 @@ import OrderTracking from "../otheritems/OrderTracking";
 
 const useRowStyles = makeStyles({
   root: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: "#feffde",
-    },
+    // "&:nth-of-type(odd)": {
+    //   backgroundColor: "#feffde",
+    // },
     "& > *": {
       borderBottom: "unset",
     },
@@ -44,7 +44,7 @@ const useRowStyles = makeStyles({
 });
 
 function Row(props) {
-  const { row, index, upcArray } = props;
+  const { row, index, upcArray, customStatusArray } = props;
   const [open, setOpen] = useState(false);
   const classes = useRowStyles();
 
@@ -62,7 +62,42 @@ function Row(props) {
 
   return (
     <React.Fragment>
-      <TableRow className={classes.root} onClick={() => setOpen(!open)}>
+      <TableRow
+        className={classes.root}
+        style={{
+          backgroundColor:
+            customStatusArray[index] === "Awaiting-fulfillment"
+              ? "#FFF5DA"
+              : customStatusArray[index] === "Cancelled"
+              ? "#FF7171"
+              : customStatusArray[index] === "Error"
+              ? "#8F4068"
+              : customStatusArray[index] === "Late-shipment"
+              ? "#B590CA"
+              : customStatusArray[index] === "Ordered"
+              ? "#F3D1F4"
+              : customStatusArray[index] === "Refund/return"
+              ? "#C06C84"
+              : customStatusArray[index] === "Shipped"
+              ? "#C68B59"
+              : customStatusArray[index] === "Stock"
+              ? "#BE8ABF"
+              : customStatusArray[index] === "ZZZ"
+              ? "#8AC6D1"
+              : customStatusArray[index] === "Ready"
+              ? "#32AFA9"
+              : customStatusArray[index] === "Partial-refund"
+              ? "#445C3C"
+              : customStatusArray[index] === "Reserved"
+              ? "#F7DAD9"
+              : customStatusArray[index] === "Label Purchased"
+              ? "#FFC947"
+              : customStatusArray[index] === "Other"
+              ? "#DBE9B7"
+              : "bdd2b6",
+        }}
+        onClick={() => setOpen(!open)}
+      >
         <TableCell align="center" component="th" scope="row">
           <>
             <p>{row.OrderNumber ? row.OrderNumber : "-"}</p>
@@ -81,6 +116,9 @@ function Row(props) {
         <TableCell align="center" component="th" scope="row">
           {upcEditFunc(upcArray[index])}
         </TableCell>
+        <TableCell align="center" component="th" scope="row">
+          {customStatusArray[index]}
+        </TableCell>
         <TableCell align="center">
           {moment.utc(row.OrderDate).local().format("MM-DD-YY HH:mm")}
         </TableCell>
@@ -90,7 +128,7 @@ function Row(props) {
         <TableCell align="center">{row.OrderTotalAmount}</TableCell>
       </TableRow>
       <TableRow className={classes.innerTable}>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h4" gutterBottom component="div">

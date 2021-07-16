@@ -99,6 +99,21 @@ export default function NEOrdersTable() {
   });
   // console.log(upcArray);
 
+  let customStatusArray = [];
+  response?.results?.forEach((item) => {
+    if (item?.items.length > 1) {
+      let biggerStatusArray = [];
+      item?.items?.forEach((i, ind) => {
+        biggerStatusArray.push(i?.tracking?.status);
+        // console.log(i?.tracking?.status);
+      });
+      customStatusArray.push(biggerStatusArray);
+    } else {
+      customStatusArray.push(item?.items[0]?.tracking?.status);
+      // console.log(item?.items[0]?.tracking?.status);
+    }
+  });
+
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
       <div className={classes.topDiv}>
@@ -118,6 +133,9 @@ export default function NEOrdersTable() {
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
               UPC
+            </TableCell>
+            <TableCell align="center" className={classes.tCell}>
+              Custom Status
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
               Customer Name
@@ -163,7 +181,13 @@ export default function NEOrdersTable() {
           <>
             <TableBody>
               {response?.results?.map((row, index) => (
-                <Row key={index} row={row} index={index} upcArray={upcArray} />
+                <Row
+                  key={index}
+                  row={row}
+                  index={index}
+                  upcArray={upcArray}
+                  customStatusArray={customStatusArray}
+                />
               ))}
             </TableBody>
             <CustomTableFooter
