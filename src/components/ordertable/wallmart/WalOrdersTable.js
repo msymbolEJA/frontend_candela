@@ -114,6 +114,21 @@ export default function NEOrdersTable() {
     }
   });
 
+  let idArray = [];
+  response?.results?.forEach((item) => {
+    if (item?.items.length > 1) {
+      let biggerIdArray = [];
+      item?.items?.forEach((i, ind) => {
+        biggerIdArray.push(i?.id);
+        // console.log(i?.tracking?.status);
+      });
+      idArray.push(biggerIdArray);
+    } else {
+      idArray.push(item?.items[0]?.id);
+      // console.log(item?.items[0]?.tracking?.status);
+    }
+  });
+
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
       <div className={classes.topDiv}>
@@ -128,6 +143,9 @@ export default function NEOrdersTable() {
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow className={classes.tRow}>
+            <TableCell align="center" className={classes.tCell}>
+              Id
+            </TableCell>
             <TableCell align="center" className={classes.tCell}>
               Customer Order Id
             </TableCell>
@@ -187,6 +205,7 @@ export default function NEOrdersTable() {
                   index={index}
                   upcArray={upcArray}
                   customStatusArray={customStatusArray}
+                  idArray={idArray}
                 />
               ))}
             </TableBody>

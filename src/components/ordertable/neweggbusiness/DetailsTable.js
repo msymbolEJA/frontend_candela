@@ -41,7 +41,7 @@ const useRowStyles = makeStyles({
 });
 
 function Row(props) {
-  const { row, upcArray, index, customStatusArray } = props;
+  const { row, upcArray, index, customStatusArray, idArray } = props;
   const [open, setOpen] = useState(false);
   const classes = useRowStyles();
 
@@ -96,6 +96,9 @@ function Row(props) {
         }}
         onClick={() => setOpen(!open)}
       >
+        <TableCell align="center" component="th" scope="row">
+          {idArray[index]}
+        </TableCell>
         <TableCell align="center" component="th" scope="row">
           <>
             <p>{row.OrderNumber ? row.OrderNumber : "-"}</p>
