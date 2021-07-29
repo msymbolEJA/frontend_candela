@@ -173,6 +173,7 @@ export const bestSellerTableHeaders = [
 ];
 
 export const selectedHeaders = [
+  { id: "wa", label: "WALMART" },
   {
     id: "ne",
     label: "NEWEGG",
@@ -181,7 +182,6 @@ export const selectedHeaders = [
     id: "nb",
     label: "NEWEGG BUSINESS",
   },
-  { id: "wa", label: "WALMART" },
   {
     id: "grandTotal",
     label: "Grand Total",

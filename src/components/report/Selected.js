@@ -69,10 +69,6 @@ export default function CustomizedTables({ dates }) {
   let start = moment(dates.start_date, "YYYY-MM-DD");
   let end = moment(dates.end_date, "YYYY-MM-DD");
 
-  // useEffect(() => {
-  //   console.log(otherReport.response.results);
-  // }, [otherReport.response.results]);
-
   useEffect(() => {
     setStats((stats) => ({
       ...stats,
@@ -87,31 +83,31 @@ export default function CustomizedTables({ dates }) {
     setStatRows([
       {
         id: "SALES",
+        wa: stats.wa.sales,
         ne: stats.ne.sales,
         nb: stats.nb.sales,
-        wa: stats.wa.sales,
         gt: stats.ne.sales + stats.nb.sales + stats.wa.sales,
       },
       {
         id: "COST",
-        ne: stats.ne.cost,
         wa: stats.wa.cost,
+        ne: stats.ne.cost,
         nb: stats.nb.cost,
         gt: stats.ne.cost + stats.nb.cost + stats.wa.cost,
       },
       {
         id: "GROSS PROFIT",
+        wa: stats.wa.gross_profit,
         ne: stats.ne.gross_profit,
         nb: stats.nb.gross_profit,
-        wa: stats.wa.gross_profit,
         gt:
           stats.ne.gross_profit + stats.nb.gross_profit + stats.wa.gross_profit,
       },
       {
         id: "COMMISSION",
+        wa: stats.wa.commision_cost,
         ne: stats.ne.commision_cost,
         nb: stats.nb.commision_cost,
-        wa: stats.wa.commision_cost,
         gt:
           stats.ne.commision_cost +
           stats.nb.commision_cost +
@@ -119,9 +115,9 @@ export default function CustomizedTables({ dates }) {
       },
       {
         id: "SHIPPING/HANDLING",
+        wa: stats.wa.shipping_cost,
         ne: stats.ne.shipping_cost,
         nb: stats.nb.shipping_cost,
-        wa: stats.wa.shipping_cost,
         gt:
           stats.ne.shipping_cost +
           stats.nb.shipping_cost +
@@ -129,41 +125,31 @@ export default function CustomizedTables({ dates }) {
       },
       {
         id: "OTHER",
-        ne: moment.duration(start.diff(end)).asDays() * -1 * 50,
-        nb: moment.duration(start.diff(end)).asDays() * -1 * 20,
-        wa: moment.duration(start.diff(end)).asDays() * -1 * 80,
+        wa: moment.duration(start.diff(end)).asDays() * -1 * stats.wa.daily_other_exp,
+        ne: moment.duration(start.diff(end)).asDays() * -1 * stats.ne.daily_other_exp,
+        nb: moment.duration(start.diff(end)).asDays() * -1 * stats.nb.daily_other_exp,
         gt:
-          moment.duration(start.diff(end)).asDays() * -1 * 50 +
-          moment.duration(start.diff(end)).asDays() * -1 * 20 +
-          moment.duration(start.diff(end)).asDays() * -1 * 80,
+          moment.duration(start.diff(end)).asDays() * -1 * stats.ne.daily_other_exp +
+          moment.duration(start.diff(end)).asDays() * -1 * stats.nb.daily_other_exp +
+          moment.duration(start.diff(end)).asDays() * -1 * stats.wa.daily_other_exp,
       },
-      // {
-      //   id: "OTHER",
-      //   ne: otherReport?.response?.results[2]?.other_exp,
-      //   nb: otherReport?.response?.results[1]?.other_exp,
-      //   wa: otherReport?.response?.results[0]?.other_exp,
-      //   gt:
-      //     otherReport?.response?.results[2]?.other_exp +
-      //     otherReport?.response?.results[1]?.other_exp +
-      //     otherReport?.response?.results[0]?.other_exp,
-      // },
       {
         id: "NET PROFIT",
+        wa:
+        stats.wa.gross_profit -
+        stats.wa.commision_cost -
+        stats.wa.shipping_cost -
+        moment.duration(start.diff(end)).asDays() * -1 * stats.wa.daily_other_exp,
         ne:
           stats.ne.gross_profit -
           stats.ne.commision_cost -
           stats.ne.shipping_cost -
-          moment.duration(start.diff(end)).asDays() * -1 * 50,
+          moment.duration(start.diff(end)).asDays() * -1 * stats.ne.daily_other_exp,
         nb:
           stats.nb.gross_profit -
           stats.nb.commision_cost -
           stats.nb.shipping_cost -
-          moment.duration(start.diff(end)).asDays() * -1 * 20,
-        wa:
-          stats.wa.gross_profit -
-          stats.wa.commision_cost -
-          stats.wa.shipping_cost -
-          moment.duration(start.diff(end)).asDays() * -1 * 80,
+          moment.duration(start.diff(end)).asDays() * -1 * stats.nb.daily_other_exp,
         gt:
           stats.ne.gross_profit -
           stats.ne.commision_cost -
@@ -179,7 +165,6 @@ export default function CustomizedTables({ dates }) {
           moment.duration(start.diff(end)).asDays() * -1 * 80,
       },
     ]);
-    // console.log(statRows);
     // eslint-disable-next-line
   }, [stats, otherReport?.response?.results]);
 
@@ -207,13 +192,13 @@ export default function CustomizedTables({ dates }) {
                 {row.id}
               </StyledTableCell>
               <StyledTableCell align="right">
+                {row.wa?.toFixed(2) || 0}
+              </StyledTableCell>
+              <StyledTableCell align="right">
                 {row.ne?.toFixed(2) || 0}
               </StyledTableCell>
               <StyledTableCell align="right">
                 {row.nb?.toFixed(2) || 0}
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                {row.wa?.toFixed(2) || 0}
               </StyledTableCell>
               <StyledTableCell align="right">
                 {row.gt?.toFixed(2) || 0}

@@ -48,9 +48,7 @@ export const ConstantCost = () => {
   }, [response]);
 
   const handleSave = (e) => {
-    // console.log(e);
     constantCosts?.forEach((item) => {
-      // console.log(item);
       putData(`${BASE_URL}report/const/${item?.shop}/`, item);
     });
   };
@@ -82,7 +80,7 @@ export const ConstantCost = () => {
       <div className={classes.headerDiv}>
         <span className={classes.header2}>Shop</span>
         <span className={classes.header}>Commission</span>
-        <span className={classes.header}>Other Expense</span>
+        <span className={classes.header}>Other Expense (Daily)</span>
         <span className={classes.header}>Shipping Expense</span>
       </div>
       {constantCosts?.map((item, index) => (
@@ -99,10 +97,10 @@ export const ConstantCost = () => {
           <input
             name={item?.shop}
             className={classes.inp}
-            id={`other_exp-${item?.shop}`}
+            id={`daily_other_exp-${item?.shop}`}
             type="text"
-            value={item?.other_exp}
-            onChange={(e) => handleChange(e, "other_exp", index)}
+            value={item?.daily_other_exp}
+            onChange={(e) => handleChange(e, "daily_other_exp", index)}
           />
           <input
             id={item?.shop}
