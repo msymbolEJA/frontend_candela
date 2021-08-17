@@ -57,7 +57,7 @@ export default function NEOrdersTable() {
   const { response, error, loading, setLoading } = useFetch(
     `${BASE_URL}ne/?OrderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
-    }&search=${searchKeyword}`,
+    }&search=${searchKeyword}&items__tracking__status=${customStatusTag}`,
     { results: [], count: 0 }
   );
 
@@ -81,8 +81,8 @@ export default function NEOrdersTable() {
   };
 
   const handleCustomBtnClick = (event) => {
-    setSearchKeyword(event.currentTarget.innerText);
-    setCustomStatusTag(event.currentTarget.innerText);
+    // setSearchKeyword(event.currentTarget.innerText);
+    setCustomStatusTag(event.currentTarget.id);
     setPage(0);
     setLoading(true);
   };

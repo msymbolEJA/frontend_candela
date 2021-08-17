@@ -50,12 +50,10 @@ const TopCustomButtonGroup = ({
             variant="contained"
             onClick={handleTagBtnClick}
             key={index}
-            id={item.id}
+            id={item.status}
             style={{
-              backgroundColor:
-                buttonTag === item?.status?.toUpperCase() ? "#52734d" : null,
-              color:
-                buttonTag === item?.status?.toUpperCase() ? "#fad586" : null,
+              backgroundColor: buttonTag === item?.status ? "#52734d" : null,
+              color: buttonTag === item?.status ? "#fad586" : null,
             }}
           >
             {item.status}

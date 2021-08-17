@@ -14,8 +14,9 @@ import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 import { TableError } from "../../../helpers/Errors";
 import { TableNoOrders } from "../../../helpers/NoOrders";
 import CustomTableFooter from "../otheritems/CustomTableFooter";
-import { NEOrderStatus } from "../../../helpers/Constants";
+import { NEOrderStatus, customTopStatus } from "../../../helpers/Constants";
 import SearchField from "../otheritems/SearchField";
+import TopCustomButtonGroup from "../otheritems/TopCustomStatusGroup";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -51,11 +52,12 @@ export default function NEOrdersTable() {
   const [buttonTag, setButtonTag] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
+  const [customStatusTag, setCustomStatusTag] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
   const { response, error, loading, setLoading } = useFetch(
     `${BASE_URL}ne/b2b/?OrderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
-    }&search=${searchKeyword}`,
+    }&search=${searchKeyword}&items__tracking__status=${customStatusTag}`,
     { results: [], count: 0 }
   );
 
@@ -72,6 +74,14 @@ export default function NEOrdersTable() {
 
   const handleTagBtnClick = (event) => {
     setButtonTag(event.currentTarget.id);
+    setPage(0);
+    setLoading(true);
+    setCustomStatusTag("");
+    setSearchKeyword("");
+  };
+
+  const handleCustomBtnClick = (event) => {
+    setCustomStatusTag(event.currentTarget.id);
     setPage(0);
     setLoading(true);
   };
@@ -138,6 +148,11 @@ export default function NEOrdersTable() {
         buttonTag={buttonTag}
         handleTagBtnClick={handleTagBtnClick}
         orderStatusTags={NEOrderStatus}
+      />
+      <TopCustomButtonGroup
+        buttonTag={customStatusTag}
+        handleTagBtnClick={handleCustomBtnClick}
+        orderStatusTags={customTopStatus}
       />
       <Table aria-label="collapsible table">
         <TableHead>

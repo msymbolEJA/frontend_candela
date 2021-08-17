@@ -14,7 +14,8 @@ import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 import { TableNoOrders } from "../../../helpers/NoOrders";
 import { TableError } from "../../../helpers/Errors";
 import CustomTableFooter from "../otheritems/CustomTableFooter";
-import { WALOrderStatus } from "../../../helpers/Constants";
+import { WALOrderStatus, customTopStatus } from "../../../helpers/Constants";
+import TopCustomButtonGroup from "../otheritems/TopCustomStatusGroup";
 import SearchField from "../otheritems/SearchField";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -50,12 +51,13 @@ export default function NEOrdersTable() {
   const classes = useRowStyles();
   const [buttonTag, setButtonTag] = useState("");
   const [page, setPage] = useState(0);
+  const [customStatusTag, setCustomStatusTag] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [searchKeyword, setSearchKeyword] = useState("");
   const { response, error, loading, setLoading } = useFetch(
     `${BASE_URL}wal/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
-    }&search=${searchKeyword}`,
+    }&search=${searchKeyword}&items__tracking__status=${customStatusTag}`,
     { results: [], count: 0 }
   );
 
@@ -71,6 +73,15 @@ export default function NEOrdersTable() {
 
   const handleTagBtnClick = (event) => {
     setButtonTag(event.currentTarget.id);
+    setPage(0);
+    setLoading(true);
+    setCustomStatusTag("");
+    setSearchKeyword("");
+  };
+
+  const handleCustomBtnClick = (event) => {
+    // setSearchKeyword(event.currentTarget.innerText);
+    setCustomStatusTag(event.currentTarget.id);
     setPage(0);
     setLoading(true);
   };
@@ -139,6 +150,11 @@ export default function NEOrdersTable() {
         buttonTag={buttonTag}
         handleTagBtnClick={handleTagBtnClick}
         orderStatusTags={WALOrderStatus}
+      />
+      <TopCustomButtonGroup
+        buttonTag={customStatusTag}
+        handleTagBtnClick={handleCustomBtnClick}
+        orderStatusTags={customTopStatus}
       />
       <Table aria-label="collapsible table">
         <TableHead>
