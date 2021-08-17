@@ -4,7 +4,7 @@ import Dashboard from "../components/dashboard/Dashboard";
 import BBOrderTable from "../components/ordertable/BestBuy/BBOrderTable";
 import NEOrderTable from "../components/ordertable/NewEgg/NEOrdersTable";
 import NEBusinessTable from "../components/ordertable/neweggbusiness/NEBOrdersTable";
-import WalOrdersTable from "../components/ordertable/wallmart/WalOrdersTable";
+import WalOrdersTable from "../components/ordertable/walmart/WalOrdersTable";
 import ReturnOrders from "../components/ordertable/returnorders/ReturnOrders";
 import MainLayout from "../components/navbar/MainLayout";
 import Login from "../components/login/Login";

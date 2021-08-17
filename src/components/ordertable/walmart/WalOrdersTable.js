@@ -143,7 +143,7 @@ export default function NEOrdersTable() {
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
       <div className={classes.topDiv}>
-        <h2 className={classes.headerStyle}>Wallmart Orders</h2>
+        <h2 className={classes.headerStyle}>Walmart Orders</h2>
         <SearchField globalSearch={globalSearch} />
       </div>
       <TopButtonGroup

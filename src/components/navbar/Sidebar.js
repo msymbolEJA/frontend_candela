@@ -38,7 +38,7 @@ const menuLinks = [
   },
   {
     id: 2,
-    title: "Wallmart",
+    title: "Walmart",
     icon: Assignment,
     link: "/orders/wal",
   },
