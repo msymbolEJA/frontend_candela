@@ -187,3 +187,20 @@ export const selectedHeaders = [
     label: "Grand Total",
   },
 ];
+
+export const customTopStatus = [
+  { id: 1, status: "Awaiting-fulfillment" },
+  { id: 2, status: "Cancelled" },
+  { id: 3, status: "Error" },
+  { id: 4, status: "Late-shipment" },
+  { id: 5, status: "Ordered" },
+  { id: 6, status: "Refund/return" },
+  { id: 7, status: "Shipped" },
+  { id: 8, status: "Stock" },
+  { id: 9, status: "ZZZ" },
+  { id: 10, status: "Ready" },
+  { id: 11, status: "Partial-refund" },
+  { id: 12, status: "Reserved" },
+  { id: 13, status: "Label Purchased" },
+  { id: 14, status: "Other" },
+];

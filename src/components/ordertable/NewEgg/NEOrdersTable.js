@@ -14,8 +14,9 @@ import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 import { TableNoOrders } from "../../../helpers/NoOrders";
 import { TableError } from "../../../helpers/Errors";
 import CustomTableFooter from "../otheritems/CustomTableFooter";
-import { NEOrderStatus } from "../../../helpers/Constants";
+import { NEOrderStatus, customTopStatus } from "../../../helpers/Constants";
 import SearchField from "../otheritems/SearchField";
+import TopCustomButtonGroup from "../otheritems/TopCustomStatusGroup";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -49,6 +50,7 @@ const useRowStyles = makeStyles({
 export default function NEOrdersTable() {
   const classes = useRowStyles();
   const [buttonTag, setButtonTag] = useState("");
+  const [customStatusTag, setCustomStatusTag] = useState("");
   const [page, setPage] = useState(0);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(25);
@@ -72,6 +74,15 @@ export default function NEOrdersTable() {
 
   const handleTagBtnClick = (event) => {
     setButtonTag(event.currentTarget.id);
+    setPage(0);
+    setLoading(true);
+    setCustomStatusTag("");
+    setSearchKeyword("");
+  };
+
+  const handleCustomBtnClick = (event) => {
+    setSearchKeyword(event.currentTarget.innerText);
+    setCustomStatusTag(event.currentTarget.innerText);
     setPage(0);
     setLoading(true);
   };
@@ -136,6 +147,11 @@ export default function NEOrdersTable() {
         buttonTag={buttonTag}
         handleTagBtnClick={handleTagBtnClick}
         orderStatusTags={NEOrderStatus}
+      />
+      <TopCustomButtonGroup
+        buttonTag={customStatusTag}
+        handleTagBtnClick={handleCustomBtnClick}
+        orderStatusTags={customTopStatus}
       />
       <Table aria-label="collapsible table">
         <TableHead>
