@@ -158,6 +158,9 @@ export default function NEOrdersTable() {
         <TableHead>
           <TableRow className={classes.tRow}>
             <TableCell align="center" className={classes.tCell}>
+              Id
+            </TableCell>
+            <TableCell align="center" className={classes.tCell}>
               Order Number
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
