@@ -23,7 +23,7 @@ const ItemsTable = ({ open, detailsRow }) => {
 
   return (
     <TableRow className={classes.innerTable}>
-      <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
+      <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={18}>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <Box margin={1}>
             <Typography variant="h4" gutterBottom component="div">
