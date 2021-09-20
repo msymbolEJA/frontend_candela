@@ -180,6 +180,7 @@ export default function SideBar({ user, open, handleDrawerClose, setOpen }) {
       </Fragment>
     );
   const handleNavigate = (link) => () => {
+    handleDrawerClose();
     history.push(link);
   };
   const handleShowSubMenu = () => () => {
