@@ -50,9 +50,9 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        {bestSellerTableHeaders.map((headCell) => (
+        {bestSellerTableHeaders.map((headCell, index) => (
           <TableCell
-            key={headCell.id}
+            key={index}
             align="center"
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -173,18 +173,13 @@ export default function EnhancedTable({ dates }) {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.SellerPartNumber}
-                    >
-                      {bestSellerTableHeaders?.map((item) =>
+                    <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                      {bestSellerTableHeaders?.map((item, ind) =>
                         item?.label === "Seller Store" ? (
                           <TableCell
                             component="th"
                             id={labelId}
-                            key={item.id}
+                            key={ind}
                             scope="row"
                             style={{ maxWidth: "250px" }}
                             align="center"

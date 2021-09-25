@@ -191,13 +191,15 @@ export default function CustomizedTables({ dates }) {
   }, [stats, otherReport?.response?.results]);
 
   const getPercentage = (shop, index) => {
+    const total =
+      (statRows[index]?.wa >= 0 ? statRows[index]?.wa : 0) +
+      (statRows[index]?.nb >= 0 ? statRows[index]?.nb : 0) +
+      (statRows[index]?.ne >= 0 ? statRows[index]?.ne : 0);
     return (
-      (100 * statRows[index]?.[shop]) /
-      (statRows[index]?.wa + statRows[index]?.nb + statRows[index]?.ne)
+      (100 * (statRows[index]?.[shop] > 0 ? statRows[index]?.[shop] : 0)) /
+      total
     ).toFixed(1);
   };
-
-  console.log("statRows", statRows);
 
   const salesData = {
     labels: ["Walmart", "NewEgg Bussines", "NewEgg"],
