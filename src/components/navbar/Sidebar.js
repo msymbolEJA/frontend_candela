@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from "react";
 import clsx from "clsx";
-// import { FormattedMessage } from "react-intl";
 import { useHistory } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -28,65 +27,73 @@ const menuLinks = [
     id: 0,
     title: "Best Buy",
     icon: Dashboard,
+    abr: "BB",
     link: "/orders/bb",
   },
   {
     id: 1,
     title: "New Egg",
+    abr: "NE",
     icon: AssignmentTurnedIn,
     link: "/orders/ne",
   },
   {
     id: 2,
     title: "Walmart",
+    abr: "WA",
     icon: Assignment,
     link: "/orders/wal",
   },
   {
     id: 3,
     title: "NewEgg Business",
+    abr: "NB",
     icon: LocalLibrary,
     link: "/orders/neb",
   },
   {
     id: 4,
     title: "Return Orders",
+    abr: "RO",
     icon: SupervisorAccount,
     link: "/orders/return-orders",
   },
   {
     id: 5,
     title: "Report",
+    abr: "RP",
     icon: Assignment,
     link: "/report",
   },
-  {
-    id: 11,
-    title: "menu5",
-    icon: Assignment,
-    link: "/student",
+  // {
+  //   id: 11,
+  //   title: "menu5",
+  //   abr: "ME",
+  //   icon: Assignment,
+  //   link: "/student",
 
-    subMenuLinks: [
-      {
-        id: 1,
-        title: "completedExams",
-        link: "/completed-exams",
-      },
-      {
-        id: 2,
-        title: "myExams",
-        link: "/my-exams",
-      },
-      {
-        id: 3,
-        title: "purchaseExams",
-        link: "/purchase-exams",
-      },
-    ],
-  },
+  //   subMenuLinks: [
+  //     {
+  //       id: 1,
+  //       title: "completedExams",
+  //       link: "/completed-exams",
+  //     },
+  //     {
+  //       id: 2,
+  //       title: "myExams",
+  //       link: "/my-exams",
+  //     },
+  //     {
+  //       id: 3,
+  //       title: "purchaseExams",
+  //       link: "/purchase-exams",
+  //     },
+  //   ],
+  // },
   {
     id: 12,
-    title: "settings",
+    title: "Settings",
+    abr: "SE",
     icon: Settings,
     link: "/student",
   },
@@ -131,6 +138,12 @@ const useStyles = makeStyles((theme) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
+  storeBadge: {
+    border: "1px solid #2D402A",
+    borderRadius: "5px",
+    padding: "5px",
+    width: "43px",
+  },
 }));
 
 export default function SideBar({ user, open, handleDrawerClose, setOpen }) {
@@ -171,7 +184,10 @@ export default function SideBar({ user, open, handleDrawerClose, setOpen }) {
               : handleNavigate(item.link)
           }
         >
-          <ListItemIcon>{item.icon && <item.icon />}</ListItemIcon>
+          {/* <ListItemIcon>{item.icon && <item.icon />}</ListItemIcon> */}
+          <ListItemIcon>
+            <div className={classes.storeBadge}>{item.abr && item.abr}</div>
+          </ListItemIcon>
           <ListItemText primary={item.title} />
         </ListItem>
         {item?.subMenuLinks?.length &&
