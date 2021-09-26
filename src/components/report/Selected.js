@@ -40,6 +40,16 @@ const useStyles = makeStyles({
     width: "fit-content",
     margin: 20,
   },
+  chartDiv: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center",
+    border: "3px solid #FF6384",
+    padding: "25px",
+    margin: "25px",
+    borderRadius: "10px",
+  },
 });
 
 export default function CustomizedTables({ dates }) {
@@ -254,7 +264,7 @@ export default function CustomizedTables({ dates }) {
   };
 
   return (
-    <div>
+    <div style={{ width: "60%" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <TableContainer className={classes.tContainer} component={Paper}>
           <h2>Selected</h2>
@@ -293,12 +303,12 @@ export default function CustomizedTables({ dates }) {
           </Table>
         </TableContainer>
       </div>
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        <div style={{ width: "500px" }}>
+      <div className={classes.chartDiv}>
+        <div style={{ width: "40%" }}>
           <h3>Sales (%)</h3>
           <Doughnut data={salesData} options={salesOptions} />
         </div>
-        <div style={{ width: "500px" }}>
+        <div style={{ width: "40%" }}>
           <h3>Net Profit (%)</h3>
           <Doughnut data={netProfitData} options={netProfitOptions} />
         </div>

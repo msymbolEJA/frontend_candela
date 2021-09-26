@@ -4,6 +4,7 @@ import Selected from "./Selected";
 import CostGetter from "./CostGetter";
 import { ConstantCost } from "./ConstantCost";
 import moment from "moment";
+import DailyChart from "./DailyChart";
 
 const Report = () => {
   const [dates, setDates] = useState({
@@ -28,6 +29,7 @@ const Report = () => {
         {username === "Admin50" && <ConstantCost />}
         <CostGetter dates={dates} setDates={setDates} />
         <Selected dates={dates} />
+        <DailyChart dates={dates} />
         <BestSeller dates={dates} />
       </div>
     </div>
