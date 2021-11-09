@@ -18,7 +18,7 @@ const useRowStyles = makeStyles({
 
 const ItemsTable = ({ open, detailsRow }) => {
   const classes = useRowStyles();
-  // console.log(detailsRow.length);
+  // console.log(detailsRow);
 
   return (
     <TableRow className={classes.innerTable}>
@@ -36,7 +36,9 @@ const ItemsTable = ({ open, detailsRow }) => {
                   <TableCell align="center">Item Price</TableCell>
                   <TableCell align="center">
                     {detailsRow[0]?.sku.includes("MC")
-                      ? "MicroCenter Price"
+                      ? "Micro Center Price"
+                      : detailsRow[0]?.sku?.includes("AC")
+                      ? "Amazon Price"
                       : "BestBuy Price"}
                   </TableCell>
                   <TableCell align="center">Price Update Date</TableCell>

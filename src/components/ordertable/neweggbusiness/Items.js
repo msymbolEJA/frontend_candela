@@ -23,8 +23,14 @@ const Items = ({ dRow }) => {
   const classes = useStyles();
   const { response } = useFetch(
     `${BASE_URL}${
-      dRow?.SellerPartNumber.includes("MC") ? "mc" : "bb"
-    }/${dRow.SellerPartNumber.replace("NC_UPC_", "").replace("MC_UPC_", "")}`
+      dRow?.SellerPartNumber.includes("MC")
+        ? "mc"
+        : dRow?.SellerPartNumber.includes("AC")
+        ? "amz"
+        : "bb"
+    }/${dRow.SellerPartNumber?.replace("NC_UPC_", "")
+      ?.replace("MC_UPC_", "")
+      ?.replace("AC_UPC_", "")}`
   );
 
   let isBuyable =

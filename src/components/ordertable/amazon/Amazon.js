@@ -37,13 +37,13 @@ const useStyles2 = makeStyles({
   },
 });
 
-export default function BBOrdersTable() {
+export default function Amazon() {
   const classes = useStyles2();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [searchKeyword, setSearchKeyword] = useState("");
   const { response, error, loading, setLoading } = useFetch(
-    `${BASE_URL}mc/?limit=${rowsPerPage}&offset=${
+    `${BASE_URL}amz/?limit=${rowsPerPage}&offset=${
       page * rowsPerPage
     }&search=${searchKeyword}`,
     { results: [], count: 0 }
@@ -69,7 +69,7 @@ export default function BBOrdersTable() {
 
   return (
     <div>
-      <h2 className={classes.headerStyle}>Micro Center</h2>
+      <h2 className={classes.headerStyle}>Amazon Items</h2>
       <div
         style={{ display: "flex", justifyContent: "center", margin: "0.3rem" }}
       >
@@ -92,15 +92,20 @@ export default function BBOrdersTable() {
                 Model Number
               </TableCell>
               <TableCell style={{ color: "white" }} align="center">
+                Online Availability
+              </TableCell>
+              <TableCell style={{ color: "white" }} align="center">
+                Last Updated Date
+              </TableCell>
+              <TableCell style={{ color: "white" }} align="center">
+                Price
+              </TableCell>
+              <TableCell style={{ color: "white" }} align="center">
                 Stock
               </TableCell>
               <TableCell style={{ color: "white" }} align="center">
-                Release Date
+                Weight
               </TableCell>
-              <TableCell style={{ color: "white" }} align="center">
-                Sale Price
-              </TableCell>
-
               <TableCell style={{ color: "white" }} align="center">
                 SKU
               </TableCell>
@@ -131,12 +136,21 @@ export default function BBOrdersTable() {
                   <TableCell align="center" component="th" scope="row">
                     {row.manufacturer}
                   </TableCell>
-                  <TableCell align="center">{row.modelNumber}</TableCell>
-                  <TableCell align="center">{row.stock}</TableCell>
+                  <TableCell align="center">{row.model_number}</TableCell>
                   <TableCell align="center">
-                    {row.releaseDate ? row.releaseDate : "-"}
+                    {row.onlineAvailability ? "Yes" : "No"}
                   </TableCell>
-                  <TableCell align="center">{row.salePrice}</TableCell>
+                  <TableCell align="center">
+                    {row.lastupdated
+                      ? moment
+                          .utc(row.lastupdated)
+                          .local()
+                          .format("MM-DD-YY HH:mm")
+                      : "-"}
+                  </TableCell>
+                  <TableCell align="center">{row.price}</TableCell>
+                  <TableCell align="center">{row.stock}</TableCell>
+                  <TableCell align="center">{row.weight}</TableCell>
                   <TableCell align="center">{row.sku}</TableCell>
                   <TableCell align="center">
                     <>

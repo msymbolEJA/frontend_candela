@@ -21,10 +21,15 @@ const useStyles = makeStyles({
 const Items = ({ dRow }) => {
   const classes = useStyles();
   const { response } = useFetch(
-    `${BASE_URL}${dRow?.sku.includes("MC") ? "mc" : "bb"}/${dRow.sku
+    `${BASE_URL}${
+      dRow?.sku.includes("MC") ? "mc" : dRow?.sku.includes("AC") ? "amz" : "bb"
+    }/${dRow.sku
       .replace("NC_UPC_", "")
-      .replace("MC_UPC_", "")}`
+      ?.replace("MC_UPC_", "")
+      ?.replace("AC_UPC_", "")}`
   );
+
+  console.log(dRow);
 
   const getUpc = () => {
     if (dRow?.sku.includes("NC_UPC_")) {
@@ -57,7 +62,11 @@ const Items = ({ dRow }) => {
             {response?.pre_salePrice ? response?.pre_salePrice : null}
           </p>
           <p className={classes.priceStyle}>
-            {response?.salePrice ? response?.salePrice : "-"}
+            {response?.salePrice
+              ? response?.salePrice
+              : response?.price
+              ? response?.price
+              : "-"}
           </p>
           {response?.url ? (
             <a href={response?.url} target="_blank" rel="noreferrer">

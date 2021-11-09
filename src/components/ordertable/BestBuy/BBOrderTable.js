@@ -89,7 +89,7 @@ export default function BBOrdersTable() {
                 Manufacturer
               </TableCell>
               <TableCell style={{ color: "white" }} align="center">
-                ModelNumber
+                Model Number
               </TableCell>
               <TableCell style={{ color: "white" }} align="center">
                 Online Availability

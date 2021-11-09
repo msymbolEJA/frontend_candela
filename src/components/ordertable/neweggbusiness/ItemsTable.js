@@ -36,8 +36,10 @@ const ItemsTable = ({ open, detailsRow }) => {
                   <TableCell align="center">Ordered Qty</TableCell>
                   <TableCell align="center">Unit Price</TableCell>
                   <TableCell align="center">
-                    {detailsRow[0]?.SellerPartNumber.includes("MC")
-                      ? "MicroCenter Price"
+                    {detailsRow[0]?.SellerPartNumber?.includes("MC")
+                      ? "Micro Center Price"
+                      : detailsRow[0]?.SellerPartNumber?.includes("AC")
+                      ? "Amazon Price"
                       : "BestBuy Price"}
                   </TableCell>
                   <TableCell align="center">Price Update Date</TableCell>

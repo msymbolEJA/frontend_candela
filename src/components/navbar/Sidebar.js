@@ -31,6 +31,20 @@ const menuLinks = [
     link: "/orders/bb",
   },
   {
+    id: 0,
+    title: "Micro Center",
+    icon: Dashboard,
+    abr: "MC",
+    link: "/orders/mc",
+  },
+  {
+    id: 0,
+    title: "Amazon",
+    icon: Dashboard,
+    abr: "AZ",
+    link: "/orders/amz",
+  },
+  {
     id: 1,
     title: "New Egg",
     abr: "NE",
