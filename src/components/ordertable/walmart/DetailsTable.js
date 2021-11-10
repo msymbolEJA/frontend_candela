@@ -5,6 +5,7 @@ import TableRow from "@material-ui/core/TableRow";
 import moment from "moment";
 import ItemsTable from "./ItemsTable";
 import OrderTracking from "../otheritems/OrderTracking";
+import { bgColorSetter, upcEditFunc } from "../../../helpers/functions";
 
 const useRowStyles = makeStyles({
   root: {
@@ -44,55 +45,12 @@ function Row(props) {
 
   const detailsRow = row.items;
 
-  // console.log(upcArray[index]);
-  // console.log(upcArray);
-  // console.log(index);
-
-  const upcEditFunc = (singleUpc) => {
-    return Array.isArray(singleUpc)
-      ? singleUpc?.map((item, index) => (
-          <p key={index} className={classes.upcStyle}>
-            {item?.replace("MC_UPC_", "").replace("NC_UPC_", "")}
-          </p>
-        ))
-      : singleUpc?.replace("MC_UPC_", "").replace("NC_UPC_", "");
-  };
-
   return (
     <React.Fragment>
       <TableRow
         className={classes.root}
         style={{
-          backgroundColor:
-            customStatusArray[index] === "Awaiting-fulfillment"
-              ? "#FFF5DA"
-              : customStatusArray[index] === "Cancelled"
-              ? "#FF7171"
-              : customStatusArray[index] === "Error"
-              ? "#8F4068"
-              : customStatusArray[index] === "Late-shipment"
-              ? "#B590CA"
-              : customStatusArray[index] === "Ordered"
-              ? "#F3D1F4"
-              : customStatusArray[index] === "Refund/return"
-              ? "#C06C84"
-              : customStatusArray[index] === "Shipped"
-              ? "#C68B59"
-              : customStatusArray[index] === "Stock"
-              ? "#BE8ABF"
-              : customStatusArray[index] === "ZZZ"
-              ? "#8AC6D1"
-              : customStatusArray[index] === "Ready"
-              ? "#32AFA9"
-              : customStatusArray[index] === "Partial-refund"
-              ? "#445C3C"
-              : customStatusArray[index] === "Reserved"
-              ? "#F7DAD9"
-              : customStatusArray[index] === "Label Purchased"
-              ? "#FFC947"
-              : customStatusArray[index] === "Other"
-              ? "#DBE9B7"
-              : "bdd2b6",
+          backgroundColor: bgColorSetter(customStatusArray[index]),
         }}
         onClick={() => setOpen(!open)}
       >
@@ -112,7 +70,7 @@ function Row(props) {
           )}
         </TableCell>
         <TableCell align="center" component="th" scope="row">
-          {upcEditFunc(upcArray[index])}
+          {upcEditFunc(upcArray[index], classes)}
         </TableCell>
         <TableCell align="center" component="th" scope="row">
           {customStatusArray[index]}

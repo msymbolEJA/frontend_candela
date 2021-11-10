@@ -98,12 +98,12 @@ export default function NEOrdersTable() {
     if (item?.items.length > 1) {
       let biggerUpcArray = [];
       item?.items?.forEach((i, ind) => {
-        biggerUpcArray.push(i?.UPCCode || i?.SellerPartNumber);
+        biggerUpcArray.push(i?.SellerPartNumber || i?.UPCCode);
       });
       upcArray.push(biggerUpcArray);
     } else {
       upcArray.push(
-        item?.items[0]?.UPCCode || item?.items[0]?.SellerPartNumber
+        item?.items[0]?.SellerPartNumber || item?.items[0]?.UPCCode
       );
     }
   });
