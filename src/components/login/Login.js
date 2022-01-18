@@ -13,11 +13,9 @@ import {
   toastSuccessNotify,
   toastErrorNotify,
 } from "../../helpers/ToastNotify";
-import { postAuthData } from "../../helpers/DataTransitions";
+import api from "../../helpers/DataTransitions";
 import { useFormik } from "formik";
 import * as yup from "yup";
-
-const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const validationSchema = yup.object({
   username: yup
@@ -110,7 +108,7 @@ function Login() {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      postAuthData(`${BASE_URL}auth/login/`, values)
+      api(`auth/login/`, "post", values)
         .then((response) => {
           // console.log(response.data.user);
           localStorage.setItem("x-auth-token", response.data.key);
@@ -119,7 +117,11 @@ function Login() {
           history.push("/");
         })
         .catch(({ response }) => {
-          toastErrorNotify(response?.data?.non_field_errors[0]);
+          toastErrorNotify(
+            response.data?.non_field_errors
+              ? response?.data?.non_field_errors[0]
+              : "Error logging in!"
+          );
         });
     },
   });

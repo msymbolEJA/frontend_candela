@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getData } from "../helpers/DataTransitions";
+import api from "../helpers/DataTransitions";
 
 const useFetch = (url, initVal) => {
   const [response, setResponse] = useState(initVal);
@@ -9,7 +9,7 @@ const useFetch = (url, initVal) => {
   //   console.log("useFetchLoading", loading);
 
   useEffect(() => {
-    getData(url)
+    api(url, "get")
       .then((data) => {
         // console.log("useFetch", data);
         setResponse(data.data);

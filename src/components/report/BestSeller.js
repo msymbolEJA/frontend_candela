@@ -13,8 +13,6 @@ import Paper from "@material-ui/core/Paper";
 import useFetch from "../../hooks/useFetch";
 import { bestSellerTableHeaders } from "../../helpers/Constants";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -120,11 +118,11 @@ export default function EnhancedTable({ dates }) {
   const [rowsPerPage, setRowsPerPage] = React.useState(20);
   const [rows, setRows] = useState([]);
   const neOrders = useFetch(
-    `${BASE_URL}report/ne?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+    `report/ne?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 }
   );
   const waOrders = useFetch(
-    `${BASE_URL}report/wa?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+    `report/wa?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 }
   );
 

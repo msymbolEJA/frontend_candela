@@ -13,8 +13,6 @@ import { logTableColumns } from "../../helpers/Constants";
 import { TableError } from "../../helpers/Errors";
 import moment from "moment";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-
 const useStyles = makeStyles({
   table: {
     minWidth: 500,
@@ -38,7 +36,7 @@ const useStyles = makeStyles({
 
 const LogTable = (props) => {
   const { response, error, loading } = useFetch(
-    `${BASE_URL}/logs/?order_num=${props.match.params.id}`,
+    `/logs/?order_num=${props.match.params.id}`,
     {}
   );
   const classes = useStyles();

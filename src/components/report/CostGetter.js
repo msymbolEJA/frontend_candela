@@ -6,8 +6,6 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import moment from "moment";
 
-// const BASE_URL = process.env.REACT_APP_BASE_URL;
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(1),

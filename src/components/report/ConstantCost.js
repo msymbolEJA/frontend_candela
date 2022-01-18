@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import { makeStyles } from "@material-ui/core/styles";
-import { putData } from "../../helpers/DataTransitions";
-
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+import api from "../../helpers/DataTransitions";
 
 const useStyles = makeStyles({
   shop: {
@@ -39,7 +37,7 @@ const useStyles = makeStyles({
 
 export const ConstantCost = () => {
   const classes = useStyles();
-  const { response } = useFetch(`${BASE_URL}report/const/`, {});
+  const { response } = useFetch(`report/const/`, {});
   const [constantCosts, setConstantCosts] = useState([]);
 
   useEffect(() => {
@@ -49,7 +47,7 @@ export const ConstantCost = () => {
 
   const handleSave = (e) => {
     constantCosts?.forEach((item) => {
-      putData(`${BASE_URL}report/const/${item?.shop}/`, item);
+      api(`report/const/${item?.shop}/`, "put", item);
     });
   };
 

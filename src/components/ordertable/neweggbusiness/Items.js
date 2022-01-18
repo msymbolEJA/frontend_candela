@@ -7,8 +7,6 @@ import warnSvg from "../../../assets/warn.svg";
 import useFetch from "../../../hooks/useFetch";
 import moment from "moment";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-
 const useStyles = makeStyles({
   priceStyle: {
     fontSize: "1.25rem",
@@ -22,7 +20,7 @@ const useStyles = makeStyles({
 const Items = ({ dRow }) => {
   const classes = useStyles();
   const { response } = useFetch(
-    `${BASE_URL}${
+    `${
       dRow?.SellerPartNumber.includes("MC")
         ? "mc"
         : dRow?.SellerPartNumber.includes("AC")

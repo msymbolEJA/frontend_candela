@@ -18,8 +18,6 @@ import { NEOrderStatus, customTopStatus } from "../../../helpers/Constants";
 import SearchField from "../otheritems/SearchField";
 import TopCustomButtonGroup from "../otheritems/TopCustomStatusGroup";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-
 const useRowStyles = makeStyles({
   root: {
     "& > *": {
@@ -55,7 +53,7 @@ export default function NEOrdersTable() {
   const [customStatusTag, setCustomStatusTag] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
   const { response, error, loading, setLoading } = useFetch(
-    `${BASE_URL}ne/b2b/?OrderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
+    `ne/b2b/?OrderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
     }&search=${searchKeyword}&items__tracking__status=${customStatusTag}`,
     { results: [], count: 0 }

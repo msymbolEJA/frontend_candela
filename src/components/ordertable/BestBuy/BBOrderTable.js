@@ -14,8 +14,6 @@ import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 import { TableError } from "../../../helpers/Errors";
 import CustomTableFooter from "../otheritems/CustomTableFooter";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-
 const useStyles2 = makeStyles({
   table: {
     minWidth: 500,
@@ -43,7 +41,7 @@ export default function BBOrdersTable() {
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [searchKeyword, setSearchKeyword] = useState("");
   const { response, error, loading, setLoading } = useFetch(
-    `${BASE_URL}bb/?limit=${rowsPerPage}&offset=${
+    `bb/?limit=${rowsPerPage}&offset=${
       page * rowsPerPage
     }&search=${searchKeyword}`,
     { results: [], count: 0 }

@@ -18,8 +18,6 @@ import { WALOrderStatus, customTopStatus } from "../../../helpers/Constants";
 import TopCustomButtonGroup from "../otheritems/TopCustomStatusGroup";
 import SearchField from "../otheritems/SearchField";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-
 const useRowStyles = makeStyles({
   root: {
     "& > *": {
@@ -55,7 +53,7 @@ export default function NEOrdersTable() {
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [searchKeyword, setSearchKeyword] = useState("");
   const { response, error, loading, setLoading } = useFetch(
-    `${BASE_URL}wal/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
+    `wal/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
     }&search=${searchKeyword}&items__tracking__status=${customStatusTag}`,
     { results: [], count: 0 }

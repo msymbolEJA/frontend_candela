@@ -8,11 +8,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import CustomAutoComplete from "../otheritems/CustomAutoComplete";
 import { OrderFormSelect } from "../../../helpers/Constants";
-import { putData } from "../../../helpers/DataTransitions";
+import api from "../../../helpers/DataTransitions";
 import useFetch from "../../../hooks/useFetch";
 import { useHistory } from "react-router-dom";
-
-const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const useStyles = makeStyles((theme) => ({
   innerTable: {
@@ -63,7 +61,7 @@ const OrderTracking = ({ open, detRow, store }) => {
   const classes = useStyles();
   let history = useHistory();
   const { response, error, loading } = useFetch(
-    `${BASE_URL}${store}/ordertrack/${detRow.id}`,
+    `${store}/ordertrack/${detRow.id}`,
     {}
   );
   const [formInfo, setFormInfo] = useState({
@@ -86,7 +84,7 @@ const OrderTracking = ({ open, detRow, store }) => {
 
   const handleFormSend = () => {
     console.log({ formInfo });
-    putData(`${BASE_URL}${store}/ordertrack/${detRow.id}`, formInfo);
+    api(`${store}/ordertrack/${detRow.id}`, "put", formInfo);
   };
 
   useEffect(() => {

@@ -13,14 +13,13 @@ import {
   Menu,
 } from "@material-ui/core";
 import { AccountCircle, Menu as MenuIcon } from "@material-ui/icons";
-import { postAuthData } from "../../helpers/DataTransitions";
+import api from "../../helpers/DataTransitions";
 import {
   toastSuccessNotify,
   toastErrorNotify,
 } from "../../helpers/ToastNotify";
 
 const STORE_NAME = process.env.REACT_APP_STORE_NAME;
-const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const drawerWidth = 225;
 
@@ -109,7 +108,7 @@ export default function NavBar({ open, handleDrawerOpen }) {
 
   const handleLogout = () => {
     history.push("/login");
-    postAuthData(`${BASE_URL}auth/logout/`)
+    api(`auth/logout/`, "post")
       .then((response) => {
         toastSuccessNotify(response.data.detail);
         localStorage.removeItem("x-auth-token");

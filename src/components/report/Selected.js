@@ -12,8 +12,6 @@ import { selectedHeaders } from "../../helpers/Constants";
 import moment from "moment";
 import { Doughnut } from "react-chartjs-2";
 
-// const BASE_URL = process.env.REACT_APP_BASE_URL;
-
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
