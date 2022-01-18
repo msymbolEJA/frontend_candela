@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import { makeStyles } from "@material-ui/core/styles";
-import api from "../../helpers/DataTransitions";
+import api from "../../helpers/api";
 
 const useStyles = makeStyles({
   shop: {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import api from "../helpers/DataTransitions";
+import api from "../helpers/api";
 
 const useFetch = (url, initVal) => {
   const [response, setResponse] = useState(initVal);

@@ -13,7 +13,7 @@ import {
   toastSuccessNotify,
   toastErrorNotify,
 } from "../../helpers/ToastNotify";
-import api from "../../helpers/DataTransitions";
+import api from "../../helpers/api";
 import { useFormik } from "formik";
 import * as yup from "yup";
 

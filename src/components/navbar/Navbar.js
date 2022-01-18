@@ -13,7 +13,7 @@ import {
   Menu,
 } from "@material-ui/core";
 import { AccountCircle, Menu as MenuIcon } from "@material-ui/icons";
-import api from "../../helpers/DataTransitions";
+import api from "../../helpers/api";
 import {
   toastSuccessNotify,
   toastErrorNotify,
