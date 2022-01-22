@@ -3,12 +3,11 @@ import ReactDOM from "react-dom";
 import axios from "axios";
 import "./index.css";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import { ContextProvider } from "./context/Context";
 
 axios.interceptors.request.use(function (config) {
   const token = localStorage.getItem("x-auth-token");
-  config.headers.Authorization = `Token ${token}`;
+  if (token) config.headers.Authorization = `Token ${token}`;
   return config;
 });
 
@@ -20,8 +19,3 @@ ReactDOM.render(
   </ContextProvider>,
   document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

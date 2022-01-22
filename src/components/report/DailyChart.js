@@ -4,14 +4,14 @@ import useFetch from "../../hooks/useFetch";
 
 export default function App({ dates }) {
   const waDaily = useFetch(
-    `http://104.156.237.87:8080/report/daily/wa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+    `report/daily/wa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     {
       results: [],
       count: 0,
     }
   );
   const neDaily = useFetch(
-    `http://104.156.237.87:8080/report/daily/ne/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+    `report/daily/ne/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     {
       results: [],
       count: 0,

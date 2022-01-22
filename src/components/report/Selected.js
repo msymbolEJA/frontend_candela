@@ -59,18 +59,18 @@ export default function CustomizedTables({ dates }) {
   });
   const [statRows, setStatRows] = useState([]);
   const neReport = useFetch(
-    `http://104.156.237.87:8080/report/summ/ne/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+    `report/summ/ne/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 }
   );
   const nbReport = useFetch(
-    `http://104.156.237.87:8080/report/summ/nb/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+    `report/summ/nb/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 }
   );
   const waReport = useFetch(
-    `http://104.156.237.87:8080/report/summ/wa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+    `report/summ/wa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 }
   );
-  const otherReport = useFetch(`http://104.156.237.87:8080/report/const/`, {
+  const otherReport = useFetch(`report/const/`, {
     results: [],
     count: 0,
   });
