@@ -118,7 +118,7 @@ function Login() {
         })
         .catch(({ response }) => {
           toastErrorNotify(
-            response.data?.non_field_errors
+            response?.data?.non_field_errors
               ? response?.data?.non_field_errors[0]
               : "Error logging in!"
           );
