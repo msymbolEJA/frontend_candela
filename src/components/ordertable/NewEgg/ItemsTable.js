@@ -42,6 +42,8 @@ const ItemsTable = ({ open, detailsRow }) => {
                       ? "Micro Center Price"
                       : detailsRow[0]?.SellerPartNumber?.includes("AC")
                       ? "Amazon Price"
+                      : detailsRow[0]?.SellerPartNumber?.includes("ML")
+                      ? "Malabs Price"
                       : "BestBuy Price"}
                   </TableCell>
                   <TableCell align="center">Price Update Date</TableCell>

@@ -13,6 +13,7 @@ import MicroCenter from "../components/ordertable/micro-center/MicroCenter";
 import LogTable from "../components/log-table/LogTable";
 import Report from "../components/report/Report";
 import Amazon from "../components/ordertable/amazon/Amazon";
+import Malabs from "../components/ordertable/malabs/Malabs";
 
 const AppRouter = () => {
   return (
@@ -32,6 +33,7 @@ const DefaultContainer = () => (
       <PrivateRouter exact path="/" component={Dashboard} />
       <PrivateRouter path="/orders/bb/" component={BBOrderTable} />
       <PrivateRouter path="/orders/ne/" component={NEOrderTable} />
+      <PrivateRouter path="/orders/mlab/" component={Malabs} />
       <PrivateRouter path="/orders/neb/" component={NEBusinessTable} />
       <PrivateRouter path="/orders/wal/" component={WalOrdersTable} />
       <PrivateRouter path="/orders/amz/" component={Amazon} />

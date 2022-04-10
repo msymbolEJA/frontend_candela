@@ -39,6 +39,13 @@ const menuLinks = [
   },
   {
     id: 0,
+    title: "Malabs",
+    icon: Dashboard,
+    abr: "ML",
+    link: "/orders/mlab",
+  },
+  {
+    id: 0,
     title: "Amazon",
     icon: Dashboard,
     abr: "AZ",

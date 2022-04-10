@@ -25,6 +25,8 @@ const Items = ({ dRow }) => {
         ? "mc"
         : dRow?.SellerPartNumber.includes("AC")
         ? "amz"
+        : dRow?.SellerPartNumber.includes("ML")
+        ? "mlab"
         : "bb"
     }/${dRow.SellerPartNumber?.replace("NC_UPC_", "")
       ?.replace("MC_UPC_", "")
