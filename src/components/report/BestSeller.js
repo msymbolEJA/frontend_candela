@@ -127,7 +127,8 @@ export default function EnhancedTable({ dates }) {
   );
 
   useEffect(() => {
-    const newArr = neOrders.response.results.concat(waOrders.response.results);
+    // const newArr = neOrders.response.results.concat(waOrders.response.results);
+    const newArr = [...neOrders.response.results, ...waOrders.response.results];
     setRows(newArr);
   }, [neOrders?.response?.results, waOrders?.response?.results]);
 
@@ -186,6 +187,10 @@ export default function EnhancedTable({ dates }) {
                               ? "Micro Center"
                               : row[item?.id].startsWith("NC")
                               ? "Best Buy"
+                              : row[item?.id].startsWith("AC")
+                              ? "Amazon"
+                              : row[item?.id].startsWith("ML")
+                              ? "Malabs"
                               : "Other"}
                           </TableCell>
                         ) : (
