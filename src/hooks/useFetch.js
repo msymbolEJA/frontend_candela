@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../helpers/api";
 
-const useFetch = (url, initVal) => {
+const useFetch = (url, initVal, base) => {
   const [response, setResponse] = useState(initVal);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -9,7 +9,7 @@ const useFetch = (url, initVal) => {
   //   console.log("useFetchLoading", loading);
 
   useEffect(() => {
-    api(url, "get")
+    api(url, "get", null, base)
       .then((data) => {
         // console.log("useFetch", data);
         setResponse(data.data);

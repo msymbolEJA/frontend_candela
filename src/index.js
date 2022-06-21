@@ -7,7 +7,11 @@ import { ContextProvider } from "./context/Context";
 
 axios.interceptors.request.use(function (config) {
   const token = localStorage.getItem("x-auth-token");
-  if (token && !config?.url?.includes("/login/")) {
+  if (
+    token &&
+    !config?.url?.includes("/login/") &&
+    !config?.url?.includes("216.128.135.6")
+  ) {
     config.headers.Authorization = `Token ${token}`;
   }
   return config;

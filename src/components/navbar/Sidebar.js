@@ -67,20 +67,27 @@ const menuLinks = [
   },
   {
     id: 3,
+    title: "Walmart2",
+    abr: "WA2",
+    icon: Assignment,
+    link: "/orders/wal2",
+  },
+  {
+    id: 4,
     title: "NewEgg Business",
     abr: "NB",
     icon: LocalLibrary,
     link: "/orders/neb",
   },
   {
-    id: 4,
+    id: 5,
     title: "Return Orders",
     abr: "RO",
     icon: SupervisorAccount,
     link: "/orders/return-orders",
   },
   {
-    id: 5,
+    id: 6,
     title: "Report",
     abr: "RP",
     icon: Assignment,
@@ -112,7 +119,7 @@ const menuLinks = [
   //   ],
   // },
   {
-    id: 12,
+    id: 7,
     title: "Settings",
     abr: "SE",
     icon: Settings,
