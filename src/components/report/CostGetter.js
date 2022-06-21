@@ -70,7 +70,7 @@ const CostGetter = ({ dates, setDates }) => {
     <Paper className={classes.paper} style={{}}>
       <div className={classes.column}>
         <label htmlFor="beginnerDate" className={classes.date}>
-          Beginner Date:
+          Start Date:
         </label>
         <input ref={beginnerDateRef} type="date" className={classes.date} />
       </div>
