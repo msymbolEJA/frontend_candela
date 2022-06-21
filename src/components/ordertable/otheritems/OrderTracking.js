@@ -62,7 +62,7 @@ const OrderTracking = ({ open, detRow, store }) => {
   let history = useHistory();
   const { response, error, loading } = useFetch(
     `${store}/ordertrack/${detRow.id}`,
-    {}
+    {}, "http://216.128.135.6:8080/"
   );
   const [formInfo, setFormInfo] = useState({
     id: 1,
