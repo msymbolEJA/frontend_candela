@@ -37,7 +37,8 @@ const useStyles = makeStyles({
 const LogTable = (props) => {
   const { response, error, loading } = useFetch(
     `/logs/?order_num=${props.match.params.id}`,
-    {}
+    {},
+    props.match.params.shop === "wal2" ? "http://216.128.135.6:8080" : null
   );
   const classes = useStyles();
 
@@ -45,7 +46,6 @@ const LogTable = (props) => {
     console.log(response);
   }, [response]);
 
-  console.log(props.match.params.id);
   return (
     <div>
       <h2 className={classes.headerStyle}>Log Table</h2>

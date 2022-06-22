@@ -94,7 +94,7 @@ function Row(props) {
       </TableRow>
       <ItemsTable open={open} detailsRow={detailsRow} />
       {detailsRow?.map((detRow, index) => (
-        <OrderTracking open={open} detRow={detRow} key={index} store={"wal"} />
+        <OrderTracking open={open} detRow={detRow} key={index} store={"wal2"}  base="http://216.128.135.6:8080/"/>
       ))}
     </React.Fragment>
   );

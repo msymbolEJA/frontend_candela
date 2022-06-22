@@ -19,7 +19,7 @@ const useFetch = (url, initVal, base) => {
         setError(error);
         setLoading(false);
       });
-  }, [url]);
+  }, [url, base]);
 
   return { response, error, loading, setLoading };
 };

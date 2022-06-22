@@ -41,7 +41,7 @@ const DefaultContainer = () => (
       <PrivateRouter path="/orders/amz/" component={Amazon} />
       <PrivateRouter path="/orders/return-orders/" component={ReturnOrders} />
       <PrivateRouter path="/orders/mc/" component={MicroCenter} />
-      <PrivateRouter path="/log-table/:id" component={LogTable} />
+      <PrivateRouter path="/log-table/:shop/:id" component={LogTable} />
       <PrivateRouter path="/report" component={Report} />
     </Switch>
   </div>

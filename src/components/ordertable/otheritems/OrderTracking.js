@@ -57,12 +57,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const OrderTracking = ({ open, detRow, store }) => {
+const OrderTracking = ({ open, detRow, store, base }) => {
   const classes = useStyles();
   let history = useHistory();
   const { response, error, loading } = useFetch(
     `${store}/ordertrack/${detRow.id}`,
-    {}, "http://216.128.135.6:8080/"
+    {},
+    store === "wal2" ? "http://216.128.135.6:8080/" : null
   );
   const [formInfo, setFormInfo] = useState({
     id: 1,
@@ -83,8 +84,7 @@ const OrderTracking = ({ open, detRow, store }) => {
   });
 
   const handleFormSend = () => {
-    console.log({ formInfo });
-    api(`${store}/ordertrack/${detRow.id}`, "put", formInfo,  "http://216.128.135.6:8080/");
+    api(`${store}/ordertrack/${detRow.id}`, "put", formInfo, base);
   };
 
   useEffect(() => {
@@ -93,7 +93,9 @@ const OrderTracking = ({ open, detRow, store }) => {
   }, [response]);
 
   const handleGotoLog = () => {
-    history.push(`/log-table/${detRow.OrderNumber || detRow.customerOrderId}`);
+    history.push(
+      `/log-table/${store}/${detRow.OrderNumber || detRow.customerOrderId}`
+    );
   };
 
   return (
