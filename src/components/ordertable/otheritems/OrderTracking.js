@@ -84,7 +84,7 @@ const OrderTracking = ({ open, detRow, store }) => {
 
   const handleFormSend = () => {
     console.log({ formInfo });
-    api(`${store}/ordertrack/${detRow.id}`, "put", formInfo);
+    api(`${store}/ordertrack/${detRow.id}`, "put", formInfo,  "http://216.128.135.6:8080/");
   };
 
   useEffect(() => {
