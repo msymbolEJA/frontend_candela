@@ -53,7 +53,7 @@ export default function NEOrdersTable() {
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [searchKeyword, setSearchKeyword] = useState("");
   const { response, error, loading, setLoading } = useFetch(
-    `wal/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
+    `wal2/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
     }&search=${searchKeyword}&items__tracking__status=${customStatusTag}`,
     { results: [], count: 0 },
