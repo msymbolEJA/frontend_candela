@@ -56,6 +56,7 @@ export default function CustomizedTables({ dates }) {
     ne: [],
     nb: [],
     wa: [],
+    wa2: [],
   });
   const [statRows, setStatRows] = useState([]);
   const neReport = useFetch(
@@ -69,6 +70,11 @@ export default function CustomizedTables({ dates }) {
   const waReport = useFetch(
     `report/summ/wa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 }
+  );
+  const waReport2 = useFetch(
+    `report2/summ/wa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+    { results: [], count: 0 },
+    "http://216.128.135.6:8080/"
   );
   const otherReport = useFetch(`report/const/`, {
     results: [],
@@ -84,8 +90,14 @@ export default function CustomizedTables({ dates }) {
       ne: neReport.response,
       nb: nbReport.response,
       wa: waReport.response,
+      wa2: waReport2.response,
     }));
-  }, [neReport.response, nbReport.response, waReport.response]);
+  }, [
+    neReport.response,
+    nbReport.response,
+    waReport.response,
+    waReport2.response,
+  ]);
 
   useEffect(() => {
     // console.log(stats);
@@ -93,44 +105,59 @@ export default function CustomizedTables({ dates }) {
       {
         id: "SALES",
         wa: stats.wa.sales,
+        wa2: stats.wa2.sales,
         ne: stats.ne.sales,
         nb: stats.nb.sales,
-        gt: stats.ne.sales + stats.nb.sales + stats.wa.sales,
+        gt:
+          stats.ne.sales +
+          stats.nb.sales +
+          stats.wa.sales +
+          (stats.wa2.sales || 0),
       },
       {
         id: "COST",
         wa: stats.wa.cost,
+        wa2: stats.wa2.cost,
         ne: stats.ne.cost,
         nb: stats.nb.cost,
-        gt: stats.ne.cost + stats.nb.cost + stats.wa.cost,
+        gt:
+          stats.ne.cost + stats.nb.cost + stats.wa.cost + (stats.wa2.cost || 0),
       },
       {
         id: "GROSS PROFIT",
         wa: stats.wa.gross_profit,
+        wa2: stats.wa2.gross_profit,
         ne: stats.ne.gross_profit,
         nb: stats.nb.gross_profit,
         gt:
-          stats.ne.gross_profit + stats.nb.gross_profit + stats.wa.gross_profit,
+          stats.ne.gross_profit +
+          stats.nb.gross_profit +
+          stats.wa.gross_profit +
+          (stats.wa2.gross_profit || 0),
       },
       {
         id: "COMMISSION",
         wa: stats.wa.commision_cost,
+        wa2: stats.wa2.commision_cost,
         ne: stats.ne.commision_cost,
         nb: stats.nb.commision_cost,
         gt:
           stats.ne.commision_cost +
           stats.nb.commision_cost +
-          stats.wa.commision_cost,
+          stats.wa.commision_cost +
+          (stats.wa2.commision_cost || 0),
       },
       {
         id: "SHIPPING/HANDLING",
         wa: stats.wa.shipping_cost,
+        wa2: stats.wa2.shipping_cost,
         ne: stats.ne.shipping_cost,
         nb: stats.nb.shipping_cost,
         gt:
           stats.ne.shipping_cost +
           stats.nb.shipping_cost +
-          stats.wa.shipping_cost,
+          stats.wa.shipping_cost +
+          (stats.wa2.shipping_cost || 0),
       },
       {
         id: "OTHER",
@@ -138,6 +165,10 @@ export default function CustomizedTables({ dates }) {
           moment.duration(start.diff(end)).asDays() *
           -1 *
           stats.wa.daily_other_exp,
+        wa2:
+          moment.duration(start.diff(end)).asDays() *
+          -1 *
+          (stats.wa2.daily_other_exp || 0),
         ne:
           moment.duration(start.diff(end)).asDays() *
           -1 *
@@ -155,7 +186,10 @@ export default function CustomizedTables({ dates }) {
             stats.nb.daily_other_exp +
           moment.duration(start.diff(end)).asDays() *
             -1 *
-            stats.wa.daily_other_exp,
+            stats.wa.daily_other_exp +
+          moment.duration(start.diff(end)).asDays() *
+            -1 *
+            (stats.wa2.daily_other_exp || 0),
       },
       {
         id: "NET PROFIT",
@@ -166,6 +200,13 @@ export default function CustomizedTables({ dates }) {
           moment.duration(start.diff(end)).asDays() *
             -1 *
             stats.wa.daily_other_exp,
+        wa2:
+          (stats.wa2.gross_profit || 0) -
+          (stats.wa2.commision_cost || 0) -
+          (stats.wa2.shipping_cost || 0) -
+          moment.duration(start.diff(end)).asDays() *
+            -1 *
+            (stats.wa2.daily_other_exp || 0),
         ne:
           stats.ne.gross_profit -
           stats.ne.commision_cost -
@@ -192,6 +233,10 @@ export default function CustomizedTables({ dates }) {
           stats.wa.gross_profit -
           stats.wa.commision_cost -
           stats.wa.shipping_cost -
+          moment.duration(start.diff(end)).asDays() * -1 * 80 +
+          (stats.wa2.gross_profit || 0) -
+          (stats.wa2.commision_cost || 0) -
+          (stats.wa2.gross_profit || 0) -
           moment.duration(start.diff(end)).asDays() * -1 * 80,
       },
     ]);
@@ -201,6 +246,7 @@ export default function CustomizedTables({ dates }) {
   const getPercentage = (shop, index) => {
     const total =
       (statRows[index]?.wa >= 0 ? statRows[index]?.wa : 0) +
+      (statRows[index]?.wa2 >= 0 ? statRows[index]?.wa2 : 0) +
       (statRows[index]?.nb >= 0 ? statRows[index]?.nb : 0) +
       (statRows[index]?.ne >= 0 ? statRows[index]?.ne : 0);
     return (
@@ -210,17 +256,19 @@ export default function CustomizedTables({ dates }) {
   };
 
   const salesData = {
-    labels: ["Walmart", "NewEgg Bussines", "NewEgg"],
+    labels: ["Walmart", "Walmart2", "NewEgg Bussines", "NewEgg"],
     datasets: [
       {
         label: "Sales 2020 (M)",
         data: [
           getPercentage("wa", 0),
+          getPercentage("wa2", 0),
           getPercentage("nb", 0),
           getPercentage("ne", 0),
         ],
         backgroundColor: [
           "rgba(255, 99, 132, 1)",
+          "rgba(0, 200, 0, 1)",
           "rgba(255, 205, 86, 1)",
           "rgba(54, 162, 235, 1)",
         ],
@@ -236,17 +284,19 @@ export default function CustomizedTables({ dates }) {
   };
 
   const netProfitData = {
-    labels: ["Walmart", "NewEgg Bussines", "NewEgg"],
+    labels: ["Walmart", "Walmart2", "NewEgg Bussines", "NewEgg"],
     datasets: [
       {
         label: "Sales 2020 (M)",
         data: [
           getPercentage("wa", 6),
+          getPercentage("wa2", 6),
           getPercentage("nb", 6),
           getPercentage("ne", 6),
         ],
         backgroundColor: [
           "rgba(255, 99, 132, 1)",
+          "rgba(0, 200, 0, 1)",
           "rgba(255, 205, 86, 1)",
           "rgba(54, 162, 235, 1)",
         ],
@@ -285,6 +335,9 @@ export default function CustomizedTables({ dates }) {
                   </StyledTableCell>
                   <StyledTableCell align="right">
                     {row.wa?.toFixed(2) || 0}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {row.wa2?.toFixed(2) || 0}
                   </StyledTableCell>
                   <StyledTableCell align="right">
                     {row.ne?.toFixed(2) || 0}

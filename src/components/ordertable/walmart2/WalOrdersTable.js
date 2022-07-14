@@ -53,8 +53,7 @@ export default function NEOrdersTable() {
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [searchKeyword, setSearchKeyword] = useState("");
   const { response, error, loading, setLoading } = useFetch(
-    `wal2/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
-      page * rowsPerPage
+    `wal2/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${page * rowsPerPage
     }&search=${searchKeyword}&items__tracking__status=${customStatusTag}`,
     { results: [], count: 0 },
     "http://216.128.135.6:8080/"
@@ -142,7 +141,7 @@ export default function NEOrdersTable() {
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
       <div className={classes.topDiv}>
-        <h2 className={classes.headerStyle}>Walmart Orders</h2>
+        <h2 className={classes.headerStyle}>Walmart-2 Orders</h2>
         <SearchField globalSearch={globalSearch} />
       </div>
       <TopButtonGroup

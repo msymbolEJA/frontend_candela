@@ -125,12 +125,24 @@ export default function EnhancedTable({ dates }) {
     `report/wa?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 }
   );
+  const wa2Orders = useFetch(
+    `report2/wa?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+    { results: [], count: 0 },
+    "http://216.128.135.6:8080/"
+  );
 
   useEffect(() => {
-    // const newArr = neOrders.response.results.concat(waOrders.response.results);
-    const newArr = [...neOrders.response.results, ...waOrders.response.results];
+    const newArr = [
+      ...neOrders.response.results,
+      ...waOrders.response.results,
+      ...wa2Orders.response.results,
+    ];
     setRows(newArr);
-  }, [neOrders?.response?.results, waOrders?.response?.results]);
+  }, [
+    neOrders?.response?.results,
+    waOrders?.response?.results,
+    wa2Orders?.response?.results,
+  ]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
