@@ -225,19 +225,27 @@ export default function CustomizedTables({ dates }) {
           stats.ne.gross_profit -
           stats.ne.commision_cost -
           stats.ne.shipping_cost -
-          moment.duration(start.diff(end)).asDays() * -1 * 50 +
+          moment.duration(start.diff(end)).asDays() *
+            -1 *
+            stats.ne.daily_other_exp +
           stats.nb.gross_profit -
           stats.nb.commision_cost -
           stats.nb.shipping_cost -
-          moment.duration(start.diff(end)).asDays() * -1 * 20 +
+          moment.duration(start.diff(end)).asDays() *
+            -1 *
+            stats.nb.daily_other_exp +
           stats.wa.gross_profit -
           stats.wa.commision_cost -
           stats.wa.shipping_cost -
-          moment.duration(start.diff(end)).asDays() * -1 * 80 +
-          (stats.wa2.gross_profit || 0) -
-          (stats.wa2.commision_cost || 0) -
-          (stats.wa2.gross_profit || 0) -
-          moment.duration(start.diff(end)).asDays() * -1 * 80,
+          moment.duration(start.diff(end)).asDays() *
+            -1 *
+            stats.wa.daily_other_exp +
+          stats.wa2.gross_profit -
+          stats.wa2.commision_cost -
+          stats.wa2.shipping_cost -
+          moment.duration(start.diff(end)).asDays() *
+            -1 *
+            stats.wa2.daily_other_exp,
       },
     ]);
     // eslint-disable-next-line
