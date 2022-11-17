@@ -124,7 +124,12 @@ export default function EnhancedTable({ dates }) {
   const waOrders = useFetch(
     `report/wa?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 }
-  );
+  ); 
+  const cawaOrders = useFetch(
+    `report/cawa?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+    { results: [], count: 0 }
+  ); 
+
   const wa2Orders = useFetch(
     `report2/wa?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 },
@@ -135,12 +140,14 @@ export default function EnhancedTable({ dates }) {
     const newArr = [
       ...neOrders.response.results,
       ...waOrders.response.results,
+      ...cawaOrders.response.results,
       ...wa2Orders.response.results,
     ];
     setRows(newArr);
   }, [
     neOrders?.response?.results,
     waOrders?.response?.results,
+    cawaOrders?.response?.results,
     wa2Orders?.response?.results,
   ]);
 

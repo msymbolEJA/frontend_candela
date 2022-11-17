@@ -10,6 +10,13 @@ export default function App({ dates }) {
       count: 0,
     }
   );
+  const cawaDaily = useFetch(
+    `report/daily/cawa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+    {
+      results: [],
+      count: 0,
+    }
+  );
   const wa2Daily = useFetch(
     `report2/daily/wa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     {
@@ -41,6 +48,28 @@ export default function App({ dates }) {
       {
         label: "Total Price",
         data: waDaily?.response?.results?.map((each) => each?.sum_total_price),
+        fill: false,
+        borderColor: "#742774",
+        tension: 0.4,
+        yAxisID: "total",
+      },
+    ],
+  };
+  const cawaData = {
+    labels: cawaDaily?.response?.results?.map((each) => each?.date?.substr(5)),
+    datasets: [
+      {
+        label: "Sum Item",
+        data: cawaDaily?.response?.results?.map((each) => each?.sum_item),
+        fill: true,
+        backgroundColor: "rgba(75,192,192,0.2)",
+        borderColor: "rgba(75,192,192,1)",
+        tension: 0.4,
+        yAxisID: "y",
+      },
+      {
+        label: "Total Price",
+        data: cawaDaily?.response?.results?.map((each) => each?.sum_total_price),
         fill: false,
         borderColor: "#742774",
         tension: 0.4,
@@ -94,7 +123,7 @@ export default function App({ dates }) {
   };
 
   return (
-    <div style={{ width: "60%" }}>
+    <div style={{ width: "90%" }}>
       <div
         style={{
           border: "3px solid rgba(75,192,192,1)",
@@ -108,6 +137,44 @@ export default function App({ dates }) {
         </h2>
         <Line
           data={waData}
+          options={{
+            scales: {
+              y: {
+                beginAtZero: true,
+                type: "linear",
+                position: "right",
+                grid: {
+                  drawOnChartArea: false,
+                },
+              },
+              total: {
+                beginAtZero: true,
+                type: "linear",
+                position: "left",
+                ticks: {
+                  callback: function (value, index, values) {
+                    return `$ ${value}`;
+                  },
+                },
+              },
+            },
+          }}
+        />
+      </div>
+     
+      <div
+        style={{
+          border: "3px solid rgba(75,192,192,1)",
+          padding: "50px",
+          margin: "25px",
+          borderRadius: "10px",
+        }}
+      >
+        <h2 style={{ marginBottom: 25, textDecoration: "underline" }}>
+          Walmart-Ca
+        </h2>
+        <Line
+          data={cawaData}
           options={{
             scales: {
               y: {

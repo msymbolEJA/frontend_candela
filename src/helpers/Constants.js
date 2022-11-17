@@ -174,6 +174,7 @@ export const bestSellerTableHeaders = [
 
 export const selectedHeaders = [
   { id: "wa", label: "WALMART" },
+  { id: "cawa", label: "WALMARTCA" },
   { id: "wa2", label: "WALMART2" },
   {
     id: "ne",

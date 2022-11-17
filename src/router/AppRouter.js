@@ -6,6 +6,7 @@ import NEOrderTable from "../components/ordertable/NewEgg/NEOrdersTable";
 import NEBusinessTable from "../components/ordertable/neweggbusiness/NEBOrdersTable";
 import WalOrdersTable from "../components/ordertable/walmart/WalOrdersTable";
 import WalOrdersTable2 from "../components/ordertable/walmart2/WalOrdersTable";
+import WalOrdersTableCa from "../components/ordertable/walmartCa/WalOrdersTable";
 import ReturnOrders from "../components/ordertable/returnorders/ReturnOrders";
 import MainLayout from "../components/navbar/MainLayout";
 import Login from "../components/login/Login";
@@ -38,6 +39,7 @@ const DefaultContainer = () => (
       <PrivateRouter path="/orders/neb/" component={NEBusinessTable} />
       <PrivateRouter path="/orders/wal/" component={WalOrdersTable} />
       <PrivateRouter path="/orders/wal2/" component={WalOrdersTable2} />
+      <PrivateRouter path="/orders/cawal/" component={WalOrdersTableCa} />
       <PrivateRouter path="/orders/amz/" component={Amazon} />
       <PrivateRouter path="/orders/return-orders/" component={ReturnOrders} />
       <PrivateRouter path="/orders/mc/" component={MicroCenter} />
