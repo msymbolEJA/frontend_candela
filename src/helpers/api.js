@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const api = async (url, method, data = null, BASE_URL) => {
+const api = async (url, method, data = null, server_url) => {
   const axiosResponse = axios({
     method,
-    url: `${BASE_URL ?? process.env.REACT_APP_BASE_URL}${url}`,
+    url: `${server_url ?? process.env.REACT_APP_CANDELA_2_URL}${url}`,
     data,
   });
   return axiosResponse;

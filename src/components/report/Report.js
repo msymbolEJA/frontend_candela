@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import BestSeller from "./BestSeller";
 import Selected from "./Selected";
-import CostGetter from "./CostGetter";
+import DateFilter from "../../helpers/DateFilter";
 import { ConstantCost } from "./ConstantCost";
 import moment from "moment";
 import DailyChart from "./DailyChart";
@@ -27,9 +27,9 @@ const Report = () => {
         }}
       >
         {username === "Admin50" && <ConstantCost />}
-        <CostGetter dates={dates} setDates={setDates} />
+        <DateFilter dates={dates} setDates={setDates} />
         <Selected dates={dates} />
-        <DailyChart dates={dates} />
+        {/* <DailyChart dates={dates} /> */}
         <BestSeller dates={dates} />
       </div>
     </div>

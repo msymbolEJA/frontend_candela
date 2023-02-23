@@ -24,7 +24,9 @@ const Items = ({ dRow }) => {
     }/${dRow.sku
       .replace("NC_UPC_", "")
       ?.replace("MC_UPC_", "")
-      ?.replace("AC_UPC_", "")}`
+      ?.replace("AC_UPC_", "")}`,
+    {},
+    process.env.REACT_APP_CANDELA_2_URL
   );
 
   console.log(dRow);

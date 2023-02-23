@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     width: "fit-content",
-    margin: 20,
+    margin: "20px auto",
   },
   column: {
     display: "flex",
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CostGetter = ({ dates, setDates }) => {
+const DateFilter = ({ dates, setDates }) => {
   const classes = useStyles();
   const beginnerDateRef = useRef(null);
   const endDateRef = useRef(null);
@@ -64,7 +64,7 @@ const CostGetter = ({ dates, setDates }) => {
     beginnerDateRef.current.value = moment()
       .subtract(1, "months")
       .format("YYYY-MM-DD");
-  }, []);
+  }, [dates]);
 
   return (
     <Paper className={classes.paper} style={{}}>
@@ -88,7 +88,7 @@ const CostGetter = ({ dates, setDates }) => {
           onClick={getDate}
           className={classes.btn}
         >
-          Calculate
+          Filter
         </Button>
         <Button
           size="small"
@@ -104,4 +104,4 @@ const CostGetter = ({ dates, setDates }) => {
   );
 };
 
-export default CostGetter;
+export default DateFilter;

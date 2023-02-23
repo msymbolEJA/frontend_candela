@@ -6,6 +6,7 @@ import moment from "moment";
 import ItemsTable from "./ItemsTable";
 import OrderTracking from "../otheritems/OrderTracking";
 import { bgColorSetter, upcEditFunc } from "../../../helpers/functions";
+import { WAL_OrderStatus } from "../../../helpers/Constants";
 
 const useRowStyles = makeStyles({
   root: {
@@ -81,7 +82,10 @@ function Row(props) {
         <TableCell align="center">
           {moment.utc(row.orderDate).local().format("MM-DD-YY HH:mm")}
         </TableCell>
-        <TableCell align="center">{row.orderStatus}</TableCell>
+        <TableCell align="center">
+          {WAL_OrderStatus.find((item) => item.id === row.orderStatus)?.status}
+        </TableCell>
+
         <TableCell align="center">{row.address1}</TableCell>
         <TableCell align="center">
           {row.address2 ? row.address2 : "No Info"}

@@ -30,7 +30,9 @@ const Items = ({ dRow }) => {
         : "bb"
     }/${dRow.SellerPartNumber?.replace("NC_UPC_", "")
       ?.replace("MC_UPC_", "")
-      ?.replace("AC_UPC_", "")}`
+      ?.replace("AC_UPC_", "")}`,
+      {},
+      process.env.REACT_APP_CANDELA_1_URL
   );
 
   // console.log(dRow?.SellerPartNumber.includes("MC"));

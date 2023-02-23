@@ -10,7 +10,8 @@ axios.interceptors.request.use(function (config) {
   if (
     token &&
     !config?.url?.includes("/login/") &&
-    !config?.url?.includes("216.128.135.6")
+    !config?.url?.includes("216.128.135.6") &&
+    !config?.url?.includes("45.32.194.193")
   ) {
     config.headers.Authorization = `Token ${token}`;
   }

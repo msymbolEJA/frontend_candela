@@ -44,7 +44,8 @@ export default function Amazon() {
     `amz/?limit=${rowsPerPage}&offset=${
       page * rowsPerPage
     }&search=${searchKeyword}`,
-    { results: [], count: 0 }
+    { results: [], count: 0 },
+    process.env.REACT_APP_CANDELA_2_URL
   );
 
   const handleChangePage = (event, newPage) => {

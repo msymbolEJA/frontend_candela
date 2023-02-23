@@ -44,7 +44,8 @@ export default function MLabsOrdersTable() {
     `mlab/?limit=${rowsPerPage}&offset=${
       page * rowsPerPage
     }&search=${searchKeyword}`,
-    { results: [], count: 0 }
+    { results: [], count: 0 },
+    process.env.REACT_APP_CANDELA_1_URL
   );
 
   console.log(response?.results[0]);

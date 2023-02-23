@@ -55,53 +55,58 @@ export default function CustomizedTables({ dates }) {
   const [stats, setStats] = useState({
     ne: [],
     nb: [],
-    wa: [],
+    wa3: [],
     cawa: [],
     wa2: [],
   });
   const [statRows, setStatRows] = useState([]);
   const neReport = useFetch(
     `report/summ/ne/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
-    { results: [], count: 0 }
+    { results: [], count: 0 },
+    process.env.REACT_APP_CANDELA_1_URL
   );
   const nbReport = useFetch(
     `report/summ/nb/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
-    { results: [], count: 0 }
+    { results: [], count: 0 },
+    process.env.REACT_APP_CANDELA_1_URL
   );
-  const waReport = useFetch(
-    `report/summ/wa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
-    { results: [], count: 0 }
+  const wa3Report = useFetch(
+    `report3/summ/wa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+    { results: [], count: 0 },
+    process.env.REACT_APP_CANDELA_3_URL
   );
   const cawaReport = useFetch(
     `report/summ/cawa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
-    { results: [], count: 0 }
+    { results: [], count: 0 },
+    process.env.REACT_APP_CANDELA_1_URL
   );
   const waReport2 = useFetch(
     `report2/summ/wa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 },
-    "http://216.128.135.6:8080/"
+    process.env.REACT_APP_CANDELA_2_URL
   );
-  const otherReport = useFetch(`report/const/`, {
-    results: [],
-    count: 0,
-  });
-
-  let start = moment(dates.start_date, "YYYY-MM-DD");
-  let end = moment(dates.end_date, "YYYY-MM-DD");
+  const otherReport = useFetch(
+    `report/const/`,
+    {
+      results: [],
+      count: 0,
+    },
+    process.env.REACT_APP_CANDELA_1_URL
+  );
 
   useEffect(() => {
     setStats((stats) => ({
       ...stats,
       ne: neReport.response,
       nb: nbReport.response,
-      wa: waReport.response,
+      wa3: wa3Report.response,
       cawa: cawaReport.response,
       wa2: waReport2.response,
     }));
   }, [
     neReport.response,
     nbReport.response,
-    waReport.response,
+    wa3Report.response,
     cawaReport.response,
     waReport2.response,
   ]);
@@ -111,177 +116,101 @@ export default function CustomizedTables({ dates }) {
     setStatRows([
       {
         id: "SALES",
-        wa: stats.wa.sales,
+        wa3: stats.wa3.sales,
         cawa: stats.cawa.sales,
         wa2: stats.wa2.sales,
         ne: stats.ne.sales,
         nb: stats.nb.sales,
         gt:
-          stats.ne.sales +
-          stats.nb.sales +
-          stats.wa.sales +
-          stats.cawa.sales +
+          // (stats.cawa.sales || 0) +
+          (stats.ne.sales || 0) +
+          (stats.nb.sales || 0) +
+          (stats.wa3.sales || 0) +
           (stats.wa2.sales || 0),
       },
       {
         id: "COST",
-        wa: stats.wa.cost,
+        wa3: stats.wa3.cost,
         cawa: stats.cawa.cost,
         wa2: stats.wa2.cost,
         ne: stats.ne.cost,
         nb: stats.nb.cost,
         gt:
-          stats.ne.cost + stats.nb.cost + stats.wa.cost + stats.cawa.cost + (stats.wa2.cost || 0),
+          // (stats.cawa.cost || 0) +
+          (stats.ne.cost || 0) +
+          (stats.nb.cost || 0) +
+          (stats.wa3.cost || 0) +
+          (stats.wa2.cost || 0),
       },
       {
         id: "GROSS PROFIT",
-        wa: stats.wa.gross_profit,
+        wa3: stats.wa3.gross_profit,
         cawa: stats.cawa.gross_profit,
         wa2: stats.wa2.gross_profit,
         ne: stats.ne.gross_profit,
         nb: stats.nb.gross_profit,
         gt:
-          stats.ne.gross_profit +
-          stats.nb.gross_profit +
-          stats.wa.gross_profit +
-          stats.cawa.gross_profit +
+          // (stats.cawa.gross_profit || 0) +
+          (stats.ne.gross_profit || 0) +
+          (stats.nb.gross_profit || 0) +
+          (stats.wa3.gross_profit || 0) +
           (stats.wa2.gross_profit || 0),
       },
       {
         id: "COMMISSION",
-        wa: stats.wa.commision_cost,
+        wa3: stats.wa3.commision_cost,
         cawa: stats.cawa.commision_cost,
         wa2: stats.wa2.commision_cost,
         ne: stats.ne.commision_cost,
         nb: stats.nb.commision_cost,
         gt:
-          stats.ne.commision_cost +
-          stats.nb.commision_cost +
-          stats.wa.commision_cost +
-          stats.cawa.commision_cost +
+          // (stats.cawa.commision_cost || 0) +
+          (stats.ne.commision_cost || 0) +
+          (stats.nb.commision_cost || 0) +
+          (stats.wa3.commision_cost || 0) +
           (stats.wa2.commision_cost || 0),
       },
       {
         id: "SHIPPING/HANDLING",
-        wa: stats.wa.shipping_cost,
-        cawa: stats.cawa.shipping_cost,
-        wa2: stats.wa2.shipping_cost,
-        ne: stats.ne.shipping_cost,
-        nb: stats.nb.shipping_cost,
+        wa3: stats.wa3.ship_cost,
+        cawa: stats.cawa.ship_cost,
+        wa2: stats.wa2.ship_cost,
+        ne: stats.ne.ship_cost,
+        nb: stats.nb.ship_cost,
         gt:
-          stats.ne.shipping_cost +
-          stats.nb.shipping_cost +
-          stats.wa.shipping_cost +
-          stats.cawa.shipping_cost +
-          (stats.wa2.shipping_cost || 0),
+          // (stats.cawa.ship_cost || 0) +
+          (stats.ne.ship_cost || 0) +
+          (stats.nb.ship_cost || 0) +
+          (stats.wa3.ship_cost || 0) +
+          (stats.wa2.ship_cost || 0),
       },
       {
         id: "OTHER",
-        wa:
-          moment.duration(start.diff(end)).asDays() *
-          -1 *
-          stats.wa.daily_other_exp,
-        cawa:
-          moment.duration(start.diff(end)).asDays() *
-          -1 *
-          (stats.cawa.daily_other_exp || 0),
-        wa2:
-          moment.duration(start.diff(end)).asDays() *
-          -1 *
-          (stats.wa2.daily_other_exp || 0),
-        ne:
-          moment.duration(start.diff(end)).asDays() *
-          -1 *
-          stats.ne.daily_other_exp,
-        nb:
-          moment.duration(start.diff(end)).asDays() *
-          -1 *
-          stats.nb.daily_other_exp,
+        wa3: stats.wa3.daily_other_exp,
+        cawa: stats.cawa.daily_other_exp,
+        wa2: stats.wa2.daily_other_exp,
+        ne: stats.ne.daily_other_exp,
+        nb: stats.nb.daily_other_exp,
         gt:
-          moment.duration(start.diff(end)).asDays() *
-            -1 *
-            stats.ne.daily_other_exp +
-          moment.duration(start.diff(end)).asDays() *
-            -1 *
-            stats.nb.daily_other_exp +
-          moment.duration(start.diff(end)).asDays() *
-            -1 *
-            stats.wa.daily_other_exp +
-          moment.duration(start.diff(end)).asDays() *
-            -1 *
-            stats.cawa.daily_other_exp +
-          moment.duration(start.diff(end)).asDays() *
-            -1 *
-            (stats.wa2.daily_other_exp || 0),
+          // (stats.cawa.daily_other_exp || 0) +
+          (stats.ne.daily_other_exp || 0) +
+          (stats.nb.daily_other_exp || 0) +
+          (stats.wa3.daily_other_exp || 0) +
+          (stats.wa2.daily_other_exp || 0),
       },
       {
         id: "NET PROFIT",
-        wa:
-          stats.wa.gross_profit -
-          stats.wa.commision_cost -
-          stats.wa.shipping_cost -
-          moment.duration(start.diff(end)).asDays() *
-            -1 *
-            stats.wa.daily_other_exp,
-        cawa:
-          stats.cawa.gross_profit -
-          stats.cawa.commision_cost -
-          stats.cawa.shipping_cost -
-          moment.duration(start.diff(end)).asDays() *
-            -1 *
-            stats.cawa.daily_other_exp,
-        wa2:
-          (stats.wa2.gross_profit || 0) -
-          (stats.wa2.commision_cost || 0) -
-          (stats.wa2.shipping_cost || 0) -
-          moment.duration(start.diff(end)).asDays() *
-            -1 *
-            (stats.wa2.daily_other_exp || 0),
-        ne:
-          stats.ne.gross_profit -
-          stats.ne.commision_cost -
-          stats.ne.shipping_cost -
-          moment.duration(start.diff(end)).asDays() *
-            -1 *
-            stats.ne.daily_other_exp,
-        nb:
-          stats.nb.gross_profit -
-          stats.nb.commision_cost -
-          stats.nb.shipping_cost -
-          moment.duration(start.diff(end)).asDays() *
-            -1 *
-            stats.nb.daily_other_exp,
+        wa3: stats.wa3.net_profit,
+        cawa: stats.cawa.net_profit,
+        wa2: stats.wa2.net_profit,
+        ne: stats.ne.net_profit,
+        nb: stats.nb.net_profit,
         gt:
-          stats.ne.gross_profit -
-          stats.ne.commision_cost -
-          stats.ne.shipping_cost -
-          moment.duration(start.diff(end)).asDays() *
-            -1 *
-            stats.ne.daily_other_exp +
-          stats.nb.gross_profit -
-          stats.nb.commision_cost -
-          stats.nb.shipping_cost -
-          moment.duration(start.diff(end)).asDays() *
-            -1 *
-            stats.nb.daily_other_exp +
-          stats.wa.gross_profit -
-          stats.wa.commision_cost -
-          stats.wa.shipping_cost -
-          moment.duration(start.diff(end)).asDays() *
-            -1 *
-            stats.wa.daily_other_exp +
-          stats.cawa.gross_profit -
-          stats.cawa.commision_cost -
-          stats.cawa.shipping_cost -
-          moment.duration(start.diff(end)).asDays() *
-            -1 *
-            stats.cawa.daily_other_exp +
-          stats.wa2.gross_profit -
-          stats.wa2.commision_cost -
-          stats.wa2.shipping_cost -
-          moment.duration(start.diff(end)).asDays() *
-            -1 *
-            stats.wa2.daily_other_exp,
+          // (stats.cawa.net_profit || 0) +
+          (stats.ne.net_profit || 0) +
+          (stats.nb.net_profit || 0) +
+          (stats.wa3.net_profit || 0) +
+          (stats.wa2.net_profit || 0),
       },
     ]);
     // eslint-disable-next-line
@@ -289,7 +218,7 @@ export default function CustomizedTables({ dates }) {
 
   const getPercentage = (shop, index) => {
     const total =
-      (statRows[index]?.wa >= 0 ? statRows[index]?.wa : 0) +
+      (statRows[index]?.wa3 >= 0 ? statRows[index]?.wa3 : 0) +
       (statRows[index]?.cawa >= 0 ? statRows[index]?.cawa : 0) +
       (statRows[index]?.wa2 >= 0 ? statRows[index]?.wa2 : 0) +
       (statRows[index]?.nb >= 0 ? statRows[index]?.nb : 0) +
@@ -306,7 +235,7 @@ export default function CustomizedTables({ dates }) {
       {
         label: "Sales 2020 (M)",
         data: [
-          getPercentage("wa", 0),
+          getPercentage("wa3", 0),
           getPercentage("cawa", 0),
           getPercentage("wa2", 0),
           getPercentage("nb", 0),
@@ -331,12 +260,12 @@ export default function CustomizedTables({ dates }) {
   };
 
   const netProfitData = {
-    labels: ["Walmart", "WalmartCa","Walmart2", "NewEgg Bussines", "NewEgg"],
+    labels: ["Walmart", "WalmartCa", "Walmart2", "NewEgg Bussines", "NewEgg"],
     datasets: [
       {
         label: "Sales 2020 (M)",
         data: [
-          getPercentage("wa", 6),
+          getPercentage("wa3", 6),
           getPercentage("cawa", 6),
           getPercentage("wa2", 6),
           getPercentage("nb", 6),
@@ -383,13 +312,13 @@ export default function CustomizedTables({ dates }) {
                     {row.id}
                   </StyledTableCell>
                   <StyledTableCell align="right">
-                    {row.wa?.toFixed(2) || 0}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
                     {row.cawa?.toFixed(2) || 0}
                   </StyledTableCell>
                   <StyledTableCell align="right">
                     {row.wa2?.toFixed(2) || 0}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {row.wa3?.toFixed(2) || 0}
                   </StyledTableCell>
                   <StyledTableCell align="right">
                     {row.ne?.toFixed(2) || 0}
@@ -404,9 +333,10 @@ export default function CustomizedTables({ dates }) {
               ))}
             </TableBody>
           </Table>
+          * Walmart Canada is not included in Grand Total
         </TableContainer>
       </div>
-      <div className={classes.chartDiv}>
+      {/* <div className={classes.chartDiv}>
         <div style={{ width: "40%" }}>
           <h3>Sales (%)</h3>
           <Doughnut data={salesData} options={salesOptions} />
@@ -415,7 +345,7 @@ export default function CustomizedTables({ dates }) {
           <h3>Net Profit (%)</h3>
           <Doughnut data={netProfitData} options={netProfitOptions} />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

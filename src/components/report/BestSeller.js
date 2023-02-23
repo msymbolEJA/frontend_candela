@@ -119,34 +119,38 @@ export default function EnhancedTable({ dates }) {
   const [rows, setRows] = useState([]);
   const neOrders = useFetch(
     `report/ne?end_date=${dates.end_date}&start_date=${dates.start_date}`,
-    { results: [], count: 0 }
+    { results: [], count: 0 },
+    process.env.REACT_APP_CANDELA_1_URL
   );
-  const waOrders = useFetch(
-    `report/wa?end_date=${dates.end_date}&start_date=${dates.start_date}`,
-    { results: [], count: 0 }
-  ); 
+
   const cawaOrders = useFetch(
     `report/cawa?end_date=${dates.end_date}&start_date=${dates.start_date}`,
-    { results: [], count: 0 }
-  ); 
+    { results: [], count: 0 },
+    process.env.REACT_APP_CANDELA_1_URL
+  );
 
   const wa2Orders = useFetch(
     `report2/wa?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 },
-    "http://216.128.135.6:8080/"
+    process.env.REACT_APP_CANDELA_2_URL
+  );
+  const wa3Orders = useFetch(
+    `report3/wa?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+    { results: [], count: 0 },
+    process.env.REACT_APP_CANDELA_3_URL
   );
 
   useEffect(() => {
     const newArr = [
       ...neOrders.response.results,
-      ...waOrders.response.results,
+      ...wa3Orders.response.results,
       ...cawaOrders.response.results,
       ...wa2Orders.response.results,
     ];
     setRows(newArr);
   }, [
     neOrders?.response?.results,
-    waOrders?.response?.results,
+    wa3Orders?.response?.results,
     cawaOrders?.response?.results,
     wa2Orders?.response?.results,
   ]);

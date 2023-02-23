@@ -38,7 +38,11 @@ const LogTable = (props) => {
   const { response, error, loading } = useFetch(
     `/logs/?order_num=${props.match.params.id}`,
     {},
-    props.match.params.shop === "wal2" ? "http://216.128.135.6:8080" : null
+    props.match.params.shop === "wal2"
+      ? process.env.REACT_APP_CANDELA_2_URL
+      : props.match.params.shop === "wal3"
+      ? process.env.REACT_APP_CANDELA_3_URL
+      : process.env.REACT_APP_CANDELA_1_URL
   );
   const classes = useStyles();
 

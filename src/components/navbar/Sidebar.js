@@ -60,17 +60,17 @@ const menuLinks = [
   },
   {
     id: 2,
-    title: "Walmart",
-    abr: "WA",
-    icon: Assignment,
-    link: "/orders/wal",
-  },
-  {
-    id: 3,
     title: "Walmart2",
     abr: "WA2",
     icon: Assignment,
     link: "/orders/wal2",
+  },
+  {
+    id: 3,
+    title: "Walmart3",
+    abr: "WA3",
+    icon: Assignment,
+    link: "/orders/wal3",
   },
   {
     id: 4,

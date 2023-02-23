@@ -14,7 +14,7 @@ import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 import { TableNoOrders } from "../../../helpers/NoOrders";
 import { TableError } from "../../../helpers/Errors";
 import CustomTableFooter from "../otheritems/CustomTableFooter";
-import { WALOrderStatus, customTopStatus } from "../../../helpers/Constants";
+import { WAL_CAOrderStatus, customTopStatus } from "../../../helpers/Constants";
 import TopCustomButtonGroup from "../otheritems/TopCustomStatusGroup";
 import SearchField from "../otheritems/SearchField";
 
@@ -45,7 +45,7 @@ const useRowStyles = makeStyles({
   },
 });
 
-export default function NEOrdersTable() {
+export default function WalCAOrdersTable() {
   const classes = useRowStyles();
   const [buttonTag, setButtonTag] = useState("");
   const [page, setPage] = useState(0);
@@ -56,7 +56,8 @@ export default function NEOrdersTable() {
     `cawal/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
     }&search=${searchKeyword}&items__tracking__status=${customStatusTag}`,
-    { results: [], count: 0 }
+    { results: [], count: 0 },
+    process.env.REACT_APP_CANDELA_1_URL
   );
 
   const handleChangePage = (event, newPage) => {
@@ -147,7 +148,7 @@ export default function NEOrdersTable() {
       <TopButtonGroup
         buttonTag={buttonTag}
         handleTagBtnClick={handleTagBtnClick}
-        orderStatusTags={WALOrderStatus}
+        orderStatusTags={WAL_CAOrderStatus}
       />
       <TopCustomButtonGroup
         buttonTag={customStatusTag}

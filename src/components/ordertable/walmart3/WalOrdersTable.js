@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import moment from "moment";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -14,9 +16,10 @@ import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 import { TableNoOrders } from "../../../helpers/NoOrders";
 import { TableError } from "../../../helpers/Errors";
 import CustomTableFooter from "../otheritems/CustomTableFooter";
-import { WALOrderStatus, customTopStatus } from "../../../helpers/Constants";
+import { WAL_OrderStatus, customTopStatus } from "../../../helpers/Constants";
 import TopCustomButtonGroup from "../otheritems/TopCustomStatusGroup";
 import SearchField from "../otheritems/SearchField";
+import DateFilter from "../../../helpers/DateFilter";
 
 const useRowStyles = makeStyles({
   root: {
@@ -45,18 +48,26 @@ const useRowStyles = makeStyles({
   },
 });
 
-export default function NEOrdersTable() {
+export default function Wal3OrdersTable() {
   const classes = useRowStyles();
   const [buttonTag, setButtonTag] = useState("");
+  const [dates, setDates] = useState({
+    end_date: moment().format("YYYY-MM-DD"),
+    start_date: moment().subtract(1, "months").format("YYYY-MM-DD"),
+  });
   const [page, setPage] = useState(0);
   const [customStatusTag, setCustomStatusTag] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [searchKeyword, setSearchKeyword] = useState("");
+
   const { response, error, loading, setLoading } = useFetch(
-    `wal/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
+    `wal3/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
-    }&search=${searchKeyword}&items__tracking__status=${customStatusTag}`,
-    { results: [], count: 0 }
+    }&search=${searchKeyword}&items__tracking__status=${customStatusTag}&end_date=${
+      dates.end_date
+    }&start_date=${dates.start_date}`,
+    { results: [], count: 0 },
+    process.env.REACT_APP_CANDELA_3_URL
   );
 
   const handleChangePage = (event, newPage) => {
@@ -141,13 +152,14 @@ export default function NEOrdersTable() {
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
       <div className={classes.topDiv}>
-        <h2 className={classes.headerStyle}>Walmart Orders</h2>
+        <h2 className={classes.headerStyle}>Walmart-3 Orders</h2>
         <SearchField globalSearch={globalSearch} />
       </div>
+      <DateFilter dates={dates} setDates={setDates} />
       <TopButtonGroup
         buttonTag={buttonTag}
         handleTagBtnClick={handleTagBtnClick}
-        orderStatusTags={WALOrderStatus}
+        orderStatusTags={WAL_OrderStatus}
       />
       <TopCustomButtonGroup
         buttonTag={customStatusTag}

@@ -31,8 +31,9 @@ const Items = ({ dRow }) => {
     }/${dRow.SellerPartNumber?.replace("NC_UPC_", "")
       ?.replace("MC_UPC_", "")
       ?.replace("AC_UPC_", "")
-      ?.replace("ML_UPC_", "")
-    }`
+      ?.replace("ML_UPC_", "")}`,
+    {},
+    process.env.REACT_APP_CANDELA_1_URL
   );
 
   let isBuyable =
@@ -69,7 +70,11 @@ const Items = ({ dRow }) => {
             {response?.pre_salePrice ? response?.pre_salePrice : null}
           </p>
           <p className={classes.priceStyle}>
-            {response?.salePrice ? response?.salePrice :  response?.price ? response?.price : "-"}
+            {response?.salePrice
+              ? response?.salePrice
+              : response?.price
+              ? response?.price
+              : "-"}
           </p>
           {response?.url ? (
             <a href={response?.url} target="_blank" rel="noreferrer">

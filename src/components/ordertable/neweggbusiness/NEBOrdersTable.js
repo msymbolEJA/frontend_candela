@@ -56,7 +56,8 @@ export default function NEOrdersTable() {
     `ne/b2b/?OrderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
     }&search=${searchKeyword}&items__tracking__status=${customStatusTag}`,
-    { results: [], count: 0 }
+    { results: [], count: 0 },
+    process.env.REACT_APP_CANDELA_1_URL
   );
 
   const handleChangePage = (event, newPage) => {

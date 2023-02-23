@@ -37,7 +37,11 @@ const useStyles = makeStyles({
 
 export const ConstantCost = () => {
   const classes = useStyles();
-  const { response } = useFetch(`report/const/`, {});
+  const { response } = useFetch(
+    `report/const/`,
+    {},
+    process.env.REACT_APP_CANDELA_1_URL
+  );
   const [constantCosts, setConstantCosts] = useState([]);
 
   useEffect(() => {

@@ -7,7 +7,7 @@ export const NEOrderStatus = [
   { id: 4, status: "Voided" },
 ];
 
-export const WALOrderStatus = [
+export const WAL_CAOrderStatus = [
   { id: "", status: "All" },
   { id: "Created", status: "Created" },
   { id: "Acknowledged", status: "Acknowledged" },
@@ -15,6 +15,17 @@ export const WALOrderStatus = [
   { id: "Delivered", status: "Delivered" },
   { id: "Cancelled", status: "Cancelled" },
   { id: "Refund", status: "Refund" },
+];
+
+export const WAL_OrderStatus = [
+  { id: "", status: "All" },
+  { id: "Created", status: "Created" },
+  { id: "Acknowledged", status: "Acknowledged" },
+  { id: "Shipped", status: "Shipped" },
+  { id: "Delivered", status: "Delivered" },
+  { id: "Cancelled", status: "Cancelled" },
+  { id: "refund_initiated", status: "Refund Initiated" },
+  { id: "refund_completed", status: "Refund Completed" },
 ];
 
 export const OrderFormSelect = [
@@ -39,37 +50,13 @@ export const OrderFormSelect = [
     ],
   },
   {
-    label: "SO User",
-    name: "so_user",
-    selectArray: [
-      { id: 1, status: "Umut" },
-      { id: 2, status: "Mert" },
-      { id: 3, status: "Emre" },
-      { id: 4, status: "Senih" },
-      { id: 5, status: "Other" },
-    ],
+    label: "SO User/Ship Note",
+    name: "user_ship_note",
+    selectArray: [],
   },
   {
     label: "SO Info",
     name: "so_info",
-    selectArray: [
-      { id: 1, status: "MemoryAmerica" },
-      { id: 2, status: "Gigatech Products. Inc." },
-      { id: 3, status: "Other" },
-    ],
-  },
-  {
-    label: "PO Vendor",
-    name: "po_vendor",
-    selectArray: [
-      { id: 1, status: "MemoryAmerica" },
-      { id: 2, status: "Gigatech Products. Inc." },
-      { id: 3, status: "Other" },
-    ],
-  },
-  {
-    label: "PO Num",
-    name: "po_num",
     selectArray: [
       { id: 1, status: "MemoryAmerica" },
       { id: 2, status: "Gigatech Products. Inc." },
@@ -83,65 +70,32 @@ export const OrderFormSelect = [
     selectArray: [],
   },
   {
-    label: "Payment Method",
-    name: "pay_method",
-    selectArray: [
-      { id: 1, status: "PayPal" },
-      { id: 2, status: "MC-1000" },
-      { id: 3, status: "CC-5574" },
-      { id: 4, status: "Other" },
-    ],
-  },
-  {
-    label: "Quantity",
-    name: "qty",
+    label: "Ship Cost",
+    name: "ship_cost",
     type: "number",
     selectArray: [],
   },
   {
-    label: "Condition",
-    name: "condition",
-    selectArray: [
-      { id: 1, status: "MemoryAmerica" },
-      { id: 2, status: "Gigatech Products. Inc." },
-      { id: 3, status: "Other" },
-    ],
+    label: "Refund Cost",
+    name: "refund_cost",
+    type: "number",
+    selectArray: [],
   },
   {
-    label: "Tracking",
-    name: "tracking",
-    selectArray: [
-      { id: 1, status: "MemoryAmerica" },
-      { id: 2, status: "Gigatech Products. Inc." },
-      { id: 3, status: "Other" },
-    ],
+    label: "Stock Cost",
+    name: "stock_cost",
+    type: "number",
+    selectArray: [],
   },
   {
-    label: "Serial",
-    name: "serial",
-    selectArray: [
-      { id: 1, status: "MemoryAmerica" },
-      { id: 2, status: "Gigatech Products. Inc." },
-      { id: 3, status: "Other" },
-    ],
+    label: "Error Reason",
+    name: "error_reason",
+    selectArray: [],
   },
   {
-    label: "PO Info",
-    name: "po_info",
-    selectArray: [
-      { id: 1, status: "MemoryAmerica" },
-      { id: 2, status: "Gigatech Products. Inc." },
-      { id: 3, status: "Other" },
-    ],
-  },
-  {
-    label: "Account Owner",
-    name: "account_owner",
-    selectArray: [
-      { id: 1, status: "MemoryAmerica" },
-      { id: 2, status: "Gigatech Products. Inc." },
-      { id: 3, status: "Other" },
-    ],
+    label: "Other",
+    name: "other",
+    selectArray: [],
   },
 ];
 
@@ -173,9 +127,9 @@ export const bestSellerTableHeaders = [
 ];
 
 export const selectedHeaders = [
-  { id: "wa", label: "WALMART" },
   { id: "cawa", label: "WALMARTCA" },
   { id: "wa2", label: "WALMART2" },
+  { id: "wa", label: "WALMART3" },
   {
     id: "ne",
     label: "NEWEGG",

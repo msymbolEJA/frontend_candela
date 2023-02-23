@@ -6,7 +6,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 export default function FreeSolo({ order, setFormInfo, formInfo }) {
   return (
     <Autocomplete
-      style={{ minWidth: 150 }}
+      style={{ minWidth: 180, marginRight: 8 }}
       id={order?.label}
       size="small"
       disableClearable

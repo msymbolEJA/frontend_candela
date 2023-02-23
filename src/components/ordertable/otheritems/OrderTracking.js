@@ -63,7 +63,11 @@ const OrderTracking = ({ open, detRow, store, base }) => {
   const { response, error, loading } = useFetch(
     `${store}/ordertrack/${detRow.id}`,
     {},
-    store === "wal2" ? "http://216.128.135.6:8080/" : null
+    store === "wal2"
+    ? process.env.REACT_APP_CANDELA_2_URL
+    : store === "wal3"
+    ? process.env.REACT_APP_CANDELA_3_URL
+    : process.env.REACT_APP_CANDELA_1_URL
   );
   const [formInfo, setFormInfo] = useState({
     id: 1,
