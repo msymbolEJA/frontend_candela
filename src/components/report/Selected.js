@@ -129,7 +129,7 @@ export default function CustomizedTables({ dates }) {
           (stats.wa2.sales || 0),
       },
       {
-        id: "COST",
+        id: "PO COST",
         wa3: stats.wa3.cost,
         cawa: stats.cawa.cost,
         wa2: stats.wa2.cost,
@@ -143,60 +143,60 @@ export default function CustomizedTables({ dates }) {
           (stats.wa2.cost || 0),
       },
       {
-        id: "GROSS PROFIT",
-        wa3: stats.wa3.gross_profit,
-        cawa: stats.cawa.gross_profit,
-        wa2: stats.wa2.gross_profit,
-        ne: stats.ne.gross_profit,
-        nb: stats.nb.gross_profit,
-        gt:
-          // (stats.cawa.gross_profit || 0) +
-          (stats.ne.gross_profit || 0) +
-          (stats.nb.gross_profit || 0) +
-          (stats.wa3.gross_profit || 0) +
-          (stats.wa2.gross_profit || 0),
-      },
-      {
-        id: "COMMISSION",
-        wa3: stats.wa3.commision_cost,
-        cawa: stats.cawa.commision_cost,
-        wa2: stats.wa2.commision_cost,
-        ne: stats.ne.commision_cost,
-        nb: stats.nb.commision_cost,
-        gt:
-          // (stats.cawa.commision_cost || 0) +
-          (stats.ne.commision_cost || 0) +
-          (stats.nb.commision_cost || 0) +
-          (stats.wa3.commision_cost || 0) +
-          (stats.wa2.commision_cost || 0),
-      },
-      {
-        id: "SHIPPING/HANDLING",
+        id: "SHIP COST",
         wa3: stats.wa3.ship_cost,
         cawa: stats.cawa.ship_cost,
         wa2: stats.wa2.ship_cost,
         ne: stats.ne.ship_cost,
         nb: stats.nb.ship_cost,
         gt:
-          // (stats.cawa.ship_cost || 0) +
+          // (stats.cawa.gross_profit || 0) +
           (stats.ne.ship_cost || 0) +
           (stats.nb.ship_cost || 0) +
           (stats.wa3.ship_cost || 0) +
           (stats.wa2.ship_cost || 0),
       },
       {
-        id: "OTHER",
-        wa3: stats.wa3.daily_other_exp,
-        cawa: stats.cawa.daily_other_exp,
-        wa2: stats.wa2.daily_other_exp,
-        ne: stats.ne.daily_other_exp,
-        nb: stats.nb.daily_other_exp,
+        id: "REFUND COST",
+        wa3: stats.wa3.refund_cost,
+        cawa: stats.cawa.refund_cost,
+        wa2: stats.wa2.refund_cost,
+        ne: stats.ne.refund_cost,
+        nb: stats.nb.refund_cost,
         gt:
-          // (stats.cawa.daily_other_exp || 0) +
-          (stats.ne.daily_other_exp || 0) +
-          (stats.nb.daily_other_exp || 0) +
-          (stats.wa3.daily_other_exp || 0) +
-          (stats.wa2.daily_other_exp || 0),
+          // (stats.cawa.refund_cost || 0) +
+          (stats.ne.refund_cost || 0) +
+          (stats.nb.refund_cost || 0) +
+          (stats.wa3.refund_cost || 0) +
+          (stats.wa2.refund_cost || 0),
+      },
+      {
+        id: "RETURN AMOUNT",
+        wa3: stats.wa3.return_amount,
+        cawa: stats.cawa.return_amount,
+        wa2: stats.wa2.return_amount,
+        ne: stats.ne.return_amount,
+        nb: stats.nb.return_amount,
+        gt:
+          // (stats.cawa.return_amount || 0) +
+          (stats.ne.return_amount || 0) +
+          (stats.nb.return_amount || 0) +
+          (stats.wa3.return_amount || 0) +
+          (stats.wa2.return_amount || 0),
+      },
+      {
+        id: "STOCK COST",
+        wa3: stats.wa3.stock_cost,
+        cawa: stats.cawa.stock_cost,
+        wa2: stats.wa2.stock_cost,
+        ne: stats.ne.stock_cost,
+        nb: stats.nb.stock_cost,
+        gt:
+          // (stats.cawa.stock_cost || 0) +
+          (stats.ne.stock_cost || 0) +
+          (stats.nb.stock_cost || 0) +
+          (stats.wa3.stock_cost || 0) +
+          (stats.wa2.stock_cost || 0),
       },
       {
         id: "NET PROFIT",
