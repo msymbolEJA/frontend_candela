@@ -23,11 +23,15 @@ export const bgColorSetter = (item) => {
     ? "#FF7171"
     : item?.includes("Error")
     ? "#8F4068"
+    : item?.includes("Dispute")
+    ? "#8F4068"
     : item?.includes("Late-shipment")
     ? "#B590CA"
     : item?.includes("Ordered")
     ? "#F3D1F4"
-    : item?.includes("Refund/return")
+    : item?.includes("Returned Supplier")
+    ? "#F3D1F4"
+    : item?.includes("Returned Stocked")
     ? "#C06C84"
     : item?.includes("Shipped")
     ? "#C68B59"
@@ -37,11 +41,11 @@ export const bgColorSetter = (item) => {
     ? "#8AC6D1"
     : item?.includes("Ready")
     ? "#32AFA9"
-    : item?.includes("Partial-refund")
+    : item?.includes("Fake Refund")
     ? "#445C3C"
     : item?.includes("Reserved")
     ? "#F7DAD9"
-    : item?.includes("Label Purchased")
+    : item?.includes("Shipsurance")
     ? "#FFC947"
     : item?.includes("Other")
     ? "#DBE9B7"

@@ -60,6 +60,7 @@ const DateFilter = ({ dates, setDates }) => {
   };
 
   useEffect(() => {
+    if (dates?.start_date) return;
     endDateRef.current.value = moment().format("YYYY-MM-DD");
     beginnerDateRef.current.value = moment()
       .subtract(1, "months")
