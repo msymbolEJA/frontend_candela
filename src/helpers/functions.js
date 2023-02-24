@@ -49,5 +49,5 @@ export const bgColorSetter = (item) => {
     ? "#FFC947"
     : item?.includes("Other")
     ? "#DBE9B7"
-    : "bdd2b6";
+    : "#bdd2b6";
 };

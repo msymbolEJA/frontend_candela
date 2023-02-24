@@ -89,7 +89,12 @@ export const OrderFormSelect = [
   {
     label: "Error Reason",
     name: "error_reason",
-    selectArray: [],
+    selectArray: [
+      { id: 1, status: "Price error / Dimension" },
+      { id: 2, status: "Out of Stock" },
+      { id: 3, status: "Wrong Variant" },
+      { id: 4, status: "Wrong Item" },
+    ],
   },
   {
     label: "Other",

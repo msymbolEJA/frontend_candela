@@ -9,8 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import useFetch from "../../hooks/useFetch";
 import { selectedHeaders } from "../../helpers/Constants";
-import moment from "moment";
-import { Doughnut } from "react-chartjs-2";
+import { Typography } from "@material-ui/core";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -47,6 +46,13 @@ const useStyles = makeStyles({
     padding: "25px",
     margin: "25px",
     borderRadius: "10px",
+  },
+  infoText: {
+    fontWeight: "bold",
+    padding: 8,
+  },
+  selectedText: {
+    padding: 8,
   },
 });
 
@@ -142,6 +148,22 @@ export default function CustomizedTables({ dates }) {
           (stats.wa3.cost || 0) +
           (stats.wa2.cost || 0),
       },
+
+      {
+        id: "COMISSION COST",
+        wa3: stats.wa3.commision_cost,
+        cawa: stats.cawa.commision_cost,
+        wa2: stats.wa2.commision_cost,
+        ne: stats.ne.commision_cost,
+        nb: stats.nb.commision_cost,
+        gt:
+          // (stats.cawa.commision_cost || 0) +
+          (stats.ne.commision_cost || 0) +
+          (stats.nb.commision_cost || 0) +
+          (stats.wa3.commision_cost || 0) +
+          (stats.wa2.commision_cost || 0),
+      },
+
       {
         id: "SHIP COST",
         wa3: stats.wa3.ship_cost,
@@ -293,7 +315,7 @@ export default function CustomizedTables({ dates }) {
     <div style={{ width: "90%" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <TableContainer className={classes.tContainer} component={Paper}>
-          <h2>Selected</h2>
+          <h2 className={classes.selectedText}>Selected</h2>
           <Table className={classes.table} aria-label="customized table">
             <TableHead>
               <TableRow>
@@ -333,7 +355,9 @@ export default function CustomizedTables({ dates }) {
               ))}
             </TableBody>
           </Table>
-          * Walmart Canada is not included in Grand Total
+          <Typography variant="subtitle1" className={classes.infoText}>
+            * Walmart Canada is not included in Grand Total
+          </Typography>
         </TableContainer>
       </div>
       {/* <div className={classes.chartDiv}>

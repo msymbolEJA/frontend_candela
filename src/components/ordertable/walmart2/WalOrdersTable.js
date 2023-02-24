@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import moment from "moment";
-
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -53,8 +51,8 @@ export default function Wal2OrdersTable() {
   const [buttonTag, setButtonTag] = useState("");
   const [page, setPage] = useState(0);
   const [dates, setDates] = useState({
-    end_date: moment().format("YYYY-MM-DD"),
-    start_date: moment().subtract(1, "months").format("YYYY-MM-DD"),
+    end_date: "",
+    start_date: "",
   });
   const [customStatusTag, setCustomStatusTag] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(25);

@@ -107,35 +107,39 @@ const OrderTracking = ({ open, detRow, store, base }) => {
       className={classes.innerTable}
       style={{
         backgroundColor:
-          formInfo?.status === "Awaiting-fulfillment"
-            ? "#FFF5DA"
-            : formInfo?.status === "Cancelled"
-            ? "#FF7171"
-            : formInfo?.status === "Error"
-            ? "#8F4068"
-            : formInfo?.status === "Late-shipment"
-            ? "#B590CA"
-            : formInfo?.status === "Ordered"
-            ? "#F3D1F4"
-            : formInfo?.status === "Refund/return"
-            ? "#C06C84"
-            : formInfo?.status === "Shipped"
-            ? "#C68B59"
-            : formInfo?.status === "Stock"
-            ? "#BE8ABF"
-            : formInfo?.status === "ZZZ"
-            ? "#8AC6D1"
-            : formInfo?.status === "Ready"
-            ? "#32AFA9"
-            : formInfo?.status === "Partial-refund"
-            ? "#445C3C"
-            : formInfo?.status === "Reserved"
-            ? "#F7DAD9"
-            : formInfo?.status === "Label Purchased"
-            ? "#FFC947"
-            : formInfo?.status === "Other"
-            ? "#DBE9B7"
-            : "bdd2b6",
+        formInfo?.status?.includes("Awaiting-fulfillment")
+        ? "#FFF5DA"
+        : formInfo?.status?.includes("Cancelled")
+        ? "#FF7171"
+        : formInfo?.status?.includes("Error")
+        ? "#8F4068"
+        : formInfo?.status?.includes("Dispute")
+        ? "#8F4068"
+        : formInfo?.status?.includes("Late-shipment")
+        ? "#B590CA"
+        : formInfo?.status?.includes("Ordered")
+        ? "#F3D1F4"
+        : formInfo?.status?.includes("Returned Supplier")
+        ? "#F3D1F4"
+        : formInfo?.status?.includes("Returned Stocked")
+        ? "#C06C84"
+        : formInfo?.status?.includes("Shipped")
+        ? "#C68B59"
+        : formInfo?.status?.includes("Stock")
+        ? "#BE8ABF"
+        : formInfo?.status?.includes("ZZZ")
+        ? "#8AC6D1"
+        : formInfo?.status?.includes("Ready")
+        ? "#32AFA9"
+        : formInfo?.status?.includes("Fake Refund")
+        ? "#445C3C"
+        : formInfo?.status?.includes("Reserved")
+        ? "#F7DAD9"
+        : formInfo?.status?.includes("Shipsurance")
+        ? "#FFC947"
+        : formInfo?.status?.includes("Other")
+        ? "#DBE9B7"
+        : "#bdd2b6"
       }}
     >
       <TableCell style={{ paddingBottom: 3, paddingTop: 3 }} colSpan={20}>

@@ -1,10 +1,9 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 // import { getData } from "../../helper/PostData";
 // import BorderColorIcon from "@material-ui/icons/BorderColor";
 import Button from "@material-ui/core/Button";
-import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -57,15 +56,10 @@ const DateFilter = ({ dates, setDates }) => {
       end_date: "",
       start_date: "",
     });
-  };
 
-  useEffect(() => {
-    if (dates?.start_date) return;
-    endDateRef.current.value = moment().format("YYYY-MM-DD");
-    beginnerDateRef.current.value = moment()
-      .subtract(1, "months")
-      .format("YYYY-MM-DD");
-  }, [dates]);
+    endDateRef.current.value = "";
+    beginnerDateRef.current.value = "";
+  };
 
   return (
     <Paper className={classes.paper} style={{}}>

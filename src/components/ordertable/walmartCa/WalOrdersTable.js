@@ -17,6 +17,7 @@ import CustomTableFooter from "../otheritems/CustomTableFooter";
 import { WAL_CAOrderStatus, customTopStatus } from "../../../helpers/Constants";
 import TopCustomButtonGroup from "../otheritems/TopCustomStatusGroup";
 import SearchField from "../otheritems/SearchField";
+import DateFilter from "../../../helpers/DateFilter";
 
 const useRowStyles = makeStyles({
   root: {
@@ -48,6 +49,11 @@ const useRowStyles = makeStyles({
 export default function WalCAOrdersTable() {
   const classes = useRowStyles();
   const [buttonTag, setButtonTag] = useState("");
+  const [dates, setDates] = useState({
+    end_date: "",
+    start_date: "",
+  });
+
   const [page, setPage] = useState(0);
   const [customStatusTag, setCustomStatusTag] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(25);
@@ -55,7 +61,9 @@ export default function WalCAOrdersTable() {
   const { response, error, loading, setLoading } = useFetch(
     `cawal/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
-    }&search=${searchKeyword}&items__tracking__status=${customStatusTag}`,
+    }&search=${searchKeyword}&items__tracking__status=${customStatusTag}&end_date=${
+      dates.end_date
+    }&start_date=${dates.start_date}`,
     { results: [], count: 0 },
     process.env.REACT_APP_CANDELA_1_URL
   );
@@ -145,6 +153,9 @@ export default function WalCAOrdersTable() {
         <h2 className={classes.headerStyle}>Ca-Walmart Orders</h2>
         <SearchField globalSearch={globalSearch} />
       </div>
+
+      <DateFilter dates={dates} setDates={setDates} />
+
       <TopButtonGroup
         buttonTag={buttonTag}
         handleTagBtnClick={handleTagBtnClick}
