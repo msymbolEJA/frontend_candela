@@ -64,10 +64,10 @@ const OrderTracking = ({ open, detRow, store, base }) => {
     `${store}/ordertrack/${detRow.id}`,
     {},
     store === "wal2"
-    ? process.env.REACT_APP_CANDELA_2_URL
-    : store === "wal3"
-    ? process.env.REACT_APP_CANDELA_3_URL
-    : process.env.REACT_APP_CANDELA_1_URL
+      ? process.env.REACT_APP_CANDELA_2_URL
+      : store === "wal3"
+      ? process.env.REACT_APP_CANDELA_3_URL
+      : process.env.REACT_APP_CANDELA_1_URL
   );
   const [formInfo, setFormInfo] = useState({
     id: 1,
@@ -106,40 +106,41 @@ const OrderTracking = ({ open, detRow, store, base }) => {
     <TableRow
       className={classes.innerTable}
       style={{
-        backgroundColor:
-        formInfo?.status?.includes("Awaiting-fulfillment")
-        ? "#FFF5DA"
-        : formInfo?.status?.includes("Cancelled")
-        ? "#FF7171"
-        : formInfo?.status?.includes("Error")
-        ? "#8F4068"
-        : formInfo?.status?.includes("Dispute")
-        ? "#8F4068"
-        : formInfo?.status?.includes("Late-shipment")
-        ? "#B590CA"
-        : formInfo?.status?.includes("Ordered")
-        ? "#F3D1F4"
-        : formInfo?.status?.includes("Returned Supplier")
-        ? "#F3D1F4"
-        : formInfo?.status?.includes("Returned Stocked")
-        ? "#C06C84"
-        : formInfo?.status?.includes("Shipped")
-        ? "#C68B59"
-        : formInfo?.status?.includes("Stock")
-        ? "#BE8ABF"
-        : formInfo?.status?.includes("ZZZ")
-        ? "#8AC6D1"
-        : formInfo?.status?.includes("Ready")
-        ? "#32AFA9"
-        : formInfo?.status?.includes("Fake Refund")
-        ? "#445C3C"
-        : formInfo?.status?.includes("Reserved")
-        ? "#F7DAD9"
-        : formInfo?.status?.includes("Shipsurance")
-        ? "#FFC947"
-        : formInfo?.status?.includes("Other")
-        ? "#DBE9B7"
-        : "#bdd2b6"
+        backgroundColor: formInfo?.status
+          ? formInfo?.status?.includes("Awaiting-fulfillment")
+            ? "#FFF5DA"
+            : formInfo?.status?.includes("Cancelled")
+            ? "#FF7171"
+            : formInfo?.status?.includes("Error")
+            ? "#8F4068"
+            : formInfo?.status?.includes("Dispute")
+            ? "#8b8989"
+            : formInfo?.status?.includes("Late-Shipment")
+            ? "#B590CA"
+            : formInfo?.status?.includes("Ordered")
+            ? "#F3D1F4"
+            : formInfo?.status?.includes("Returned Supplier")
+            ? "#F3D1F4"
+            : formInfo?.status?.includes("Returned Stocked")
+            ? "#C06C84"
+            : formInfo?.status?.includes("Shipped")
+            ? "#C68B59"
+            : formInfo?.status?.includes("Stock")
+            ? "#97ffff"
+            : formInfo?.status?.includes("ZZZ")
+            ? "#8AC6D1"
+            : formInfo?.status?.includes("Ready")
+            ? "#32AFA9"
+            : formInfo?.status?.includes("Fake Refund")
+            ? "#2e8b57"
+            : formInfo?.status?.includes("Reserved")
+            ? "#F7DAD9"
+            : formInfo?.status?.includes("Shipsurance")
+            ? "#FFC947"
+            : formInfo?.status?.includes("Other")
+            ? "#DBE9B7"
+            : "#bdd2b6"
+          : "#ffffff",
       }}
     >
       <TableCell style={{ paddingBottom: 3, paddingTop: 3 }} colSpan={20}>
