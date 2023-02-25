@@ -81,6 +81,12 @@ export const OrderFormSelect = [
     selectArray: [],
   },
   {
+    label: "Return Amount",
+    name: "return_amount",
+    type: "number",
+    selectArray: [],
+  },
+  {
     label: "Stock Cost",
     name: "stock_cost",
     type: "number",
