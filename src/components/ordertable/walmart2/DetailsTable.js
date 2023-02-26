@@ -102,7 +102,7 @@ function Row(props) {
           detRow={detRow}
           key={index}
           store={"wal2"}
-          base="http://216.128.135.6:8080/"
+          base={process.env.REACT_APP_CANDELA_2_URL}
         />
       ))}
     </React.Fragment>

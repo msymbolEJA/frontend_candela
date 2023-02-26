@@ -238,78 +238,78 @@ export default function CustomizedTables({ dates }) {
     // eslint-disable-next-line
   }, [stats, otherReport?.response?.results]);
 
-  const getPercentage = (shop, index) => {
-    const total =
-      (statRows[index]?.wa3 >= 0 ? statRows[index]?.wa3 : 0) +
-      (statRows[index]?.cawa >= 0 ? statRows[index]?.cawa : 0) +
-      (statRows[index]?.wa2 >= 0 ? statRows[index]?.wa2 : 0) +
-      (statRows[index]?.nb >= 0 ? statRows[index]?.nb : 0) +
-      (statRows[index]?.ne >= 0 ? statRows[index]?.ne : 0);
-    return (
-      (100 * (statRows[index]?.[shop] > 0 ? statRows[index]?.[shop] : 0)) /
-      total
-    ).toFixed(1);
-  };
+  // const getPercentage = (shop, index) => {
+  //   const total =
+  //     (statRows[index]?.wa3 >= 0 ? statRows[index]?.wa3 : 0) +
+  //     (statRows[index]?.cawa >= 0 ? statRows[index]?.cawa : 0) +
+  //     (statRows[index]?.wa2 >= 0 ? statRows[index]?.wa2 : 0) +
+  //     (statRows[index]?.nb >= 0 ? statRows[index]?.nb : 0) +
+  //     (statRows[index]?.ne >= 0 ? statRows[index]?.ne : 0);
+  //   return (
+  //     (100 * (statRows[index]?.[shop] > 0 ? statRows[index]?.[shop] : 0)) /
+  //     total
+  //   ).toFixed(1);
+  // };
 
-  const salesData = {
-    labels: ["Walmart", "WalmartCa", "Walmart2", "NewEgg Bussines", "NewEgg"],
-    datasets: [
-      {
-        label: "Sales 2020 (M)",
-        data: [
-          getPercentage("wa3", 0),
-          getPercentage("cawa", 0),
-          getPercentage("wa2", 0),
-          getPercentage("nb", 0),
-          getPercentage("ne", 0),
-        ],
-        backgroundColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(255, 255, 132, 1)",
-          "rgba(0, 200, 0, 1)",
-          "rgba(255, 205, 86, 1)",
-          "rgba(54, 162, 235, 1)",
-        ],
-      },
-    ],
-  };
+  // const salesData = {
+  //   labels: ["Walmart", "WalmartCa", "Walmart2", "NewEgg Bussines", "NewEgg"],
+  //   datasets: [
+  //     {
+  //       label: "Sales 2020 (M)",
+  //       data: [
+  //         getPercentage("wa3", 0),
+  //         getPercentage("cawa", 0),
+  //         getPercentage("wa2", 0),
+  //         getPercentage("nb", 0),
+  //         getPercentage("ne", 0),
+  //       ],
+  //       backgroundColor: [
+  //         "rgba(255, 99, 132, 1)",
+  //         "rgba(255, 255, 132, 1)",
+  //         "rgba(0, 200, 0, 1)",
+  //         "rgba(255, 205, 86, 1)",
+  //         "rgba(54, 162, 235, 1)",
+  //       ],
+  //     },
+  //   ],
+  // };
 
-  const salesOptions = {
-    title: {
-      display: true,
-      text: "Doughnut Chart",
-    },
-  };
+  // const salesOptions = {
+  //   title: {
+  //     display: true,
+  //     text: "Doughnut Chart",
+  //   },
+  // };
 
-  const netProfitData = {
-    labels: ["Walmart", "WalmartCa", "Walmart2", "NewEgg Bussines", "NewEgg"],
-    datasets: [
-      {
-        label: "Sales 2020 (M)",
-        data: [
-          getPercentage("wa3", 6),
-          getPercentage("cawa", 6),
-          getPercentage("wa2", 6),
-          getPercentage("nb", 6),
-          getPercentage("ne", 6),
-        ],
-        backgroundColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(255, 255, 132, 1)",
-          "rgba(0, 200, 0, 1)",
-          "rgba(255, 205, 86, 1)",
-          "rgba(54, 162, 235, 1)",
-        ],
-      },
-    ],
-  };
+  // const netProfitData = {
+  //   labels: ["Walmart", "WalmartCa", "Walmart2", "NewEgg Bussines", "NewEgg"],
+  //   datasets: [
+  //     {
+  //       label: "Sales 2020 (M)",
+  //       data: [
+  //         getPercentage("wa3", 6),
+  //         getPercentage("cawa", 6),
+  //         getPercentage("wa2", 6),
+  //         getPercentage("nb", 6),
+  //         getPercentage("ne", 6),
+  //       ],
+  //       backgroundColor: [
+  //         "rgba(255, 99, 132, 1)",
+  //         "rgba(255, 255, 132, 1)",
+  //         "rgba(0, 200, 0, 1)",
+  //         "rgba(255, 205, 86, 1)",
+  //         "rgba(54, 162, 235, 1)",
+  //       ],
+  //     },
+  //   ],
+  // };
 
-  const netProfitOptions = {
-    title: {
-      display: true,
-      text: "Doughnut Chart",
-    },
-  };
+  // const netProfitOptions = {
+  //   title: {
+  //     display: true,
+  //     text: "Doughnut Chart",
+  //   },
+  // };
 
   return (
     <div style={{ width: "90%" }}>

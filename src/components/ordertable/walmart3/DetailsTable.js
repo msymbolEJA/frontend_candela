@@ -98,7 +98,13 @@ function Row(props) {
       </TableRow>
       <ItemsTable open={open} detailsRow={detailsRow} />
       {detailsRow?.map((detRow, index) => (
-        <OrderTracking open={open} detRow={detRow} key={index} store={"wal"} />
+        <OrderTracking
+          open={open}
+          detRow={detRow}
+          key={index}
+          store={"wal3"}
+          base={process.env.REACT_APP_CANDELA_3_URL}
+        />
       ))}
     </React.Fragment>
   );
