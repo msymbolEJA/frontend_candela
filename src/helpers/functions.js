@@ -1,19 +1,19 @@
-export const upcEditFunc = (singleUpc, classes) => {
+export const upcEditFunc = (singleUpc) => {
   return Array.isArray(singleUpc)
-    ? singleUpc?.map((item, index) => (
-        <p key={index} className={classes.upcStyle}>
-          {item
-            ?.replace("MC_UPC_", "MC - ")
-            ?.replace("NC_UPC_", "BB - ")
-            ?.replace("AC_UPC_", "AZ - ")
-            ?.replace("EC_UPC_", "ET - ")}
-        </p>
-      ))
-    : singleUpc
-        ?.replace("MC_UPC_", "MC - ")
-        ?.replace("NC_UPC_", "BB - ")
-        ?.replace("AC_UPC_", "AZ - ")
-        ?.replace("EC_UPC_", "ET - ");
+    ? singleUpc?.map((item) =>
+        item
+          ?.replace("MC_UPC_", "MC - ")
+          ?.replace("NC_UPC_", "BB - ")
+          ?.replace("AC_UPC_", "AZ - ")
+          ?.replace("EC_UPC_", "ET - ")
+      )
+    : [
+        singleUpc
+          ?.replace("MC_UPC_", "MC - ")
+          ?.replace("NC_UPC_", "BB - ")
+          ?.replace("AC_UPC_", "AZ - ")
+          ?.replace("EC_UPC_", "ET - "),
+      ];
 };
 
 export const bgColorSetter = (item) => {

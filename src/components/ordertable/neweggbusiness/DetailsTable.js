@@ -12,6 +12,7 @@ import moment from "moment";
 import ItemsTable from "./ItemsTable";
 import OrderTracking from "../otheritems/OrderTracking";
 import { bgColorSetter, upcEditFunc } from "../../../helpers/functions";
+import CustomUPCComponent from "../otheritems/CustomUPCComponent";
 
 const useRowStyles = makeStyles({
   root: {
@@ -72,7 +73,9 @@ function Row(props) {
           </>
         </TableCell>
         <TableCell align="center" component="th" scope="row">
-          {upcEditFunc(upcArray[index], classes)}
+          {upcEditFunc(upcArray[index], classes).map((item, i) => (
+            <CustomUPCComponent item={item} />
+          ))}
         </TableCell>
         <TableCell align="center" component="th" scope="row">
           {customStatusArray[index]}
