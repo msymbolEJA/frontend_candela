@@ -123,7 +123,10 @@ export default function Wal2OrdersTable() {
     setLoading(true);
   };
 
-  const handleMete = () => setIsShowMete(!isShowMete);
+  const handleMete = () => {
+    setIsShowMete(!isShowMete);
+    setLoading(true);
+  };
 
   let upcArray = [];
   response?.results?.forEach((item) => {
