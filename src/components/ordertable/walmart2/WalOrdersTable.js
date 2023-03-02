@@ -18,6 +18,7 @@ import { WAL_OrderStatus, customTopStatus } from "../../../helpers/Constants";
 import TopCustomButtonGroup from "../otheritems/TopCustomStatusGroup";
 import SearchField from "../otheritems/SearchField";
 import DateFilter from "../../../helpers/DateFilter";
+import { Button, Checkbox } from "@material-ui/core";
 
 const useRowStyles = makeStyles({
   root: {
@@ -44,6 +45,20 @@ const useRowStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
   },
+  meteButton: {
+    marginBottom: 13,
+    fontSize: 12.5,
+    padding: "2px 15px",
+    borderRadius: " 20px 10px 20px 10px ",
+    boxShadow: "1px 2px 2px 1px #345C7C",
+    letterSpacing: 0.5,
+    transition: "1s ease all",
+    backgroundColor: "#0BB68A",
+    color: "#f5f5f5",
+    "&:hover": {
+      backgroundColor: "#5ee0bf",
+    },
+  },
 });
 
 export default function Wal2OrdersTable() {
@@ -57,12 +72,13 @@ export default function Wal2OrdersTable() {
   const [customStatusTag, setCustomStatusTag] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [searchKeyword, setSearchKeyword] = useState("");
+  const [isShowMete, setIsShowMete] = useState(false);
   const { response, error, loading, setLoading } = useFetch(
     `wal2/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
     }&search=${searchKeyword}&items__tracking__status=${customStatusTag}&end_date=${
       dates.end_date
-    }&start_date=${dates.start_date}`,
+    }&start_date=${dates.start_date}${isShowMete ? "&sku=METE" : null}`,
     { results: [], count: 0 },
     process.env.REACT_APP_CANDELA_2_URL
   );
@@ -106,6 +122,8 @@ export default function Wal2OrdersTable() {
     setPage(0);
     setLoading(true);
   };
+
+  const handleMete = () => setIsShowMete(!isShowMete);
 
   let upcArray = [];
   response?.results?.forEach((item) => {
@@ -161,6 +179,11 @@ export default function Wal2OrdersTable() {
         <SearchField globalSearch={globalSearch} />
       </div>
       <DateFilter dates={dates} setDates={handleDateFilter} />
+
+      <Button onClick={handleMete} className={classes.meteButton}>
+        <Checkbox checked={isShowMete} color="primary" />
+        Show Mete Orders
+      </Button>
 
       <TopButtonGroup
         buttonTag={buttonTag}
