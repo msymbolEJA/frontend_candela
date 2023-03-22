@@ -18,52 +18,68 @@ import { WAL_OrderStatus, customTopStatus } from "../../../helpers/Constants";
 import TopCustomButtonGroup from "../otheritems/TopCustomStatusGroup";
 import SearchField from "../otheritems/SearchField";
 import DateFilter from "../../../helpers/DateFilter";
+import { Button, Checkbox } from '@material-ui/core';
 
 const useRowStyles = makeStyles({
   root: {
-    "& > *": {
-      borderBottom: "unset",
+    '& > *': {
+      borderBottom: 'unset',
     },
   },
   tContainer: {
-    marginLeft: "60px",
+    marginLeft: '60px',
     width: `calc(100% - ${60}px)`,
   },
   tRow: {
-    backgroundColor: "#52734d",
+    backgroundColor: '#52734d',
   },
   tCell: {
-    color: "white",
+    color: 'white',
   },
   headerStyle: {
-    color: "#1f441e",
-    fontSize: "2rem",
-    fontFamily: "Courier New",
+    color: '#1f441e',
+    fontSize: '2rem',
+    fontFamily: 'Courier New',
   },
   topDiv: {
-    display: "flex",
-    justifyContent: "center",
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  meteButton: {
+    marginBottom: 13,
+    fontSize: 12.5,
+    padding: '2px 15px',
+    borderRadius: ' 20px 10px 20px 10px ',
+    boxShadow: '1px 2px 2px 1px #345C7C',
+    letterSpacing: 0.5,
+    transition: '1s ease all',
+    backgroundColor: '#0BB68A',
+    color: '#f5f5f5',
+    '&:hover': {
+      backgroundColor: '#5ee0bf',
+    },
   },
 });
 
 export default function Wal3OrdersTable() {
   const classes = useRowStyles();
-  const [buttonTag, setButtonTag] = useState("");
+  const [buttonTag, setButtonTag] = useState('');
   const [dates, setDates] = useState({
-    end_date: "",
-    start_date: "",
+    end_date: '',
+    start_date: '',
   });
   const [page, setPage] = useState(0);
-  const [customStatusTag, setCustomStatusTag] = useState("");
+  const [customStatusTag, setCustomStatusTag] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(25);
-  const [searchKeyword, setSearchKeyword] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const [isShowMete, setIsShowMete] = useState(false);
 
   const { response, error, loading, setLoading } = useFetch(
     `wal3/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
     }&search=${searchKeyword}&items__tracking__status=${customStatusTag}&end_date=${
       dates.end_date
-    }&start_date=${dates.start_date}`,
+    }&start_date=${dates.start_date}${isShowMete ? '&sku=METE' : null}`,
     { results: [], count: 0 },
     process.env.REACT_APP_CANDELA_3_URL
   );
@@ -82,8 +98,8 @@ export default function Wal3OrdersTable() {
     setButtonTag(event.currentTarget.id);
     setPage(0);
     setLoading(true);
-    setCustomStatusTag("");
-    setSearchKeyword("");
+    setCustomStatusTag('');
+    setSearchKeyword('');
   };
 
   const handleCustomBtnClick = (event) => {
@@ -97,6 +113,11 @@ export default function Wal3OrdersTable() {
     event.preventDefault();
     setSearchKeyword(searchKey);
     setPage(0);
+    setLoading(true);
+  };
+
+  const handleMete = () => {
+    setIsShowMete(!isShowMete);
     setLoading(true);
   };
 
@@ -154,6 +175,12 @@ export default function Wal3OrdersTable() {
         <SearchField globalSearch={globalSearch} />
       </div>
       <DateFilter dates={dates} setDates={setDates} />
+
+      <Button onClick={handleMete} className={classes.meteButton}>
+        <Checkbox checked={isShowMete} color="primary" />
+        Show Mete Orders
+      </Button>
+
       <TopButtonGroup
         buttonTag={buttonTag}
         handleTagBtnClick={handleTagBtnClick}
