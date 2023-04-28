@@ -75,11 +75,9 @@ export default function Wal3OrdersTable() {
   const [isShowMete, setIsShowMete] = useState(false);
 
   const { response, error, loading, setLoading } = useFetch(
-    `wal3/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
-      page * rowsPerPage
-    }&search=${searchKeyword}&items__tracking__status=${customStatusTag}&end_date=${
-      dates.end_date
-    }&start_date=${dates.start_date}${isShowMete ? '&sku=METE' : null}`,
+    `wal3/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${page * rowsPerPage
+    }&search=${searchKeyword}&items__tracking__status=${customStatusTag}&end_date=${dates.end_date
+    }&start_date=${dates.start_date}${isShowMete ? '&sku=METE' : ""}`,
     { results: [], count: 0 },
     process.env.REACT_APP_CANDELA_3_URL
   );
