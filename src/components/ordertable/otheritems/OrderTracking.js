@@ -102,8 +102,6 @@ const OrderTracking = ({ open, detRow, store, base }) => {
     );
   };
 
-
-  console.log(formInfo)
   return (
     <TableRow
       className={classes.innerTable}

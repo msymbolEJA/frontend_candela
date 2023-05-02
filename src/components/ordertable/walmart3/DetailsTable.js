@@ -103,7 +103,6 @@ function Row(props) {
         <TableCell align="center">{row.state}</TableCell>
       </TableRow>
       <ItemsTable open={open} detailsRow={detailsRow} />
-      {console.log(detailsRow)}
       {detailsRow?.map((detRow, index) => (
         <OrderTracking
           open={open}
