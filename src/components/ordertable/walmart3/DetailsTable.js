@@ -52,7 +52,7 @@ function Row(props) {
       <TableRow
         className={classes.root}
         style={{
-          backgroundColor: row.fullfilment_type === "WFSFulfilled" ? "#fdfa66" : bgColorSetter(customStatusArray[index]),
+          backgroundColor: row?.fullfilment_type === "WFSFulfilled" ? "#fdfa66" : bgColorSetter(customStatusArray[index]),
         }}
         onClick={() => setOpen(!open)}
       >
@@ -107,7 +107,7 @@ function Row(props) {
       {detailsRow?.map((detRow, index) => (
         <OrderTracking
           open={open}
-          detRow={{ ...detRow, fullfilment_type: row.fullfilment_type }}
+          detRow={{ ...detRow, fullfilment_type: row?.fullfilment_type }}
           key={index}
           store={"wal3"}
           base={process.env.REACT_APP_CANDELA_3_URL}
