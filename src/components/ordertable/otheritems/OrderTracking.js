@@ -102,11 +102,13 @@ const OrderTracking = ({ open, detRow, store, base }) => {
     );
   };
 
+
+  console.log(formInfo)
   return (
     <TableRow
       className={classes.innerTable}
       style={{
-        backgroundColor: formInfo?.status
+        backgroundColor: detRow?.fullfilment_type.includes("WFSFulfilled") ? "#fdfa66" :  formInfo?.status
           ? formInfo?.status?.includes("Awaiting-fulfillment")
             ? "#FFF5DA"
             : formInfo?.status?.includes("Cancelled")
