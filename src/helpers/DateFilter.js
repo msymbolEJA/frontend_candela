@@ -1,41 +1,42 @@
-import React, { useRef } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
+import React, { useRef } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 // import { getData } from "../../helper/PostData";
 // import BorderColorIcon from "@material-ui/icons/BorderColor";
-import Button from "@material-ui/core/Button";
+import Button from '@material-ui/core/Button';
+import { Box, Checkbox } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(1),
-    textAlign: "center",
+    textAlign: 'center',
     color: theme.palette.text.primary,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "fit-content",
-    margin: "20px auto",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 'fit-content',
+    margin: '20px auto',
   },
   column: {
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
     margin: 10,
   },
   date: {
     margin: 5,
   },
   btnDiv: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   btn: {
     margin: 5,
   },
 }));
 
-const DateFilter = ({ dates, setDates }) => {
+const DateFilter = ({ dates, setDates, handleMete, IsShowMete }) => {
   const classes = useStyles();
   const beginnerDateRef = useRef(null);
   const endDateRef = useRef(null);
@@ -53,12 +54,12 @@ const DateFilter = ({ dates, setDates }) => {
   const resetDate = () => {
     setDates({
       ...dates,
-      end_date: "",
-      start_date: "",
+      end_date: '',
+      start_date: '',
     });
 
-    endDateRef.current.value = "";
-    beginnerDateRef.current.value = "";
+    endDateRef.current.value = '';
+    beginnerDateRef.current.value = '';
   };
 
   return (
@@ -94,6 +95,10 @@ const DateFilter = ({ dates, setDates }) => {
         >
           Reset
         </Button>
+        <Box display="flex" alignItems="center" mr={2}>
+          <Checkbox checked={IsShowMete} color="primary" onChange={handleMete} />
+          Include Mete
+        </Box>
       </div>
     </Paper>
   );

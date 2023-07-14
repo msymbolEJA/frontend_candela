@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import useFetch from "../../hooks/useFetch";
-import { selectedHeaders } from "../../helpers/Constants";
-import { Typography } from "@material-ui/core";
+import React, { useEffect, useState } from 'react';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import useFetch from '../../hooks/useFetch';
+import { selectedHeaders } from '../../helpers/Constants';
+import { Typography } from '@material-ui/core';
 
-const StyledTableCell = withStyles((theme) => ({
+const StyledTableCell = withStyles(theme => ({
   head: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
@@ -21,9 +21,9 @@ const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
-const StyledTableRow = withStyles((theme) => ({
+const StyledTableRow = withStyles(theme => ({
   root: {
-    "&:nth-of-type(odd)": {
+    '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
     },
   },
@@ -34,21 +34,21 @@ const useStyles = makeStyles({
     minWidth: 250,
   },
   tContainer: {
-    width: "fit-content",
+    width: 'fit-content',
     margin: 20,
   },
   chartDiv: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    alignItems: "center",
-    border: "3px solid #FF6384",
-    padding: "25px",
-    margin: "25px",
-    borderRadius: "10px",
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    border: '3px solid #FF6384',
+    padding: '25px',
+    margin: '25px',
+    borderRadius: '10px',
   },
   infoText: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     padding: 8,
   },
   selectedText: {
@@ -56,7 +56,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CustomizedTables({ dates }) {
+export default function CustomizedTables({ dates, IsShowMete }) {
   const classes = useStyles();
   const [stats, setStats] = useState({
     ne: [],
@@ -69,27 +69,29 @@ export default function CustomizedTables({ dates }) {
   const neReport = useFetch(
     `report/summ/ne/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 },
-    process.env.REACT_APP_CANDELA_1_URL
+    process.env.REACT_APP_CANDELA_1_URL,
   );
   const nbReport = useFetch(
     `report/summ/nb/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 },
-    process.env.REACT_APP_CANDELA_1_URL
+    process.env.REACT_APP_CANDELA_1_URL,
   );
   const wa3Report = useFetch(
-    `report3/summ/wa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+    `report3/summ/wa/?end_date=${dates.end_date}&start_date=${dates.start_date}${
+      IsShowMete ? '&store=METE_' : ''
+    }`,
     { results: [], count: 0 },
-    process.env.REACT_APP_CANDELA_3_URL
+    process.env.REACT_APP_CANDELA_3_URL,
   );
   const cawaReport = useFetch(
     `report/summ/cawa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 },
-    process.env.REACT_APP_CANDELA_1_URL
+    process.env.REACT_APP_CANDELA_1_URL,
   );
   const waReport2 = useFetch(
     `report2/summ/wa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 },
-    process.env.REACT_APP_CANDELA_2_URL
+    process.env.REACT_APP_CANDELA_2_URL,
   );
   const otherReport = useFetch(
     `report/const/`,
@@ -97,11 +99,11 @@ export default function CustomizedTables({ dates }) {
       results: [],
       count: 0,
     },
-    process.env.REACT_APP_CANDELA_1_URL
+    process.env.REACT_APP_CANDELA_1_URL,
   );
 
   useEffect(() => {
-    setStats((stats) => ({
+    setStats(stats => ({
       ...stats,
       ne: neReport.response,
       nb: nbReport.response,
@@ -121,7 +123,7 @@ export default function CustomizedTables({ dates }) {
     // console.log(stats);
     setStatRows([
       {
-        id: "SALES",
+        id: 'SALES',
         wa3: stats.wa3.sales,
         cawa: stats.cawa.sales,
         wa2: stats.wa2.sales,
@@ -135,7 +137,7 @@ export default function CustomizedTables({ dates }) {
           (stats.wa2.sales || 0),
       },
       {
-        id: "PO COST",
+        id: 'PO COST',
         wa3: stats.wa3.cost,
         cawa: stats.cawa.cost,
         wa2: stats.wa2.cost,
@@ -150,7 +152,7 @@ export default function CustomizedTables({ dates }) {
       },
 
       {
-        id: "COMISSION COST",
+        id: 'COMISSION COST',
         wa3: stats.wa3.commision_cost,
         cawa: stats.cawa.commision_cost,
         wa2: stats.wa2.commision_cost,
@@ -165,7 +167,7 @@ export default function CustomizedTables({ dates }) {
       },
 
       {
-        id: "SHIP COST",
+        id: 'SHIP COST',
         wa3: stats.wa3.ship_cost,
         cawa: stats.cawa.ship_cost,
         wa2: stats.wa2.ship_cost,
@@ -179,7 +181,7 @@ export default function CustomizedTables({ dates }) {
           (stats.wa2.ship_cost || 0),
       },
       {
-        id: "REFUND COST",
+        id: 'REFUND COST',
         wa3: stats.wa3.refund_cost,
         cawa: stats.cawa.refund_cost,
         wa2: stats.wa2.refund_cost,
@@ -193,7 +195,7 @@ export default function CustomizedTables({ dates }) {
           (stats.wa2.refund_cost || 0),
       },
       {
-        id: "RETURN AMOUNT",
+        id: 'RETURN AMOUNT',
         wa3: stats.wa3.return_amount,
         cawa: stats.cawa.return_amount,
         wa2: stats.wa2.return_amount,
@@ -207,7 +209,7 @@ export default function CustomizedTables({ dates }) {
           (stats.wa2.return_amount || 0),
       },
       {
-        id: "STOCK COST",
+        id: 'STOCK COST',
         wa3: stats.wa3.stock_cost,
         cawa: stats.cawa.stock_cost,
         wa2: stats.wa2.stock_cost,
@@ -221,7 +223,7 @@ export default function CustomizedTables({ dates }) {
           (stats.wa2.stock_cost || 0),
       },
       {
-        id: "NET PROFIT",
+        id: 'NET PROFIT',
         wa3: stats.wa3.net_profit,
         cawa: stats.cawa.net_profit,
         wa2: stats.wa2.net_profit,
@@ -312,15 +314,15 @@ export default function CustomizedTables({ dates }) {
   // };
 
   return (
-    <div style={{ width: "90%" }}>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+    <div style={{ width: '90%' }}>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
         <TableContainer className={classes.tContainer} component={Paper}>
           <h2 className={classes.selectedText}>Selected</h2>
           <Table className={classes.table} aria-label="customized table">
             <TableHead>
               <TableRow>
                 <StyledTableCell></StyledTableCell>
-                {selectedHeaders?.map((item) => (
+                {selectedHeaders?.map(item => (
                   <StyledTableCell align="right" key={item?.id}>
                     {item?.label}
                   </StyledTableCell>
@@ -328,29 +330,17 @@ export default function CustomizedTables({ dates }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {statRows?.map((row) => (
+              {statRows?.map(row => (
                 <StyledTableRow key={row.id}>
                   <StyledTableCell component="th" scope="row">
                     {row.id}
                   </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.cawa?.toFixed(2) || 0}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.wa2?.toFixed(2) || 0}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.wa3?.toFixed(2) || 0}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.ne?.toFixed(2) || 0}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.nb?.toFixed(2) || 0}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.gt?.toFixed(2) || 0}
-                  </StyledTableCell>
+                  <StyledTableCell align="right">{row.cawa?.toFixed(2) || 0}</StyledTableCell>
+                  <StyledTableCell align="right">{row.wa2?.toFixed(2) || 0}</StyledTableCell>
+                  <StyledTableCell align="right">{row.wa3?.toFixed(2) || 0}</StyledTableCell>
+                  <StyledTableCell align="right">{row.ne?.toFixed(2) || 0}</StyledTableCell>
+                  <StyledTableCell align="right">{row.nb?.toFixed(2) || 0}</StyledTableCell>
+                  <StyledTableCell align="right">{row.gt?.toFixed(2) || 0}</StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>
