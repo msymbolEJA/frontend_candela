@@ -95,10 +95,12 @@ const DateFilter = ({ dates, setDates, handleMete, IsShowMete }) => {
         >
           Reset
         </Button>
-        <Box display="flex" alignItems="center" mr={2}>
-          <Checkbox checked={IsShowMete} color="primary" onChange={handleMete} />
-          Include Mete
-        </Box>
+        {handleMete && (
+          <Box display="flex" alignItems="center" mr={2}>
+            <Checkbox checked={IsShowMete} color="primary" onChange={handleMete} />
+            Only Mete
+          </Box>
+        )}
       </div>
     </Paper>
   );
