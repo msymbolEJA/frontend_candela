@@ -73,6 +73,13 @@ const menuLinks = [
     link: "/orders/wal3",
   },
   {
+    id: 9,
+    title: "Mete Team",
+    abr: "MT",
+    icon: Assignment,
+    link: "/orders/mt",
+  },
+  {
     id: 4,
     title: "WalmartCa",
     abr: "WCA",
@@ -136,7 +143,7 @@ const menuLinks = [
 
 const drawerWidth = 225;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   hide: {
     display: "none",
   },
@@ -189,35 +196,25 @@ export default function SideBar({ user, open, handleDrawerClose, setOpen }) {
   const userRole = JSON.parse(localStorage.getItem("user"))?.userRole;
   // console.log(userRole);
 
-  const menuLinkComp = (item) =>
+  const menuLinkComp = item =>
     userRole !== "admin" ? (
       item?.title !== "Report" ? (
         <Fragment key={item.id}>
           <ListItem
             button
-            onClick={
-              item?.subMenuLinks?.length
-                ? handleShowSubMenu()
-                : handleNavigate(item.link)
-            }
+            onClick={item?.subMenuLinks?.length ? handleShowSubMenu() : handleNavigate(item.link)}
           >
             <ListItemIcon>{item.icon && <item.icon />}</ListItemIcon>
             <ListItemText primary={item.title} />
           </ListItem>
-          {item?.subMenuLinks?.length &&
-            isOpen &&
-            item.subMenuLinks.map((el) => menuLinkComp(el))}
+          {item?.subMenuLinks?.length && isOpen && item.subMenuLinks.map(el => menuLinkComp(el))}
         </Fragment>
       ) : null
     ) : (
       <Fragment key={item.id}>
         <ListItem
           button
-          onClick={
-            item?.subMenuLinks?.length
-              ? handleShowSubMenu()
-              : handleNavigate(item.link)
-          }
+          onClick={item?.subMenuLinks?.length ? handleShowSubMenu() : handleNavigate(item.link)}
         >
           {/* <ListItemIcon>{item.icon && <item.icon />}</ListItemIcon> */}
           <ListItemIcon>
@@ -225,12 +222,10 @@ export default function SideBar({ user, open, handleDrawerClose, setOpen }) {
           </ListItemIcon>
           <ListItemText primary={item.title} />
         </ListItem>
-        {item?.subMenuLinks?.length &&
-          isOpen &&
-          item.subMenuLinks.map((el) => menuLinkComp(el))}
+        {item?.subMenuLinks?.length && isOpen && item.subMenuLinks.map(el => menuLinkComp(el))}
       </Fragment>
     );
-  const handleNavigate = (link) => () => {
+  const handleNavigate = link => () => {
     handleDrawerClose();
     history.push(link);
   };

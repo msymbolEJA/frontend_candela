@@ -10,13 +10,22 @@ const useRowStyles = makeStyles({
   },
 });
 
-const CustomUPCComponent = ({ item, in_stock }) => {
+const CustomUPCComponent = ({ item, in_stock, link = false }) => {
   const classes = useRowStyles();
-  return (
+
+  const content = (
     <p className={classes.upcStyle}>
       {item} {in_stock ? <StoreMallDirectoryIcon /> : null}
     </p>
   );
+
+  if (link)
+    return (
+      <a href={link} alt="">
+        {content}
+      </a>
+    );
+  else return content;
 };
 
 export default CustomUPCComponent;
