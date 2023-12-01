@@ -7,6 +7,7 @@ const useRowStyles = makeStyles({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    width: "max-content",
   },
 });
 
@@ -21,7 +22,13 @@ const CustomUPCComponent = ({ item, in_stock, link = false }) => {
 
   if (link)
     return (
-      <a href={link} alt="">
+      <a
+        href={link}
+        alt=""
+        target="_blank"
+        rel="noreferrer"
+        style={{ display: "block", width: "min-content" }}
+      >
         {content}
       </a>
     );

@@ -80,6 +80,7 @@ function Row(props) {
         </TableCell>
         <TableCell align="center" component="th" scope="row">
           {/* SKU */}
+
           {upcEditFunc(upcArray[index], classes).map((item, i) => (
             <CustomUPCComponent
               item={item}
@@ -90,11 +91,15 @@ function Row(props) {
         </TableCell>
 
         <TableCell align="center" component="th" scope="row">
-          {row?.items?.[0]?.gtin || row?.items?.[0]?.upc}
-          <br />
-          <a href={row?.items?.[0]?.wa_link} target="_blank" rel="noreferrer">
-            Visit
-          </a>
+          {row?.items
+            ?.map(item => item.gtin || item.upc)
+            .map((item, i) => (
+              <CustomUPCComponent
+                item={item}
+                in_stock={detailsRow?.[i]?.in_stock}
+                link={detailsRow?.[i]?.wa_link}
+              />
+            ))}
         </TableCell>
 
         <TableCell align="center" component="th" scope="row">
@@ -102,7 +107,13 @@ function Row(props) {
         </TableCell>
 
         <TableCell align="center" component="th" scope="row">
-          {customStatusArray[index]}
+          {Array.isArray(customStatusArray[index])
+            ? customStatusArray[index]?.map(item => (
+                <>
+                  {item} <br />
+                </>
+              ))
+            : customStatusArray[index]}
         </TableCell>
         <TableCell align="center" component="th" scope="row">
           {row.cutomerName}

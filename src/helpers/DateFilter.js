@@ -1,42 +1,42 @@
-import React, { useRef } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import Paper from "@material-ui/core/Paper";
+import { makeStyles } from "@material-ui/core/styles";
+import React, { useRef } from "react";
 // import { getData } from "../../helper/PostData";
 // import BorderColorIcon from "@material-ui/icons/BorderColor";
-import Button from '@material-ui/core/Button';
-import { Box, Checkbox } from '@material-ui/core';
+import { Box, Checkbox } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(1),
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.text.primary,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 'fit-content',
-    margin: '20px auto',
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "fit-content",
+    margin: "20px auto",
   },
   column: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
     margin: 10,
   },
   date: {
     margin: 5,
   },
   btnDiv: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
   btn: {
     margin: 5,
   },
 }));
 
-const DateFilter = ({ dates, setDates, handleMete, IsShowMete }) => {
+const DateFilter = ({ dates, setDates, handleMete, IsShowMete, excelDownload = false }) => {
   const classes = useStyles();
   const beginnerDateRef = useRef(null);
   const endDateRef = useRef(null);
@@ -54,12 +54,21 @@ const DateFilter = ({ dates, setDates, handleMete, IsShowMete }) => {
   const resetDate = () => {
     setDates({
       ...dates,
-      end_date: '',
-      start_date: '',
+      end_date: "",
+      start_date: "",
     });
 
-    endDateRef.current.value = '';
-    beginnerDateRef.current.value = '';
+    endDateRef.current.value = "";
+    beginnerDateRef.current.value = "";
+  };
+
+  const handleDownload = () => {
+    window.open(
+      `${process.env.REACT_APP_CANDELA_3_URL}wal3/generate-excell/?end_date=${
+        endDateRef.current?.value || ""
+      }&start_date=${beginnerDateRef.current?.value || ""}`,
+      "_self",
+    );
   };
 
   return (
@@ -100,6 +109,18 @@ const DateFilter = ({ dates, setDates, handleMete, IsShowMete }) => {
             <Checkbox checked={IsShowMete} color="primary" onChange={handleMete} />
             Only Mete
           </Box>
+        )}
+        {excelDownload && (
+          <Button
+            size="small"
+            variant="contained"
+            color="primary"
+            className={classes.btn}
+            // href={}
+            onClick={handleDownload}
+          >
+            Excel Download
+          </Button>
         )}
       </div>
     </Paper>

@@ -174,7 +174,7 @@ export default function Wal3OrdersTable() {
         <h2 className={classes.headerStyle}>Mete Orders</h2>
         <SearchField globalSearch={globalSearch} />
       </div>
-      <DateFilter dates={dates} setDates={setDates} />
+      <DateFilter dates={dates} setDates={setDates} excelDownload />
 
       <Button onClick={handleMete} className={classes.meteButton}>
         <Checkbox checked={isShowMete} color="primary" />
