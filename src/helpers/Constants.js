@@ -169,3 +169,9 @@ export const customTopStatus = [
   { id: 12, status: "Shipsurance" },
   { id: 13, status: "Other" },
 ];
+
+export const fullfilmentTypes = [
+  { id: "all", status: "all" },
+  { id: "wf", status: "wf" },
+  { id: "sf", status: "sf" },
+];

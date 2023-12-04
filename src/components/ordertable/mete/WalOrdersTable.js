@@ -14,11 +14,12 @@ import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 import { TableNoOrders } from "../../../helpers/NoOrders";
 import { TableError } from "../../../helpers/Errors";
 import CustomTableFooter from "../otheritems/CustomTableFooter";
-import { WAL_OrderStatus, customTopStatus } from "../../../helpers/Constants";
+import { WAL_OrderStatus, customTopStatus, fullfilmentTypes } from "../../../helpers/Constants";
 import TopCustomButtonGroup from "../otheritems/TopCustomStatusGroup";
 import SearchField from "../otheritems/SearchField";
 import DateFilter from "../../../helpers/DateFilter";
 import { Button, Checkbox } from "@material-ui/core";
+import TopFullfilmentTypeButtonGroup from "../otheritems/TopFullfilmentTypeButtonGroup";
 
 const useRowStyles = makeStyles({
   root: {
@@ -73,13 +74,21 @@ export default function Wal3OrdersTable() {
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [isShowMete, setIsShowMete] = useState(false);
+  const [fullfilment_type, setFullfilment_type] = useState("all");
 
+  console.log(fullfilment_type);
   const { response, error, loading, setLoading } = useFetch(
     `wal3/mete?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
     }&search=${searchKeyword}&items__tracking__status=${customStatusTag}&end_date=${
       dates.end_date
-    }&start_date=${dates.start_date}${isShowMete ? "&sku=METE" : ""}`,
+    }&start_date=${dates.start_date}${isShowMete ? "&sku=METE" : ""}&fullfilment_type=${
+      fullfilment_type === "wf"
+        ? "WFSFulfilled"
+        : fullfilment_type === "sf"
+        ? "SellerFulfilled"
+        : ""
+    }`,
     { results: [], count: 0 },
     process.env.REACT_APP_CANDELA_3_URL,
   );
@@ -99,6 +108,14 @@ export default function Wal3OrdersTable() {
     setPage(0);
     setLoading(true);
     setCustomStatusTag("");
+    setSearchKeyword("");
+  };
+
+  const handleTypeBtnClick = event => {
+    setFullfilment_type(event.currentTarget.id);
+    setPage(0);
+    setLoading(true);
+    // setCustomStatusTag("");
     setSearchKeyword("");
   };
 
@@ -168,19 +185,41 @@ export default function Wal3OrdersTable() {
     }
   });
 
+  const excelDownload = () => {
+    window.open(
+      `${
+        process.env.REACT_APP_CANDELA_3_URL
+      }wal3/generate-excell?orderStatus=${buttonTag}&search=${searchKeyword}&items__tracking__status=${customStatusTag}&end_date=${
+        dates.end_date
+      }&start_date=${dates.start_date}${isShowMete ? "&sku=METE" : ""}&fullfilment_type=${
+        fullfilment_type === "wf"
+          ? "WFSFulfilled"
+          : fullfilment_type === "sf"
+          ? "SellerFulfilled"
+          : ""
+      }`,
+      "_self",
+    );
+  };
+
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
       <div className={classes.topDiv}>
         <h2 className={classes.headerStyle}>Mete Orders</h2>
         <SearchField globalSearch={globalSearch} />
       </div>
-      <DateFilter dates={dates} setDates={setDates} excelDownload />
+      <DateFilter dates={dates} setDates={setDates} excelDownload={excelDownload} />
 
       <Button onClick={handleMete} className={classes.meteButton}>
         <Checkbox checked={isShowMete} color="primary" />
         Show Mete Orders
       </Button>
 
+      <TopFullfilmentTypeButtonGroup
+        buttonTag={fullfilment_type}
+        handleTagBtnClick={handleTypeBtnClick}
+        orderStatusTags={fullfilmentTypes}
+      />
       <TopButtonGroup
         buttonTag={buttonTag}
         handleTagBtnClick={handleTagBtnClick}

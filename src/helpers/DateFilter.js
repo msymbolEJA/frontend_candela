@@ -62,15 +62,6 @@ const DateFilter = ({ dates, setDates, handleMete, IsShowMete, excelDownload = f
     beginnerDateRef.current.value = "";
   };
 
-  const handleDownload = () => {
-    window.open(
-      `${process.env.REACT_APP_CANDELA_3_URL}wal3/generate-excell/?end_date=${
-        endDateRef.current?.value || ""
-      }&start_date=${beginnerDateRef.current?.value || ""}`,
-      "_self",
-    );
-  };
-
   return (
     <Paper className={classes.paper} style={{}}>
       <div className={classes.column}>
@@ -117,7 +108,7 @@ const DateFilter = ({ dates, setDates, handleMete, IsShowMete, excelDownload = f
             color="primary"
             className={classes.btn}
             // href={}
-            onClick={handleDownload}
+            onClick={excelDownload}
           >
             Excel Download
           </Button>
