@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -62,7 +63,7 @@ const useRowStyles = makeStyles({
   },
 });
 
-export default function Wal3OrdersTable() {
+export default function wal2OrdersTable() {
   const classes = useRowStyles();
   const [buttonTag, setButtonTag] = useState("");
   const [dates, setDates] = useState({
@@ -78,7 +79,7 @@ export default function Wal3OrdersTable() {
 
   console.log(fullfilment_type);
   const { response, error, loading, setLoading } = useFetch(
-    `wal3/mete?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
+    `wal2/new?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
       page * rowsPerPage
     }&search=${searchKeyword}&items__tracking__status=${customStatusTag}&end_date=${
       dates.end_date
@@ -90,7 +91,7 @@ export default function Wal3OrdersTable() {
         : ""
     }`,
     { results: [], count: 0 },
-    process.env.REACT_APP_CANDELA_3_URL,
+    process.env.REACT_APP_CANDELA_2_URL,
   );
 
   const handleChangePage = (event, newPage) => {
@@ -188,8 +189,8 @@ export default function Wal3OrdersTable() {
   const excelDownload = () => {
     window.open(
       `${
-        process.env.REACT_APP_CANDELA_3_URL
-      }wal3/generate-excell?orderStatus=${buttonTag}&search=${searchKeyword}&items__tracking__status=${customStatusTag}&end_date=${
+        process.env.REACT_APP_CANDELA_2_URL
+      }wal2/generate-excell?orderStatus=${buttonTag}&search=${searchKeyword}&items__tracking__status=${customStatusTag}&end_date=${
         dates.end_date
       }&start_date=${dates.start_date}${isShowMete ? "&sku=METE" : ""}&fullfilment_type=${
         fullfilment_type === "wf"
@@ -205,7 +206,7 @@ export default function Wal3OrdersTable() {
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
       <div className={classes.topDiv}>
-        <h2 className={classes.headerStyle}>Walmart 3 Orders</h2>
+        <h2 className={classes.headerStyle}>Walmart 2 Orders</h2>
         <SearchField globalSearch={globalSearch} />
       </div>
       <DateFilter dates={dates} setDates={setDates} excelDownload={excelDownload} />

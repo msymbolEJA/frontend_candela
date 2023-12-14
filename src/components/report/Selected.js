@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import useFetch from '../../hooks/useFetch';
-import { selectedHeaders } from '../../helpers/Constants';
-import { Typography } from '@material-ui/core';
+import React, { useEffect, useState } from "react";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import useFetch from "../../hooks/useFetch";
+import { selectedHeaders } from "../../helpers/Constants";
+import { Typography } from "@material-ui/core";
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -23,7 +23,7 @@ const StyledTableCell = withStyles(theme => ({
 
 const StyledTableRow = withStyles(theme => ({
   root: {
-    '&:nth-of-type(odd)': {
+    "&:nth-of-type(odd)": {
       backgroundColor: theme.palette.action.hover,
     },
   },
@@ -34,21 +34,21 @@ const useStyles = makeStyles({
     minWidth: 250,
   },
   tContainer: {
-    width: 'fit-content',
+    width: "fit-content",
     margin: 20,
   },
   chartDiv: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'center',
-    border: '3px solid #FF6384',
-    padding: '25px',
-    margin: '25px',
-    borderRadius: '10px',
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center",
+    border: "3px solid #FF6384",
+    padding: "25px",
+    margin: "25px",
+    borderRadius: "10px",
   },
   infoText: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     padding: 8,
   },
   selectedText: {
@@ -59,10 +59,10 @@ const useStyles = makeStyles({
 export default function CustomizedTables({ dates, IsShowMete }) {
   const classes = useStyles();
   const [stats, setStats] = useState({
-    ne: [],
-    nb: [],
+    // ne: [],
+    // nb: [],
     wa3: [],
-    cawa: [],
+    // cawa: [],
     wa2: [],
   });
   const [statRows, setStatRows] = useState([]);
@@ -78,7 +78,7 @@ export default function CustomizedTables({ dates, IsShowMete }) {
   );
   const wa3Report = useFetch(
     `report3/summ/wa/?end_date=${dates.end_date}&start_date=${dates.start_date}${
-      IsShowMete ? '&store=METE_' : ''
+      IsShowMete ? "&store=METE_" : ""
     }`,
     { results: [], count: 0 },
     process.env.REACT_APP_CANDELA_3_URL,
@@ -105,17 +105,17 @@ export default function CustomizedTables({ dates, IsShowMete }) {
   useEffect(() => {
     setStats(stats => ({
       ...stats,
-      ne: neReport.response,
-      nb: nbReport.response,
+      // ne: neReport.response,
+      // nb: nbReport.response,
       wa3: wa3Report.response,
-      cawa: cawaReport.response,
+      // cawa: cawaReport.response,
       wa2: waReport2.response,
     }));
   }, [
-    neReport.response,
-    nbReport.response,
+    // neReport.response,
+    // nbReport.response,
     wa3Report.response,
-    cawaReport.response,
+    // cawaReport.response,
     waReport2.response,
   ]);
 
@@ -123,116 +123,116 @@ export default function CustomizedTables({ dates, IsShowMete }) {
     // console.log(stats);
     setStatRows([
       {
-        id: 'SALES',
+        id: "SALES",
         wa3: stats.wa3.sales,
-        cawa: stats.cawa.sales,
+        // cawa: stats.cawa.sales,
         wa2: stats.wa2.sales,
-        ne: stats.ne.sales,
-        nb: stats.nb.sales,
+        // // ne: stats.ne.sales,
+        // // nb: stats.nb.sales,
         gt:
           // (stats.cawa.sales || 0) +
-          (stats.ne.sales || 0) +
-          (stats.nb.sales || 0) +
+          // (stats.ne.sales || 0) +
+          // (stats.nb.sales || 0) +
           (stats.wa3.sales || 0) +
           (stats.wa2.sales || 0),
       },
       {
-        id: 'PO COST',
+        id: "PO COST",
         wa3: stats.wa3.cost,
-        cawa: stats.cawa.cost,
+        // cawa: stats.cawa.cost,
         wa2: stats.wa2.cost,
-        ne: stats.ne.cost,
-        nb: stats.nb.cost,
+        // // ne: stats.ne.cost,
+        // // nb: stats.nb.cost,
         gt:
           // (stats.cawa.cost || 0) +
-          (stats.ne.cost || 0) +
-          (stats.nb.cost || 0) +
+          // (stats.ne.cost || 0) +
+          // (stats.nb.cost || 0) +
           (stats.wa3.cost || 0) +
           (stats.wa2.cost || 0),
       },
 
-      {
-        id: 'COMISSION COST',
-        wa3: stats.wa3.commision_cost,
-        cawa: stats.cawa.commision_cost,
-        wa2: stats.wa2.commision_cost,
-        ne: stats.ne.commision_cost,
-        nb: stats.nb.commision_cost,
-        gt:
-          // (stats.cawa.commision_cost || 0) +
-          (stats.ne.commision_cost || 0) +
-          (stats.nb.commision_cost || 0) +
-          (stats.wa3.commision_cost || 0) +
-          (stats.wa2.commision_cost || 0),
-      },
+      // {
+      //   id: 'COMISSION COST',
+      //   wa3: stats.wa3.commision_cost,
+      // //   cawa: stats.cawa.commision_cost,
+      //   wa2: stats.wa2.commision_cost,
+      // // //   ne: stats.ne.commision_cost,
+      // // //   nb: stats.nb.commision_cost,
+      //   gt:
+      //     // (stats.cawa.commision_cost || 0) +
+      // //     (stats.ne.commision_cost || 0) +
+      // //     (stats.nb.commision_cost || 0) +
+      //     (stats.wa3.commision_cost || 0) +
+      //     (stats.wa2.commision_cost || 0),
+      // },
 
       {
-        id: 'SHIP COST',
+        id: "SHIP COST",
         wa3: stats.wa3.ship_cost,
-        cawa: stats.cawa.ship_cost,
+        // cawa: stats.cawa.ship_cost,
         wa2: stats.wa2.ship_cost,
-        ne: stats.ne.ship_cost,
-        nb: stats.nb.ship_cost,
+        // // ne: stats.ne.ship_cost,
+        // // nb: stats.nb.ship_cost,
         gt:
           // (stats.cawa.gross_profit || 0) +
-          (stats.ne.ship_cost || 0) +
-          (stats.nb.ship_cost || 0) +
+          // (stats.ne.ship_cost || 0) +
+          // (stats.nb.ship_cost || 0) +
           (stats.wa3.ship_cost || 0) +
           (stats.wa2.ship_cost || 0),
       },
       {
-        id: 'REFUND COST',
+        id: "REFUND COST",
         wa3: stats.wa3.refund_cost,
-        cawa: stats.cawa.refund_cost,
+        // cawa: stats.cawa.refund_cost,
         wa2: stats.wa2.refund_cost,
-        ne: stats.ne.refund_cost,
-        nb: stats.nb.refund_cost,
+        // // ne: stats.ne.refund_cost,
+        // // nb: stats.nb.refund_cost,
         gt:
           // (stats.cawa.refund_cost || 0) +
-          (stats.ne.refund_cost || 0) +
-          (stats.nb.refund_cost || 0) +
+          // (stats.ne.refund_cost || 0) +
+          // (stats.nb.refund_cost || 0) +
           (stats.wa3.refund_cost || 0) +
           (stats.wa2.refund_cost || 0),
       },
+      // {
+      //   id: 'RETURN AMOUNT',
+      //   wa3: stats.wa3.return_amount,
+      // //   cawa: stats.cawa.return_amount,
+      //   wa2: stats.wa2.return_amount,
+      // // //   ne: stats.ne.return_amount,
+      // // //   nb: stats.nb.return_amount,
+      //   gt:
+      //     // (stats.cawa.return_amount || 0) +
+      // //     (stats.ne.return_amount || 0) +
+      // //     (stats.nb.return_amount || 0) +
+      //     (stats.wa3.return_amount || 0) +
+      //     (stats.wa2.return_amount || 0),
+      // },
       {
-        id: 'RETURN AMOUNT',
-        wa3: stats.wa3.return_amount,
-        cawa: stats.cawa.return_amount,
-        wa2: stats.wa2.return_amount,
-        ne: stats.ne.return_amount,
-        nb: stats.nb.return_amount,
-        gt:
-          // (stats.cawa.return_amount || 0) +
-          (stats.ne.return_amount || 0) +
-          (stats.nb.return_amount || 0) +
-          (stats.wa3.return_amount || 0) +
-          (stats.wa2.return_amount || 0),
-      },
-      {
-        id: 'STOCK COST',
+        id: "STOCK COST",
         wa3: stats.wa3.stock_cost,
-        cawa: stats.cawa.stock_cost,
+        // cawa: stats.cawa.stock_cost,
         wa2: stats.wa2.stock_cost,
-        ne: stats.ne.stock_cost,
-        nb: stats.nb.stock_cost,
+        // // ne: stats.ne.stock_cost,
+        // // nb: stats.nb.stock_cost,
         gt:
           // (stats.cawa.stock_cost || 0) +
-          (stats.ne.stock_cost || 0) +
-          (stats.nb.stock_cost || 0) +
+          // (stats.ne.stock_cost || 0) +
+          // (stats.nb.stock_cost || 0) +
           (stats.wa3.stock_cost || 0) +
           (stats.wa2.stock_cost || 0),
       },
       {
-        id: 'NET PROFIT',
+        id: "NET PROFIT",
         wa3: stats.wa3.net_profit,
-        cawa: stats.cawa.net_profit,
+        // cawa: stats.cawa.net_profit,
         wa2: stats.wa2.net_profit,
-        ne: stats.ne.net_profit,
-        nb: stats.nb.net_profit,
+        // // ne: stats.ne.net_profit,
+        // // nb: stats.nb.net_profit,
         gt:
           // (stats.cawa.net_profit || 0) +
-          (stats.ne.net_profit || 0) +
-          (stats.nb.net_profit || 0) +
+          // (stats.ne.net_profit || 0) +
+          // (stats.nb.net_profit || 0) +
           (stats.wa3.net_profit || 0) +
           (stats.wa2.net_profit || 0),
       },
@@ -314,8 +314,8 @@ export default function CustomizedTables({ dates, IsShowMete }) {
   // };
 
   return (
-    <div style={{ width: '90%' }}>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <div style={{ width: "90%" }}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
         <TableContainer className={classes.tContainer} component={Paper}>
           <h2 className={classes.selectedText}>Selected</h2>
           <Table className={classes.table} aria-label="customized table">
@@ -335,11 +335,11 @@ export default function CustomizedTables({ dates, IsShowMete }) {
                   <StyledTableCell component="th" scope="row">
                     {row.id}
                   </StyledTableCell>
-                  <StyledTableCell align="right">{row.cawa?.toFixed(2) || 0}</StyledTableCell>
+                  {/* <StyledTableCell align="right">{row.cawa?.toFixed(2) || 0}</StyledTableCell> */}
                   <StyledTableCell align="right">{row.wa2?.toFixed(2) || 0}</StyledTableCell>
                   <StyledTableCell align="right">{row.wa3?.toFixed(2) || 0}</StyledTableCell>
-                  <StyledTableCell align="right">{row.ne?.toFixed(2) || 0}</StyledTableCell>
-                  <StyledTableCell align="right">{row.nb?.toFixed(2) || 0}</StyledTableCell>
+                  {/* <StyledTableCell align="right">{row.ne?.toFixed(2) || 0}</StyledTableCell> */}
+                  {/* <StyledTableCell align="right">{row.nb?.toFixed(2) || 0}</StyledTableCell> */}
                   <StyledTableCell align="right">{row.gt?.toFixed(2) || 0}</StyledTableCell>
                 </StyledTableRow>
               ))}

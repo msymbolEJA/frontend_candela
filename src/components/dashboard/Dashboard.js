@@ -35,7 +35,7 @@ const Dashboard = () => {
     <div>
       <h1>DashBoard</h1>
       <div className={classes.storeLine}>
-        <img
+        {/* <img
           id="orders/bb"
           onClick={handleClick}
           className={classes.btn}
@@ -55,16 +55,16 @@ const Dashboard = () => {
           className={classes.btn}
           src={malabs}
           alt="malabs"
-        />
+        /> */}
       </div>
       <hr />
-      <img
+      {/* <img
         id="orders/ne"
         onClick={handleClick}
         className={classes.btn}
         src={newegg}
         alt="newegg"
-      />
+      /> */}
       <img
         id="orders/wal"
         onClick={handleClick}
@@ -72,13 +72,13 @@ const Dashboard = () => {
         src={walmart}
         alt="walmart"
       />
-      <img
+      {/* <img
         id="orders/neb"
         onClick={handleClick}
         className={classes.btn}
         src={neweggBusiness}
         alt="neweggbusiness"
-      />
+      /> */}
     </div>
   );
 };

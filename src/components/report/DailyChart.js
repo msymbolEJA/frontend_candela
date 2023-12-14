@@ -236,7 +236,7 @@ export default function App({ dates }) {
           }}
         />
       </div>
-      <div
+      {/* <div
         style={{
           border: "3px solid #F3BD6A",
           padding: "50px",
@@ -272,7 +272,7 @@ export default function App({ dates }) {
             },
           }}
         />
-      </div>
+      </div> */}
     </div>
   );
 }
