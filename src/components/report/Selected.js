@@ -66,16 +66,16 @@ export default function CustomizedTables({ dates, IsShowMete }) {
     wa2: [],
   });
   const [statRows, setStatRows] = useState([]);
-  const neReport = useFetch(
-    `report/summ/ne/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
-    { results: [], count: 0 },
-    process.env.REACT_APP_CANDELA_1_URL,
-  );
-  const nbReport = useFetch(
-    `report/summ/nb/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
-    { results: [], count: 0 },
-    process.env.REACT_APP_CANDELA_1_URL,
-  );
+  // const neReport = useFetch(
+  //   `report/summ/ne/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+  //   { results: [], count: 0 },
+  //   process.env.REACT_APP_CANDELA_1_URL,
+  // );
+  // const nbReport = useFetch(
+  //   `report/summ/nb/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+  //   { results: [], count: 0 },
+  //   process.env.REACT_APP_CANDELA_1_URL,
+  // );
   const wa3Report = useFetch(
     `report3/summ/wa/?end_date=${dates.end_date}&start_date=${dates.start_date}${
       IsShowMete ? "&store=METE_" : ""
@@ -83,11 +83,11 @@ export default function CustomizedTables({ dates, IsShowMete }) {
     { results: [], count: 0 },
     process.env.REACT_APP_CANDELA_3_URL,
   );
-  const cawaReport = useFetch(
-    `report/summ/cawa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
-    { results: [], count: 0 },
-    process.env.REACT_APP_CANDELA_1_URL,
-  );
+  // const cawaReport = useFetch(
+  //   `report/summ/cawa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+  //   { results: [], count: 0 },
+  //   process.env.REACT_APP_CANDELA_1_URL,
+  // );
   const waReport2 = useFetch(
     `report2/summ/wa/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 },
@@ -209,18 +209,18 @@ export default function CustomizedTables({ dates, IsShowMete }) {
       //     (stats.wa2.return_amount || 0),
       // },
       {
-        id: "STOCK COST",
-        wa3: stats.wa3.stock_cost,
-        // cawa: stats.cawa.stock_cost,
-        wa2: stats.wa2.stock_cost,
-        // // ne: stats.ne.stock_cost,
-        // // nb: stats.nb.stock_cost,
+        id: "LOSS COST",
+        wa3: stats.wa3.loss_cost,
+        // cawa: stats.cawa.loss_cost,
+        wa2: stats.wa2.loss_cost,
+        // // ne: stats.ne.loss_cost,
+        // // nb: stats.nb.loss_cost,
         gt:
-          // (stats.cawa.stock_cost || 0) +
-          // (stats.ne.stock_cost || 0) +
-          // (stats.nb.stock_cost || 0) +
-          (stats.wa3.stock_cost || 0) +
-          (stats.wa2.stock_cost || 0),
+          // (stats.cawa.loss_cost || 0) +
+          // (stats.ne.loss_cost || 0) +
+          // (stats.nb.loss_cost || 0) +
+          (stats.wa3.loss_cost || 0) +
+          (stats.wa2.loss_cost || 0),
       },
       {
         id: "NET PROFIT",
@@ -345,9 +345,6 @@ export default function CustomizedTables({ dates, IsShowMete }) {
               ))}
             </TableBody>
           </Table>
-          <Typography variant="subtitle1" className={classes.infoText}>
-            * Walmart Canada is not included in Grand Total
-          </Typography>
         </TableContainer>
       </div>
       {/* <div className={classes.chartDiv}>

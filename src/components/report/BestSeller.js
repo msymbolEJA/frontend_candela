@@ -36,12 +36,12 @@ function stableSort(array, comparator) {
     if (order !== 0) return order;
     return a[1] - b[1];
   });
-  return stabilizedThis.map((el) => el[0]);
+  return stabilizedThis.map(el => el[0]);
 }
 
 function EnhancedTableHead(props) {
   const { classes, order, orderBy, onRequestSort } = props;
-  const createSortHandler = (property) => (event) => {
+  const createSortHandler = property => event => {
     onRequestSort(event, property);
   };
 
@@ -81,7 +81,7 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: "fit-content",
     margin: 20,
@@ -117,41 +117,41 @@ export default function EnhancedTable({ dates }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(20);
   const [rows, setRows] = useState([]);
-  const neOrders = useFetch(
-    `report/ne?end_date=${dates.end_date}&start_date=${dates.start_date}`,
-    { results: [], count: 0 },
-    process.env.REACT_APP_CANDELA_1_URL
-  );
+  // const neOrders = useFetch(
+  //   `report/ne?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+  //   { results: [], count: 0 },
+  //   process.env.REACT_APP_CANDELA_1_URL
+  // );
 
-  const cawaOrders = useFetch(
-    `report/cawa?end_date=${dates.end_date}&start_date=${dates.start_date}`,
-    { results: [], count: 0 },
-    process.env.REACT_APP_CANDELA_1_URL
-  );
+  // const cawaOrders = useFetch(
+  //   `report/cawa?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+  //   { results: [], count: 0 },
+  //   process.env.REACT_APP_CANDELA_1_URL
+  // );
 
   const wa2Orders = useFetch(
     `report2/wa?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 },
-    process.env.REACT_APP_CANDELA_2_URL
+    process.env.REACT_APP_CANDELA_2_URL,
   );
   const wa3Orders = useFetch(
     `report3/wa?end_date=${dates.end_date}&start_date=${dates.start_date}`,
     { results: [], count: 0 },
-    process.env.REACT_APP_CANDELA_3_URL
+    process.env.REACT_APP_CANDELA_3_URL,
   );
 
   useEffect(() => {
     const newArr = [
-      ...neOrders.response.results,
+      // ...neOrders.response.results,
       ...wa3Orders.response.results,
-      ...cawaOrders.response.results,
+      // ...cawaOrders.response.results,
       ...wa2Orders.response.results,
     ];
     setRows(newArr);
   }, [
-    neOrders?.response?.results,
+    // neOrders?.response?.results,
     wa3Orders?.response?.results,
-    cawaOrders?.response?.results,
+    // cawaOrders?.response?.results,
     wa2Orders?.response?.results,
   ]);
 
@@ -165,7 +165,7 @@ export default function EnhancedTable({ dates }) {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = event => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -227,7 +227,7 @@ export default function EnhancedTable({ dates }) {
                           >
                             {row[item?.id]}
                           </TableCell>
-                        )
+                        ),
                       )}
                     </TableRow>
                   );
