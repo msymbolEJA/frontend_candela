@@ -133,8 +133,7 @@ export default function CustomizedTables({ dates, IsShowMete }) {
           // (stats.cawa.sales || 0) +
           // (stats.ne.sales || 0) +
           // (stats.nb.sales || 0) +
-          (stats.wa3.sales || 0) +
-          (stats.wa2.sales || 0),
+          (stats.wa3.sales || 0) + (stats.wa2.sales || 0),
       },
       {
         id: "PO COST",
@@ -147,8 +146,7 @@ export default function CustomizedTables({ dates, IsShowMete }) {
           // (stats.cawa.cost || 0) +
           // (stats.ne.cost || 0) +
           // (stats.nb.cost || 0) +
-          (stats.wa3.cost || 0) +
-          (stats.wa2.cost || 0),
+          (stats.wa3.cost || 0) + (stats.wa2.cost || 0),
       },
 
       // {
@@ -177,8 +175,7 @@ export default function CustomizedTables({ dates, IsShowMete }) {
           // (stats.cawa.gross_profit || 0) +
           // (stats.ne.ship_cost || 0) +
           // (stats.nb.ship_cost || 0) +
-          (stats.wa3.ship_cost || 0) +
-          (stats.wa2.ship_cost || 0),
+          (stats.wa3.ship_cost || 0) + (stats.wa2.ship_cost || 0),
       },
       {
         id: "REFUND COST",
@@ -191,8 +188,20 @@ export default function CustomizedTables({ dates, IsShowMete }) {
           // (stats.cawa.refund_cost || 0) +
           // (stats.ne.refund_cost || 0) +
           // (stats.nb.refund_cost || 0) +
-          (stats.wa3.refund_cost || 0) +
-          (stats.wa2.refund_cost || 0),
+          (stats.wa3.refund_cost || 0) + (stats.wa2.refund_cost || 0),
+      },
+      {
+        id: "COMISSION COST",
+        wa3: stats.wa3.commision_cost,
+        // cawa: stats.cawa.commision_cost,
+        wa2: stats.wa2.commision_cost,
+        // // ne: stats.ne.commision_cost,
+        // // nb: stats.nb.commision_cost,
+        gt:
+          // (stats.cawa.commision_cost || 0) +
+          // (stats.ne.commision_cost || 0) +
+          // (stats.nb.commision_cost || 0) +
+          (stats.wa3.commision_cost || 0) + (stats.wa2.commision_cost || 0),
       },
       // {
       //   id: 'RETURN AMOUNT',
@@ -219,8 +228,7 @@ export default function CustomizedTables({ dates, IsShowMete }) {
           // (stats.cawa.loss_cost || 0) +
           // (stats.ne.loss_cost || 0) +
           // (stats.nb.loss_cost || 0) +
-          (stats.wa3.loss_cost || 0) +
-          (stats.wa2.loss_cost || 0),
+          (stats.wa3.loss_cost || 0) + (stats.wa2.loss_cost || 0),
       },
       {
         id: "NET PROFIT",
@@ -233,8 +241,7 @@ export default function CustomizedTables({ dates, IsShowMete }) {
           // (stats.cawa.net_profit || 0) +
           // (stats.ne.net_profit || 0) +
           // (stats.nb.net_profit || 0) +
-          (stats.wa3.net_profit || 0) +
-          (stats.wa2.net_profit || 0),
+          (stats.wa3.net_profit || 0) + (stats.wa2.net_profit || 0),
       },
     ]);
     // eslint-disable-next-line
