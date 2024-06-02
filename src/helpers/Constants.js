@@ -38,8 +38,8 @@ export const EBAY_OrderStatus = [
   { id: "IN_PROGRESS", status: "In Progress" },
   { id: "NOT_STARTED", status: "Not Started" },
   { id: "CANCELED", status: "Cancelled" },
-  { id: "REFUND_COMPLETED", status: "Refund Completed" },
-  { id: "REFUND_INITIATED", status: "Refund Initiated" },
+  { id: "REFUND_COMPLETED", status: "Refund Completed", disabled: true },
+  { id: "REFUND_INITIATED", status: "Refund Initiated", disabled: true },
 ];
 
 export const OrderFormSelect = [

@@ -14,7 +14,12 @@ import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 import { TableNoOrders } from "../../../helpers/NoOrders";
 import { TableError } from "../../../helpers/Errors";
 import CustomTableFooter from "../otheritems/CustomTableFooter";
-import { EBAY_OrderStatus, customTopStatus, ebayFullfilmentTypes, fullfilmentTypes } from "../../../helpers/Constants";
+import {
+  EBAY_OrderStatus,
+  customTopStatus,
+  ebayFullfilmentTypes,
+  fullfilmentTypes,
+} from "../../../helpers/Constants";
 import TopCustomButtonGroup from "../otheritems/TopCustomStatusGroup";
 import SearchField from "../otheritems/SearchField";
 import DateFilter from "../../../helpers/DateFilter";
@@ -74,7 +79,7 @@ export default function EbayOrdersTable() {
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [isShowMete, setIsShowMete] = useState(false);
-  const [fullfilment_type, setFullfilment_type] = useState("all");
+  const [fullfilment_type, setFullfilment_type] = useState("");
 
   console.log(fullfilment_type);
   const { response, error, loading, setLoading } = useFetch(
@@ -185,13 +190,7 @@ export default function EbayOrdersTable() {
         process.env.REACT_APP_CANDELA_3_URL
       }ebay/generate-excell?orderStatus=${buttonTag}&search=${searchKeyword}&items__tracking__status=${customStatusTag}&end_date=${
         dates.end_date
-      }&start_date=${dates.start_date}${isShowMete ? "&sku=METE" : ""}&fullfilment_type=${
-        fullfilment_type === "wf"
-          ? "WFSFulfilled"
-          : fullfilment_type === "sf"
-          ? "SellerFulfilled"
-          : ""
-      }`,
+      }&start_date=${dates.start_date}&fullfilment_type=${fullfilment_type.toUpperCase()}`,
       "_self",
     );
   };

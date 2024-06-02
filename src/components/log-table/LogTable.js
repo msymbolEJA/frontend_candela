@@ -34,15 +34,17 @@ const useStyles = makeStyles({
   },
 });
 
-const LogTable = (props) => {
+const LogTable = props => {
   const { response, error, loading } = useFetch(
-    `/logs/?order_num=${props.match.params.id}`,
+    `/logs/?${props.match.params.shop === "ebay" ? "order_num2" : "order_num"}=${
+      props.match.params.id
+    }`,
     {},
     props.match.params.shop === "wal2"
       ? process.env.REACT_APP_CANDELA_2_URL
-      : props.match.params.shop === "wal3"
+      : props.match.params.shop === "wal3" || props.match.params.shop === "ebay"
       ? process.env.REACT_APP_CANDELA_3_URL
-      : process.env.REACT_APP_CANDELA_1_URL
+      : process.env.REACT_APP_CANDELA_1_URL,
   );
   const classes = useStyles();
 
@@ -60,7 +62,7 @@ const LogTable = (props) => {
         <Table className={classes.table} aria-label="custom pagination table">
           <TableHead>
             <TableRow className={classes.headingRow}>
-              {logTableColumns?.map((item) => (
+              {logTableColumns?.map(item => (
                 <TableCell align="center" style={{ color: "white" }}>
                   {item?.label}
                 </TableCell>
@@ -75,13 +77,10 @@ const LogTable = (props) => {
             ) : response?.results?.length > 0 ? (
               response?.results?.map((row, index) => (
                 <TableRow key={index} className={classes.rowStyle}>
-                  {logTableColumns?.map((item) => (
+                  {logTableColumns?.map(item => (
                     <TableCell align="center">
                       {item?.id === "change_date"
-                        ? moment
-                            .utc(row[item?.id])
-                            .local()
-                            .format("MM-DD-YY HH:mm")
+                        ? moment.utc(row[item?.id]).local().format("MM-DD-YY HH:mm")
                         : row[item?.id]}
                     </TableCell>
                   ))}

@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
     flexDirection: "column",
@@ -29,11 +29,7 @@ const TopButtonGroup = ({ buttonTag, handleTagBtnClick, orderStatusTags }) => {
 
   return (
     <div className={classes.root}>
-      <ButtonGroup
-        color="primary"
-        aria-label="outlined primary button group"
-        size="medium"
-      >
+      <ButtonGroup color="primary" aria-label="outlined primary button group" size="medium">
         {orderStatusTags?.map((item, index) => (
           <Button
             className={classes.btnStyle}
@@ -42,10 +38,10 @@ const TopButtonGroup = ({ buttonTag, handleTagBtnClick, orderStatusTags }) => {
             key={index}
             id={item.id}
             style={{
-              backgroundColor:
-                buttonTag === item?.id?.toString() ? "#52734d" : null,
+              backgroundColor: buttonTag === item?.id?.toString() ? "#52734d" : null,
               color: buttonTag === item?.id?.toString() ? "#fad586" : null,
             }}
+            disabled={!!item?.disabled}
           >
             {item.status}
           </Button>
