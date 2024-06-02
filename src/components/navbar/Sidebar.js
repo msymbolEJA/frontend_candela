@@ -79,6 +79,13 @@ const menuLinks = [
     icon: Assignment,
     link: "/orders/wal3",
   },
+  {
+    id: 10,
+    title: "Ebay",
+    abr: "EBA",
+    icon: Assignment,
+    link: "/orders/ebay",
+  },
   // {
   //   id: 4,
   //   title: "WalmartCa",

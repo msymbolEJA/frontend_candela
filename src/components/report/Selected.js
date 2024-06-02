@@ -64,6 +64,7 @@ export default function CustomizedTables({ dates, IsShowMete }) {
     wa3: [],
     // cawa: [],
     wa2: [],
+    ebay: [],
   });
   const [statRows, setStatRows] = useState([]);
   // const neReport = useFetch(
@@ -93,6 +94,12 @@ export default function CustomizedTables({ dates, IsShowMete }) {
     { results: [], count: 0 },
     process.env.REACT_APP_CANDELA_2_URL,
   );
+  const ebayReport = useFetch(
+    `report3/summ/ebay/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+    { results: [], count: 0 },
+    process.env.REACT_APP_CANDELA_3_URL,
+  );
+
   const otherReport = useFetch(
     `report/const/`,
     {
@@ -110,6 +117,7 @@ export default function CustomizedTables({ dates, IsShowMete }) {
       wa3: wa3Report.response,
       // cawa: cawaReport.response,
       wa2: waReport2.response,
+      ebay: ebayReport.response,
     }));
   }, [
     // neReport.response,
@@ -117,6 +125,7 @@ export default function CustomizedTables({ dates, IsShowMete }) {
     wa3Report.response,
     // cawaReport.response,
     waReport2.response,
+    ebayReport.response,
   ]);
 
   useEffect(() => {
@@ -127,26 +136,28 @@ export default function CustomizedTables({ dates, IsShowMete }) {
         wa3: stats.wa3.sales,
         // cawa: stats.cawa.sales,
         wa2: stats.wa2.sales,
+        ebay: stats.ebay.sales,
         // // ne: stats.ne.sales,
         // // nb: stats.nb.sales,
         gt:
           // (stats.cawa.sales || 0) +
           // (stats.ne.sales || 0) +
           // (stats.nb.sales || 0) +
-          (stats.wa3.sales || 0) + (stats.wa2.sales || 0),
+          (stats.wa3.sales || 0) + (stats.wa2.sales || 0) + (stats.ebay.sales || 0),
       },
       {
         id: "PO COST",
         wa3: stats.wa3.cost,
         // cawa: stats.cawa.cost,
         wa2: stats.wa2.cost,
+        ebay: stats.ebay.cost,
         // // ne: stats.ne.cost,
         // // nb: stats.nb.cost,
         gt:
           // (stats.cawa.cost || 0) +
           // (stats.ne.cost || 0) +
           // (stats.nb.cost || 0) +
-          (stats.wa3.cost || 0) + (stats.wa2.cost || 0),
+          (stats.wa3.cost || 0) + (stats.wa2.cost || 0) + (stats.ebay.cost || 0),
       },
 
       // {
@@ -169,39 +180,46 @@ export default function CustomizedTables({ dates, IsShowMete }) {
         wa3: stats.wa3.ship_cost,
         // cawa: stats.cawa.ship_cost,
         wa2: stats.wa2.ship_cost,
+        ebay: stats.ebay.ship_cost,
         // // ne: stats.ne.ship_cost,
         // // nb: stats.nb.ship_cost,
         gt:
           // (stats.cawa.gross_profit || 0) +
           // (stats.ne.ship_cost || 0) +
           // (stats.nb.ship_cost || 0) +
-          (stats.wa3.ship_cost || 0) + (stats.wa2.ship_cost || 0),
+          (stats.wa3.ship_cost || 0) + (stats.wa2.ship_cost || 0) + (stats.ebay.ship_cost || 0),
       },
       {
         id: "REFUND COST",
         wa3: stats.wa3.refund_cost,
         // cawa: stats.cawa.refund_cost,
         wa2: stats.wa2.refund_cost,
+        ebay: stats.ebay.refund_cost,
         // // ne: stats.ne.refund_cost,
         // // nb: stats.nb.refund_cost,
         gt:
           // (stats.cawa.refund_cost || 0) +
           // (stats.ne.refund_cost || 0) +
           // (stats.nb.refund_cost || 0) +
-          (stats.wa3.refund_cost || 0) + (stats.wa2.refund_cost || 0),
+          (stats.wa3.refund_cost || 0) +
+          (stats.wa2.refund_cost || 0) +
+          (stats.ebay.refund_cost || 0),
       },
       {
         id: "COMISSION COST",
         wa3: stats.wa3.commision_cost,
         // cawa: stats.cawa.commision_cost,
         wa2: stats.wa2.commision_cost,
+        ebay: stats.ebay.commision_cost,
         // // ne: stats.ne.commision_cost,
         // // nb: stats.nb.commision_cost,
         gt:
           // (stats.cawa.commision_cost || 0) +
           // (stats.ne.commision_cost || 0) +
           // (stats.nb.commision_cost || 0) +
-          (stats.wa3.commision_cost || 0) + (stats.wa2.commision_cost || 0),
+          (stats.wa3.commision_cost || 0) +
+          (stats.wa2.commision_cost || 0) +
+          (stats.ebay.commision_cost || 0),
       },
       // {
       //   id: 'RETURN AMOUNT',
@@ -222,26 +240,28 @@ export default function CustomizedTables({ dates, IsShowMete }) {
         wa3: stats.wa3.loss_cost,
         // cawa: stats.cawa.loss_cost,
         wa2: stats.wa2.loss_cost,
+        ebay: stats.ebay.loss_cost,
         // // ne: stats.ne.loss_cost,
         // // nb: stats.nb.loss_cost,
         gt:
           // (stats.cawa.loss_cost || 0) +
           // (stats.ne.loss_cost || 0) +
           // (stats.nb.loss_cost || 0) +
-          (stats.wa3.loss_cost || 0) + (stats.wa2.loss_cost || 0),
+          (stats.wa3.loss_cost || 0) + (stats.wa2.loss_cost || 0) + (stats.ebay.loss_cost || 0),
       },
       {
         id: "NET PROFIT",
         wa3: stats.wa3.net_profit,
         // cawa: stats.cawa.net_profit,
         wa2: stats.wa2.net_profit,
+        ebay: stats.ebay.net_profit,
         // // ne: stats.ne.net_profit,
         // // nb: stats.nb.net_profit,
         gt:
           // (stats.cawa.net_profit || 0) +
           // (stats.ne.net_profit || 0) +
           // (stats.nb.net_profit || 0) +
-          (stats.wa3.net_profit || 0) + (stats.wa2.net_profit || 0),
+          (stats.wa3.net_profit || 0) + (stats.wa2.net_profit || 0) + (stats.ebay.net_profit || 0),
       },
     ]);
     // eslint-disable-next-line
@@ -345,6 +365,7 @@ export default function CustomizedTables({ dates, IsShowMete }) {
                   {/* <StyledTableCell align="right">{row.cawa?.toFixed(2) || 0}</StyledTableCell> */}
                   <StyledTableCell align="right">{row.wa2?.toFixed(2) || 0}</StyledTableCell>
                   <StyledTableCell align="right">{row.wa3?.toFixed(2) || 0}</StyledTableCell>
+                  <StyledTableCell align="right">{row.ebay?.toFixed(2) || 0}</StyledTableCell>
                   {/* <StyledTableCell align="right">{row.ne?.toFixed(2) || 0}</StyledTableCell> */}
                   {/* <StyledTableCell align="right">{row.nb?.toFixed(2) || 0}</StyledTableCell> */}
                   <StyledTableCell align="right">{row.gt?.toFixed(2) || 0}</StyledTableCell>

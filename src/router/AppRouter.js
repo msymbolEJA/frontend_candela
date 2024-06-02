@@ -18,6 +18,7 @@ import LogTable from "../components/log-table/LogTable";
 import Report from "../components/report/Report";
 import Amazon from "../components/ordertable/amazon/Amazon";
 import Malabs from "../components/ordertable/malabs/Malabs";
+import EbayOrdersTable from "../components/ordertable/ebay/EbayOrdersTable";
 
 const AppRouter = () => {
   return (
@@ -41,6 +42,7 @@ const DefaultContainer = () => (
       <PrivateRouter path="/orders/neb/" component={NEBusinessTable} /> */}
       <PrivateRouter path="/orders/wal2/" component={Wal2OrdersTable} />
       <PrivateRouter path="/orders/wal3/" component={MeteOrdersTable} />
+      <PrivateRouter path="/orders/ebay/" component={EbayOrdersTable} />
       <PrivateRouter path="/orders/cawal/" component={WalOrdersTableCa} />
       <PrivateRouter path="/orders/return-orders/" component={ReturnOrders} />
       {/* <PrivateRouter path="/orders/mt/" component={MeteOrdersTable} />

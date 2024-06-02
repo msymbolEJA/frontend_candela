@@ -24,8 +24,22 @@ export const WAL_OrderStatus = [
   { id: "Shipped", status: "Shipped" },
   { id: "Delivered", status: "Delivered" },
   { id: "Cancelled", status: "Cancelled" },
-  { id: "refund_initiated", status: "Refund Initiated" },
+  { id: "REFUND_INITIATED", status: "Refund Initiated" },
   { id: "refund_completed", status: "Refund Completed" },
+];
+
+/* 
+FULFILLED, IN_PROGRESS, NOT_STARTED, CANCELED, REFUND_COMPLETED, REFUND_INITIATED
+
+*/
+export const EBAY_OrderStatus = [
+  { id: "", status: "All" },
+  { id: "FULFILLED", status: "Fulfilled" },
+  { id: "IN_PROGRESS", status: "In Progress" },
+  { id: "NOT_STARTED", status: "Not Started" },
+  { id: "CANCELED", status: "Cancelled" },
+  { id: "REFUND_COMPLETED", status: "Refund Completed" },
+  { id: "REFUND_INITIATED", status: "Refund Initiated" },
 ];
 
 export const OrderFormSelect = [
@@ -140,6 +154,7 @@ export const selectedHeaders = [
   // { id: "cawa", label: "WALMARTCA" },
   { id: "wa2", label: "WALMART2" },
   { id: "wa", label: "WALMART3" },
+  { id: "ebay", label: "EBAY" },
   // {
   //   id: "ne",
   //   label: "NEWEGG",
@@ -150,7 +165,7 @@ export const selectedHeaders = [
   // },
   {
     id: "grandTotal",
-    label: "Grand Total",
+    label: "GRAND TOTAL",
   },
 ];
 
@@ -174,4 +189,10 @@ export const fullfilmentTypes = [
   { id: "all", status: "all" },
   { id: "wf", status: "wf" },
   { id: "sf", status: "sf" },
+];
+
+export const ebayFullfilmentTypes = [
+  { id: "", status: "all" },
+  { id: "sf", status: "sf" },
+  { id: "efs", status: "efs" },
 ];

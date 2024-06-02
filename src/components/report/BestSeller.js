@@ -140,12 +140,19 @@ export default function EnhancedTable({ dates }) {
     process.env.REACT_APP_CANDELA_3_URL,
   );
 
+  const ebayOrders = useFetch(
+    `report3/ebay?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+    { results: [], count: 0 },
+    process.env.REACT_APP_CANDELA_3_URL,
+  );
+
   useEffect(() => {
     const newArr = [
       // ...neOrders.response.results,
-      ...wa3Orders.response.results,
       // ...cawaOrders.response.results,
       ...wa2Orders.response.results,
+      ...wa3Orders.response.results,
+      ...ebayOrders.response.results,
     ];
     setRows(newArr);
   }, [
@@ -153,6 +160,7 @@ export default function EnhancedTable({ dates }) {
     wa3Orders?.response?.results,
     // cawaOrders?.response?.results,
     wa2Orders?.response?.results,
+    ebayOrders?.response?.results,
   ]);
 
   const handleRequestSort = (event, property) => {
@@ -206,13 +214,13 @@ export default function EnhancedTable({ dates }) {
                             style={{ maxWidth: "250px" }}
                             align="center"
                           >
-                            {row[item?.id].startsWith("MC")
+                            {row[item?.id]?.startsWith("MC")
                               ? "Micro Center"
-                              : row[item?.id].startsWith("NC")
+                              : row[item?.id]?.startsWith("NC")
                               ? "Best Buy"
-                              : row[item?.id].startsWith("AC")
+                              : row[item?.id]?.startsWith("AC")
                               ? "Amazon"
-                              : row[item?.id].startsWith("ML")
+                              : row[item?.id]?.startsWith("ML")
                               ? "Malabs"
                               : "Other"}
                           </TableCell>
