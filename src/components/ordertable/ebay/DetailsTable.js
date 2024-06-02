@@ -45,7 +45,7 @@ function Row(props) {
   const [open, setOpen] = useState(false);
   const classes = useRowStyles();
 
-  const detailsRow = row.items;
+  const detailsRow = row?.items;
 
   return (
     <React.Fragment>
@@ -71,9 +71,9 @@ function Row(props) {
         </TableCell>
         <TableCell align="center" component="th" scope="row">
           {/* Customer Order Id */}
-          {row.orderId ? (
+          {row?.orderId ? (
             <>
-              <p>{row.orderId}</p>
+              <p>{row?.orderId}</p>
             </>
           ) : (
             <p>No Info</p>
@@ -98,18 +98,18 @@ function Row(props) {
           {/* {row?.ebaySupportedFulfillment} */}
         </TableCell>
         <TableCell align="center" component="th" scope="row">
-          {row.cutomerName}
+          {row?.cutomerName}
         </TableCell>
         <TableCell align="center">
-          {moment.utc(row.orderDate).local().format("MM-DD-YY HH:mm")}
+          {moment.utc(row?.creationDate).local().format("MM-DD-YY HH:mm")}
         </TableCell>
-        <TableCell align="center">{row.orderFulfillmentStatus}</TableCell>
+        <TableCell align="center">{row?.orderFulfillmentStatus}</TableCell>
 
         <TableCell align="center">
-          {moment.utc(row.maxEstimatedDeliveryDate).local().format("MM-DD-YY HH:mm")}-{" "}
-          {moment.utc(row.minEstimatedDeliveryDate).local().format("MM-DD-YY HH:mm")}
+          {moment.utc(row?.maxEstimatedDeliveryDate).local().format("MM-DD-YY HH:mm")}-{" "}
+          {moment.utc(row?.minEstimatedDeliveryDate).local().format("MM-DD-YY HH:mm")}
           <br />
-          <a href={row.ordoroUrl} target="_blank" rel="noreferrer">
+          <a href={row?.ordoroUrl} target="_blank" rel="noreferrer">
             Visit
           </a>
         </TableCell>

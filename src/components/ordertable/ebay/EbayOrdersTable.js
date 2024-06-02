@@ -243,7 +243,7 @@ export default function EbayOrdersTable() {
               Api Status
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
-              Ship Method
+              Min-Max Delivery Date
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
               State

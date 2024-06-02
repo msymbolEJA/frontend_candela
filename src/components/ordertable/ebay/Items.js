@@ -48,14 +48,6 @@ const Items = ({ dRow }) => {
   const base = process.env.REACT_APP_CANDELA_3_URL;
 
   console.log("dRow", dRow);
-  const { response } = useFetch(
-    `${dRow?.sku.includes("MC") ? "mc" : dRow?.sku.includes("AC") ? "amz" : "bb"}/${dRow.sku
-      .replace("NC_UPC_", "")
-      ?.replace("MC_UPC_", "")
-      ?.replace("AC_UPC_", "")}`,
-    {},
-    base,
-  );
 
   console.log(dRow);
 
@@ -76,7 +68,7 @@ const Items = ({ dRow }) => {
   });
 
   const handleFormSend = () => {
-    api(`ebay/ordertrack/${dRow.id}`, "put", formInfo, base);
+    api(`ebay/ordertrack/${dRow?.id}`, "put", formInfo, base);
   };
 
   useEffect(() => {
@@ -85,7 +77,7 @@ const Items = ({ dRow }) => {
   }, [dRow]);
 
   const handleGotoLog = () => {
-    history.push(`/log-table/ebay/${dRow.OrderNumber || dRow.customerOrderId}`);
+    history.push(`/log-table/ebay/${dRow?.OrderNumber || dRow?.customerOrderId}`);
   };
 
   return (
@@ -126,7 +118,7 @@ const Items = ({ dRow }) => {
         {dRow?.title}
       </TableCell>
       <TableCell align="center">
-        <p className={classes.priceStyle}>{dRow.lineItemCost}</p>
+        <p className={classes.priceStyle}>{dRow?.lineItemCost}</p>
       </TableCell>
       <TableCell align="center" component="th" scope="row">
         -
@@ -135,7 +127,7 @@ const Items = ({ dRow }) => {
         {dRow?.walmart_stock}{" "}
       </TableCell>
 
-      <TableCell align="center">{dRow.fulfillmentStatus}</TableCell>
+      <TableCell align="center">{dRow?.fulfillmentStatus}</TableCell>
       <TableCell align="center">{dRow?.taxAmount}</TableCell>
 
       <TableCell align="center">
