@@ -88,14 +88,13 @@ function Row(props) {
         </TableCell>
 
         <TableCell align="center" component="th" scope="row">
-          {/* {Array.isArray(customStatusArray[index])
+          {Array.isArray(customStatusArray[index])
             ? customStatusArray[index]?.map(item => (
                 <>
                   {item} <br />
                 </>
               ))
-            : customStatusArray[index]} */}
-          {/* {row?.ebaySupportedFulfillment} */}
+            : customStatusArray[index]}
         </TableCell>
         <TableCell align="center" component="th" scope="row">
           {row?.cutomerName}
