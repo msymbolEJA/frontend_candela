@@ -47,7 +47,6 @@ const Items = ({ dRow }) => {
   let history = useHistory();
   const base = process.env.REACT_APP_CANDELA_2_URL;
 
-  console.log("dRow", dRow);
   const { response } = useFetch(
     `${dRow?.sku.includes("MC") ? "mc" : dRow?.sku.includes("AC") ? "amz" : "bb"}/${dRow.sku
       .replace("NC_UPC_", "")
@@ -57,7 +56,6 @@ const Items = ({ dRow }) => {
     base,
   );
 
-  console.log(dRow);
 
   const [formInfo, setFormInfo] = useState({
     id: null,

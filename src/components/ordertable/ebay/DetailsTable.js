@@ -54,8 +54,12 @@ function Row(props) {
         style={{
           backgroundColor:
             row?.fullfilment_type === "WFSFulfilled"
-              ? "#fdfa66"
-              : bgColorSetter(customStatusArray[index]),
+              ? row?.items?.length <= 1
+                ? "#fdfa66"
+                : row?.items?.every((item, index, arr) => item?.tracking?.status === arr[0]?.tracking?.status)
+                  ? "#fdfa66"
+                  : "#91c788"
+              : bgColorSetter(customStatusArray[index])
         }}
         onClick={() => setOpen(!open)}
       >
@@ -63,10 +67,10 @@ function Row(props) {
         <TableCell align="center" component="th" scope="row">
           {Array.isArray(idArray[index])
             ? idArray[index]?.map(item => (
-                <>
-                  {item} <br />
-                </>
-              ))
+              <>
+                {item} <br />
+              </>
+            ))
             : idArray[index]}
         </TableCell>
         <TableCell align="center" component="th" scope="row">
@@ -90,10 +94,10 @@ function Row(props) {
         <TableCell align="center" component="th" scope="row">
           {Array.isArray(customStatusArray[index])
             ? customStatusArray[index]?.map(item => (
-                <>
-                  {item} <br />
-                </>
-              ))
+              <>
+                {item} <br />
+              </>
+            ))
             : customStatusArray[index]}
         </TableCell>
         <TableCell align="center" component="th" scope="row">

@@ -52,7 +52,14 @@ function Row(props) {
       <TableRow
         className={classes.root}
         style={{
-          backgroundColor: row?.fullfilment_type === "WFSFulfilled" ? "#fdfa66" : bgColorSetter(customStatusArray[index]),
+          backgroundColor:
+            row?.fullfilment_type === "WFSFulfilled"
+              ? row?.items?.length <= 1
+                ? "#fdfa66"
+                : row?.items?.every((item, index, arr) => item?.tracking?.status === arr[0]?.tracking?.status)
+                  ? "#fdfa66"
+                  : "#91c788"
+              : bgColorSetter(customStatusArray[index])
         }}
         onClick={() => setOpen(!open)}
       >

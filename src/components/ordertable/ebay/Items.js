@@ -47,10 +47,6 @@ const Items = ({ dRow }) => {
   let history = useHistory();
   const base = process.env.REACT_APP_CANDELA_3_URL;
 
-  console.log("dRow", dRow);
-
-  console.log(dRow);
-
   const [formInfo, setFormInfo] = useState({
     id: null,
     item: null,
