@@ -6,7 +6,7 @@ import moment from "moment";
 import ItemsTable from "./ItemsTable";
 import OrderTracking from "../otheritems/OrderTracking";
 import { bgColorSetter, upcEditFunc } from "../../../helpers/functions";
-import { WAL_OrderStatus } from "../../../helpers/Constants";
+import { EBAY_OrderStatus } from "../../../helpers/Constants";
 import CustomUPCComponent from "../otheritems/CustomUPCComponent";
 
 const useRowStyles = makeStyles({
@@ -45,7 +45,7 @@ function Row(props) {
   const [open, setOpen] = useState(false);
   const classes = useRowStyles();
 
-  const detailsRow = row.items;
+  const detailsRow = row?.items;
 
   return (
     <React.Fragment>
@@ -63,62 +63,75 @@ function Row(props) {
         }}
         onClick={() => setOpen(!open)}
       >
+        {console.log("row", row)}
         <TableCell align="center" component="th" scope="row">
-          {idArray[index]}
+          {Array.isArray(idArray[index])
+            ? idArray[index]?.map(item => (
+              <>
+                {item} <br />
+              </>
+            ))
+            : idArray[index]}
         </TableCell>
         <TableCell align="center" component="th" scope="row">
-          {row.customerOrderId ? (
+          {/* Customer Order Id */}
+          {row?.orderId ? (
             <>
-              <p>{row.customerOrderId}</p>
-              <a href={row.ordoroUrl} target="_blank" rel="noreferrer">
-                Visit
-              </a>
+              <p>{row?.orderId}</p>
             </>
           ) : (
             <p>No Info</p>
           )}
         </TableCell>
         <TableCell align="center" component="th" scope="row">
+          {/* SKU */}
+
           {upcEditFunc(upcArray[index], classes).map((item, i) => (
-            <CustomUPCComponent
-              item={item}
-              in_stock={detailsRow?.[i]?.in_stock}
-            />
+            <CustomUPCComponent item={item} in_stock={false} link={detailsRow?.[i]?.amazon_link} />
           ))}
         </TableCell>
+
         <TableCell align="center" component="th" scope="row">
-          {customStatusArray[index]}
+          {Array.isArray(customStatusArray[index])
+            ? customStatusArray[index]?.map(item => (
+              <>
+                {item} <br />
+              </>
+            ))
+            : customStatusArray[index]}
         </TableCell>
         <TableCell align="center" component="th" scope="row">
-          {row.cutomerName}
+          {row?.cutomerName}
         </TableCell>
         <TableCell align="center">
-          {moment.utc(row.orderDate).local().format("MM-DD-YY HH:mm")}
+          {moment.utc(row?.creationDate).local().format("MM-DD-YY HH:mm")}
         </TableCell>
+        <TableCell align="center">{row?.orderFulfillmentStatus}</TableCell>
+
         <TableCell align="center">
-          {WAL_OrderStatus.find((item) => item.id === row.orderStatus)?.status}
+          {row?.shipDate ? moment.utc(row?.shipDate).local().format("MM-DD-YY HH:mm") : "-"}
+
         </TableCell>
 
-        <TableCell align="center">{row.address1}</TableCell>
         <TableCell align="center">
-          {row.address2 ? row.address2 : "No Info"}
+          {moment.utc(row?.deliveryDate).local().format("MM-DD-YY HH:mm")}-{" "}
+          <br />
+          <a href={row?.ordoroUrl} target="_blank" rel="noreferrer">
+            Visit
+          </a>
         </TableCell>
-        <TableCell align="center">{row.city}</TableCell>
-        <TableCell align="center">{row.country}</TableCell>
-        <TableCell align="center">{row.postalCode}</TableCell>
-        <TableCell align="center">{row.shipMethod}</TableCell>
-        <TableCell align="center">{row.state}</TableCell>
+        <TableCell align="center">{row?.stateOrProvince}</TableCell>
       </TableRow>
-      <ItemsTable open={open} detailsRow={detailsRow} />
-      {detailsRow?.map((detRow, index) => (
+      <ItemsTable open={open} detailsRow={detailsRow} row={row} />
+      {/* {detailsRow?.map((detRow, index) => (
         <OrderTracking
           open={open}
           detRow={{ ...detRow, fullfilment_type: row?.fullfilment_type }}
           key={index}
-          store={"wal3"}
+          store={'wal3'}
           base={process.env.REACT_APP_CANDELA_3_URL}
         />
-      ))}
+      ))} */}
     </React.Fragment>
   );
 }

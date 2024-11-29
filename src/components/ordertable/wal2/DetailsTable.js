@@ -6,6 +6,7 @@ import moment from "moment";
 import ItemsTable from "./ItemsTable";
 import OrderTracking from "../otheritems/OrderTracking";
 import { bgColorSetter, upcEditFunc } from "../../../helpers/functions";
+import { WAL_OrderStatus } from "../../../helpers/Constants";
 import CustomUPCComponent from "../otheritems/CustomUPCComponent";
 
 const useRowStyles = makeStyles({
@@ -51,32 +52,72 @@ function Row(props) {
       <TableRow
         className={classes.root}
         style={{
-          backgroundColor: bgColorSetter(customStatusArray[index]),
+          backgroundColor:
+            row?.fullfilment_type === "WFSFulfilled"
+              ? row?.items?.length <= 1
+                ? "#fdfa66"
+                : row?.items?.every((item, index, arr) => item?.tracking?.status === arr[0]?.tracking?.status)
+                  ? "#fdfa66"
+                  : "#91c788"
+              : bgColorSetter(customStatusArray[index])
         }}
         onClick={() => setOpen(!open)}
       >
         <TableCell align="center" component="th" scope="row">
-          {idArray[index]}
+          {Array.isArray(idArray[index])
+            ? idArray[index]?.map(item => (
+                <>
+                  {item} <br />
+                </>
+              ))
+            : idArray[index]}
         </TableCell>
         <TableCell align="center" component="th" scope="row">
+          {/* Customer Order Id */}
           {row.customerOrderId ? (
             <>
               <p>{row.customerOrderId}</p>
-              <a href={row.ordoroUrl} target="_blank" rel="noreferrer">
-                Visit
-              </a>
             </>
           ) : (
             <p>No Info</p>
           )}
         </TableCell>
         <TableCell align="center" component="th" scope="row">
+          {/* SKU */}
+
           {upcEditFunc(upcArray[index], classes).map((item, i) => (
-            <CustomUPCComponent item={item} />
+            <CustomUPCComponent
+              item={item}
+              in_stock={detailsRow?.[i]?.in_stock}
+              link={detailsRow?.[i]?.wa_ss_link}
+            />
           ))}
         </TableCell>
+
         <TableCell align="center" component="th" scope="row">
-          {customStatusArray[index]}
+          {row?.items
+            ?.map(item => item.gtin || item.upc)
+            .map((item, i) => (
+              <CustomUPCComponent
+                item={item}
+                in_stock={detailsRow?.[i]?.in_stock}
+                link={detailsRow?.[i]?.wa_link}
+              />
+            ))}
+        </TableCell>
+
+        <TableCell align="center" component="th" scope="row">
+          {row?.purchaseOrderId}
+        </TableCell>
+
+        <TableCell align="center" component="th" scope="row">
+          {Array.isArray(customStatusArray[index])
+            ? customStatusArray[index]?.map(item => (
+                <>
+                  {item} <br />
+                </>
+              ))
+            : customStatusArray[index]}
         </TableCell>
         <TableCell align="center" component="th" scope="row">
           {row.cutomerName}
@@ -84,26 +125,29 @@ function Row(props) {
         <TableCell align="center">
           {moment.utc(row.orderDate).local().format("MM-DD-YY HH:mm")}
         </TableCell>
-        <TableCell align="center">{row.orderStatus}</TableCell>
-        <TableCell align="center">{row.address1}</TableCell>
         <TableCell align="center">
-          {row.address2 ? row.address2 : "No Info"}
+          {WAL_OrderStatus.find(item => item.id === row.orderStatus)?.status}
         </TableCell>
-        <TableCell align="center">{row.city}</TableCell>
-        <TableCell align="center">{row.country}</TableCell>
-        <TableCell align="center">{row.postalCode}</TableCell>
-        <TableCell align="center">{row.shipMethod}</TableCell>
+
+        <TableCell align="center">
+          {row.shipMethod}
+          <br />
+          <a href={row.ordoroUrl} target="_blank" rel="noreferrer">
+            Visit
+          </a>
+        </TableCell>
         <TableCell align="center">{row.state}</TableCell>
       </TableRow>
-      <ItemsTable open={open} detailsRow={detailsRow} />
-      {detailsRow?.map((detRow, index) => (
+      <ItemsTable open={open} detailsRow={detailsRow} row={row} />
+      {/* {detailsRow?.map((detRow, index) => (
         <OrderTracking
           open={open}
-          detRow={detRow}
+          detRow={{ ...detRow, fullfilment_type: row?.fullfilment_type }}
           key={index}
-          store={"cawal"}
+          store={'wal2'}
+          base={process.env.REACT_APP_CANDELA_2_URL}
         />
-      ))}
+      ))} */}
     </React.Fragment>
   );
 }

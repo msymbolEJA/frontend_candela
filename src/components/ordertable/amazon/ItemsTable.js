@@ -9,51 +9,39 @@ import TableRow from "@material-ui/core/TableRow";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Items from "./Items";
+import { Button } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
-const useRowStyles = makeStyles({
+const useRowStyles = makeStyles(theme => ({
   innerTable: {
     backgroundColor: "#bdd2b6",
   },
-});
+}));
 
 const ItemsTable = ({ open, detailsRow }) => {
   const classes = useRowStyles();
-  // console.log(detailsRow);
 
   return (
     <TableRow className={classes.innerTable}>
       <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={15}>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <Box margin={1}>
-            <Typography variant="h4" gutterBottom component="div">
-              Items
-            </Typography>
             <Table size="small" aria-label="purchases">
               <TableHead>
                 <TableRow style={{ backgroundColor: "#d6efc7" }}>
-                  <TableCell align="center">Product Name</TableCell>
-                  <TableCell align="center">UPC</TableCell>
-                  <TableCell align="center">Item Price</TableCell>
-                  <TableCell align="center">
-                    {detailsRow[0]?.sku.includes("MC")
-                      ? "Micro Center Price"
-                      : detailsRow[0]?.sku?.includes("AC")
-                      ? "Amazon Price"
-                      : "BestBuy Price"}
-                  </TableCell>
-                  <TableCell align="center">Price Update Date</TableCell>
-                  <TableCell align="center">BestBuy Shipping Cost</TableCell>
+                  <TableCell align="center">Status</TableCell>
+                  <TableCell align="center">Title</TableCell>
+                  <TableCell align="center">Our Price</TableCell>
+                  <TableCell align="center">Quantity</TableCell>
+                  <TableCell align="center">Amazon Stock</TableCell>
                   <TableCell align="center">Order Status</TableCell>
                   <TableCell align="center">Tax Amount</TableCell>
-                  <TableCell align="center">Tax Name</TableCell>
-                  <TableCell align="center">
-                    BestBuy Online Availibility
-                  </TableCell>
-                  <TableCell align="center">
-                    Online Availability Update Date
-                  </TableCell>
+                  <TableCell align="center">PO Cost</TableCell>
+                  <TableCell align="center">Ship Cost</TableCell>
+                  <TableCell align="center">Refund Cost</TableCell>
+                  <TableCell align="center">Loss Cost</TableCell>
                   <TableCell align="center">Shipping Amount</TableCell>
-                  <TableCell align="center">Action</TableCell>
+                  <TableCell align="center"></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

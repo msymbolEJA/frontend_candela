@@ -14,11 +14,19 @@ import { TableLoadingSpinner } from "../../../helpers/LoadingSpinners";
 import { TableNoOrders } from "../../../helpers/NoOrders";
 import { TableError } from "../../../helpers/Errors";
 import CustomTableFooter from "../otheritems/CustomTableFooter";
-import { WAL_OrderStatus, customTopStatus } from "../../../helpers/Constants";
+import {
+  AMAZON_OrderStatus,
+  EBAY_OrderStatus,
+  amazonFullfilmentTypes,
+  customTopStatus,
+  ebayFullfilmentTypes,
+  fullfilmentTypes,
+} from "../../../helpers/Constants";
 import TopCustomButtonGroup from "../otheritems/TopCustomStatusGroup";
 import SearchField from "../otheritems/SearchField";
 import DateFilter from "../../../helpers/DateFilter";
 import { Button, Checkbox } from "@material-ui/core";
+import TopFullfilmentTypeButtonGroup from "../otheritems/TopFullfilmentTypeButtonGroup";
 
 const useRowStyles = makeStyles({
   root: {
@@ -61,24 +69,29 @@ const useRowStyles = makeStyles({
   },
 });
 
-export default function Wal2OrdersTable() {
+export default function AmazonOrdersTable() {
   const classes = useRowStyles();
   const [buttonTag, setButtonTag] = useState("");
-  const [page, setPage] = useState(0);
   const [dates, setDates] = useState({
     end_date: "",
     start_date: "",
   });
+  const [page, setPage] = useState(0);
   const [customStatusTag, setCustomStatusTag] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(25);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [isShowMete, setIsShowMete] = useState(false);
+  const [fullfilment_type, setFullfilment_type] = useState("");
+
+  console.log(fullfilment_type);
   const { response, error, loading, setLoading } = useFetch(
-    `wal2/?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${page * rowsPerPage
-    }&search=${searchKeyword}&items__tracking__status=${customStatusTag}&end_date=${dates.end_date
-    }&start_date=${dates.start_date}${isShowMete ? "&sku=METE" : ""}`,
+    `amazon/mete?orderStatus=${buttonTag}&limit=${rowsPerPage}&offset=${
+      page * rowsPerPage
+    }&search=${searchKeyword}&items__tracking__status=${customStatusTag}&end_date=${
+      dates.end_date
+    }&start_date=${dates.start_date}&channel=${fullfilment_type}`,
     { results: [], count: 0 },
-    process.env.REACT_APP_CANDELA_2_URL
+    process.env.REACT_APP_CANDELA_3_URL,
   );
 
   const handleChangePage = (event, newPage) => {
@@ -86,20 +99,12 @@ export default function Wal2OrdersTable() {
     setLoading(true);
   };
 
-  const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = event => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setLoading(true);
   };
 
-  const handleDateFilter = (date) => {
-    setDates(date);
-    setPage(0);
-    setLoading(true);
-    setCustomStatusTag("");
-    setSearchKeyword("");
-  };
-
-  const handleTagBtnClick = (event) => {
+  const handleTagBtnClick = event => {
     setButtonTag(event.currentTarget.id);
     setPage(0);
     setLoading(true);
@@ -107,7 +112,15 @@ export default function Wal2OrdersTable() {
     setSearchKeyword("");
   };
 
-  const handleCustomBtnClick = (event) => {
+  const handleTypeBtnClick = event => {
+    setFullfilment_type(event.currentTarget.id);
+    setPage(0);
+    setLoading(true);
+    // setCustomStatusTag("");
+    setSearchKeyword("");
+  };
+
+  const handleCustomBtnClick = event => {
     // setSearchKeyword(event.currentTarget.innerText);
     setCustomStatusTag(event.currentTarget.id);
     setPage(0);
@@ -127,7 +140,7 @@ export default function Wal2OrdersTable() {
   };
 
   let upcArray = [];
-  response?.results?.forEach((item) => {
+  response?.results?.forEach(item => {
     // console.log(item?.items.length);
     // console.log(item?.items[0]?.sku);
     if (item?.items.length > 1) {
@@ -144,7 +157,7 @@ export default function Wal2OrdersTable() {
   // console.log(upcArray);
 
   let customStatusArray = [];
-  response?.results?.forEach((item) => {
+  response?.results?.forEach(item => {
     if (item?.items.length > 1) {
       let biggerStatusArray = [];
       item?.items?.forEach((i, ind) => {
@@ -159,7 +172,7 @@ export default function Wal2OrdersTable() {
   });
 
   let idArray = [];
-  response?.results?.forEach((item) => {
+  response?.results?.forEach(item => {
     if (item?.items.length > 1) {
       let biggerIdArray = [];
       item?.items?.forEach((i, ind) => {
@@ -173,23 +186,34 @@ export default function Wal2OrdersTable() {
     }
   });
 
+  const excelDownload = () => {
+    window.open(
+      `${
+        process.env.REACT_APP_CANDELA_3_URL
+      }amazon/generate-excell?orderStatus=${buttonTag}&search=${searchKeyword}&items__tracking__status=${customStatusTag}&end_date=${
+        dates.end_date
+      }&start_date=${dates.start_date}&fullfilment_type=${fullfilment_type.toUpperCase()}`,
+      "_self",
+    );
+  };
+
   return (
     <TableContainer component={Paper} className={classes.tContainer}>
       <div className={classes.topDiv}>
-        <h2 className={classes.headerStyle}>Walmart-2 Orders</h2>
+        <h2 className={classes.headerStyle}>Amazon Orders</h2>
         <SearchField globalSearch={globalSearch} />
       </div>
-      <DateFilter dates={dates} setDates={handleDateFilter} />
+      <DateFilter dates={dates} setDates={setDates} excelDownload={excelDownload} />
 
-      <Button onClick={handleMete} className={classes.meteButton}>
-        <Checkbox checked={isShowMete} color="primary" />
-        Show Mete Orders
-      </Button>
-
+      <TopFullfilmentTypeButtonGroup
+        buttonTag={fullfilment_type}
+        handleTagBtnClick={handleTypeBtnClick}
+        orderStatusTags={amazonFullfilmentTypes}
+      />
       <TopButtonGroup
         buttonTag={buttonTag}
         handleTagBtnClick={handleTagBtnClick}
-        orderStatusTags={WAL_OrderStatus}
+        orderStatusTags={AMAZON_OrderStatus}
       />
       <TopCustomButtonGroup
         buttonTag={customStatusTag}
@@ -203,10 +227,10 @@ export default function Wal2OrdersTable() {
               Id
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
-              Customer Order Id
+              Order Id
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
-              UPC
+              SKU
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
               Custom Status
@@ -215,28 +239,16 @@ export default function Wal2OrdersTable() {
               Customer Name
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
-              Order Date
+              Creation Date
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
               Api Status
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
-              Address 1
+              Ship Date
             </TableCell>
-            <TableCell align="center" className={classes.tCell}>
-              Address 2
-            </TableCell>
-            <TableCell align="center" className={classes.tCell}>
-              City
-            </TableCell>
-            <TableCell align="center" className={classes.tCell}>
-              Country
-            </TableCell>
-            <TableCell align="center" className={classes.tCell}>
-              Postal Code
-            </TableCell>
-            <TableCell align="center" className={classes.tCell}>
-              Ship Method
+             <TableCell align="center" className={classes.tCell}>
+              Delivery Date
             </TableCell>
             <TableCell align="center" className={classes.tCell}>
               State

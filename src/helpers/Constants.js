@@ -42,6 +42,16 @@ export const EBAY_OrderStatus = [
   { id: "REFUND_INITIATED", status: "Refund Initiated" },
 ];
 
+export const AMAZON_OrderStatus = [
+  { id: "", status: "All" },
+  { id: "AWAITING_FULFILLMENT", status: "Awaiting Fulfillment" },
+  { id: "SHIPPED", status: "Shipped" },
+  { id: "CANCELLED", status: "Cancelled" },
+  { id: "DROPSHIPMENT_REQUESTED", status: "Dropshipment Requested" },
+];
+
+
+
 export const OrderFormSelect = [
   {
     label: "Status",
@@ -195,4 +205,11 @@ export const ebayFullfilmentTypes = [
   { id: "", status: "all" },
   { id: "sf", status: "sf" },
   { id: "efs", status: "efs" },
+];
+
+
+export const amazonFullfilmentTypes = [
+  { id: "", status: "all" },
+  { id: "afn", status: "afn" },
+  { id: "mfn", status: "mfn" },
 ];
