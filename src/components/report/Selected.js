@@ -65,6 +65,7 @@ export default function CustomizedTables({ dates, IsShowMete }) {
     // cawa: [],
     wa2: [],
     ebay: [],
+    amazon: []
   });
   const [statRows, setStatRows] = useState([]);
   // const neReport = useFetch(
@@ -99,6 +100,11 @@ export default function CustomizedTables({ dates, IsShowMete }) {
     { results: [], count: 0 },
     process.env.REACT_APP_CANDELA_3_URL,
   );
+  const amazonReport = useFetch(
+    `report3/summ/amazon/?end_date=${dates.end_date}&start_date=${dates.start_date}`,
+    { results: [], count: 0 },
+    process.env.REACT_APP_CANDELA_3_URL,
+  );
 
   const otherReport = useFetch(
     `report/const/`,
@@ -118,6 +124,7 @@ export default function CustomizedTables({ dates, IsShowMete }) {
       // cawa: cawaReport.response,
       wa2: waReport2.response,
       ebay: ebayReport.response,
+      amazon: amazonReport.response,
     }));
   }, [
     // neReport.response,
@@ -126,6 +133,7 @@ export default function CustomizedTables({ dates, IsShowMete }) {
     // cawaReport.response,
     waReport2.response,
     ebayReport.response,
+    amazonReport.response,
   ]);
 
   useEffect(() => {
@@ -137,13 +145,14 @@ export default function CustomizedTables({ dates, IsShowMete }) {
         // cawa: stats.cawa.sales,
         wa2: stats.wa2.sales,
         ebay: stats.ebay.sales,
+        amazon: stats.amazon.sales,
         // // ne: stats.ne.sales,
         // // nb: stats.nb.sales,
         gt:
           // (stats.cawa.sales || 0) +
           // (stats.ne.sales || 0) +
           // (stats.nb.sales || 0) +
-          (stats.wa3.sales || 0) + (stats.wa2.sales || 0) + (stats.ebay.sales || 0),
+          (stats.wa3.sales || 0) + (stats.wa2.sales || 0) + (stats.ebay.sales || 0) + (stats.amazon.sales || 0),
       },
       {
         id: "PO COST",
@@ -151,13 +160,14 @@ export default function CustomizedTables({ dates, IsShowMete }) {
         // cawa: stats.cawa.cost,
         wa2: stats.wa2.cost,
         ebay: stats.ebay.cost,
+        amazon: stats.amazon.cost,
         // // ne: stats.ne.cost,
         // // nb: stats.nb.cost,
         gt:
           // (stats.cawa.cost || 0) +
           // (stats.ne.cost || 0) +
           // (stats.nb.cost || 0) +
-          (stats.wa3.cost || 0) + (stats.wa2.cost || 0) + (stats.ebay.cost || 0),
+          (stats.wa3.cost || 0) + (stats.wa2.cost || 0) + (stats.ebay.cost || 0) + (stats.amazon.cost || 0),
       },
 
       // {
@@ -181,13 +191,14 @@ export default function CustomizedTables({ dates, IsShowMete }) {
         // cawa: stats.cawa.ship_cost,
         wa2: stats.wa2.ship_cost,
         ebay: stats.ebay.ship_cost,
+        amazon: stats.amazon.ship_cost,
         // // ne: stats.ne.ship_cost,
         // // nb: stats.nb.ship_cost,
         gt:
           // (stats.cawa.gross_profit || 0) +
           // (stats.ne.ship_cost || 0) +
           // (stats.nb.ship_cost || 0) +
-          (stats.wa3.ship_cost || 0) + (stats.wa2.ship_cost || 0) + (stats.ebay.ship_cost || 0),
+          (stats.wa3.ship_cost || 0) + (stats.wa2.ship_cost || 0) + (stats.ebay.ship_cost || 0) + (stats.amazon.ship_cost || 0),
       },
       {
         id: "REFUND COST",
@@ -195,6 +206,7 @@ export default function CustomizedTables({ dates, IsShowMete }) {
         // cawa: stats.cawa.refund_cost,
         wa2: stats.wa2.refund_cost,
         ebay: stats.ebay.refund_cost,
+        amazon: stats.amazon.refund_cost,
         // // ne: stats.ne.refund_cost,
         // // nb: stats.nb.refund_cost,
         gt:
@@ -203,7 +215,8 @@ export default function CustomizedTables({ dates, IsShowMete }) {
           // (stats.nb.refund_cost || 0) +
           (stats.wa3.refund_cost || 0) +
           (stats.wa2.refund_cost || 0) +
-          (stats.ebay.refund_cost || 0),
+          (stats.ebay.refund_cost || 0) + 
+          (stats.amazon.refund_cost || 0),
       },
       {
         id: "COMISSION COST",
@@ -211,6 +224,7 @@ export default function CustomizedTables({ dates, IsShowMete }) {
         // cawa: stats.cawa.commision_cost,
         wa2: stats.wa2.commision_cost,
         ebay: stats.ebay.commision_cost,
+        amazon: stats.amazon.commision_cost,
         // // ne: stats.ne.commision_cost,
         // // nb: stats.nb.commision_cost,
         gt:
@@ -219,7 +233,8 @@ export default function CustomizedTables({ dates, IsShowMete }) {
           // (stats.nb.commision_cost || 0) +
           (stats.wa3.commision_cost || 0) +
           (stats.wa2.commision_cost || 0) +
-          (stats.ebay.commision_cost || 0),
+          (stats.ebay.commision_cost || 0) + 
+          (stats.amazon.commision_cost || 0),
       },
       // {
       //   id: 'RETURN AMOUNT',
@@ -241,13 +256,14 @@ export default function CustomizedTables({ dates, IsShowMete }) {
         // cawa: stats.cawa.loss_cost,
         wa2: stats.wa2.loss_cost,
         ebay: stats.ebay.loss_cost,
+        amazon: stats.amazon.loss_cost,
         // // ne: stats.ne.loss_cost,
         // // nb: stats.nb.loss_cost,
         gt:
           // (stats.cawa.loss_cost || 0) +
           // (stats.ne.loss_cost || 0) +
           // (stats.nb.loss_cost || 0) +
-          (stats.wa3.loss_cost || 0) + (stats.wa2.loss_cost || 0) + (stats.ebay.loss_cost || 0),
+          (stats.wa3.loss_cost || 0) + (stats.wa2.loss_cost || 0) + (stats.ebay.loss_cost || 0) + (stats.amazon.loss_cost || 0),
       },
       {
         id: "NET PROFIT",
@@ -255,13 +271,14 @@ export default function CustomizedTables({ dates, IsShowMete }) {
         // cawa: stats.cawa.net_profit,
         wa2: stats.wa2.net_profit,
         ebay: stats.ebay.net_profit,
+        amazon: stats.amazon.net_profit,
         // // ne: stats.ne.net_profit,
         // // nb: stats.nb.net_profit,
         gt:
           // (stats.cawa.net_profit || 0) +
           // (stats.ne.net_profit || 0) +
           // (stats.nb.net_profit || 0) +
-          (stats.wa3.net_profit || 0) + (stats.wa2.net_profit || 0) + (stats.ebay.net_profit || 0),
+          (stats.wa3.net_profit || 0) + (stats.wa2.net_profit || 0) + (stats.ebay.net_profit || 0) + (stats.amazon.net_profit || 0),
       },
     ]);
     // eslint-disable-next-line
@@ -366,6 +383,7 @@ export default function CustomizedTables({ dates, IsShowMete }) {
                   <StyledTableCell align="right">{row.wa2?.toFixed(2) || 0}</StyledTableCell>
                   <StyledTableCell align="right">{row.wa3?.toFixed(2) || 0}</StyledTableCell>
                   <StyledTableCell align="right">{row.ebay?.toFixed(2) || 0}</StyledTableCell>
+                  <StyledTableCell align="right">{row.amazon?.toFixed(2) || 0}</StyledTableCell>
                   {/* <StyledTableCell align="right">{row.ne?.toFixed(2) || 0}</StyledTableCell> */}
                   {/* <StyledTableCell align="right">{row.nb?.toFixed(2) || 0}</StyledTableCell> */}
                   <StyledTableCell align="right">{row.gt?.toFixed(2) || 0}</StyledTableCell>

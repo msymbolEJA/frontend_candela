@@ -89,7 +89,7 @@ export default function AmazonOrdersTable() {
       page * rowsPerPage
     }&search=${searchKeyword}&items__tracking__status=${customStatusTag}&end_date=${
       dates.end_date
-    }&start_date=${dates.start_date}&channel=${fullfilment_type}`,
+    }&start_date=${dates.start_date}&fullfilment_type=${fullfilment_type.toUpperCase()}`,
     { results: [], count: 0 },
     process.env.REACT_APP_CANDELA_3_URL,
   );

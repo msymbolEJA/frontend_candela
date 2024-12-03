@@ -165,6 +165,7 @@ export const selectedHeaders = [
   { id: "wa2", label: "WALMART2" },
   { id: "wa", label: "WALMART3" },
   { id: "ebay", label: "EBAY" },
+  { id: "amazon", label: "AMAZON" },
   // {
   //   id: "ne",
   //   label: "NEWEGG",

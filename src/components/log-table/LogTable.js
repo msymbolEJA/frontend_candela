@@ -36,7 +36,7 @@ const useStyles = makeStyles({
 
 const LogTable = props => {
   const { response, error, loading } = useFetch(
-    `/logs/?${props.match.params.shop === "ebay" ? "order_num2" : "order_num"}=${
+    `/logs/?${props.match.params.shop === "ebay" || props.match.params.shop === "amazon" ? "order_num2" : "order_num"}=${
       props.match.params.id
     }`,
     {},
