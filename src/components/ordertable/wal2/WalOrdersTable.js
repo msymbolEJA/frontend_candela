@@ -83,7 +83,7 @@ export default function wal2OrdersTable() {
       page * rowsPerPage
     }&search=${searchKeyword}&items__tracking__status=${customStatusTag}&end_date=${
       dates.end_date
-    }&start_date=${dates.start_date}${isShowMete ? "&sku=METE" : ""}&fullfilment_type=${
+    }&start_date=${dates.start_date}${isShowMete ? "&sku=DLLS" : ""}&fullfilment_type=${
       fullfilment_type === "wf"
         ? "WFSFulfilled"
         : fullfilment_type === "sf"
@@ -192,7 +192,7 @@ export default function wal2OrdersTable() {
         process.env.REACT_APP_CANDELA_2_URL
       }wal2/generate-excell?orderStatus=${buttonTag}&search=${searchKeyword}&items__tracking__status=${customStatusTag}&end_date=${
         dates.end_date
-      }&start_date=${dates.start_date}${isShowMete ? "&sku=METE" : ""}&fullfilment_type=${
+      }&start_date=${dates.start_date}${isShowMete ? "&sku=DLLS" : ""}&fullfilment_type=${
         fullfilment_type === "wf"
           ? "WFSFulfilled"
           : fullfilment_type === "sf"
@@ -213,7 +213,7 @@ export default function wal2OrdersTable() {
 
       <Button onClick={handleMete} className={classes.meteButton}>
         <Checkbox checked={isShowMete} color="primary" />
-        Show Mete Orders
+        Show DLLS Orders
       </Button>
 
       <TopFullfilmentTypeButtonGroup

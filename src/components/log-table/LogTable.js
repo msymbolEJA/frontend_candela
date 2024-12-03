@@ -42,7 +42,7 @@ const LogTable = props => {
     {},
     props.match.params.shop === "wal2"
       ? process.env.REACT_APP_CANDELA_2_URL
-      : props.match.params.shop === "wal3" || props.match.params.shop === "ebay"
+      : props.match.params.shop === "wal3" || props.match.params.shop === "ebay" || props.match.params.shop === "amazon"
       ? process.env.REACT_APP_CANDELA_3_URL
       : process.env.REACT_APP_CANDELA_1_URL,
   );
