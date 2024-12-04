@@ -211,6 +211,6 @@ export const ebayFullfilmentTypes = [
 
 export const amazonFullfilmentTypes = [
   { id: "", status: "all" },
-  { id: "afn", status: "afn" },
-  { id: "mfn", status: "mfn" },
+  { id: "afn", status: "FBA" },
+  { id: "mfn", status: "FBM" },
 ];
