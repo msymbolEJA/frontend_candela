@@ -100,6 +100,12 @@ function Row(props) {
             ))
             : customStatusArray[index]}
         </TableCell>
+
+           <TableCell align="center" component="th" scope="row">
+          {row?.items.map(i => <div key={i?.id}>{i?.quantity}</div>)}
+        </TableCell>
+
+
         <TableCell align="center" component="th" scope="row">
           {row?.cutomerName}
         </TableCell>

@@ -233,6 +233,9 @@ export default function EbayOrdersTable() {
             <TableCell align="center" className={classes.tCell}>
               Custom Status
             </TableCell>
+                <TableCell align="center" className={classes.tCell}>
+              Quantity
+            </TableCell>
             <TableCell align="center" className={classes.tCell}>
               Customer Name
             </TableCell>
