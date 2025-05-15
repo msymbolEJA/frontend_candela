@@ -5,7 +5,7 @@ import TableRow from "@material-ui/core/TableRow";
 import moment from "moment";
 import ItemsTable from "./ItemsTable";
 import OrderTracking from "../otheritems/OrderTracking";
-import { bgColorSetter, upcEditFunc } from "../../../helpers/functions";
+import { bgColorSetter2, upcEditFunc } from "../../../helpers/functions";
 import { WAL_OrderStatus } from "../../../helpers/Constants";
 import CustomUPCComponent from "../otheritems/CustomUPCComponent";
 
@@ -59,7 +59,7 @@ function Row(props) {
                 : row?.items?.every((item, index, arr) => item?.tracking?.status === arr[0]?.tracking?.status)
                   ? "#fdfa66"
                   : "#91c788"
-              : bgColorSetter(customStatusArray[index])
+              :detailsRow?.[0]?.orderStatus?.includes("Cancelled") ? "#FF7171" : bgColorSetter2(customStatusArray[index])
         }}
         onClick={() => setOpen(!open)}
       >

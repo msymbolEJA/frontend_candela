@@ -5,7 +5,7 @@ import TableRow from "@material-ui/core/TableRow";
 import moment from "moment";
 import ItemsTable from "./ItemsTable";
 import OrderTracking from "../otheritems/OrderTracking";
-import { bgColorSetter, upcEditFunc } from "../../../helpers/functions";
+import { bgColorSetter2, upcEditFunc } from "../../../helpers/functions";
 import { WAL_OrderStatus } from "../../../helpers/Constants";
 import CustomUPCComponent from "../otheritems/CustomUPCComponent";
 
@@ -47,6 +47,8 @@ function Row(props) {
 
   const detailsRow = row.items;
 
+  
+
   return (
     <React.Fragment>
       <TableRow
@@ -59,10 +61,11 @@ function Row(props) {
                 : row?.items?.every((item, index, arr) => item?.tracking?.status === arr[0]?.tracking?.status)
                   ? "#fdfa66"
                   : "#91c788"
-              : bgColorSetter(customStatusArray[index])
+              : detailsRow?.[0]?.orderStatus?.includes("Cancelled") ? "#FF7171" : bgColorSetter2(customStatusArray[index])
         }}
         onClick={() => setOpen(!open)}
       >
+        
         <TableCell align="center" component="th" scope="row">
           {Array.isArray(idArray[index])
             ? idArray[index]?.map(item => (
